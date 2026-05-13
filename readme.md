@@ -1,7 +1,7 @@
 # Template per tesi triennale - Laurea in Informatica UniPD
 
 Questo file è un promemoria personale e una guida su come è strutturato il template e come usarlo.
-Il template originale è mantenuto da [FIUP]([https://github.com/FIUP/](https://github.com/FIUP/Thesis-template)) per il corso di Laurea in Informatica dell'Università di Padova.
+Il template originale è mantenuto da [FIUP](https://github.com/FIUP/Thesis-template) per il corso di Laurea in Informatica dell'Università di Padova.
 
 ---
 
@@ -39,7 +39,7 @@ tesi/
 └── printable-thesis.tex      ← versione per la stampa
 ```
 
-### A cosa servono i file principali
+### Guida ai file principali
 
 - **`config/variables.tex`** — la prima cosa da aprire. Definisce tutte le variabili che riempiono automaticamente il documento: titolo, nome, matricola, professore ecc. Riempie anche i metadati del PDF finale.
 - **`config/thesis-config.tex`** — definizioni di comandi custom e configurazioni dei pacchetti. Di solito non va toccato, ma puoi modificarlo se vuoi personalizzare qualcosa.
