@@ -281,6 +281,6 @@ Per citare nel testo:
 
 ## Fonti ufficiali UniPD
 
-- Regolamento didattico e scadenze: [didattica.math.unipd.it](https://didattica.math.unipd.it)
+- Regolamento didattico e scadenze: [math.unipd.it](https://www.math.unipd.it/didattica/informazioni-per-la-laurea/)
 - Conseguimento titolo e upload tesi: portale **Uniweb**
 - Indicazioni specifiche: chiedere direttamente al relatore prima di iniziare
