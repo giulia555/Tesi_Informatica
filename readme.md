@@ -1,201 +1,286 @@
-# Thesis template
-A simple Thesis template for the Bachelor Degree in Computer Science @Unipadova
+# Note personali — Template tesi triennale
 
-# Installation
-To use this template you will need a full LaTeX configuration installed.
-If you don't have an already installed distribution you can read the following instructions and you'll be ready to go!
-
-<details>
-<summary>Read more</summary>
-
-## TeX Live installation
-You can use whatever you want to compile your thesis, but one of the most straightforward ways is using TeX Live.
-It should be available on every platform you use and comes with a lot of packages and tools.
-
-There are downloads for [Windows](https://mirror.ctan.org/systems/texlive/tlnet/install-tl-windows.exe) and [macOS](https://mirror.ctan.org/systems/mac/mactex/MacTeX.pkg), or instead you can install it using your favorite package manager:
-```bash
-sudo apt install texlive-full
-```
-```bash
-sudo pacman -S texlive-most
-```
-```bash
-sudo dnf install texlive-scheme-full
-```
-```bash
-brew install basictex
-```
-```powershell
-choco install texlive
-```
-
-## Configuration for TeX Live
-This template is pretty big and complex, therefore it requires a lot of specific packages that may not be shipped with your installation of TeX Live by default.
-
-Here's the complete list of packages that you'll need, in order to be able to successfully compile your thesis:
-- pdfx
-- xcolor
-- xmpincl
-- caption
-- changepage
-- csquotes
-- emptypage
-- epigraph
-- nextpage
-- eurosym
-- layaureo
-- listings
-- microtype
-- mparhack
-- relsize
-- quoting
-- booktabs
-- glossaries
-- glossaries-italian
-- glossaries-english
-- biber
-- biblatex
-- babel
-- babel-italian
-- cm-super
-- greek-fontenc
-- latexmk
-- fancyhdr
-
-You can install them manually using the TeX Live Manager (good luck!), or using the CLI utility counterpart `tlmgr`
-
-Just copy and paste the following command in your terminal.
-```bash
-sudo tlmgr update --self
-sudo tlmgr update --all
-sudo tlmgr install pdfx xcolor xmpincl caption changepage csquotes emptypage epigraph nextpage eurosym layaureo listings microtype mparhack relsize quoting booktabs glossaries glossaries-italian glossaries-english biber biblatex babel babel-italian cm-super greek-fontenc latexmk fancyhdr
-```
-
-As you can see `tlmgr` asks for admin rights, so you'll need to use `sudo` on Linux/macOS, while on Windows you have to [open a command prompt instance as admin](https://www.makeuseof.com/windows-run-command-prompt-admin/) and omit the `sudo` at the beginning of the lines.
-
-</details>
-
-## SVG support
-
-SVG images are supported (and encouraged) with the following dependencies:
-
-- `cairosvg`
-- (only for draw.io diagrams) a POSIX environment due to `sed` usage, if you feel brave you can port the logic to Perl :)
+Questo file è un promemoria personale su come è strutturato il template e come usarlo.
+Il template originale è mantenuto da [FIUP](https://github.com/FIUP) per il corso di Laurea in Informatica dell'Università di Padova.
 
 ---
 
-# Compilation
-You tried to compile this template and the glossary isn't showing up or the bibliography is empty? Don't panic, that's pretty normal.
-It happens because glossary and bibliography need a special treatment during the compilation process.
+## Struttura della repo
 
-Down here you find all the details to successfully compile the PDF
+```
+tesi/
+├── config/
+│   ├── variables.tex         ← PRIMA COSA DA MODIFICARE
+│   ├── thesis-config.tex     ← configurazioni avanzate, comandi custom
+│   └── packages.tex          ← dichiarazione pacchetti LaTeX
+├── preface/
+│   ├── title-page.tex        ← frontespizio (automatico da variables.tex)
+│   ├── summary.tex           ← sommario/abstract
+│   ├── dedication.tex        ← dedica
+│   ├── acknowledgements.tex  ← ringraziamenti
+│   ├── copyright.tex         ← pagina copyright
+│   └── table-of-contents.tex ← indice (automatico)
+├── chapters/
+│   ├── introduzione.tex
+│   ├── processi.tex
+│   ├── kick-off.tex
+│   ├── concept.tex
+│   ├── product-prototype.tex
+│   ├── product-design.tex
+│   └── conclusioni.tex
+├── appendix/
+│   ├── glossary-entries.tex  ← definizioni glossario e acronimi
+│   ├── bibliography.bib      ← voci bibliografiche
+│   └── bibliography.tex      ← struttura automatica bibliografia
+├── images/
+│   └── unipd-logo.png        ← qui vanno tutte le immagini
+├── structure.tex             ← ordine di inclusione dei file
+├── thesis.tex                ← file radice (quello da compilare)
+└── printable-thesis.tex      ← versione per la stampa
+```
 
-<details>
-<summary>Read more</summary>
+### A cosa servono i file principali
 
-## Latexmk
-In order to get the complete PDF of your thesis, with all the rings and bells of glossaries and bibliographies you need to compile using latexmk with the following command:
+- **`config/variables.tex`** — la prima cosa da aprire. Definisce tutte le variabili che riempiono automaticamente il documento: titolo, nome, matricola, professore ecc. Riempie anche i metadati del PDF finale.
+- **`config/thesis-config.tex`** — definizioni di comandi custom e configurazioni dei pacchetti. Di solito non va toccato, ma puoi modificarlo se vuoi personalizzare qualcosa.
+- **`config/packages.tex`** — dichiarazione di tutti i pacchetti usati. Niente di rilevante da cambiare qui.
+- **`preface/`** — tutto ciò che viene prima dei capitoli: frontespizio, sommario, dedica, ringraziamenti, indice. Il frontespizio si riempie automaticamente dalle variabili. Se il titolo della tesi è molto lungo potresti dover aggiustare leggermente gli spazi in `title-page.tex`.
+- **`chapters/`** — qui passerai la maggior parte del tempo. Contiene i capitoli veri e propri. Usa nomi di file che riflettano il contenuto (es. `architettura-sistema.tex`), evita nomi generici come `capitolo-03.tex`. Trovi già dei capitoli di esempio che mostrano come usare glossario, bibliografia, use case, tabelle dei requisiti ecc.
+- **`structure.tex`** — non contiene contenuto vero e proprio: definisce solo l'ordine in cui vengono inclusi tutti i file. Ogni volta che aggiungi o rimuovi un capitolo devi aggiornarlo.
+- **`thesis.tex`** — il file radice da compilare per ottenere il PDF digitale.
+- **`printable-thesis.tex`** — produce una versione ottimizzata per la stampa: margini asimmetrici, capitoli che aprono a destra, link non colorati.
+- **`images/`** — dove il template cerca le immagini quando le includi nel testo.
+- **`appendix/bibliography.bib`** — dove inserire le voci bibliografiche in formato BibTeX.
+- **`appendix/glossary-entries.tex`** — dove definire le voci del glossario, seguendo la sintassi degli esempi già presenti.
+- **`appendix/bibliography.tex`** — struttura automatica della bibliografia. Non serve modificarlo.
+
+---
+
+## Ordine delle sezioni nella tesi
+
+| Sezione | Posizione |
+|---|---|
+| Frontespizio | Inizio |
+| Copyright | Inizio |
+| Dedica | Inizio |
+| Sommario | Inizio |
+| Ringraziamenti | Inizio |
+| Indice / Liste figure e tabelle | Inizio |
+| Capitoli (introduzione → conclusioni) | Corpo |
+| Appendici | Fine |
+| Acronimi | Fine |
+| Glossario | Fine |
+| Bibliografia | Fine |
+
+> I ringraziamenti stanno all'inizio secondo la tradizione italiana. La dedica va sempre all'inizio. Glossario e bibliografia sempre alla fine, nonostante i loro file sorgente stiano nella cartella `appendix/` per comodità organizzativa.
+
+---
+
+## Prima cosa da fare: `config/variables.tex`
+
+Apri questo file e compila tutti i campi:
+
+```latex
+\newcommand{\myName}{Mario Rossi}
+\newcommand{\myID}{1234567}
+\newcommand{\myTitle}{Titolo della mia tesi}
+\newcommand{\myDegree}{Tesi di laurea}
+\newcommand{\myUni}{Università degli Studi di Padova}
+\newcommand{\myFaculty}{Corso di Laurea in Informatica}
+\newcommand{\myDepartment}{Dipartimento di Matematica ``Tullio Levi-Civita''}
+\newcommand{\profTitle}{Prof.}
+\newcommand{\myProf}{Nome Cognome}
+\newcommand{\myLocation}{Padova}
+\newcommand{\myAA}{2024-2025}
+\newcommand{\myTime}{Luglio 2025}
+```
+
+Aggiorna anche il blocco `\begin{filecontents*}` subito sotto, con titolo, autore e parole chiave per i metadati del PDF.
+
+> ⚠️ Dopo aver modificato i metadati PDF elimina la cartella `build/` prima di ricompilare, altrimenti le modifiche non vengono recepite.
+
+---
+
+## Installazione
+
+### Linux (Ubuntu/Debian)
+
+Installa una versione leggera di TeX Live (circa 1-2 GB, molto meno di `texlive-full` che pesa 5-7 GB):
+
+```bash
+sudo apt install texlive-base texlive-latex-extra texlive-fonts-recommended texlive-lang-italian biber latexmk
+```
+
+Poi installa i pacchetti specifici richiesti dal template:
+
+```bash
+sudo tlmgr update --self && sudo tlmgr update --all
+sudo tlmgr install pdfx xcolor xmpincl caption changepage csquotes emptypage \
+  epigraph nextpage eurosym layaureo listings microtype mparhack relsize \
+  quoting booktabs glossaries glossaries-italian glossaries-english biber \
+  biblatex babel babel-italian cm-super greek-fontenc latexmk fancyhdr
+```
+
+### macOS
+
+```bash
+brew install basictex
+```
+
+Poi installa i pacchetti con `tlmgr` come indicato sopra per Linux.
+
+In alternativa puoi scaricare **MacTeX** (installazione completa) da [tug.org/mactex](https://tug.org/mactex).
+
+### Windows — Opzione 1: MiKTeX (più semplice)
+
+La scelta più immediata su Windows. MiKTeX installa automaticamente i pacchetti mancanti alla prima compilazione, senza bisogno di usare il terminale.
+
+1. Scarica e installa MiKTeX da [miktex.org/download](https://miktex.org/download)
+2. Alla prima compilazione ti verrà chiesto se installare i pacchetti mancanti: conferma sempre
+
+### Windows — Opzione 2: WSL (consigliata se sei a tuo agio col terminale)
+
+WSL ti dà un terminale Linux dentro Windows, evitando i classici problemi di compatibilità di LaTeX su Windows. VS Code si integra nativamente con WSL.
+
+Attiva WSL aprendo PowerShell come amministratore:
+
+```powershell
+wsl --install
+```
+
+Riavvia il PC, apri Ubuntu dal menu Start e segui i passaggi della sezione Linux qui sopra.
+
+---
+
+## Editor
+
+### VS Code (consigliato)
+
+Il modo più comodo se hai già la repo su GitHub, perché puoi committare e pushare le modifiche direttamente dall'editor.
+
+1. Installa [VS Code](https://code.visualstudio.com)
+2. Installa l'estensione **LaTeX Workshop** dal marketplace
+3. Apri la cartella della repo in VS Code
+
+La repo include già `.vscode/settings.json` preconfigurato per usare `latexmk`, quindi puoi compilare direttamente con il tasto ▶ senza toccare il terminale.
+
+### TeXStudio
+
+Editor dedicato a LaTeX, molto usato in ambito accademico. Ha suggerimenti automatici per i comandi LaTeX. Per configurarlo con `latexmk` segui i primi 3 punti di [questa guida](https://latex.ti.bfh.ch/doc_gettingStarted/configuration/texstudio.html).
+
+### Overleaf
+
+Editor online, nessuna installazione richiesta. Utile per lavorare da browser o condividere facilmente col relatore. Il piano gratuito va bene per uso personale, ma la sincronizzazione con GitHub richiede l'abbonamento a pagamento.
+
+---
+
+## Compilazione
+
+### Comando base
+
 ```bash
 latexmk thesis.tex
 ```
 
-Latexmk is a powerful tool and allows you to do some other interesting stuff too, see `latexmk -help`.
-Most notably, if something feels wrong in the produced PDF you may want to force a full recompilation, using the `-g` (or the more aggressive `-gg`) option.
+Latexmk gestisce automaticamente tutti i passaggi necessari (bibliografia, glossario ecc.), quindi non servono più esecuzioni manuali di `pdflatex`. Il PDF viene generato nella cartella `build/`.
 
-## Yeah ok, cool, but I don't want to always compile from the terminal
-You can tell your LaTeX editor to compile using latexmk by default.
+Per la versione ottimizzata per la stampa:
 
-### VS Code + TeX Workshop extension
-This template comes with a [`settings.json`](.vscode/settings.json) file, that sets latexmk as the default command to compile the PDF.
-Everything should work fine out of the box.
+```bash
+latexmk printable-thesis.tex
+```
 
-### TeXStudio
-Read the first 3 points of [this guide](https://latex.ti.bfh.ch/doc_gettingStarted/configuration/texstudio.html).
+### Glossario o bibliografia non compaiono?
 
-</details>
+È normale alla prima compilazione. Latexmk dovrebbe risolverlo da solo, ma se il problema persiste forza una ricompilazione completa:
+
+```bash
+latexmk -gg thesis.tex
+```
+
+### Altre opzioni utili
+
+```bash
+latexmk -help           # mostra tutte le opzioni disponibili
+latexmk -g thesis.tex   # forza ricompilazione
+latexmk -gg thesis.tex  # forza ricompilazione completa (più aggressiva)
+```
 
 ---
 
-# Template structure
-So, you finally managed to get your setup working and you're ready to begin to write actual stuff, but you just realized there are so many files in here and you don't even know where to start from...
+## Supporto immagini SVG
 
-First of all, these are the only files you should care about:
-```
-Thesis
-├── appendix/
-│   ├── appendice-a.tex
-│   ├── bibliography.bib
-│   ├── bibliography.tex
-│   └── glossary-entries.tex
-├── chapters/
-│   ├── concept.tex
-│   └── ...
-├── config/
-│   ├── packages.tex
-│   ├── thesis-config.tex
-│   └── variables.tex
-├── images/
-│   ├── unipd-logo.png
-│   └── ...
-├── preface/
-│   ├── acknowledgements.tex
-│   ├── copyright.tex
-│   ├── dedication.tex
-│   ├── summary.tex
-│   ├── table-of-contents.tex
-│   └── title-page.tex
-├── structure.tex
-├── printable-thesis.tex
-└── thesis.tex
+Le immagini SVG sono supportate (e consigliate). Richiedono la dipendenza `cairosvg`:
+
+```bash
+pip install cairosvg
 ```
 
-Yeah, well, not actually all of them. Let's break down their purpose down here
-
-<details>
-<summary>Read more</summary>
-
-- `config/`
-    - `variables.tex`: the first file you want to look into.
-    It defines all the variables that will be used to automatically fill some contents of the document, such as the title, your name, your professor etc.
-    It also fills the final PDF file metadata fields.
-    - `thesis-config.tex`: some custom commands definitions and package-specific configurations.
-    If you feel adventurous enough you can tune them to your preferences, but the provided ones should be ok
-    - `packages.tex`: should be pretty much self-explanatory.
-    Just the declaration of all the packages used in the project.
-    Nothing relevant to see here
-- `preface/`: all those pages you find before the actual chapters are gathered here:
-    - `summary.tex`: in here you briefly explain what the thesis is about.
-    You shouldn't spend much effort on this, just look at what's already in there and adapt it to your experience
-    - `acknowledgements.tex`: should be clear by itself. Just remember to thank your professor first
-    - `dedication.tex`: contains a small dedication with famous quote
-    - `title-page.tex`: declares the structure of the front page.
-    Everything is automatic and the various names, such as your name, you thesis title, your professor etc get filled from those variables you set in `config/variables.tex`.
-    If your thesis has a very long title you may need to slightly adjust some spacing, in order to keep a decent layout
-    - `table-of-contents.tex`: generates the table of contents. Nothing to see here
-    - `copyright.tex`: it's nothing special, just that blank page with copyright
-- `chapters/`: the real stuff is placed here.
-This is the directory you will spend most of your time in, writing the main content.
-You will already find some example chapters in there, which are meant to show you how to use the template and to give an example of the structure of a thesis. \
-Use file names that reflect the content of the chapter, avoid calling them `chapter-03.tex`.
-When creating, deleting or editing chapters remember that you have to put them in `structure.tex` too
-- `structure.tex`: this doesn't contain any actual content at all.
-It just sets down the structure of the document, importing other files in the right order.
-You may occasionally need to put some new chapters you will write, but apart from that there's not much to do here
-- `thesis.tex`: the root file of your thesis. As you can read above it is the only file to compile, in order to get the final PDF. Nothing more to say
-- `printable-thesis.tex`: yet another root file.
-When compiled, this one produces a version that is more fit to be printed as an elegant sweet physical copy, than to be viewed on your favorite PDF reader.
-It provides asymmetrical margins, chapters openings on the right and no links highlighting
-- `images/`: where the template will look for images, when including one
-- `appendix/`: contains the last chapters, such as custom appendix chapters, bibliography and glossary
-    - `bibliography.bib`: where you put actual bibliography content
-    - `glossary-entries.tex:` where you put your glossary definitions, following the syntax of the example terms
-    - `bibliography.tex`: the automatic structure of bibliography. No need to change anything here
-
-</details>
+Per i diagrammi draw.io è necessario un ambiente POSIX per via dell'uso di `sed` (disponibile nativamente su Linux e macOS; su Windows funziona tramite WSL).
 
 ---
 
-Remember not to unconditionally stick with this structure, as it's just an example.
-If you feel you don't need this chapter or that section, or you prefer a different order and organization of the content do as you want.
+## Come aggiungere un capitolo
 
-Before really starting to write actual content you should take some time to think about the structure of your chapters, filling them with the (empty) sections you will then develop, as it should help later on, avoiding to constantly rewrite and reorder stuff.
+1. Crea il file `.tex` nella cartella `chapters/` con un nome che rifletta il contenuto (es. `architettura-sistema.tex`)
+2. Aprilo con `\chapter{Titolo capitolo}` e il relativo `\label{cap:...}`
+3. Registralo in `structure.tex` nell'ordine corretto:
+
+```latex
+\input{chapters/architettura-sistema}
+```
+
+---
+
+## Glossario
+
+Le voci si definiscono in `appendix/glossary-entries.tex`. Ci sono due tipi:
+
+```latex
+% Acronimo
+\newacronym{api}{API}{Application Program Interface}
+
+% Voce di glossario estesa
+\newglossaryentry{apig}{
+    name=\glslink{api}{API},
+    text=Application Program Interface,
+    sort=api,
+    description={descrizione estesa...}
+}
+```
+
+Per usare un termine nel testo:
+- `\gls{api}` → prima occorrenza con marcatore [g], poi solo il termine
+- `\Gls{api}` → come sopra ma con iniziale maiuscola
+
+---
+
+## Bibliografia
+
+Aggiungi le voci in `appendix/bibliography.bib` in formato BibTeX:
+
+```bibtex
+@book{cognome:titolo-breve,
+    author    = {Nome Cognome},
+    title     = {Titolo del libro},
+    publisher = {Editore},
+    year      = {2023}
+}
+
+@online{site:nome-sito,
+    title = {Titolo pagina},
+    url   = {https://esempio.com}
+}
+```
+
+Per citare nel testo:
+- `\cite{cognome:titolo-breve}` → citazione inline
+- `\footcite{cognome:titolo-breve}` → citazione a piè di pagina
+
+---
+
+## Fonti ufficiali UniPD
+
+- Regolamento didattico e scadenze: [didattica.math.unipd.it](https://didattica.math.unipd.it)
+- Conseguimento titolo e upload tesi: portale **Uniweb**
+- Indicazioni specifiche: chiedere direttamente al relatore prima di iniziare
