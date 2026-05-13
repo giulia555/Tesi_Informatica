@@ -1,7 +1,7 @@
-# Note personali — Template tesi triennale
+# Template per tesi triennale - Laurea in Informatica UniPD
 
-Questo file è un promemoria personale su come è strutturato il template e come usarlo.
-Il template originale è mantenuto da [FIUP](https://github.com/FIUP) per il corso di Laurea in Informatica dell'Università di Padova.
+Questo file è un promemoria personale e una guida su come è strutturato il template e come usarlo.
+Il template originale è mantenuto da [FIUP]([https://github.com/FIUP/](https://github.com/FIUP/Thesis-template)) per il corso di Laurea in Informatica dell'Università di Padova.
 
 ---
 
