@@ -1,0 +1,31 @@
+# File generati dalla compilazione LaTeX
+*.aux
+*.log
+*.toc
+*.fls
+*.out
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+*.fdb_latexmk
+*.synctex.gz
+*.synctex
+*.acn
+*.acr
+*.alg
+*.glo
+*.gls
+*.glg
+*.ist
+*.lof
+*.lot
+*.lol
+*.xmpdata
+*.lua
+*.xmpi
+build/
+*-SAVE-ERROR
+
+# PDF generati (tieni solo quelli che vuoi committare esplicitamente)
+*thesis.pdf
