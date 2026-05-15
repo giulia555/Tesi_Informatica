@@ -1,22 +1,14 @@
-        %%******************************************%%
-        %%                                          %%
-        %%        Modello di tesi di laurea         %%
-        %%            di Andrea Giraldin            %%
-        %%                                          %%
-        %%             2 novembre 2012              %%
-        %%                                          %%
-        %%******************************************%%
-
+% STRUTTURA DEL DOCUMENTO INTERO
 \begin{document}
     \frontmatter
-    \input{preface/title-page}
-    \input{preface/copyright}
-    \input{preface/dedication}
-    \input{preface/summary}
-    \input{preface/acknowledgements}
-    \input{preface/table-of-contents}
+    \input{preface/title-page} % pagina iniziale con titolo e logo
+    \input{preface/copyright} % riga del copywright
+    \input{preface/dedication} % dedica
+    \input{preface/summary} % sommario
+    \input{preface/table-of-contents} % indice
     \cleardoublepage
 
+    % contenuto principale: capitoli
     \mainmatter
     \input{chapters/introduzione}
     \input{chapters/processi}
@@ -31,7 +23,7 @@
 
     \backmatter
     \printglossary[type=\acronymtype, title=Acronimi e abbreviazioni, toctitle=Acronimi e abbreviazioni]
-    \printglossary[type=main, title=Glossario, toctitle=Glossario]
-
-    \input{appendix/bibliography}
+    \printglossary[type=main, title=Glossario, toctitle=Glossario] % glossario e acronimi
+    \input{appendix/bibliography} % bibliografia
+    \input{preface/acknowledgements} % ringraziamenti
 \end{document}

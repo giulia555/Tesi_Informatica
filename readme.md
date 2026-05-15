@@ -182,6 +182,11 @@ Editor online, nessuna installazione richiesta. Utile per lavorare da browser o 
 latexmk thesis.tex
 ```
 
+Per sovrascrivere e forzare la compilazione (se è già presente la cartella build/):
+```bash
+latexmk -gg thesis.tex
+```
+
 Latexmk gestisce automaticamente tutti i passaggi necessari (bibliografia, glossario ecc.), quindi non servono più esecuzioni manuali di `pdflatex`. Il PDF viene generato nella cartella `build/`.
 
 Per la versione ottimizzata per la stampa:
