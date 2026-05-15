@@ -24,6 +24,8 @@
 *.xmpdata
 *.lua
 *.xmpi
+
+# tutto ciò che è dentro la cartella build/ viene ignorato (corretto)
 build/
 *-SAVE-ERROR
 

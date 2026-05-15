@@ -64,13 +64,13 @@ tesi/
 | Copyright | Inizio |
 | Dedica | Inizio |
 | Sommario | Inizio |
-| Ringraziamenti | Inizio |
 | Indice / Liste figure e tabelle | Inizio |
 | Capitoli (introduzione → conclusioni) | Corpo |
 | Appendici | Fine |
 | Acronimi | Fine |
 | Glossario | Fine |
 | Bibliografia | Fine |
+| Ringraziamenti | Fine |
 
 > I ringraziamenti stanno all'inizio secondo la tradizione italiana. La dedica va sempre all'inizio. Glossario e bibliografia sempre alla fine, nonostante i loro file sorgente stiano nella cartella `appendix/` per comodità organizzativa.
 
