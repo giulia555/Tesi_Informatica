@@ -10,28 +10,30 @@ Il template originale è mantenuto da [FIUP](https://github.com/FIUP/Thesis-temp
 ```
 tesi/
 ├── config/
-│   ├── variables.tex         ← PRIMA COSA DA MODIFICARE
+│   ├── variables.tex         ← variabili da modificare
 │   ├── thesis-config.tex     ← configurazioni avanzate, comandi custom
 │   └── packages.tex          ← dichiarazione pacchetti LaTeX
 ├── preface/
 │   ├── title-page.tex        ← frontespizio (automatico da variables.tex)
 │   ├── summary.tex           ← sommario/abstract
 │   ├── dedication.tex        ← dedica
-│   ├── acknowledgements.tex  ← ringraziamenti
 │   ├── copyright.tex         ← pagina copyright
 │   └── table-of-contents.tex ← indice (automatico)
-├── chapters/
+├── chapters/                 ← struttura dei capitoli (da modificare)
 │   ├── introduzione.tex
-│   ├── processi.tex
-│   ├── kick-off.tex
-│   ├── concept.tex
-│   ├── product-prototype.tex
-│   ├── product-design.tex
+│   ├── descrizione-stage.tex
+│   ├── analisi-requisiti.tex
+│   ├── valutazione-competitor.tex
+│   ├── implementazione-tecnica.tex
+│   ├── quality-observability.tex
+│   ├── sviluppo-sicuro.tex
+│   ├── business-intelligence.tex
 │   └── conclusioni.tex
 ├── appendix/
 │   ├── glossary-entries.tex  ← definizioni glossario e acronimi
 │   ├── bibliography.bib      ← voci bibliografiche
-│   └── bibliography.tex      ← struttura automatica bibliografia
+│   ├── bibliography.tex      ← struttura automatica bibliografia
+│   └── acknowledgements.tex  ← ringraziamenti
 ├── images/
 │   └── unipd-logo.png        ← qui vanno tutte le immagini
 ├── structure.tex             ← ordine di inclusione dei file
@@ -72,7 +74,7 @@ tesi/
 | Bibliografia | Fine |
 | Ringraziamenti | Fine |
 
-> I ringraziamenti stanno all'inizio secondo la tradizione italiana. La dedica va sempre all'inizio. Glossario e bibliografia sempre alla fine, nonostante i loro file sorgente stiano nella cartella `appendix/` per comodità organizzativa.
+> La dedica va sempre all'inizio. I ringraziamenti sono alla fine.
 
 ---
 
