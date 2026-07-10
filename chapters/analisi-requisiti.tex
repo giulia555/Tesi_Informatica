@@ -1,18 +1,274 @@
 % capitolo 3: analisi dei requisiti
 \chapter{Analisi dei requisiti}
 \label{cap:analisi-requisiti}
+% TENERE SEMPRE A MENTE CHE OGNI REQUISITO DEVE RISPETTARE QUESTI 2 PRINCIPI:
+% 1. Necessità: ogni requisito inserito nella lista deve soddisfare un bisogno aziendale reale ed esplicito.
+% 2. Sufficienza: I requisiti elencati devono coprire tutti i bisogni dell'azienda.
 
-% \section{Casi d'uso}
+ \section{Introduzione}
+ In questa sezione vengono analizzati i casi d'uso e i requisiti aziendali necessari per l'introduzione di un \textit{Data Catalog} nell'infrastruttura di Wintech. 
+ Dato che le moderne soluzioni software offrono un ampio spettro di funzionalità, non sempre necessarie, l'analisi ha lo scopo di filtrare gli strumenti attualmente 
+ presenti sul mercato, individuando quelli che meglio rispondono ai requisiti dell'azienda e alle sue reali esigenze operative.
 
-% Per lo studio dei casi di utilizzo del prodotto sono stati creati dei diagrammi.
-% I diagrammi dei casi d'uso (in inglese \emph{Use Case Diagram}) sono diagrammi di tipo \gls{uml} dedicati alla descrizione delle funzioni o servizi offerti da un sistema, così come sono percepiti e utilizzati dagli attori che interagiscono col sistema stesso.
-% Essendo il progetto finalizzato alla creazione di un tool per l'automazione di un processo, le interazioni da parte dell'utilizzatore devono essere ovviamente ridotte allo stretto necessario. Per questo motivo i diagrammi d'uso risultano semplici e in numero ridotto.
+\subsection{Attori del sistema}
+In ambito aziendale possono essere molteplici le figure che hanno la necessità di accedere a un \textit{Data Catalog}, ognuna con esigenze e competenze diverse. 
+Ai fini dell'analisi dei requisiti, si individuano i seguenti attori principali:
+\begin{itemize}
+    \item \textbf{Analista o Sviluppatore di BI}: Utente finale del catalogo, il cui obiettivo è ricercare e accedere ai dati provenienti da varie fonti, comprenderne il significato e 
+    utilizzarli per generare report e analisi o per esportarli in strumenti esterni di Business Intelligence.
+    \item \textbf{Responsabile della Governance e della sicurezza dei dati}: Figura garante della qualità e della sicurezza dei dati, che controlla che i dati siano corretti e che rispettino le normative vigenti.
+    \item \textbf{Amministratore di sistema}: Figura tecnica che gestisce l'infrastruttura della piattaforma e connette le varie fonti di dati aziendali e mantiene il catalogo aggiornato, garantendone il corretto funzionamento.
+\end{itemize}
 
-% \begin{figure}[!h] 
-%    \centering 
-%    \includegraphics[width=0.9\columnwidth]{usecase/scenario-principale} 
-%    \caption{Use Case - UC0: Scenario principale}
-%\end{figure}
+\newpage
+
+\section{Casi d'uso}
+In questa sezione vengono analizzati i casi d'uso e gli scenari per cui l'azienda ha bisogno di adottare un \textit{Data Catalog}. 
+Per maggiore chiarezza organizzativa, i casi d'uso vengono suddivisi in tre macroaree raggruppate in base all'attore primario coinvolto.\\
+Ogni caso d'uso è identificato dalla seguente notazione:
+\begin{center}
+    \textbf{UC-[Macroarea].[Numero]}
+\end{center}
+
+% MACROAREA 1
+\subsection{Amministrazione del sistema}
+
+\begin{usecase}{1.0}{Collegamento a una fonte dati strutturata}
+    \usecaseactors{Amministratore di sistema}
+    \usecasedesc{L'amministratore collega una fonte dati strutturata al catalogo dati aziendale e ne visualizza i metadati tramite interfaccia}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di amministratore e possiede le credenziali della fonte dati da importare}
+    \usecasepost{I metadati della fonte dati selezionata sono stati importati con successo e sono visibili all'interno del catalogo dati}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore seleziona l'opzione che permette di connettere una nuova fonte di dati al catalogo.
+            \item L'attore seleziona la fonte desiderata e inserisce credenziali o parametri per la connessione.
+            \item Il sistema verifica la connessione e notifica il successo della connessione.
+            \item L'attore avvia l'estrazione dei metadati.
+        \end{enumerate}
+    }
+    \usecasealt{
+        \begin{enumerate}
+            \item Il sistema segnala il fallimento della connessione.
+            \item L'attore non può importare i dati nel catalogo e deve ricontrollare i parametri per la connessione.
+        \end{enumerate}
+    }
+    \label{uc:1_0_fonte_strutturata}
+\end{usecase}
+
+\begin{usecase}{1.1}{Collegamento a una fonte dati semi strutturata}
+    \usecaseactors{Amministratore di sistema}
+    \usecasedesc{L'amministratore collega una fonte dati semi strutturata al catalogo dati aziendale e ne visualizza i metadati tramite interfaccia}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di amministratore e possiede le credenziali o il percorso della fonte dati da importare}
+    \usecasepost{I metadati della fonte dati selezionata sono stati importati con successo e sono visibili all'interno del catalogo dati}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore seleziona l'opzione che permette di aggiungere una nuova fonte di dati al catalogo.
+            \item L'attore seleziona la fonte desiderata e inserisce i parametri per la connessione o il percorso del file.
+            \item Il sistema verifica la connessione e notifica il successo della connessione.
+            \item L'attore avvia l'estrazione dei metadati.
+        \end{enumerate}
+    }
+    \label{uc:1_1_fonte_semi_strutturata}
+\end{usecase}
+
+\begin{usecase}{1.2}{Collegamento a una fonte dati non strutturata}
+    \usecaseactors{Amministratore di sistema}
+    \usecasedesc{L'amministratore collega una fonte dati non strutturata al catalogo dati aziendale e ne visualizza i metadati tramite l'interfaccia della piattaforma}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di amministratore e possiede le credenziali o il percorso della fonte dati da importare}
+    \usecasepost{I metadati della fonte dati selezionata sono stati importati con successo e sono visibili all'interno del catalogo dati}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore seleziona l'opzione che permette di aggiungere una nuova fonte di dati al catalogo.
+            \item L'attore seleziona la fonte desiderata e inserisce i parametri per la connessione o il percorso del file.
+            \item Il sistema verifica la connessione e notifica il successo della connessione.
+            \item L'attore avvia l'estrazione dei metadati.
+        \end{enumerate}
+    }
+    \label{uc:1_2_fonte_non_strutturata}
+\end{usecase}
+
+\begin{usecase}{1.3}{Visualizzazione delle fonti dati collegate}
+    \usecaseactors{Amministratore di sistema}
+    \usecasedesc{L'amministratore visualizza l'inventario delle fonti dati, cioè l'insieme delle fonti di dati che popolano il \textit{Data Catalog}}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di amministratore}
+    \usecasepost{L'attore accede all'elenco completo delle fonti di dati importate nel \textit{Data Catalog}}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore seleziona l'opzione per visualizzare l'elenco delle fonti dati del catalogo dati.
+            \item Il sistema mostra l'elenco completo delle fonti dati.
+        \end{enumerate}
+    }
+    \label{uc:1_3_visualizzazione_fonti_collegate}
+\end{usecase}
+
+\begin{usecase}{1.4}{Gestione dei permessi e degli accessi}
+    \usecaseactors{Amministratore di sistema}
+    \usecasedesc{L'amministratore definisce i ruoli degli utenti che accedono alla piattaforma e assegna i permessi di accesso ai diversi set di dati. 
+    Il sistema garantisce che ogni utente visualizzi esclusivamente i dati per cui dispone delle autorizzazioni necessarie}    
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di amministratore}
+    \usecasepost{I ruoli degli utenti sono stati definiti e i permessi di accesso ai dati sono stati configurati correttamente}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore seleziona l'opzione per la gestione dei ruoli e dei permessi.
+            \item L'attore crea o modifica i ruoli disponibili nella piattaforma.
+            \item L'attore assegna i ruoli agli utenti che accedono al catalogo.
+            \item L'attore definisce le regole di accesso ai dati associate a ciascun ruolo.
+            \item Il sistema applica i permessi configurati e limita la visibilità dei dati in base al ruolo di ciascun utente.
+        \end{enumerate}
+    }
+    \label{uc:1_4_gestione_permessi}
+\end{usecase}
+
+\begin{usecase}{1.5}{Pianificazione della sincronizzazione dei metadati}
+    \usecaseactors{Amministratore di sistema}
+    \usecasedesc{L'amministratore pianifica la sincronizzazione automatica dei metadati, definendo la frequenza e le modalità con cui il catalogo si aggiorna allineandosi 
+    alle fonti dati originali, garantendo che le informazioni presenti nel catalogo siano sempre coerenti e aggiornate}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di amministratore e almeno una fonte dati è stata collegata al catalogo}
+    \usecasepost{La sincronizzazione automatica è stata pianificata correttamente e i metadati vengono aggiornati secondo la frequenza stabilita}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore seleziona le impostazioni per la pianificazione della sincronizzazione dei metadati.
+            \item L'attore configura la frequenza e le modalità di aggiornamento desiderate.
+            \item Il sistema conferma la configurazione e pianifica le sincronizzazioni secondo i parametri definiti.
+            \item Il sistema esegue automaticamente la sincronizzazione dei metadati agli intervalli stabiliti.
+        \end{enumerate}
+    }
+    \label{uc:1_5_pianificazione_sincronizzazione}
+\end{usecase}
+
+\begin{usecase}{1.6}{Configurazione della classificazione automatica dei dati sensibili}
+    \usecaseactors{Amministratore di sistema}
+    \usecasedesc{L'amministratore abilita e configura il motore di classificazione automatica dei dati sensibili, che analizza i metadati delle fonti dati collegate 
+    al catalogo e individua in autonomia i campi contenenti dati personali o sensibili (PII). Il motore si avvale per esempio di tecniche di Intelligenza Artificiale e di espressioni 
+    regolari per riconoscere pattern tipici di dati sensibili, quali nomi, indirizzi email, numeri di telefono, codici fiscali e altri dati identificativi}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di amministratore e almeno una fonte dati è stata collegata al catalogo}
+    \usecasepost{Il motore di classificazione automatica è attivo e configurato. Durante le sincronizzazioni dei metadati, il sistema individua e contrassegna automaticamente i campi contenenti dati sensibili}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore accede alle impostazioni della classificazione automatica dei dati sensibili.
+            \item L'attore abilita il motore di classificazione e seleziona le fonti dati su cui applicarlo.
+            \item L'attore configura le categorie di dati sensibili da rilevare o adotta la configurazione predefinita della piattaforma.
+            \item Il sistema conferma la configurazione e attiva il motore.
+            \item Ad ogni sincronizzazione, il sistema analizza i metadati delle fonti selezionate e contrassegna automaticamente i campi identificati come sensibili.
+        \end{enumerate}
+    }
+    \label{uc:1_6_configurazione_classificazione_dati}
+\end{usecase}
+
+\begin{usecase}{1.7}{Monitoraggio dello stato delle sincronizzazioni e delle connessioni}
+    \usecaseactors{Amministratore di sistema}
+    \usecasedesc{L'amministratore visualizza una dashboard tecnica, un report o un avviso che indica lo stato delle connessioni alle fonti dati e l'esito 
+    delle sincronizzazioni dei metadati, consentendo di verificare che le operazioni pianificate siano avvenute correttamente e di individuare eventuali anomalie o errori}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di amministratore e almeno una sincronizzazione è stata pianificata ed eseguita}
+    \usecasepost{L'attore ha visualizzato lo stato aggiornato delle connessioni e delle sincronizzazioni ed è a conoscenza di eventuali errori o anomalie da risolvere}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'amministratore accede alla dashboard di monitoraggio delle connessioni e delle sincronizzazioni.
+            \item Il sistema mostra lo stato di ciascuna operazione, indicando se è avvenuta con successo o se si sono verificati errori.
+            \item In caso di errore, il sistema fornisce informazioni dettagliate sulla causa del problema, ad esempio una credenziale scaduta o una fonte dati non raggiungibile.
+            \item L'attore prende visione delle anomalie e interviene per risolvere il problema alla fonte.
+        \end{enumerate}
+    }
+    \label{uc:1_7_monitoraggio_sincronizzazioni}
+\end{usecase}
+
+\begin{usecase}{1.8}{Gestione di avvisi e alert tecnici}
+    \usecaseactors{Amministratore di sistema}
+    \usecasedesc{Il sistema invia automaticamente alert di natura tecnica e avvisi all'amministratore quando vengono rilevate anomalie tecniche, come il fallimento di una sincronizzazione, 
+    un errore di connessione o la scadenza delle credenziali. L'amministratore visualizza gli alert ricevuti e interviene per risolvere i problemi segnalati}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di amministratore e il sistema di notifiche automatiche è stato configurato}
+    \usecasepost{L'attore ha preso visione degli alert ricevuti e ha avviato le azioni correttive necessarie per risolvere i problemi segnalati}
+    \usecasemain{
+        \begin{enumerate}
+            \item Il sistema rileva un'anomalia e genera automaticamente un alert.
+            \item L'attore riceve una notifica e accede alla sezione dedicata agli alert e agli avvisi.
+            \item Il sistema mostra i dettagli dell'alert, come la causa, la fonte dati coinvolta e il momento in cui si è verificato il problema.
+            \item L'attore esamina le informazioni disponibili e interviene per risolvere il problema.
+            \item Il sistema non mostra più l'alert o lo marchia come "risolto".
+        \end{enumerate}
+    }
+    \label{uc:1_8_gestione_alert_tecnici}
+\end{usecase}
+
+
+% MACROAREA 2
+\subsection{Governance e sicurezza dei dati}
+\begin{usecase}{2.0}{Individuazione automatica dei dati sensibili}
+    \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
+    \usecasedesc{La piattaforma analizza automaticamente i metadati dei dataset caricati nel catalogo e individua i campi contenenti dati sensibili o personali (PII), classificandoli tramite tag appositi. 
+    Il processo avviene in modo trasparente durante la sincronizzazione dei metadati, senza richiedere intervento manuale da parte dell'attore}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di responsabile della Governance e il motore di classificazione automatica è già stato configurato dall'amministratore}
+    \usecasepost{I campi contenenti dati sensibili o personali sono stati identificati e classificati automaticamente con i tag appropriati}
+    \usecasemain{
+        \begin{enumerate}
+            \item La piattaforma rileva l'aggiunta o la sincronizzazione di un nuovo dataset nel catalogo.
+            \item Il motore di classificazione automatica analizza i metadati del dataset e individua i campi che corrispondono a pattern tipici di dati sensibili o personali.
+            \item Il sistema associa automaticamente i tag appropriati ai campi individuati.
+            \item L'attore riceve una notifica dell'avvenuta classificazione automatica e può procedere alla revisione o all'approvazione.
+        \end{enumerate}
+    }
+    \label{uc:2_0_individuazione_automatica_dati}
+\end{usecase}
+
+
+
+
+% MACROAREA 3
+\subsection{Analisi dei dati e Business Intelligence}
+
+
+\newpage
+
+\section{Requisiti}
+In questa sezione vengono elencati e descritti i requisiti derivanti dallo studio dei casi d'uso, con l'obiettivo di avere un quadro chiaro delle caratteristiche 
+che un \textit{Data Catalog} deve avere per rispondere alle esigenze aziendali. Per ogni requisito vengono forniti una descrizione e il tracciamento verso i casi d'uso correlati.\\
+
+Ogni requisito è identificato dalla seguente notazione:
+\begin{center}
+    \textbf{R[Tipo]-[Importanza]-[Numero]}
+\end{center}
+dove le voci assumono i seguenti significati:
+\begin{description}
+    \item[Tipo] Indica la natura architetturale del requisito:
+    \begin{itemize}
+        \item \textbf{F (Funzionale)}: Descrive i servizi e le funzionalità tangibili che il sistema deve fornire.
+        \item \textbf{V (Vincolo)}: Descrive limitazioni tecnologiche o normative imposte esternamente.
+        \item \textbf{Q (Qualità)}: Descrive le caratteristiche qualitative misurabili del sistema.
+    \end{itemize}
+
+    \item[Importanza] Indica il grado di priorità per l'azienda:
+    \begin{itemize}
+        \item \textbf{O (Obbligatorio)}: Requisito irrinunciabile; la sua assenza compromette gli obiettivi primari del progetto.
+        \item \textbf{D (Desiderabile)}: Requisito non strettamente vincolante nel breve termine, ma a valore aggiunto riconoscibile.
+        \item \textbf{OP (Opzionale)}: Requisito di priorità minore, la cui implementazione può essere rimandata.
+    \end{itemize}
+
+    \item[Numero] Un intero progressivo univoco per ogni tipologia.
+\end{description}
+
+% TABELLE DEI REQUISITI
+\subsection{Requisiti funzionali}
+I requisiti funzionali descrivono i comportamenti e i servizi che il sistema deve fornire. Rispondono alla domanda: \textit{"Cosa deve fare il software?"}.
+
+
+\subsection{Requisiti di vincolo}
+I requisiti di vincolo rappresentano le limitazioni tecnologiche, normative, architetturali o implementative imposte dall'esterno entro le quali il progetto deve muoversi.
+
+\subsection{Requisiti di qualità}
+I requisiti di qualità descrivono le caratteristiche misurabili che il sistema deve garantire, come prestazioni, sicurezza, usabilità o manutenibilità.
+
+
+
+
+\newpage
+
+\section{Tracciamento dei requisiti}
+% tabella di tracciamento fonte - requisito
+
+
+
+
+% ROBA DEL TEMPLATE ==================================
 
 % \begin{usecase}{0}{Scenario principale}
 % \usecaseactors{Sviluppatore applicativi}
@@ -22,23 +278,6 @@
 % \label{uc:scenario-principale}
 % \end{usecase}
 
-% \section{Tracciamento dei requisiti}
-
-% Da un'attenta analisi dei requisiti e degli use case effettuata sul progetto è stata stilata la tabella che traccia i requisiti in rapporto agli use case.\\
-% Sono stati individuati diversi tipi di requisiti e si è quindi fatto utilizzo di un codice identificativo per distinguerli.\\
-% Il codice dei requisiti è così strutturato R(F/Q/V)(N/D/O) dove:
-% \begin{enumerate}
-% 	\item[R =] requisito
-%    \item[F =] funzionale
-%    \item[Q =] qualitativo
-%    \item[V =] di vincolo
-%    \item[N =] obbligatorio (necessario)
-%    \item[D =] desiderabile
-%    \item[Z =] opzionale
-% \end{enumerate}
-% Nelle tabelle \ref{tab:requisiti-funzionali}, \ref{tab:requisiti-qualitativi} e \ref{tab:requisiti-vincolo} sono riassunti i requisiti e il loro tracciamento con gli use case delineati in fase di analisi.
-
-% \newpage
 
 % \begin{table}%
 % \caption{Tabella del tracciamento dei requisti funzionali}
