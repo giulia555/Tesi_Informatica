@@ -14,7 +14,7 @@
 In ambito aziendale possono essere molteplici le figure che hanno la necessità di accedere a un \textit{Data Catalog}, ognuna con esigenze e competenze diverse. 
 Ai fini dell'analisi dei requisiti, si individuano i seguenti attori principali:
 \begin{itemize}
-    \item \textbf{Analista o Sviluppatore di BI}: Utente finale del catalogo, il cui obiettivo è ricercare e accedere ai dati provenienti da varie fonti, comprenderne il significato e 
+    \item \textbf{Analista o sviluppatore di BI}: Utente finale del catalogo, il cui obiettivo è ricercare e accedere ai dati provenienti da varie fonti, comprenderne il significato e 
     utilizzarli per generare report e analisi o per esportarli in strumenti esterni di Business Intelligence.
     \item \textbf{Responsabile della Governance e della sicurezza dei dati}: Figura garante della qualità e della sicurezza dei dati, che controlla che i dati siano corretti e che rispettino le normative vigenti.
     \item \textbf{Amministratore di sistema}: Figura tecnica che gestisce l'infrastruttura della piattaforma e connette le varie fonti di dati aziendali e mantiene il catalogo aggiornato, garantendone il corretto funzionamento.
@@ -210,11 +210,440 @@ Ogni caso d'uso è identificato dalla seguente notazione:
     \label{uc:2_0_individuazione_automatica_dati}
 \end{usecase}
 
+\begin{usecase}{2.1}{Revisione della classificazione automatica dei dati sensibili}
+    \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
+    \usecasedesc{L'attore revisiona i tag assegnati automaticamente dalla piattaforma ai dati sensibili, verificando che la classificazione sia corretta e conforme alle norme aziendali 
+    e alle normative vigenti. L'attore può approvare la classificazione esistente, correggere i tag non corretti o modificare le impostazioni del motore di classificazione automatica per adattarlo al contesto aziendale}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di responsabile della Governance e la classificazione automatica dei dati sensibili è già stata eseguita}
+    \usecasepost{La classificazione dei dati sensibili è stata revisionata e approvata dall'attore ed eventuali tag errati sono stati corretti}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore accede alla sezione dedicata alla revisione della classificazione dei dati sensibili.
+            \item Il sistema mostra l'elenco dei campi classificati automaticamente come sensibili, con i relativi tag assegnati.
+            \item L'attore esamina la classificazione e verifica che i tag siano corretti e conformi alle norme aziendali.
+            \item Se la classificazione è corretta, l'attore la approva.
+            \item Se la classificazione non è corretta, l'attore modifica o rimuove i tag errati e, se necessario, aggiorna le impostazioni del motore di classificazione per evitare errori futuri.
+            \item Il sistema salva le modifiche e aggiorna la classificazione dei campi coinvolti.
+        \end{enumerate}
+    }
+    \usecasealt{
+        \begin{enumerate}
+            \item La classificazione automatica non individua nessun dato personale o sensibile nel dataset.
+            \item L'attore viene notificato dell'assenza di classificazioni automatiche e può procedere con la classificazione manuale.
+        \end{enumerate}
+    }
+    \label{uc:2_1_revisione_classificazione_automatica}
+\end{usecase}
 
+\begin{usecase}{2.2}{Classificazione manuale dei dati tramite flag}
+    \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
+    \usecasedesc{L'attore assegna manualmente tag ai dati presenti nel catalogo per classificarli secondo diversi parametri, tra cui la sensibilità del dato, l'area tematica 
+    di appartenenza, il reparto di riferimento o altri criteri aziendali. Questo caso d'uso si applica sia come fallback quando il motore di classificazione automatica non ha 
+    individuato un dato sensibile, sia in modo indipendente per arricchire la classificazione dei dati con tag personalizzati}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di responsabile della governance ed è presente almeno un set di dati nel Data Catalog}
+    \usecasepost{I dati selezionati sono stati classificati tramite tag e il sistema li riconosce e li tratta di conseguenza, applicando le regole associate a ciascun tag}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore naviga nel catalogo e seleziona il dataset o il campo su cui intervenire.
+            \item L'attore seleziona l'opzione per assegnare o modificare i tag.
+            \item L'attore sceglie i tag appropriati tra quelli disponibili o ne crea di nuovi se necessario.
+            \item Il sistema applica i tag selezionati al dato e aggiorna la classificazione.
+            \item Se il tag indica che il dato è sensibile o personale, il sistema lo tratta di conseguenza applicando le regole di accesso e protezione previste.
+        \end{enumerate}
+    }
+    \label{uc:2_2_classificazione_manuale_dati}
+\end{usecase}
+
+\begin{usecase}{2.3}{Propagazione delle modifiche ai tag dei dati sensibili}
+    \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
+    \usecasedesc{Quando un tag relativo a un dato sensibile viene modificato o rimosso, la piattaforma propaga automaticamente la modifica a tutti i dataset e i campi correlati in 
+    cui quel dato è presente, garantendo la coerenza della classificazione in tutto il catalogo e la conformità alle normative vigenti, in particolare al GDPR}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di responsabile della Governance e almeno un dato sensibile è già stato classificato tramite tag nel catalogo}
+    \usecasepost{La modifica al tag è stata propagata a tutti i dataset e i campi correlati. La classificazione dei dati sensibili è coerente in tutto il catalogo}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore modifica o rimuove un tag relativo a un dato sensibile su un campo o dataset.
+            \item Il sistema individua tutti i dataset e i campi correlati in cui quel dato è presente.
+            \item Il sistema mostra all'attore un riepilogo delle modifiche che verranno propagate e richiede conferma.
+            \item L'attore conferma la propagazione.
+            \item Il sistema applica la modifica in modo coerente a tutti i dataset coinvolti e notifica l'attore dell'avvenuta propagazione.
+        \end{enumerate}
+    }
+    \label{uc:2_3_propagazione_modifiche_tag}
+\end{usecase}
+
+\begin{usecase}{2.4}{Anonimizzazione dei dati}
+    \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
+    \usecasedesc{La piattaforma permette di applicare regole di anonimizzazione ai dati presenti nel catalogo, mascherandone totalmente la visualizzazione agli utenti non autorizzati. I dati originali nelle fonti non vengono modificati: 
+    il catalogo applica il mascheramento esclusivamente a livello di visualizzazione, impedendo agli utenti privi delle autorizzazioni necessarie di accedere al contenuto del campo. Le regole di anonimizzazione possono essere applicate manualmente dall'attore oppure automaticamente dal sistema in base ai tag assegnati ai dati}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di responsabile della Governance ed è presente almeno un set di dati nel Data Catalog}
+    \usecasepost{Le regole di anonimizzazione sono state applicate ai dati selezionati. Gli utenti non autorizzati non possono visualizzare il contenuto dei campi anonimizzati. I dati originali nelle fonti rimangono invariati}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore seleziona il campo o il dataset su cui applicare l'anonimizzazione, oppure il sistema individua automaticamente i dati classificati con tag specifici, come PII.
+            \item L'attore sceglie di applicare una regola di anonimizzazione totale al campo selezionato.
+            \item Il sistema applica la regola di mascheramento e nasconde totalmente il contenuto del campo agli utenti non autorizzati.
+            \item Il sistema propaga la regola di anonimizzazione a tutti i campi correlati presenti nel catalogo.
+            \item Il sistema notifica l'attore dell'avvenuta applicazione delle regole e dei campi coinvolti.
+        \end{enumerate}
+    }
+    \usecasealt{
+        \begin{enumerate}
+            \item L'attore decide di rimuovere una regola di anonimizzazione esistente: il sistema rimuove il mascheramento e ripristina la visualizzazione del campo per gli utenti autorizzati, propagando la modifica a tutti i campi correlati.
+        \end{enumerate}
+    }
+    \label{uc:2_4_anonimizzazione_dati}
+\end{usecase}
+
+\begin{usecase}{2.5}{Pseudonimizzazione dei dati}
+    \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
+    \usecasedesc{La piattaforma permette di applicare regole di pseudonimizzazione ai dati presenti nel catalogo, mascherandone parzialmente la visualizzazione agli utenti non autorizzati. I dati originali nelle fonti non vengono modificati: 
+    il catalogo applica il mascheramento esclusivamente a livello di visualizzazione. Le regole di pseudonimizzazione possono essere applicate manualmente dall'attore oppure automaticamente dal sistema in base ai tag assegnati ai dati}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di responsabile della Governance ed è presente almeno un set di dati nel Data Catalog}
+    \usecasepost{Le regole di pseudonimizzazione sono state applicate ai dati selezionati. Gli utenti non autorizzati visualizzano il contenuto dei campi in forma parzialmente mascherata. I dati originali nelle fonti rimangono invariati}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore seleziona il campo o il dataset su cui applicare la pseudonimizzazione, oppure il sistema individua automaticamente i dati classificati con tag specifici, come PII.
+            \item L'attore sceglie di applicare una regola di pseudonimizzazione e seleziona la modalità di mascheramento parziale desiderata, ad esempio la sostituzione con un codice identificativo o la visualizzazione parziale del valore.
+            \item Il sistema applica la regola di mascheramento e mostra il contenuto del campo in forma parziale agli utenti non autorizzati.
+            \item Il sistema propaga la regola di pseudonimizzazione a tutti i campi correlati presenti nel catalogo.
+            \item Il sistema notifica l'attore dell'avvenuta applicazione delle regole e dei campi coinvolti.
+        \end{enumerate}
+    }
+    \usecasealt{
+        \begin{enumerate}
+            \item L'attore decide di rimuovere una regola di pseudonimizzazione esistente: il sistema ripristina la visualizzazione completa del campo per gli utenti autorizzati, propagando la modifica a tutti i campi correlati.
+        \end{enumerate}
+    }
+    \label{uc:2_5_pseudonimizzazione_dati}
+\end{usecase}
+
+\begin{usecase}{2.6}{Ricerca e visualizzazione di dati sensibili}
+    \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
+    \usecasedesc{L'attore ricerca e visualizza i dati classificati come sensibili o personali all'interno del catalogo, con l'obiettivo di verificarne la corretta gestione, controllarne la distribuzione tra le fonti dati e garantire 
+    la conformità alle normative vigenti. A differenza della ricerca generica effettuata dall'Analista BI (UC-3.0), questo caso d'uso ha finalità di controllo e audit, non di utilizzo del dato}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di responsabile della Governance ed è presente almeno un set di dati classificato come sensibile nel Data Catalog}
+    \usecasepost{L'attore ha ottenuto una visione completa dei dati sensibili o personali presenti nel catalogo, della loro distribuzione tra le fonti dati e dello stato della loro classificazione}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore accede alla funzionalità di ricerca del catalogo.
+            \item L'attore filtra i risultati per tag, selezionando ad esempio i tag PII o altri tag relativi a dati sensibili.
+            \item Il sistema restituisce l'elenco di tutti i campi e dataset classificati con i tag selezionati, indicando per ciascuno la fonte dati di provenienza, il tipo di dato e lo stato della classificazione.
+            \item L'attore visualizza i dettagli di un campo o dataset specifico per verificarne la corretta gestione e le regole di accesso applicate.
+            \item L'attore può esportare i risultati della ricerca per finalità di audit o reportistica o può risalire alle fonti originali dei dati per modificarli.
+        \end{enumerate}
+    }
+    \label{uc:2_6_ricerca_visualizzazione_dati_sensibili}
+\end{usecase}
+
+\begin{usecase}{2.7}{Controllo automatico di conformità alle normative}
+    \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
+    \usecasedesc{La piattaforma mette a disposizione uno strumento automatico per verificare la conformità dei dati presenti nel catalogo rispetto alle normative vigenti in materia di protezione dei dati personali, come il GDPR. 
+    Il sistema analizza i dati classificati come sensibili o personali e verifica che siano gestiti nel rispetto delle regole previste dalla normativa, come la presenza di tag appropriati, l'applicazione di regole di accesso e l'eventuale mascheramento. L'attore può anche personalizzare le regole di conformità per adattarle alle esigenze e alle policy aziendali specifiche}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di responsabile della Governance, è presente almeno un set di dati nel Data Catalog e i dati sensibili o personali sono già stati classificati tramite tag}
+    \usecasepost{Il sistema ha eseguito il controllo automatico di conformità e ha notificato l'attore dell'esito, indicando eventuali dati non conformi che richiedono un intervento correttivo}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore accede alla sezione dedicata al controllo di conformità alle normative.
+            \item L'attore avvia il controllo automatico oppure il sistema lo esegue secondo una pianificazione predefinita.
+            \item Il sistema analizza i dati classificati come sensibili o personali e verifica che siano gestiti in conformità alle normative vigenti e alle policy aziendali configurate.
+            \item Il sistema genera un report con l'esito del controllo, evidenziando i dati conformi e quelli che presentano anomalie o violazioni.
+            \item L'attore visualizza il report e, in caso di non conformità, interviene per correggere la gestione dei dati coinvolti.
+        \end{enumerate}
+    }
+    \usecasealt{
+        \begin{enumerate}
+            \item Il sistema individua dati non conformi alle normative: invia una notifica automatica o un alert all'attore, magari indicando le azioni correttive necessarie.
+        \end{enumerate}
+    }
+    \label{uc:2_7_controllo_conformita}
+\end{usecase}
+
+\begin{usecase}{2.8}{Monitoraggio della qualità dei dati}
+    \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
+    \usecasedesc{La piattaforma mette a disposizione strumenti di Data Quality che consentono di eseguire test automatici sui dati presenti nel catalogo e di visualizzarne lo stato di salute tramite una dashboard o una sezione dedicata. 
+    I test permettono di rilevare anomalie quali valori nulli, duplicati, dati non aggiornati, formati errati o valori fuori range. I risultati dei test sono consultabili in tempo reale e consentono all'attore di avere una visione chiara e aggiornata della qualità dei dati presenti nel catalogo}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di responsabile della Governance ed è presente almeno un set di dati nel Data Catalog}
+    \usecasepost{I test di Data Quality sono stati eseguiti e i risultati sono visibili nella dashboard o sezione dedicata. L'attore ha una visione aggiornata dello stato di salute dei dati presenti nel catalogo}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore accede alla sezione dedicata al monitoraggio della qualità dei dati.
+            \item L'attore seleziona il dataset o il campo su cui eseguire i test di qualità oppure il sistema esegue i test automaticamente secondo una pianificazione predefinita.
+            \item Il sistema esegue i test configurati e analizza i dati alla ricerca di anomalie, quali valori nulli, duplicati, formati errati o dati non aggiornati.
+            \item Il sistema mostra i risultati dei test nella dashboard dedicata, indicando per ciascun dataset o campo lo stato di salute e le eventuali anomalie rilevate.
+            \item L'attore esamina i risultati e, in caso di anomalie, interviene per segnalare il problema o avviare le azioni correttive necessarie.
+        \end{enumerate}
+    }
+    \usecasealt{
+        \begin{enumerate}
+            \item I test rilevano anomalie nei dati: il sistema evidenzia i campi o i dataset coinvolti e notifica l'attore, che può procedere alla correzione o a configurare un alert automatico.
+        \end{enumerate}
+    }
+    \label{uc:2_8_monitoraggio_qualita_dati}
+\end{usecase}
+
+\begin{usecase}{2.9}{Configurazione di soglie di qualità e alert automatici sui dati}
+    \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
+    \usecasedesc{La piattaforma permette di configurare soglie di accettazione per la qualità dei dati presenti nel catalogo. Quando i risultati dei test di Data Quality non raggiungono le soglie configurate, o quando un test fallisce, 
+    il sistema genera automaticamente un alert o un avviso che viene inviato all'attore, consentendo un intervento tempestivo prima che le anomalie impattino sulle analisi o sui report aziendali}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di responsabile della Governance, è presente almeno un set di dati nel Data Catalog e i test di Data Quality sono stati configurati}
+    \usecasepost{Le soglie di qualità sono state configurate e il sistema genera automaticamente alert e avvisi ogni volta che i dati non raggiungono i livelli di accettazione definiti}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore accede alle impostazioni di configurazione delle soglie di qualità.
+            \item L'attore seleziona il dataset o il campo su cui configurare la soglia e definisce i parametri di accettazione.
+            \item L'attore configura le modalità di notifica dell'alert.
+            \item Il sistema salva la configurazione e monitora continuamente i dati rispetto alle soglie definite.
+            \item Quando i dati non raggiungono le soglie configurate o un test fallisce, il sistema genera automaticamente un alert e lo recapita all'attore secondo le modalità configurate.
+        \end{enumerate}
+    }
+    \usecasealt{
+        \begin{enumerate}
+            \item L'attore modifica o rimuove una soglia esistente: il sistema aggiorna la configurazione e smette di generare alert per i parametri rimossi.
+        \end{enumerate}
+    }
+    \label{uc:2_9_configurazione_soglie_qualita}
+\end{usecase}
+
+\begin{usecase}{2.10}{Gestione delle segnalazioni degli utenti}
+    \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
+    \usecasedesc{La piattaforma consente agli utenti di inviare segnalazioni di problemi o domande direttamente nella pagina del dato a cui si riferiscono. Il responsabile della Governance 
+    visualizza le segnalazioni e può rispondere alle domande ricevute o intervenire per risolvere i problemi relativi alla qualità o alla classificazione dei dati segnalati}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di responsabile della Governance e almeno una segnalazione o una domanda è stata inviata da un altro utente}
+    \usecasepost{L'attore ha risposto alla domanda ricevuta o ha preso in carico la segnalazione e avviato le azioni correttive necessarie}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore riceve una notifica della nuova segnalazione o domanda ricevuta.
+            \item L'attore accede alla segnalazione e visualizza il contesto del dato a cui si riferisce.
+            \item L'attore risponde alla domanda o interviene per risolvere il problema segnalato.
+            \item Il sistema aggiorna lo stato della segnalazione e notifica l'utente che l'aveva inviata.
+        \end{enumerate}
+    }
+    \label{uc:2_10_gestione_segnalazioni}
+\end{usecase}
+
+\begin{usecase}{2.11}{Gestione del Glossario aziendale}
+    \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
+    \usecasedesc{La piattaforma mette a disposizione uno strumento di Glossario aziendale che consente di definire e centralizzare i termini e i concetti comuni all'organizzazione. 
+    Gli utenti possono aggiungere o modificare i termini del glossario, organizzarli e raggrupparli per area tematica e associare i termini ai dataset del Data Catalog}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di responsabile della Governance ed è presente almeno un set di dati nel Data Catalog}
+    \usecasepost{L'attore ha aggiunto dei termini al Glossario, che sono associati ai dataset e che sono usati dalla piattaforma per arricchire i risultati di ricerca}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore seleziona l'opzione che permette di modificare il Glossario.
+            \item L'attore aggiunge un nuovo termine al Glossario, fornendo un nome, una descrizione e possibili sinonimi.
+            \item L'attore classifica il termine, per esempio usando dei tags.
+            \item L'attore associa il termine ai rispettivi set di dati.
+            \item Il sistema utilizza i termini del Glossario per arricchire i risultati di ricerca quando un utente cerca un dato nel catalogo.
+        \end{enumerate}
+    }
+    \label{uc:2_11_gestione_glossario}
+\end{usecase}
 
 
 % MACROAREA 3
 \subsection{Analisi dei dati e Business Intelligence}
+\begin{usecase}{3.0}{Ricerca e visualizzazione di un dato}
+    \usecaseactors{Analista, sviluppatore di BI o utente che consulta il catalogo}
+    \usecasedesc{L'utente ricerca un dato o un dataset all'interno del catalogo tramite diversi criteri di ricerca, quali parole chiave, nomi delle fonti, tag o termini del glossario aziendale. 
+    Il catalogo esegue una ricerca incrociata su tutte le fonti dati collegate e restituisce i risultati pertinenti, consentendo all'utente di individuare rapidamente il dato di interesse tra tutte le fonti aziendali disponibili. Questa funzionalità è anche nota come Data Discovery}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma ed è presente almeno un set di dati nel Data Catalog}
+    \usecasepost{Il sistema ha restituito i risultati della ricerca e l'attore ha individuato il dato o il dataset di interesse}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore accede alla funzionalità di ricerca del catalogo.
+            \item L'attore inserisce i criteri di ricerca, quali parole chiave, nomi delle fonti, tag o termini del glossario.
+            \item Il sistema esegue una ricerca incrociata su tutte le fonti dati collegate al catalogo.
+            \item Il sistema restituisce l'elenco dei risultati pertinenti, indicando per ciascuno la fonte di provenienza e i principali metadati associati.
+            \item L'attore esamina i risultati e seleziona il dato o il dataset di interesse per visualizzarne i dettagli (UC-3.1).
+        \end{enumerate}
+    }
+    \label{uc:3_0_ricerca_visualizzazione_dato}
+\end{usecase}
+
+\begin{usecase}{3.1}{Visualizzazione di metadati e dettagli di un dataset}
+    \usecaseactors{Analista, sviluppatore di BI o utente che consulta il catalogo}
+    \usecasedesc{L'utente visualizza in una scheda dedicata tutti i metadati e i dettagli relativi a un dato o dataset selezionato, tra cui i tag associati, i termini del glossario aziendale collegati, le fonti di provenienza, 
+    il proprietario del dato, la data di ultimo aggiornamento o sincronizzazione e altre informazioni descrittive. Questa visualizzazione consente all'utente di comprendere il contenuto e il contesto del dato prima di utilizzarlo in analisi o report}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma e ha individuato il dato o il dataset di interesse tramite ricerca (UC-3.0)}
+    \usecasepost{L'attore ha preso visione di tutti i metadati e i dettagli relativi al dato o dataset selezionato ed è in grado di valutarne l'utilizzo per le proprie analisi}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore seleziona il dato o il dataset di interesse dall'elenco dei risultati della ricerca.
+            \item Il sistema apre la scheda dedicata al dato o dataset selezionato.
+            \item Il sistema mostra tutti i metadati disponibili, tra cui tag, termini del glossario, fonti di provenienza, proprietario, data di ultimo aggiornamento e storico delle modifiche.
+            \item L'attore esamina i metadati del dato ricercato, navigando nella pagina e visionando le informazioni di suo interesse.
+        \end{enumerate}
+    }
+    \label{uc:3_1_visualizzazione_metadati}
+\end{usecase}
+
+\begin{usecase}{3.2}{Visualizzazione del Data Lineage}
+    \usecaseactors{Analista, sviluppatore di BI o utente che consulta il catalogo}
+    \usecasedesc{L'utente visualizza il Data Lineage di un dato o dataset, ovvero la rappresentazione grafica del suo intero percorso tecnico: l'origine del dato, le trasformazioni che ha subito e i sistemi attraverso cui 
+    è transitato prima di giungere alla destinazione finale. Il Data Lineage consente all'utente di comprendere da dove proviene un dato, come è stato elaborato e in quanti punti del sistema è presente, aumentando la fiducia nell'affidabilità delle informazioni utilizzate per le analisi}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma e sta visualizzando la scheda di dettaglio di un dato o dataset (UC-3.1)}
+    \usecasepost{L'attore visualizza l'intero percorso tecnico di un dato e conosce la sua provenienza, le trasformazioni subite e i sistemi in cui è presente}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore, dalla scheda del dato o dataset, accede alla sezione dedicata al Data Lineage.
+            \item Il sistema elabora e visualizza graficamente l'intero percorso del dato, mostrando le fonti di origine, le trasformazioni subite e i sistemi di destinazione.
+            \item L'attore esamina il grafo del Data Lineage e naviga tra i nodi per approfondire i dettagli di ciascuna fase del percorso del dato.
+        \end{enumerate}
+    }
+    \label{uc:3_2_visualizzazione_data_lineage}
+\end{usecase}
+
+\begin{usecase}{3.3}{Visualizzazione dello storico delle attività di un dato}
+    \usecaseactors{Analista, sviluppatore di BI o utente che consulta il catalogo}
+    \usecasedesc{Il sistema tiene traccia di tutte le attività e le interazioni avvenute su un dato o dataset all'interno della piattaforma, tra cui le modifiche ai metadati e ai tag, i commenti e le segnalazioni degli utenti, 
+    gli accessi e le ricerche effettuate e le variazioni di versione. L'utente può consultare questo storico per comprendere lo stato attuale del dato, valutarne l'affidabilità e verificare se è attivamente monitorato o aggiornato}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma e sta visualizzando la scheda di dettaglio di un dato o dataset}
+    \usecasepost{L'attore ha preso visione dello storico completo delle attività e delle interazioni avvenute sul dato o dataset selezionato}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore, dalla scheda del dato o dataset, accede alla sezione dedicata allo storico delle attività.
+            \item Il sistema mostra in ordine cronologico tutte le attività registrate sul dato, tra cui modifiche ai metadati, variazioni di versione, commenti, segnalazioni e accessi degli utenti.
+            \item L'attore esamina lo storico e può filtrare le attività per tipo, utente o periodo di tempo per individuare le informazioni di interesse.
+        \end{enumerate}
+    }
+    \label{uc:3_3_visualizzazione_storico_attivita}
+\end{usecase}
+
+\begin{usecase}{3.4}{Monitoraggio di un dataset (``Follow'')}
+    \usecaseactors{Analista, sviluppatore di BI o utente che consulta il catalogo}
+    \usecasedesc{L'utente monitora un particolare dataset di suo interesse "seguendolo" (Follow) o salvandolo nei preferiti, al fine di ricevere notifiche automatiche in caso di aggiornamenti o modifiche strutturali, e per potervi accedere rapidamente tramite un elenco di preferiti}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma ed è presente almeno un set di dati nel Data Catalog}
+    \usecasepost{L'attore ha aggiunto il dataset ai preferiti e riceve notifiche automatiche in caso di modifiche o aggiornamenti}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore accede alla pagina di dettaglio di un dato di suo interesse.
+            \item L'attore seleziona l'opzione per seguire/salvare il dato (per esempio un pulsante Follow o Bookmark).
+            \item Il sistema aggiunge il dato alla dashboard personale dell'utente o a una sezione apposita per l'accesso rapido.
+            \item Il sistema invia notifiche all'attore se il dato subisce variazioni, aggiornamenti o segnalazioni.
+        \end{enumerate}
+    }
+    \label{uc:3_4_monitoraggio_dataset}
+\end{usecase}
+
+\begin{usecase}{3.5}{Aggiunta di un commento o feedback su un dato}
+    \usecaseactors{Analista, sviluppatore di BI o utente che consulta il catalogo}
+    \usecasedesc{L'utente può lasciare un commento o un feedback direttamente nella pagina di un dato o dataset, contestualmente alla visualizzazione dei metadati. Il commento può riguardare osservazioni generali sul dato, segnalazioni informali di possibili errori nei metadati o suggerimenti per altri utenti che consulteranno il dato in futuro. 
+    A differenza della segnalazione formale di un problema (UC-3.7) e dell'invio di una richiesta, il commento non richiede necessariamente una risposta o un intervento da parte di un utente autorizzato}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma ed è presente almeno un set di dati nel Data Catalog}
+    \usecasepost{Il commento è stato registrato dal sistema ed è visibile nella pagina del dato a tutti gli utenti che vi accedono. Gli utenti autorizzati hanno ricevuto una notifica del nuovo commento}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore accede a un dato o dataset.
+            \item L'attore accede a una sezione dedicata ai commenti o a un'area di scrittura.
+            \item L'attore scrive il proprio commento o feedback.
+            \item Il sistema registra il commento e lo rende visibile nella pagina del dato.
+            \item Il sistema invia una notifica agli utenti autorizzati, che possono rispondere al commento se necessario.
+        \end{enumerate}
+    }
+    \label{uc:3_5_aggiunta_commento}
+\end{usecase}
+
+\begin{usecase}{3.6}{Invio di una domanda o di una richiesta su un dato}
+    \usecaseactors{Analista, sviluppatore di BI o utente che consulta il catalogo}
+    \usecasedesc{L'utente può inviare una domanda o una richiesta formale relativamente a un dato o dataset direttamente dalla sua pagina nel catalogo. La richiesta può riguardare un aggiornamento dei dati, una modifica ai metadati, una chiarimento sul significato o sull'utilizzo corretto del dato. 
+    A differenza del commento, la richiesta è formale e richiede una risposta da parte di un utente autorizzato. Poiché gli utenti che consultano il catalogo non dispongono dei permessi necessari per modificare direttamente i metadati, questo caso d'uso rappresenta il metodo per richiedere modifiche o ottenere informazioni}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma ed è presente almeno un set di dati nel Data Catalog}
+    \usecasepost{La richiesta è stata registrata dal sistema e inoltrata agli utenti autorizzati. L'attore riceve una notifica quando la richiesta viene presa in carico o riceve una risposta}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore accede a un dato o dataset.
+            \item L'attore accede a un'are di scrittura o una sezione specifica per fare una richiesta.
+            \item L'attore compila la richiesta, specificando la natura della domanda o della modifica desiderata e, se necessario, indicando l'utente a cui indirizzarla.
+            \item Il sistema registra la richiesta e invia una notifica agli utenti autorizzati competenti.
+            \item L'utente autorizzato esamina la richiesta e fornisce una risposta o interviene per apportare le modifiche richieste.
+            \item Il sistema notifica l'attore dell'avvenuta risposta o dell'intervento effettuato.
+        \end{enumerate}
+    }
+    \label{uc:3_6_invio_domanda_richiesta}
+\end{usecase}
+
+\begin{usecase}{3.7}{Segnalazione di un problema su un dato}
+    \usecaseactors{Analista, sviluppatore di BI o utente che consulta il catalogo}
+    \usecasedesc{L'utente segnala formalmente un problema riscontrato su un dato o dataset direttamente dalla sua pagina nel catalogo, al fine di richiedere un intervento correttivo da parte degli utenti autorizzati. Il problema può essere di natura tecnica, come una sincronizzazione non riuscita o dati non aggiornati, oppure riguardare la qualità o la correttezza dei metadati, come tag errati o informazioni incomplete. 
+    Il sistema indirizza automaticamente la segnalazione all'utente autorizzato corretto in base alla natura del problema: l'Amministratore di Sistema per i problemi tecnici, il Responsabile della Governance per i problemi relativi alla qualità o ai metadati}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma ed è presente almeno un set di dati nel Data Catalog}
+    \usecasepost{La segnalazione è stata registrata dal sistema e inoltrata all'utente autorizzato competente. L'attore riceve una notifica quando la segnalazione viene presa in carico e quando il problema viene risolto}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore accede a un dato o un dataset.
+            \item L'attore accede a una sezione apposita per lasciare segnalazioni.
+            \item L'attore descrive il problema riscontrato e seleziona la natura del problema, indicando se si tratta di un problema tecnico o di un problema relativo alla qualità o ai metadati del dato.
+            \item Il sistema registra la segnalazione e la indirizza automaticamente all'utente autorizzato competente in base alla natura del problema selezionata.
+            \item L'utente autorizzato riceve una notifica della nuova segnalazione e prende in carico il problema.
+            \item Il sistema notifica l'attore dell'avvenuta presa in carico e, successivamente, della risoluzione del problema.
+        \end{enumerate}
+    }
+    \usecasealt{
+        \begin{enumerate}
+            \item L'attore non è sicuro della natura del problema: può lasciare la classificazione generica e il sistema notifica tutti gli utenti autorizzati competenti, che possono prendersi in carico il problema.
+        \end{enumerate}
+    }
+    \label{uc:3_7_segnalazione_problema}
+\end{usecase}
+
+\begin{usecase}{3.8}{Verifica della qualità e dello stato di salute dei dati}
+    \usecaseactors{Analista, sviluppatore di BI o utente che consulta il catalogo}
+    \usecasedesc{L'utente può consultare i risultati dei test di Data Quality eseguiti sui dati presenti nel catalogo, al fine di verificare che i dati siano corretti, puliti e aggiornati prima di utilizzarli in analisi o report. 
+    A differenza del Responsabile della Governance che configura e gestisce i test, l'Analista BI consulta i risultati già disponibili per valutare l'affidabilità del dato prima dell'utilizzo}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma, è presente almeno un dataset nel catalogo e sono stati eseguiti test di Data Quality sul dataset di interesse}
+    \usecasepost{L'attore è a conoscenza dello stato di salute del dato e può decidere se utilizzarlo per le proprie analisi o inviare una segnalazione in caso di anomalie}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore accede alla scheda del dato o dataset di interesse.
+            \item Il sistema mostra i risultati dei test di Data Quality disponibili, indicando lo stato di salute del dato e le eventuali anomalie rilevate, quali valori nulli, duplicati o dati non aggiornati.
+            \item L'attore valuta i risultati e verifica che il dato sia adatto all'utilizzo previsto.
+            \item Se il dato presenta anomalie o non è aggiornato, l'attore può inviare una segnalazione (UC-3.7) o una richiesta di aggiornamento (UC-3.6).
+        \end{enumerate}
+    }
+    \label{uc:3_8_verifica_qualita_dati}
+\end{usecase}
+
+\begin{usecase}{3.9}{Consultazione del Glossario aziendale}
+    \usecaseactors{Analista, sviluppatore di BI o utente che consulta il catalogo}
+    \usecasedesc{L'utente può accedere al Glossario aziendale, aggiornato dai responsabili della Data Governance, per consultare e prendere visione della terminologia comune usata in ambito aziendale. 
+    La consultazione del Glossario è utile per comprendere il significato corretto di un termine prima di utilizzare i dati in analisi o report, e per individuare i nomi dei campi o delle colonne che identificano un dato particolare nelle diverse fonti dati}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma ed è presente almeno un termine nel Glossario aziendale}
+    \usecasepost{L'attore ha consultato i termini di interesse nel Glossario e ha acquisito le informazioni necessarie per utilizzare correttamente i dati}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore accede alla sezione dedicata al Glossario aziendale nella piattaforma.
+            \item L'attore ricerca il termine di interesse inserendo parole chiave o navigando per area tematica.
+            \item Il sistema restituisce i risultati della ricerca, mostrando i termini corrispondenti con la relativa descrizione, i sinonimi, i termini correlati e i dataset associati.
+            \item L'attore consulta le informazioni disponibili e, se necessario, naviga verso i dataset collegati al termine per approfondire.
+        \end{enumerate}
+    }
+    \label{uc:3_9_consultazione_glossario}
+\end{usecase}
+
+\begin{usecase}{3.10}{Importazione dei metadati da Power BI nel catalogo}
+    \usecaseactors{Amministratore di sistema o sviluppatore di BI autorizzato}
+    \usecasedesc{La piattaforma supporta il collegamento con Power BI come fonte dati, consentendo di importare nel catalogo i metadati relativi a dashboard, grafici, datamodel e progetti presenti nell'istanza Power BI aziendale. 
+    Questo permette di centralizzare nel catalogo anche le risorse di Business Intelligence, rendendole ricercabili e navigabili insieme alle altre fonti dati aziendali. Il flusso è unidirezionale: i metadati vengono importati da Power BI nel catalogo, non possono essere esportati dal catalogo a Power BI. Per accedere alle API di Power BI potrebbe essere necessaria una licenza Power BI Pro}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di amministratore o con le autorizzazioni necessarie, dispone delle credenziali per l'accesso ai dati e l'organizzazione dispone di una licenza Power BI Pro}
+    \usecasepost{I metadati delle dashboard, dei grafici e dei datamodel di Power BI sono stati importati nel catalogo e sono visibili e ricercabili dagli utenti autorizzati}
+    \usecasemain{
+        \begin{enumerate}
+            \item L'attore accede alla sezione di configurazione dei connettori della piattaforma.
+            \item L'attore seleziona Power BI come tipo di connettore e inserisce le credenziali di autenticazione richieste.
+            \item Il sistema verifica la connessione e conferma l'esito.
+            \item L'attore seleziona quali dashboard, grafici e datamodel importare e definendo eventuali filtri.
+            \item L'attore pianifica la sincronizzazione automatica dei metadati di Power BI.
+            \item Il sistema importa i metadati e li rende disponibili nel catalogo, incluso il lineage tra le tabelle dei database e le dashboard di Power BI.
+        \end{enumerate}
+    }
+    \usecasealt{
+        \begin{enumerate}
+            \item L'organizzazione non dispone di una licenza Power BI Pro: il sistema non è in grado di accedere alle API di Power BI e notifica l'attore del requisito di licenza necessario per procedere.
+        \end{enumerate}
+    }
+    \label{uc:3_10_importazione_metadati_powerbi}
+\end{usecase}
 
 
 \newpage
