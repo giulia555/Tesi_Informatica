@@ -455,7 +455,7 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item L'attore inserisce i criteri di ricerca, quali parole chiave, nomi delle fonti, tag o termini del glossario.
             \item Il sistema esegue una ricerca incrociata su tutte le fonti dati collegate al catalogo.
             \item Il sistema restituisce l'elenco dei risultati pertinenti, indicando per ciascuno la fonte di provenienza e i principali metadati associati.
-            \item L'attore esamina i risultati e seleziona il dato o il dataset di interesse per visualizzarne i dettagli (UC-3.1).
+            \item L'attore esamina i risultati e seleziona il dato o il dataset di interesse per visualizzarne i dettagli.
         \end{enumerate}
     }
     \label{uc:3_0_ricerca_visualizzazione_dato}
@@ -465,7 +465,7 @@ Ogni caso d'uso è identificato dalla seguente notazione:
     \usecaseactors{Analista, sviluppatore di BI o utente che consulta il catalogo}
     \usecasedesc{L'utente visualizza in una scheda dedicata tutti i metadati e i dettagli relativi a un dato o dataset selezionato, tra cui i tag associati, i termini del glossario aziendale collegati, le fonti di provenienza, 
     il proprietario del dato, la data di ultimo aggiornamento o sincronizzazione e altre informazioni descrittive. Questa visualizzazione consente all'utente di comprendere il contenuto e il contesto del dato prima di utilizzarlo in analisi o report}
-    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma e ha individuato il dato o il dataset di interesse tramite ricerca (UC-3.0)}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma e ha individuato il dato o il dataset di interesse tramite ricerca}
     \usecasepost{L'attore ha preso visione di tutti i metadati e i dettagli relativi al dato o dataset selezionato ed è in grado di valutarne l'utilizzo per le proprie analisi}
     \usecasemain{
         \begin{enumerate}
@@ -482,7 +482,7 @@ Ogni caso d'uso è identificato dalla seguente notazione:
     \usecaseactors{Analista, sviluppatore di BI o utente che consulta il catalogo}
     \usecasedesc{L'utente visualizza il Data Lineage di un dato o dataset, ovvero la rappresentazione grafica del suo intero percorso tecnico: l'origine del dato, le trasformazioni che ha subito e i sistemi attraverso cui 
     è transitato prima di giungere alla destinazione finale. Il Data Lineage consente all'utente di comprendere da dove proviene un dato, come è stato elaborato e in quanti punti del sistema è presente, aumentando la fiducia nell'affidabilità delle informazioni utilizzate per le analisi}
-    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma e sta visualizzando la scheda di dettaglio di un dato o dataset (UC-3.1)}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma e sta visualizzando la scheda di dettaglio di un dato o dataset}
     \usecasepost{L'attore visualizza l'intero percorso tecnico di un dato e conosce la sua provenienza, le trasformazioni subite e i sistemi in cui è presente}
     \usecasemain{
         \begin{enumerate}
@@ -510,9 +510,9 @@ Ogni caso d'uso è identificato dalla seguente notazione:
     \label{uc:3_3_visualizzazione_storico_attivita}
 \end{usecase}
 
-\begin{usecase}{3.4}{Monitoraggio di un dataset (``Follow'')}
+\begin{usecase}{3.4}{Monitoraggio di un dataset}
     \usecaseactors{Analista, sviluppatore di BI o utente che consulta il catalogo}
-    \usecasedesc{L'utente monitora un particolare dataset di suo interesse "seguendolo" (Follow) o salvandolo nei preferiti, al fine di ricevere notifiche automatiche in caso di aggiornamenti o modifiche strutturali, e per potervi accedere rapidamente tramite un elenco di preferiti}
+    \usecasedesc{L'utente monitora un particolare dataset di suo interesse "seguendolo" (\textit{Follow}) o salvandolo nei preferiti, al fine di ricevere notifiche automatiche in caso di aggiornamenti o modifiche strutturali, e per potervi accedere rapidamente tramite un elenco di preferiti}
     \usecasepre{L'attore ha effettuato l'accesso alla piattaforma ed è presente almeno un set di dati nel Data Catalog}
     \usecasepost{L'attore ha aggiunto il dataset ai preferiti e riceve notifiche automatiche in caso di modifiche o aggiornamenti}
     \usecasemain{
@@ -529,7 +529,7 @@ Ogni caso d'uso è identificato dalla seguente notazione:
 \begin{usecase}{3.5}{Aggiunta di un commento o feedback su un dato}
     \usecaseactors{Analista, sviluppatore di BI o utente che consulta il catalogo}
     \usecasedesc{L'utente può lasciare un commento o un feedback direttamente nella pagina di un dato o dataset, contestualmente alla visualizzazione dei metadati. Il commento può riguardare osservazioni generali sul dato, segnalazioni informali di possibili errori nei metadati o suggerimenti per altri utenti che consulteranno il dato in futuro. 
-    A differenza della segnalazione formale di un problema (UC-3.7) e dell'invio di una richiesta, il commento non richiede necessariamente una risposta o un intervento da parte di un utente autorizzato}
+    A differenza della segnalazione formale di un problema e dell'invio di una richiesta, il commento non richiede necessariamente una risposta o un intervento da parte di un utente autorizzato}
     \usecasepre{L'attore ha effettuato l'accesso alla piattaforma ed è presente almeno un set di dati nel Data Catalog}
     \usecasepost{Il commento è stato registrato dal sistema ed è visibile nella pagina del dato a tutti gli utenti che vi accedono. Gli utenti autorizzati hanno ricevuto una notifica del nuovo commento}
     \usecasemain{
@@ -590,7 +590,7 @@ Ogni caso d'uso è identificato dalla seguente notazione:
 \begin{usecase}{3.8}{Verifica della qualità e dello stato di salute dei dati}
     \usecaseactors{Analista, sviluppatore di BI o utente che consulta il catalogo}
     \usecasedesc{L'utente può consultare i risultati dei test di Data Quality eseguiti sui dati presenti nel catalogo, al fine di verificare che i dati siano corretti, puliti e aggiornati prima di utilizzarli in analisi o report. 
-    A differenza del Responsabile della Governance che configura e gestisce i test, l'Analista BI consulta i risultati già disponibili per valutare l'affidabilità del dato prima dell'utilizzo}
+    A differenza del Responsabile della Governance che configura e gestisce i test, l'analista di BI consulta i risultati già disponibili per valutare l'affidabilità del dato prima dell'utilizzo}
     \usecasepre{L'attore ha effettuato l'accesso alla piattaforma, è presente almeno un dataset nel catalogo e sono stati eseguiti test di Data Quality sul dataset di interesse}
     \usecasepost{L'attore è a conoscenza dello stato di salute del dato e può decidere se utilizzarlo per le proprie analisi o inviare una segnalazione in caso di anomalie}
     \usecasemain{
@@ -598,7 +598,7 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item L'attore accede alla scheda del dato o dataset di interesse.
             \item Il sistema mostra i risultati dei test di Data Quality disponibili, indicando lo stato di salute del dato e le eventuali anomalie rilevate, quali valori nulli, duplicati o dati non aggiornati.
             \item L'attore valuta i risultati e verifica che il dato sia adatto all'utilizzo previsto.
-            \item Se il dato presenta anomalie o non è aggiornato, l'attore può inviare una segnalazione (UC-3.7) o una richiesta di aggiornamento (UC-3.6).
+            \item Se il dato presenta anomalie o non è aggiornato, l'attore può inviare una segnalazione o una richiesta di aggiornamento.
         \end{enumerate}
     }
     \label{uc:3_8_verifica_qualita_dati}
