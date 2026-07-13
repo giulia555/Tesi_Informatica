@@ -33,7 +33,7 @@ Ogni caso d'uso è identificato dalla seguente notazione:
 % MACROAREA 1
 \subsection{Amministrazione del sistema}
 
-\begin{usecase}{1.0}{Collegamento a una fonte dati strutturata}
+\begin{usecase}{1.1}{Collegamento a una fonte dati strutturata}
     \usecaseactors{Amministratore di sistema}
     \usecasedesc{L'amministratore collega una fonte dati strutturata al catalogo dati aziendale e ne visualizza i metadati tramite interfaccia}
     \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di amministratore e possiede le credenziali della fonte dati da importare}
@@ -52,10 +52,10 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item L'attore non può importare i dati nel catalogo e deve ricontrollare i parametri per la connessione.
         \end{enumerate}
     }
-    \label{uc:1_0_fonte_strutturata}
+    \label{uc:1_1_fonte_strutturata}
 \end{usecase}
 
-\begin{usecase}{1.1}{Collegamento a una fonte dati semi strutturata}
+\begin{usecase}{1.2}{Collegamento a una fonte dati semi strutturata}
     \usecaseactors{Amministratore di sistema}
     \usecasedesc{L'amministratore collega una fonte dati semi strutturata al catalogo dati aziendale e ne visualizza i metadati tramite interfaccia}
     \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di amministratore e possiede le credenziali o il percorso della fonte dati da importare}
@@ -68,10 +68,10 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item L'attore avvia l'estrazione dei metadati.
         \end{enumerate}
     }
-    \label{uc:1_1_fonte_semi_strutturata}
+    \label{uc:1_2_fonte_semi_strutturata}
 \end{usecase}
 
-\begin{usecase}{1.2}{Collegamento a una fonte dati non strutturata}
+\begin{usecase}{1.3}{Collegamento a una fonte dati non strutturata}
     \usecaseactors{Amministratore di sistema}
     \usecasedesc{L'amministratore collega una fonte dati non strutturata al catalogo dati aziendale e ne visualizza i metadati tramite l'interfaccia della piattaforma}
     \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di amministratore e possiede le credenziali o il percorso della fonte dati da importare}
@@ -84,10 +84,10 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item L'attore avvia l'estrazione dei metadati.
         \end{enumerate}
     }
-    \label{uc:1_2_fonte_non_strutturata}
+    \label{uc:1_3_fonte_non_strutturata}
 \end{usecase}
 
-\begin{usecase}{1.3}{Visualizzazione delle fonti dati collegate}
+\begin{usecase}{1.4}{Visualizzazione delle fonti dati collegate}
     \usecaseactors{Amministratore di sistema}
     \usecasedesc{L'amministratore visualizza l'inventario delle fonti dati, cioè l'insieme delle fonti di dati che popolano il \textit{Data Catalog}}
     \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di amministratore}
@@ -98,10 +98,10 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item Il sistema mostra l'elenco completo delle fonti dati.
         \end{enumerate}
     }
-    \label{uc:1_3_visualizzazione_fonti_collegate}
+    \label{uc:1_4_visualizzazione_fonti_collegate}
 \end{usecase}
 
-\begin{usecase}{1.4}{Gestione dei permessi e degli accessi}
+\begin{usecase}{1.5}{Gestione dei permessi e degli accessi}
     \usecaseactors{Amministratore di sistema}
     \usecasedesc{L'amministratore definisce i ruoli degli utenti che accedono alla piattaforma e assegna i permessi di accesso ai diversi set di dati. 
     Il sistema garantisce che ogni utente visualizzi esclusivamente i dati per cui dispone delle autorizzazioni necessarie}    
@@ -116,10 +116,10 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item Il sistema applica i permessi configurati e limita la visibilità dei dati in base al ruolo di ciascun utente.
         \end{enumerate}
     }
-    \label{uc:1_4_gestione_permessi}
+    \label{uc:1_5_gestione_permessi}
 \end{usecase}
 
-\begin{usecase}{1.5}{Pianificazione della sincronizzazione dei metadati}
+\begin{usecase}{1.6}{Pianificazione della sincronizzazione dei metadati}
     \usecaseactors{Amministratore di sistema}
     \usecasedesc{L'amministratore pianifica la sincronizzazione automatica dei metadati, definendo la frequenza e le modalità con cui il catalogo si aggiorna allineandosi 
     alle fonti dati originali, garantendo che le informazioni presenti nel catalogo siano sempre coerenti e aggiornate}
@@ -133,10 +133,10 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item Il sistema esegue automaticamente la sincronizzazione dei metadati agli intervalli stabiliti.
         \end{enumerate}
     }
-    \label{uc:1_5_pianificazione_sincronizzazione}
+    \label{uc:1_6_pianificazione_sincronizzazione}
 \end{usecase}
 
-\begin{usecase}{1.6}{Configurazione della classificazione automatica dei dati sensibili}
+\begin{usecase}{1.7}{Configurazione della classificazione automatica dei dati sensibili}
     \usecaseactors{Amministratore di sistema}
     \usecasedesc{L'amministratore abilita e configura il motore di classificazione automatica dei dati sensibili, che analizza i metadati delle fonti dati collegate 
     al catalogo e individua in autonomia i campi contenenti dati personali o sensibili (PII). Il motore si avvale per esempio di tecniche di Intelligenza Artificiale e di espressioni 
@@ -152,10 +152,10 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item Ad ogni sincronizzazione, il sistema analizza i metadati delle fonti selezionate e contrassegna automaticamente i campi identificati come sensibili.
         \end{enumerate}
     }
-    \label{uc:1_6_configurazione_classificazione_dati}
+    \label{uc:1_7_configurazione_classificazione_dati}
 \end{usecase}
 
-\begin{usecase}{1.7}{Monitoraggio dello stato delle sincronizzazioni e delle connessioni}
+\begin{usecase}{1.8}{Monitoraggio dello stato delle sincronizzazioni e delle connessioni}
     \usecaseactors{Amministratore di sistema}
     \usecasedesc{L'amministratore visualizza una dashboard tecnica, un report o un avviso che indica lo stato delle connessioni alle fonti dati e l'esito 
     delle sincronizzazioni dei metadati, consentendo di verificare che le operazioni pianificate siano avvenute correttamente e di individuare eventuali anomalie o errori}
@@ -169,10 +169,10 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item L'attore prende visione delle anomalie e interviene per risolvere il problema alla fonte.
         \end{enumerate}
     }
-    \label{uc:1_7_monitoraggio_sincronizzazioni}
+    \label{uc:1_8_monitoraggio_sincronizzazioni}
 \end{usecase}
 
-\begin{usecase}{1.8}{Gestione di avvisi e alert tecnici}
+\begin{usecase}{1.9}{Gestione di avvisi e alert tecnici}
     \usecaseactors{Amministratore di sistema}
     \usecasedesc{Il sistema invia automaticamente alert di natura tecnica e avvisi all'amministratore quando vengono rilevate anomalie tecniche, come il fallimento di una sincronizzazione, 
     un errore di connessione o la scadenza delle credenziali. L'amministratore visualizza gli alert ricevuti e interviene per risolvere i problemi segnalati}
@@ -187,13 +187,13 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item Il sistema non mostra più l'alert o lo marchia come "risolto".
         \end{enumerate}
     }
-    \label{uc:1_8_gestione_alert_tecnici}
+    \label{uc:1_9_gestione_alert_tecnici}
 \end{usecase}
 
 
 % MACROAREA 2
 \subsection{Governance e sicurezza dei dati}
-\begin{usecase}{2.0}{Individuazione automatica dei dati sensibili}
+\begin{usecase}{2.1}{Individuazione automatica dei dati sensibili}
     \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
     \usecasedesc{La piattaforma analizza automaticamente i metadati dei dataset caricati nel catalogo e individua i campi contenenti dati sensibili o personali (PII), classificandoli tramite tag appositi. 
     Il processo avviene in modo trasparente durante la sincronizzazione dei metadati, senza richiedere intervento manuale da parte dell'attore}
@@ -207,10 +207,10 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item L'attore riceve una notifica dell'avvenuta classificazione automatica e può procedere alla revisione o all'approvazione.
         \end{enumerate}
     }
-    \label{uc:2_0_individuazione_automatica_dati}
+    \label{uc:2_1_individuazione_automatica_dati}
 \end{usecase}
 
-\begin{usecase}{2.1}{Revisione della classificazione automatica dei dati sensibili}
+\begin{usecase}{2.2}{Revisione della classificazione automatica dei dati sensibili}
     \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
     \usecasedesc{L'attore revisiona i tag assegnati automaticamente dalla piattaforma ai dati sensibili, verificando che la classificazione sia corretta e conforme alle norme aziendali 
     e alle normative vigenti. L'attore può approvare la classificazione esistente, correggere i tag non corretti o modificare le impostazioni del motore di classificazione automatica per adattarlo al contesto aziendale}
@@ -232,10 +232,10 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item L'attore viene notificato dell'assenza di classificazioni automatiche e può procedere con la classificazione manuale.
         \end{enumerate}
     }
-    \label{uc:2_1_revisione_classificazione_automatica}
+    \label{uc:2_2_revisione_classificazione_automatica}
 \end{usecase}
 
-\begin{usecase}{2.2}{Classificazione manuale dei dati tramite flag}
+\begin{usecase}{2.3}{Classificazione manuale dei dati tramite flag}
     \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
     \usecasedesc{L'attore assegna manualmente tag ai dati presenti nel catalogo per classificarli secondo diversi parametri, tra cui la sensibilità del dato, l'area tematica 
     di appartenenza, il reparto di riferimento o altri criteri aziendali. Questo caso d'uso si applica sia come fallback quando il motore di classificazione automatica non ha 
@@ -251,10 +251,10 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item Se il tag indica che il dato è sensibile o personale, il sistema lo tratta di conseguenza applicando le regole di accesso e protezione previste.
         \end{enumerate}
     }
-    \label{uc:2_2_classificazione_manuale_dati}
+    \label{uc:2_3_classificazione_manuale_dati}
 \end{usecase}
 
-\begin{usecase}{2.3}{Propagazione delle modifiche ai tag dei dati sensibili}
+\begin{usecase}{2.4}{Propagazione delle modifiche ai tag dei dati sensibili}
     \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
     \usecasedesc{Quando un tag relativo a un dato sensibile viene modificato o rimosso, la piattaforma propaga automaticamente la modifica a tutti i dataset e i campi correlati in 
     cui quel dato è presente, garantendo la coerenza della classificazione in tutto il catalogo e la conformità alle normative vigenti, in particolare al GDPR}
@@ -269,10 +269,10 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item Il sistema applica la modifica in modo coerente a tutti i dataset coinvolti e notifica l'attore dell'avvenuta propagazione.
         \end{enumerate}
     }
-    \label{uc:2_3_propagazione_modifiche_tag}
+    \label{uc:2_4_propagazione_modifiche_tag}
 \end{usecase}
 
-\begin{usecase}{2.4}{Anonimizzazione dei dati}
+\begin{usecase}{2.5}{Anonimizzazione dei dati}
     \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
     \usecasedesc{La piattaforma permette di applicare regole di anonimizzazione ai dati presenti nel catalogo, mascherandone totalmente la visualizzazione agli utenti non autorizzati. I dati originali nelle fonti non vengono modificati: 
     il catalogo applica il mascheramento esclusivamente a livello di visualizzazione, impedendo agli utenti privi delle autorizzazioni necessarie di accedere al contenuto del campo. Le regole di anonimizzazione possono essere applicate manualmente dall'attore oppure automaticamente dal sistema in base ai tag assegnati ai dati}
@@ -292,10 +292,10 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item L'attore decide di rimuovere una regola di anonimizzazione esistente: il sistema rimuove il mascheramento e ripristina la visualizzazione del campo per gli utenti autorizzati, propagando la modifica a tutti i campi correlati.
         \end{enumerate}
     }
-    \label{uc:2_4_anonimizzazione_dati}
+    \label{uc:2_5_anonimizzazione_dati}
 \end{usecase}
 
-\begin{usecase}{2.5}{Pseudonimizzazione dei dati}
+\begin{usecase}{2.6}{Pseudonimizzazione dei dati}
     \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
     \usecasedesc{La piattaforma permette di applicare regole di pseudonimizzazione ai dati presenti nel catalogo, mascherandone parzialmente la visualizzazione agli utenti non autorizzati. I dati originali nelle fonti non vengono modificati: 
     il catalogo applica il mascheramento esclusivamente a livello di visualizzazione. Le regole di pseudonimizzazione possono essere applicate manualmente dall'attore oppure automaticamente dal sistema in base ai tag assegnati ai dati}
@@ -315,13 +315,13 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item L'attore decide di rimuovere una regola di pseudonimizzazione esistente: il sistema ripristina la visualizzazione completa del campo per gli utenti autorizzati, propagando la modifica a tutti i campi correlati.
         \end{enumerate}
     }
-    \label{uc:2_5_pseudonimizzazione_dati}
+    \label{uc:2_6_pseudonimizzazione_dati}
 \end{usecase}
 
-\begin{usecase}{2.6}{Ricerca e visualizzazione di dati sensibili}
+\begin{usecase}{2.7}{Ricerca e visualizzazione di dati sensibili}
     \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
     \usecasedesc{L'attore ricerca e visualizza i dati classificati come sensibili o personali all'interno del catalogo, con l'obiettivo di verificarne la corretta gestione, controllarne la distribuzione tra le fonti dati e garantire 
-    la conformità alle normative vigenti. A differenza della ricerca generica effettuata dall'Analista BI (UC-3.0), questo caso d'uso ha finalità di controllo e audit, non di utilizzo del dato}
+    la conformità alle normative vigenti. A differenza della ricerca generica effettuata dall'Analista BI (UC-3.1), questo caso d'uso ha finalità di controllo e audit, non di utilizzo del dato}
     \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di responsabile della Governance ed è presente almeno un set di dati classificato come sensibile nel Data Catalog}
     \usecasepost{L'attore ha ottenuto una visione completa dei dati sensibili o personali presenti nel catalogo, della loro distribuzione tra le fonti dati e dello stato della loro classificazione}
     \usecasemain{
@@ -333,10 +333,10 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item L'attore può esportare i risultati della ricerca per finalità di audit o reportistica o può risalire alle fonti originali dei dati per modificarli.
         \end{enumerate}
     }
-    \label{uc:2_6_ricerca_visualizzazione_dati_sensibili}
+    \label{uc:2_7_ricerca_visualizzazione_dati_sensibili}
 \end{usecase}
 
-\begin{usecase}{2.7}{Controllo automatico di conformità alle normative}
+\begin{usecase}{2.8}{Controllo automatico di conformità alle normative}
     \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
     \usecasedesc{La piattaforma mette a disposizione uno strumento automatico per verificare la conformità dei dati presenti nel catalogo rispetto alle normative vigenti in materia di protezione dei dati personali, come il GDPR. 
     Il sistema analizza i dati classificati come sensibili o personali e verifica che siano gestiti nel rispetto delle regole previste dalla normativa, come la presenza di tag appropriati, l'applicazione di regole di accesso e l'eventuale mascheramento. L'attore può anche personalizzare le regole di conformità per adattarle alle esigenze e alle policy aziendali specifiche}
@@ -356,10 +356,10 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item Il sistema individua dati non conformi alle normative: invia una notifica automatica o un alert all'attore, magari indicando le azioni correttive necessarie.
         \end{enumerate}
     }
-    \label{uc:2_7_controllo_conformita}
+    \label{uc:2_8_controllo_conformita}
 \end{usecase}
 
-\begin{usecase}{2.8}{Monitoraggio della qualità dei dati}
+\begin{usecase}{2.9}{Monitoraggio della qualità dei dati}
     \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
     \usecasedesc{La piattaforma mette a disposizione strumenti di Data Quality che consentono di eseguire test automatici sui dati presenti nel catalogo e di visualizzarne lo stato di salute tramite una dashboard o una sezione dedicata. 
     I test permettono di rilevare anomalie quali valori nulli, duplicati, dati non aggiornati, formati errati o valori fuori range. I risultati dei test sono consultabili in tempo reale e consentono all'attore di avere una visione chiara e aggiornata della qualità dei dati presenti nel catalogo}
@@ -379,10 +379,10 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item I test rilevano anomalie nei dati: il sistema evidenzia i campi o i dataset coinvolti e notifica l'attore, che può procedere alla correzione o a configurare un alert automatico.
         \end{enumerate}
     }
-    \label{uc:2_8_monitoraggio_qualita_dati}
+    \label{uc:2_9_monitoraggio_qualita_dati}
 \end{usecase}
 
-\begin{usecase}{2.9}{Configurazione di soglie di qualità e alert automatici sui dati}
+\begin{usecase}{2.10}{Configurazione di soglie di qualità e alert automatici sui dati}
     \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
     \usecasedesc{La piattaforma permette di configurare soglie di accettazione per la qualità dei dati presenti nel catalogo. Quando i risultati dei test di Data Quality non raggiungono le soglie configurate, o quando un test fallisce, 
     il sistema genera automaticamente un alert o un avviso che viene inviato all'attore, consentendo un intervento tempestivo prima che le anomalie impattino sulle analisi o sui report aziendali}
@@ -402,10 +402,10 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item L'attore modifica o rimuove una soglia esistente: il sistema aggiorna la configurazione e smette di generare alert per i parametri rimossi.
         \end{enumerate}
     }
-    \label{uc:2_9_configurazione_soglie_qualita}
+    \label{uc:2_10_configurazione_soglie_qualita}
 \end{usecase}
 
-\begin{usecase}{2.10}{Gestione delle segnalazioni degli utenti}
+\begin{usecase}{2.11}{Gestione delle segnalazioni degli utenti}
     \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
     \usecasedesc{La piattaforma consente agli utenti di inviare segnalazioni di problemi o domande direttamente nella pagina del dato a cui si riferiscono. Il responsabile della Governance 
     visualizza le segnalazioni e può rispondere alle domande ricevute o intervenire per risolvere i problemi relativi alla qualità o alla classificazione dei dati segnalati}
@@ -419,10 +419,10 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item Il sistema aggiorna lo stato della segnalazione e notifica l'utente che l'aveva inviata.
         \end{enumerate}
     }
-    \label{uc:2_10_gestione_segnalazioni}
+    \label{uc:2_11_gestione_segnalazioni}
 \end{usecase}
 
-\begin{usecase}{2.11}{Gestione del Glossario aziendale}
+\begin{usecase}{2.12}{Gestione del Glossario aziendale}
     \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
     \usecasedesc{La piattaforma mette a disposizione uno strumento di Glossario aziendale che consente di definire e centralizzare i termini e i concetti comuni all'organizzazione. 
     Gli utenti possono aggiungere o modificare i termini del glossario, organizzarli e raggrupparli per area tematica e associare i termini ai dataset del Data Catalog}
@@ -437,13 +437,13 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item Il sistema utilizza i termini del Glossario per arricchire i risultati di ricerca quando un utente cerca un dato nel catalogo.
         \end{enumerate}
     }
-    \label{uc:2_11_gestione_glossario}
+    \label{uc:2_12_gestione_glossario}
 \end{usecase}
 
 
 % MACROAREA 3
 \subsection{Analisi dei dati e Business Intelligence}
-\begin{usecase}{3.0}{Ricerca e visualizzazione di un dato}
+\begin{usecase}{3.1}{Ricerca e visualizzazione di un dato}
     \usecaseactors{Analista, sviluppatore di BI o utente che consulta il catalogo}
     \usecasedesc{L'utente ricerca un dato o un dataset all'interno del catalogo tramite diversi criteri di ricerca, quali parole chiave, nomi delle fonti, tag o termini del glossario aziendale. 
     Il catalogo esegue una ricerca incrociata su tutte le fonti dati collegate e restituisce i risultati pertinenti, consentendo all'utente di individuare rapidamente il dato di interesse tra tutte le fonti aziendali disponibili. Questa funzionalità è anche nota come Data Discovery}
@@ -458,10 +458,10 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item L'attore esamina i risultati e seleziona il dato o il dataset di interesse per visualizzarne i dettagli.
         \end{enumerate}
     }
-    \label{uc:3_0_ricerca_visualizzazione_dato}
+    \label{uc:3_1_ricerca_visualizzazione_dato}
 \end{usecase}
 
-\begin{usecase}{3.1}{Visualizzazione di metadati e dettagli di un dataset}
+\begin{usecase}{3.2}{Visualizzazione di metadati e dettagli di un dataset}
     \usecaseactors{Analista, sviluppatore di BI o utente che consulta il catalogo}
     \usecasedesc{L'utente visualizza in una scheda dedicata tutti i metadati e i dettagli relativi a un dato o dataset selezionato, tra cui i tag associati, i termini del glossario aziendale collegati, le fonti di provenienza, 
     il proprietario del dato, la data di ultimo aggiornamento o sincronizzazione e altre informazioni descrittive. Questa visualizzazione consente all'utente di comprendere il contenuto e il contesto del dato prima di utilizzarlo in analisi o report}
@@ -475,10 +475,10 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item L'attore esamina i metadati del dato ricercato, navigando nella pagina e visionando le informazioni di suo interesse.
         \end{enumerate}
     }
-    \label{uc:3_1_visualizzazione_metadati}
+    \label{uc:3_2_visualizzazione_metadati}
 \end{usecase}
 
-\begin{usecase}{3.2}{Visualizzazione del Data Lineage}
+\begin{usecase}{3.3}{Visualizzazione del Data Lineage}
     \usecaseactors{Analista, sviluppatore di BI o utente che consulta il catalogo}
     \usecasedesc{L'utente visualizza il Data Lineage di un dato o dataset, ovvero la rappresentazione grafica del suo intero percorso tecnico: l'origine del dato, le trasformazioni che ha subito e i sistemi attraverso cui 
     è transitato prima di giungere alla destinazione finale. Il Data Lineage consente all'utente di comprendere da dove proviene un dato, come è stato elaborato e in quanti punti del sistema è presente, aumentando la fiducia nell'affidabilità delle informazioni utilizzate per le analisi}
@@ -491,10 +491,10 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item L'attore esamina il grafo del Data Lineage e naviga tra i nodi per approfondire i dettagli di ciascuna fase del percorso del dato.
         \end{enumerate}
     }
-    \label{uc:3_2_visualizzazione_data_lineage}
+    \label{uc:3_3_visualizzazione_data_lineage}
 \end{usecase}
 
-\begin{usecase}{3.3}{Visualizzazione dello storico delle attività di un dato}
+\begin{usecase}{3.4}{Visualizzazione dello storico delle attività di un dato}
     \usecaseactors{Analista, sviluppatore di BI o utente che consulta il catalogo}
     \usecasedesc{Il sistema tiene traccia di tutte le attività e le interazioni avvenute su un dato o dataset all'interno della piattaforma, tra cui le modifiche ai metadati e ai tag, i commenti e le segnalazioni degli utenti, 
     gli accessi e le ricerche effettuate e le variazioni di versione. L'utente può consultare questo storico per comprendere lo stato attuale del dato, valutarne l'affidabilità e verificare se è attivamente monitorato o aggiornato}
@@ -507,10 +507,10 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item L'attore esamina lo storico e può filtrare le attività per tipo, utente o periodo di tempo per individuare le informazioni di interesse.
         \end{enumerate}
     }
-    \label{uc:3_3_visualizzazione_storico_attivita}
+    \label{uc:3_4_visualizzazione_storico_attivita}
 \end{usecase}
 
-\begin{usecase}{3.4}{Monitoraggio di un dataset}
+\begin{usecase}{3.5}{Monitoraggio di un dataset}
     \usecaseactors{Analista, sviluppatore di BI o utente che consulta il catalogo}
     \usecasedesc{L'utente monitora un particolare dataset di suo interesse "seguendolo" (\textit{Follow}) o salvandolo nei preferiti, al fine di ricevere notifiche automatiche in caso di aggiornamenti o modifiche strutturali, e per potervi accedere rapidamente tramite un elenco di preferiti}
     \usecasepre{L'attore ha effettuato l'accesso alla piattaforma ed è presente almeno un set di dati nel Data Catalog}
@@ -523,10 +523,10 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item Il sistema invia notifiche all'attore se il dato subisce variazioni, aggiornamenti o segnalazioni.
         \end{enumerate}
     }
-    \label{uc:3_4_monitoraggio_dataset}
+    \label{uc:3_5_monitoraggio_dataset}
 \end{usecase}
 
-\begin{usecase}{3.5}{Aggiunta di un commento o feedback su un dato}
+\begin{usecase}{3.6}{Aggiunta di un commento o feedback su un dato}
     \usecaseactors{Analista, sviluppatore di BI o utente che consulta il catalogo}
     \usecasedesc{L'utente può lasciare un commento o un feedback direttamente nella pagina di un dato o dataset, contestualmente alla visualizzazione dei metadati. Il commento può riguardare osservazioni generali sul dato, segnalazioni informali di possibili errori nei metadati o suggerimenti per altri utenti che consulteranno il dato in futuro. 
     A differenza della segnalazione formale di un problema e dell'invio di una richiesta, il commento non richiede necessariamente una risposta o un intervento da parte di un utente autorizzato}
@@ -541,12 +541,12 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item Il sistema invia una notifica agli utenti autorizzati, che possono rispondere al commento se necessario.
         \end{enumerate}
     }
-    \label{uc:3_5_aggiunta_commento}
+    \label{uc:3_6_aggiunta_commento}
 \end{usecase}
 
-\begin{usecase}{3.6}{Invio di una domanda o di una richiesta su un dato}
+\begin{usecase}{3.7}{Invio di una domanda o di una richiesta su un dato}
     \usecaseactors{Analista, sviluppatore di BI o utente che consulta il catalogo}
-    \usecasedesc{L'utente può inviare una domanda o una richiesta formale relativamente a un dato o dataset direttamente dalla sua pagina nel catalogo. La richiesta può riguardare un aggiornamento dei dati, una modifica ai metadati, una chiarimento sul significato o sull'utilizzo corretto del dato. 
+    \usecasedesc{L'utente può inviare una domanda o una richiesta formale relativamente a un dato o dataset direttamente dalla sua pagina nel catalogo. La richiesta può riguardare un aggiornamento dei dati, una modifica ai metadati, un chiarimento sul significato o sull'utilizzo corretto del dato. 
     A differenza del commento, la richiesta è formale e richiede una risposta da parte di un utente autorizzato. Poiché gli utenti che consultano il catalogo non dispongono dei permessi necessari per modificare direttamente i metadati, questo caso d'uso rappresenta il metodo per richiedere modifiche o ottenere informazioni}
     \usecasepre{L'attore ha effettuato l'accesso alla piattaforma ed è presente almeno un set di dati nel Data Catalog}
     \usecasepost{La richiesta è stata registrata dal sistema e inoltrata agli utenti autorizzati. L'attore riceve una notifica quando la richiesta viene presa in carico o riceve una risposta}
@@ -560,10 +560,10 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item Il sistema notifica l'attore dell'avvenuta risposta o dell'intervento effettuato.
         \end{enumerate}
     }
-    \label{uc:3_6_invio_domanda_richiesta}
+    \label{uc:3_7_invio_domanda_richiesta}
 \end{usecase}
 
-\begin{usecase}{3.7}{Segnalazione di un problema su un dato}
+\begin{usecase}{3.8}{Segnalazione di un problema su un dato}
     \usecaseactors{Analista, sviluppatore di BI o utente che consulta il catalogo}
     \usecasedesc{L'utente segnala formalmente un problema riscontrato su un dato o dataset direttamente dalla sua pagina nel catalogo, al fine di richiedere un intervento correttivo da parte degli utenti autorizzati. Il problema può essere di natura tecnica, come una sincronizzazione non riuscita o dati non aggiornati, oppure riguardare la qualità o la correttezza dei metadati, come tag errati o informazioni incomplete. 
     Il sistema indirizza automaticamente la segnalazione all'utente autorizzato corretto in base alla natura del problema: l'Amministratore di Sistema per i problemi tecnici, il Responsabile della Governance per i problemi relativi alla qualità o ai metadati}
@@ -584,10 +584,10 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item L'attore non è sicuro della natura del problema: può lasciare la classificazione generica e il sistema notifica tutti gli utenti autorizzati competenti, che possono prendersi in carico il problema.
         \end{enumerate}
     }
-    \label{uc:3_7_segnalazione_problema}
+    \label{uc:3_8_segnalazione_problema}
 \end{usecase}
 
-\begin{usecase}{3.8}{Verifica della qualità e dello stato di salute dei dati}
+\begin{usecase}{3.9}{Verifica della qualità e dello stato di salute dei dati}
     \usecaseactors{Analista, sviluppatore di BI o utente che consulta il catalogo}
     \usecasedesc{L'utente può consultare i risultati dei test di Data Quality eseguiti sui dati presenti nel catalogo, al fine di verificare che i dati siano corretti, puliti e aggiornati prima di utilizzarli in analisi o report. 
     A differenza del Responsabile della Governance che configura e gestisce i test, l'analista di BI consulta i risultati già disponibili per valutare l'affidabilità del dato prima dell'utilizzo}
@@ -601,10 +601,10 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item Se il dato presenta anomalie o non è aggiornato, l'attore può inviare una segnalazione o una richiesta di aggiornamento.
         \end{enumerate}
     }
-    \label{uc:3_8_verifica_qualita_dati}
+    \label{uc:3_9_verifica_qualita_dati}
 \end{usecase}
 
-\begin{usecase}{3.9}{Consultazione del Glossario aziendale}
+\begin{usecase}{3.10}{Consultazione del Glossario aziendale}
     \usecaseactors{Analista, sviluppatore di BI o utente che consulta il catalogo}
     \usecasedesc{L'utente può accedere al Glossario aziendale, aggiornato dai responsabili della Data Governance, per consultare e prendere visione della terminologia comune usata in ambito aziendale. 
     La consultazione del Glossario è utile per comprendere il significato corretto di un termine prima di utilizzare i dati in analisi o report, e per individuare i nomi dei campi o delle colonne che identificano un dato particolare nelle diverse fonti dati}
@@ -618,10 +618,10 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item L'attore consulta le informazioni disponibili e, se necessario, naviga verso i dataset collegati al termine per approfondire.
         \end{enumerate}
     }
-    \label{uc:3_9_consultazione_glossario}
+    \label{uc:3_10_consultazione_glossario}
 \end{usecase}
 
-\begin{usecase}{3.10}{Importazione dei metadati da Power BI nel catalogo}
+\begin{usecase}{3.11}{Importazione dei metadati da Power BI nel catalogo}
     \usecaseactors{Amministratore di sistema o sviluppatore di BI autorizzato}
     \usecasedesc{La piattaforma supporta il collegamento con Power BI come fonte dati, consentendo di importare nel catalogo i metadati relativi a dashboard, grafici, datamodel e progetti presenti nell'istanza Power BI aziendale. 
     Questo permette di centralizzare nel catalogo anche le risorse di Business Intelligence, rendendole ricercabili e navigabili insieme alle altre fonti dati aziendali. Il flusso è unidirezionale: i metadati vengono importati da Power BI nel catalogo, non possono essere esportati dal catalogo a Power BI. Per accedere alle API di Power BI potrebbe essere necessaria una licenza Power BI Pro}
@@ -642,7 +642,7 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item L'organizzazione non dispone di una licenza Power BI Pro: il sistema non è in grado di accedere alle API di Power BI e notifica l'attore del requisito di licenza necessario per procedere.
         \end{enumerate}
     }
-    \label{uc:3_10_importazione_metadati_powerbi}
+    \label{uc:3_11_importazione_metadati_powerbi}
 \end{usecase}
 
 
