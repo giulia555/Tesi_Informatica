@@ -6,6 +6,7 @@
 
 \section{L'idea}
 
+
 \subsection{Motivazioni: perchè adottare un Data Catalog}
 Nell'era moderna, le aziende hanno un'enormità di dati sparsi in sistemi diversi (database, fogli Excel, file CSV...). Senza un catalogo, le persone 
 non sanno cosa esiste, dove si trova o se possono fidarsi di quel dato. Il Data Catalog risolve questo caos creando una mappa unica, organizzata e facilmente consultabile.
@@ -30,6 +31,10 @@ Assicura che chiunque in azienda prenda decisioni basandosi su informazioni affi
 % obiettivi dell'azienda (vedi prog. formativo) + altre cose tipo: studio completo del way of working aziendale per un mio possibile futuro in azienda
 % studio delle tecnologie, dell'ambiente, confidenza con strumenti, competenze trasversali in più ambiti per tenere tutte le porte aperte
 
+% Obiettivi obbligatori (fasi 1- 6) - data discovery, creazione catalogo dati centralizzato e automatizzato con openmetadata, applicazione data quality, individuazione dati personali, dashboard della qualità
+% Obiettivi desiderabili (fase 7) - analisi dei requisiti, produzione di una completa documetnazione progettuale
+% Obiettivi facoltativi (fase 8) - presentazione interna, documentazione di esempi e di guida (es documenti di guida e manuale utente)
+
 \subsection{Obiettivi personali}
 % tipo aspettative personali e cosa mi aspetto/voglio dallo stage
 
@@ -39,14 +44,43 @@ Assicura che chiunque in azienda prenda decisioni basandosi su informazioni affi
 % per esempio le tecnologie che ho usato e che ho dovuto installare
 
 \subsection{Vincoli metodologici}
-% usare Teams per qualsiasi comubnicazione, studio della comunicazione (vedi doc), metodologia agile, aggironamenti frequenti, 
+% usare Teams per qualsiasi comunicazione (aggiornamenti giornalieri se necessario, e settimanali), studio della comunicazione (vedi doc), metodologia agile, aggironamenti frequenti, 
 % scrittura di tutta la documentazione richiesta: dai documenti ufficiali per lo studio di OpenMetadata, ai verbali delle riunioni, a quelli relativi alla formazione, come
 % i manuali di installazione o i verbali sugli incontri su Power BI
 
 \subsection{Vincoli temporali}
-% le ore a disposizione, considerando che il venerdì si esce un'ora prima e rispettando le pause. I vincoli temporali poi sono stati definiti nel piano di progetto che riporto dopo
+L'analisi, l'installazione e la configurazione del sistema devono essere completate entro il limite delle 320 ore 
+lavorative previste dal progetto formativo, seguendo le scadenze definite nella Sezione 2.4 (Pianificazione del lavoro).
+
 
 \section{Pianificazione del lavoro}
+Le attività previste per il percorso formativo, per un totale di 320 ore lavorative, sono state suddivise dal tutor aziendale in 8 macro-fasi principali. 
+A ciascuna fase è stato assegnato un budget temporale stimato di circa 40 ore. 
+Di seguito vengono descritte nel dettaglio le fasi del piano di lavoro concordato.
+
+\paragraph{Fase 1 - Formazione iniziale}
+Configurazione degli strumenti di collaborazione aziendale (Office 365) e studio delle metodologie di lavoro interne, con focus sul framework Scrum. Ripasso dei sistemi di versionamento (Git e GitHub) e del linguaggio SQL.
+
+\paragraph{Fase 2 - Studio e utilizzo dei database aziendali}
+Formazione completa sui database, dalle query di base, a viste e indici, fino alle procedure di backup e restore. Sono stati installati, studiati e testati i RDBMS aziendali, quali PostgreSQL e SQL Server.
+
+\paragraph{Fase 3 - Sviluppo sicuro e studio di altre tecnologie}
+Formazione relativa al trattamento dei dati sensibili in azienda e alle policy di sicurezza interne e introduzione al ciclo di sviluppo sicuro del software. Formazione relativa a macchine virtuali (VirtualBox) e a sistemi di containerizzazione (Docker).
+
+\paragraph{Fase 4 - Studio delle piattaforme di Data Catalog}
+Analisi dei requisiti e conseguente valutazione delle piattaforme di Data Catalog presenti sul mercato, al fine di trovare quella più adatta alle esigenze aziendali.
+
+\paragraph{Fase 5 - OpenMetadata, installazione e Data Discovery}
+Installazione di OpenMetadata, configurazione della piattaforma e connessioni alle fonti dati aziendali.
+
+ \paragraph{Fase 6 - Data Quality e Data Observability}
+ Test delle funzionalità principali di OpenMetadata, come implementazione di test di qualità sui dati, configurazione del sistema di alerting, gestione dei ruoli e degli accessi.
+
+ \paragraph{Fase 7 - Data Governance}
+ Test del motore di individuazione e classificazione automatica dei dati sensibili, corretta gestione dei PII e funzionalità di anonimizzazione.
+
+ \paragraph{Fase 8 - Integrazione con la BI}
+ Integrazione del catalogo dati con Microsoft Power BI e studio teorico su altri strumenti di Data Discovery e anonimizzazione dei dati.
 
 
 \section{Formazione e tecnologie}
