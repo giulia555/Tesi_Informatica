@@ -20,8 +20,8 @@ tesi/
 │   ├── copyright.tex         ← pagina copyright
 │   └── table-of-contents.tex ← indice (automatico)
 ├── chapters/                 ← struttura dei capitoli (da modificare)
-│   ├── introduzione.tex
-│   ├── descrizione-stage.tex
+│   ├── contesto-aziendale.tex
+│   ├── progetto-di-stage.tex
 │   ├── analisi-requisiti.tex
 │   ├── valutazione-competitor.tex
 │   ├── implementazione-tecnica.tex
