@@ -1,21 +1,80 @@
-% Acronyms
-\newacronym[description={\glslink{apig}{Application Program Interface}}]
-    {api}{API}{Application Program Interface}
+% ACRONIMI SEMPLICI
+\newacronym{bi}{BI}{Business Intelligence}
+\newacronym{samm}{SAMM}{Software Assurance Maturity Model}
 
-\newacronym[description={\glslink{umlg}{Unified Modeling Language}}]
-    {uml}{UML}{Unified Modeling Language}
 
-% Glossary entries
-\newglossaryentry{apig} {
-    name=\glslink{api}{API},
-    text=Application Program Interface,
-    sort=api,
-    description={in informatica con il termine \emph{Application Programming Interface API} (ing. interfaccia di programmazione di un'applicazione) si indica ogni insieme di procedure disponibili al programmatore, di solito raggruppate a formare un set di strumenti specifici per l'espletamento di un determinato compito all'interno di un certo programma. La finalità è ottenere un'astrazione, di solito tra l'hardware e il programmatore o tra software a basso e quello ad alto livello semplificando così il lavoro di programmazione}
+% TERMINI CON ACRONIMO + GLOSSARIO
+% GDPR
+\newacronym[description={\glslink{gdprg}{General Data Protection Regulation}}]
+    {gdpr}{GDPR}{General Data Protection Regulation}
+
+\newglossaryentry{gdprg} {
+    name=\glslink{gdpr}{GDPR},
+    text=General Data Protection Regulation,
+    sort=gdpr,
+    description={Regolamento generale sulla protezione dei dati personali emanato dall'Unione Europea (Regolamento UE 2016/679). Stabilisce le norme relative alla raccolta, al trattamento, alla conservazione e alla cancellazione dei dati personali, imponendo alle organizzazioni precisi obblighi in materia di trasparenza, consenso e sicurezza dei dati.}
 }
 
-\newglossaryentry{umlg} {
-    name=\glslink{uml}{UML},
-    text=UML,
-    sort=uml,
-    description={in ingegneria del software \emph{UML, Unified Modeling Language} (ing. linguaggio di modellazione unificato) è un linguaggio di modellazione e specifica basato sul paradigma object-oriented. L'\emph{UML} svolge un'importantissima funzione di ``lingua franca'' nella comunità della progettazione e programmazione a oggetti. Gran parte della letteratura di settore usa tale linguaggio per descrivere soluzioni analitiche e progettuali in modo sintetico e comprensibile a un vasto pubblico}
+% PII
+\newacronym[description={\glslink{piig}{Personally Identifiable Information}}]
+    {pii}{PII}{Personally Identifiable Information}
+
+\newglossaryentry{piig} {
+    name=\glslink{pii}{PII},
+    text=Personally Identifiable Information,
+    sort=pii,
+    description={Qualsiasi dato che consenta di identificare direttamente o indirettamente una persona fisica (es. nome, cognome, indirizzo e-mail, numero di telefono, codice fiscale). Nel contesto del Data Catalog, i dati PII richiedono una gestione particolare in conformità alle normative vigenti.}
+}
+
+% RBAC
+\newacronym[description={\glslink{rbacg}{Role-Based Access Control}}]
+    {rbac}{RBAC}{Role-Based Access Control}
+
+\newglossaryentry{rbacg} {
+    name=\glslink{rbac}{RBAC},
+    text=Role-Based Access Control,
+    sort=rbac,
+    description={Modello di controllo degli accessi che assegna i permessi agli utenti in base al ruolo che ricoprono nell'organizzazione, anziché individualmente. In piattaforme come OpenMetadata, il sistema RBAC determina quali operazioni possono essere eseguite su quali risorse.}
+}
+
+
+% VOCI DI GLOSSARIO
+\newglossaryentry{anonimizzazione}{
+    name={Anonimizzazione},
+    description={Processo irreversibile mediante il quale i dati personali vengono alterati in modo tale da non consentire l'identificazione, diretta o indiretta, della persona fisica a cui si riferiscono. Una volta anonimizzati, i dati non sono più soggetti alle disposizioni del GDPR.}
+}
+
+\newglossaryentry{pseudonimizzazione}{
+    name={Pseudonimizzazione},
+    description={Processo mediante il quale i dati personali vengono trattati in modo tale da non poter essere attribuiti a una persona fisica specifica senza l'utilizzo di informazioni aggiuntive. A differenza dell'anonimizzazione, la pseudonimizzazione è un processo reversibile e i dati rimangono soggetti al GDPR.}
+}
+
+\newglossaryentry{dataquality}{
+    name={Data Quality},
+    description={Misura che valuta quanto un insieme di dati sia "sano" e adatto allo scopo per cui deve essere utilizzato dall'azienda. Applicare la Data Quality significa adottare un sistema che implementa controlli automatici sui dati per individuare anomalie, dati incompleti o informazioni incoerenti.}
+}
+
+\newglossaryentry{datagovernance}{
+    name={Data Governance},
+    description={Insieme di policy, ruoli, regole e processi aziendali che garantiscono che i dati siano sicuri, affidabili, accessibili e conformi alle normative. Rappresenta il "regolamento aziendale" che gestisce il ciclo di vita del dato.}
+}
+
+\newglossaryentry{dataingestion}{
+    name={Data Ingestion},
+    description={Processo di estrazione e importazione automatica dei metadati dalle fonti dati collegate al catalogo. Include la raccolta di informazioni strutturali (tabelle, colonne) ed eventuale profilazione e classificazione dei dati.}
+}
+
+\newglossaryentry{datalineage}{
+    name={Data Lineage},
+    description={Rappresenta la tracciabilità del dato lungo il suo intero ciclo di vita: indica l'origine del dato, le trasformazioni che ha subito e i sistemi attraverso cui è transitato prima di giungere alla destinazione finale, aumentando la fiducia nell'affidabilità delle informazioni.}
+}
+
+\newglossaryentry{dataobservability}{
+    name={Data Observability},
+    description={Capacità di conoscere in tempo reale lo "stato di salute" dei dati. Applica i concetti di monitoraggio del software ai flussi di dati, permettendo di identificare, diagnosticare e risolvere i problemi prima che impattino gli utenti aziendali.}
+}
+
+\newglossaryentry{datadiscovery}{
+    name={Data Discovery},
+    description={Processo di ricerca e centralizzazione volto a scoprire quali informazioni sono presenti all'interno dei vari sistemi dati aziendali. In una piattaforma di Data Catalog, agisce come un motore di ricerca intuitivo per esplorare i dataset disponibili.}
 }
