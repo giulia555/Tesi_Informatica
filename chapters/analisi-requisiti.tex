@@ -675,7 +675,7 @@ dove le voci assumono i seguenti significati:
     \item[Numero] Un intero progressivo univoco per ogni tipologia.
 \end{description}
 
-\newpage
+
 % TABELLE DEI REQUISITI
 \subsection{Requisiti funzionali}
 I requisiti funzionali descrivono i comportamenti e i servizi che il sistema deve fornire. Rispondono alla domanda: \textit{"Cosa deve fare il software?"}.
@@ -695,19 +695,18 @@ I requisiti funzionali descrivono i comportamenti e i servizi che il sistema dev
 
 % piè di pagina intermedio
 \midrule
+\noalign{\vspace{10pt}}
 \caption[]{Tabella dei requisiti funzionali} \\
 \endfoot
 
 % piè di pagina finale
 \bottomrule
+\noalign{\vspace{10pt}}
 \caption{Tabella dei requisiti funzionali}
 \label{tab:requisiti-funzionali}
 \endlastfoot
 
 % REQUISITI OBBLIGATORI
-\multicolumn{3}{l}{\textbf{Requisiti obbligatori}} \\
-\midrule
-
 RF-O-1 & Il sistema permette di collegare e importare fonti strutturate di dati al catalogo (come database o fogli Excel). & UC-1.1 \\ \midrule
 RF-O-2 & Il sistema notifica l'utente dell'esito della connessione a una fonte dati, indicando se è avvenuta con successo o con errori. & UC-1.1, 1.2, 1.3 \\ \midrule
 RF-O-3 & L'utente può visualizzare l'elenco completo di tutte le fonti collegate al catalogo. & UC-1.4 \\ \midrule
@@ -749,9 +748,6 @@ RF-O-38 & L'utente può consultare il Glossario aziendale per visualizzare il si
 RF-O-39 & L'utente può ricercare termini nel Glossario usando parole chiave o navigando per area tematica. & UC-3.10 \\ \midrule
 
 % REQUISITI DESIDERABILI
-\multicolumn{3}{l}{\textbf{Requisiti desiderabili}} \\
-\midrule
-
 RF-D-1 & Il sistema permette di collegare fonti semi-strutturate di dati al catalogo (come file JSON o CSV). & UC-1.2 \\ \midrule
 RF-D-2 & Il sistema permette di collegare fonti di dati non strutturati al catalogo (come immagini o PDF). & UC-1.3 \\ \midrule
 RF-D-3 & Il sistema permette di schedulare la sincronizzazione automatica dei metadati definendo frequenza e modalità. & UC-1.6 \\ \midrule
@@ -787,9 +783,6 @@ RF-D-32 & Il sistema permette di indirizzare un commento/segnalazione a un utent
 RF-D-33 & L'utente può visualizzare i risultati dei test di Data Quality eseguiti su un dato per verificarne lo stato di salute. & UC-3.9 \\ \midrule
 
 % REQUISITI OPZIONALI
-\multicolumn{3}{l}{\textbf{Requisiti opzionali}} \\
-\midrule
-
 RF-OP-1 & La piattaforma notifica l'utente se la classificazione automatica non ha individuato dati sensibili nel dataset. & UC-2.2 \\ \midrule
 RF-OP-2 & L'utente può scegliere la modalità specifica di pseudonimizzazione dei dati. & UC-2.6 \\ \midrule
 RF-OP-3 & L'utente può esportare i risultati della ricerca dei dati sensibili per finalità di audit o reportistica. & UC-2.7 \\ \midrule
