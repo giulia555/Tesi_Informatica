@@ -37,25 +37,90 @@ Assicura che chiunque in azienda prenda decisioni basandosi su informazioni affi
 
 
 \section{Obiettivi dello stage}
-% obiettivi dell'azienda (vedi prog. formativo) + altre cose tipo: studio completo del way of working aziendale per un mio possibile futuro in azienda
-% studio delle tecnologie, dell'ambiente, confidenza con strumenti, competenze trasversali in più ambiti per tenere tutte le porte aperte
+Gli obiettivi da raggiungere durante lo stage sono stati definiti in accordo con l'azienda e suddivisi in tre categorie in base alla loro priorità:
+\begin{itemize}
+    \item \textbf{Obbligatori (O)}: Obiettivi primari e vincolanti, la cui mancata realizzazione compromette gli scopi principali del progetto;
+    \item \textbf{Desiderabili (D)}: Obiettivi non strettamente necessari, ma che portano un valore aggiunto riconoscibile;
+    \item \textbf{Facoltativi (F)}: Obiettivi opzionali da perseguire nel caso in cui le tempistiche lo consentano.
+\end{itemize}
 
-% Obiettivi obbligatori (fasi 1- 6) - data discovery, creazione catalogo dati centralizzato e automatizzato con openmetadata, applicazione data quality, individuazione dati personali, dashboard della qualità
-% Obiettivi desiderabili (fase 7) - analisi dei requisiti, produzione di una completa documetnazione progettuale
-% Obiettivi facoltativi (fase 8) - presentazione interna, documentazione di esempi e di guida (es documenti di guida e manuale utente)
 
-\subsection{Obiettivi personali}
-% tipo aspettative personali e cosa mi aspetto/voglio dallo stage
+\begin{longtable}{ p{0.2\textwidth} p{0.7\textwidth} }
+% intestazione prima pagina
+\toprule
+\textbf{Obiettivo} & \textbf{Descrizione} \\
+\midrule
+\endfirsthead
+
+% intestazione pagine intermedie
+\toprule
+\textbf{Obiettivo} & \textbf{Descrizione} \\
+\midrule
+\endhead
+
+% piè di pagina intermedio
+\midrule
+\noalign{\vspace{10pt}}
+\caption[]{Tabella degli obiettivi dello stage} \\
+\endfoot
+
+% piè di pagina finale
+\bottomrule
+\noalign{\vspace{10pt}}
+\caption{Tabella degli obiettivi dello stage}
+\label{tab:obiettivi-stage}
+\endlastfoot
+
+% OBBLIGATORI
+O1 & Analisi e Data Discovery delle fonti dati aziendali, compreso lo studio dei motori di database aziendali (SQL Server e PostgreSQL).\\ \midrule
+O2 & Studio dei principi dello sviluppo sicuro, dati personali, anonimizzazione e tecniche di mascheramento.\\ \midrule
+O3 & Studio e valutazione delle principali piattaforme di Data Catalog.\\ \midrule
+O4 & Creazione di un catalogo dati centralizzato e automatizzato con OpenMetadata.\\ \midrule
+O5 & Applicazione di regole di Data Quality sui dataset del catalogo.\\ \midrule
+O6 & Individuazione e classificazione dei dati sensibili e personali, in conformità alle normative sulla sicurezza e sulla privacy.\\ \midrule
+O7 & Realizzazione di una dashboard per il monitoraggio della qualità dei dati.\\ \midrule
+
+% DESIDERABILI
+D1 & Studio dei casi d'uso e analisi dei requisiti.\\ \midrule
+D2 & Produzione di una completa documentazione progettuale.\\ \midrule
+D3 & Studio e applicazione pratica dei principi di Business Intelligence attraverso Power BI.\\ \midrule
+
+% FACOLTATIVI
+F1 & Proof of Concept contenente alcuni requisiti.\\ \midrule
+F2 & Presentazione interna all'azienda.\\ \midrule
+F3 & Documentazione di guida all'uso e manuale utente per i team aziendali.\\ \midrule
+F4 & Connessione del catalogo a Power BI.\\ \midrule
+F5 & Valutazione di tool di Data Discovery e mascheramento dati, da integrare a Power BI.\\
+
+\end{longtable}
 
 
 \section{Vincoli di progetto}
 \subsection{Vincoli tecnologici}
-% per esempio le tecnologie che ho usato e che ho dovuto installare
+La selezione, l'installazione e l'impiego degli strumenti software hanno dovuto rispettare standard architetturali e tecnologici imposti da Wintech:
+\begin{itemize}
+    \item \textbf{Licenze e costi}: Adozione obbligatoria di software con licenza \textit{Open Source}, che ne consentisse l'uso commerciale senza costi di licenza vincolanti per l'azienda.
+    \item \textbf{Infrastruttura e deployment}: Il Data Catalog doveva prevedere un'installazione semplice, scartando soluzioni infrastrutturali troppo onerose per gli scopi dello stage, come Kubernetes. Si è optato per Docker.
+    \item \textbf{Architettura dei dati (on-premise)}: Per motivi di sicurezza, è stato vietato il caricamento di dati aziendali su ambienti Cloud o SaaS esterni. Il sistema doveva inoltre limitarsi all'estrazione dei soli metadati, senza duplicare o memorizzare i dati fisici nel catalogo.
+    \item \textbf{Sicurezza e privacy}: Il sistema doveva supportare l'identificazione e la classificazione dei dati sensibili (\gls{pii}), garantendo la conformità al GDPR (UE 2016/679).
+    \item \textbf{Stack tecnologico}: Il progetto ha richiesto l'installazione locale di \textbf{Microsoft SQL Server} e \textbf{PostgreSQL}, la disponibilità di specifiche porte di rete (8585 e 8080) e l'uso di \textbf{Microsoft Power BI} con licenza \textbf{Pro}.
+\end{itemize}
 
 \subsection{Vincoli metodologici}
-% usare Teams per qualsiasi comunicazione (aggiornamenti giornalieri se necessario, e settimanali), studio della comunicazione (vedi doc), metodologia agile, aggironamenti frequenti, 
-% scrittura di tutta la documentazione richiesta: dai documenti ufficiali per lo studio di OpenMetadata, ai verbali delle riunioni, a quelli relativi alla formazione, come
-% i manuali di installazione o i verbali sugli incontri su Power BI
+Il flusso di lavoro ha seguito le direttive interne di Wintech; in particolare, lo svolgimento dello stage ha dovuto rispettare i seguenti vincoli:
+\begin{itemize}
+    \item \textbf{Metodologia Agile e aggiornamenti continui}: L'organizzazione del lavoro si è ispirata ai principi della metodologia \emph{Agile}, comprendendo allineamenti giornalieri e riunioni di revisione settimanali con il tutor aziendale.
+    \item \textbf{Comunicazione aziendale tramite Teams}: Ms Teams è stato il canale principale per qualsiasi comunicazione; la fase iniziale di stage ha incluso uno studio delle regole di comunicazione aziendale adottate da Wintech.
+    \item \textbf{Produzione documentale esaustiva}: Redazione di tutta la documentazione utile alla riproducibilità e tracciabilità del lavoro svolto.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{documentazione.png}
+    \vspace{0.2cm}
+    \caption[Documentazione prodotta durante lo stage]{Documentazione prodotta durante lo stage. \textit{Nota: La presente infografica è stata generata con l'ausilio di un sistema di Intelligenza Artificiale.}}
+    \label{fig:documentazione}
+\end{figure}
 
 \subsection{Vincoli temporali}
 L'analisi, l'installazione e la configurazione del sistema devono essere completate entro il limite delle 320 ore 
@@ -93,11 +158,50 @@ Installazione di OpenMetadata, configurazione della piattaforma e connessioni al
 
 
 \section{Formazione e tecnologie}
-% formazione su SQL e database: query, sintassi SQL base, viste anche stored procedures, viste, cursori; confidenza con PostgreSQL e PgAdmin e anche con SQL Server; procedure di backup e restore
-% docker e docker compose, WSL, VM (Virtual Box), perchè il pc è windows ma mi serviva anche ubuntu (+ studio comandi batch ubuntu)
-% formazione su sviluppo sicuro, principi della privacy e protezione dei dati sensibili e personali
-% altro: metodologia Agile (SCRUM), git e github, sistema gestionale di Wintech (ESOLVER), Power BI e principi della business intelligence
+L'inserimento nel contesto aziendale ha previsto una fase iniziale di formazione, propedeutica all'utilizzo delle tecnologie 
+impiegate nel progetto e volta a garantire un metodo di lavoro in linea con il \textit{Way of Working} aziendale.
 
+\subsection{Formazione}
+Le prime settimane di stage sono state dedicate allo studio o al ripasso delle competenze tecniche necessarie:
+\begin{itemize}
+    \item \textbf{Collaborazione e versionamento}: Strumenti di collaborazione aziendale (Microsoft 365, Teams) e sistemi di versionamento tramite Git e GitHub;
+    \item \textbf{Database e SQL}: Linguaggio SQL (livelli base e intermedio) e concetti avanzati di gestione dei database, tra cui transazioni ACID, procedure di backup logico e fisico, viste, cursori e stored procedure;
+    \item \textbf{Sviluppo sicuro}: Studio dei documenti del Sistema di Gestione Integrato di Wintech relativi alla \textit{Privacy by Design}, con focus sulle tecniche di anonimizzazione e pseudonimizzazione dei dati personali;
+    \item \textbf{Infrastruttura}: Formazione teorica e pratica sulla creazione di macchine virtuali e sulla containerizzazione tramite Docker;
+    \item \textbf{Sistema gestionale aziendale}: Introduzione al sistema gestionale di Wintech (ESOLVER);
+    \item \textbf{Business Intelligence}: Studio dei principi di BI e attività pratiche con Microsoft Power BI.
+\end{itemize}
 
+\subsection{Tecnologie utilizzate}
+Di seguito vengono descritte le principali tecnologie utilizzate durante lo stage.
 
+\paragraph{Microsoft SQL Server e PostgreSQL}
+Sistemi di gestione di database relazionali utilizzati come fonti dati principali.
 
+\paragraph{Docker}
+Piattaforma di containerizzazione utilizzata per il deployment e l'esecuzione di OpenMetadata in ambienti isolati e riproducibili.
+
+\paragraph{VirtualBox e WSL}
+Strumenti di virtualizzazione utilizzati per configurare ambienti di sviluppo e test isolati dal sistema operativo host.
+
+\paragraph{OpenMetadata}
+Piattaforma open source per la gestione dei metadati aziendali, adottata come soluzione principale per la realizzazione del Data Catalog.
+
+\paragraph{Microsoft Power BI}
+Strumento di Business Intelligence per la creazione di dashboard e report aziendali.
+
+\paragraph{Microsoft Presidio, ARX e Hawk-Eye}
+Tool di Data Discovery utilizzati per l'individuazione, la classificazione e l'anonimizzazione dei dati personali nei dataset aziendali, in alternativa a OpenMetadata.
+
+% loghi tecnologie
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.2\textwidth]{logo-openmetadata.png} \hspace{1cm}
+    \includegraphics[width=0.2\textwidth]{logo-postgresql.png} \hspace{1cm}
+    \includegraphics[width=0.2\textwidth]{logo-sqlserver.png} \hspace{1cm}
+    \includegraphics[width=0.25\textwidth]{logo-docker.png} \hspace{1cm}
+    \includegraphics[width=0.25\textwidth]{logo-powerbi.png}
+
+    \caption{Principali tecnologie utilizzate durante lo stage}
+    \label{fig:loghi_tecnologie}
+\end{figure}
