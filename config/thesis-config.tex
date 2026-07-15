@@ -61,13 +61,17 @@
 % Spacing between entries
 \setlength\bibitemsep{1.5\itemsep}
 
+% CATEOGRIE E VOCI DELLA BIBLIOGRAFIA
 \DeclareBibliographyCategory{opere}
 \DeclareBibliographyCategory{web}
+\DeclareBibliographyCategory{report}
 
-\addtocategory{opere}{womak:lean-thinking}
 \addtocategory{web}{site:agile-manifesto}
+\addtocategory{report}{gartner:data-catalog-2017}
+
 
 \defbibheading{opere}{\section*{Riferimenti bibliografici}}
+\defbibheading{report}{\section*{Report e studi}}
 \defbibheading{web}{\section*{Siti Web consultati}}
 
 
@@ -136,7 +140,8 @@
 
 \newcommand{\glsfirstoccur}{\ap{{[g]}}}
 
-\newcommand{\intro}[1]{\emph{\textsf{#1}}}
+% ORIGINALE: \newcommand{\intro}[1]{\emph{\textsf{#1}}}
+\newcommand{\intro}[1]{\emph{#1}} % SENZA SANS-SERIF
 
 % Risks environment
 \newcounter{riskcounter}                % define a counter
