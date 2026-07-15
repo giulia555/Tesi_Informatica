@@ -8,7 +8,7 @@
 \intro{In questa sezione vengono analizzati i casi d'uso e i requisiti aziendali riguardanti l'introduzione di un \textit{Data Catalog} nell'infrastruttura di Wintech. 
 L'analisi ha lo scopo di filtrare gli strumenti attualmente presenti sul mercato, individuando quelli che meglio rispondono ai requisiti dell'azienda e alle sue reali esigenze operative.}\\
 
-\subsection{Attori del sistema}
+\section{Attori del sistema}
 In ambito aziendale possono essere molteplici le figure che hanno la necessità di accedere a un \textit{Data Catalog}, ognuna con esigenze e competenze diverse. 
 Ai fini dell'analisi dei requisiti, si individuano i seguenti attori principali:
 \begin{itemize}
@@ -18,7 +18,6 @@ Ai fini dell'analisi dei requisiti, si individuano i seguenti attori principali:
     \item \textbf{Amministratore di sistema}: Figura tecnica che gestisce l'infrastruttura della piattaforma e connette le varie fonti di dati aziendali e mantiene il catalogo aggiornato, garantendone il corretto funzionamento.
 \end{itemize}
 
-\newpage
 
 \section{Casi d'uso}
 In questa sezione vengono analizzati i casi d'uso e gli scenari per cui l'azienda ha bisogno di adottare un \textit{Data Catalog}. 
@@ -701,7 +700,6 @@ Ogni caso d'uso è identificato dalla seguente notazione:
     \label{fig:uc3_bi}
 \end{figure}
 
-\newpage
 
 
 \section{Requisiti}
@@ -731,7 +729,6 @@ dove le voci assumono i seguenti significati:
     \item[Numero] Un intero progressivo univoco per ogni tipologia.
 \end{description}
 
-\newpage
 
 % TABELLE DEI REQUISITI
 \subsection{Requisiti funzionali}
@@ -854,7 +851,6 @@ RF-OP-11 & Il sistema permette di pianificare la sincronizzazione automatica dei
 
 \end{longtable}
 
-\newpage
 
 \subsection{Requisiti di vincolo}
 I requisiti di vincolo rappresentano le limitazioni tecnologiche, normative, architetturali o implementative imposte dall'esterno entro le quali il progetto deve muoversi.
@@ -895,7 +891,6 @@ RV-O-6 & L'infrastruttura aziendale deve garantire che le porte di rete 8585 (pe
 RV-O-7 & L'importazione dei metadati da Power BI richiede una licenza Power BI Pro o superiore. & UC-3.11 \\
 \end{longtable}
 
-\newpage
 
 \subsection{Requisiti di qualità}
 I requisiti di qualità descrivono le caratteristiche misurabili che il sistema deve garantire, come prestazioni, sicurezza, usabilità o manutenibilità.
@@ -935,7 +930,26 @@ RQ-O-5 & Il sistema deve garantire un'alta disponibilità (uptime), assicurando 
 
 \end{longtable}
 
-\newpage
+
+\subsection{Riepilogo dei requisiti}
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{ l c c c c }
+        \toprule
+        \textbf{Tipologia} & \textbf{Obbligatori (O)} & \textbf{Desiderabili (D)} & \textbf{Opzionali (OP)} & \textbf{Totale} \\
+        \midrule
+        Requisiti Funzionali & 39 & 33 & 11 & \textbf{83} \\
+        Requisiti di Vincolo & 7 & 0 & 0 & \textbf{7} \\
+        Requisiti di Qualità & 5 & 0 & 0 & \textbf{5} \\
+        \midrule
+        \textbf{Totale} & \textbf{51} & \textbf{33} & \textbf{11} & \textbf{95} \\
+        \bottomrule
+    \end{tabular}
+    \caption{Riepilogo quantitativo dei requisiti}
+    \label{tab:riepilogo_requisiti}
+\end{table}
+
 
 \section{Tracciamento dei requisiti}
 In questa sezione viene presentata la matrice di tracciabilità in avanti, che mappa le fonti di origine ai rispettivi requisiti generati.
