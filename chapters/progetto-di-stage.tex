@@ -17,24 +17,23 @@ In altri termini, un Data Catalog è una raccolta centralizzata di metadati, che
 comprenderne il significato e il contesto e valutare come e quando usarli.
 
 \subsection{Motivazioni}
-Nell'era moderna, le aziende hanno un'enormità di dati sparsi in sistemi diversi (database, fogli Excel, file CSV...). Senza un catalogo, gli utenti 
-non sanno cosa esiste, dove si trova o se possono fidarsi di quel dato. Il Data Catalog risolve questo caos creando una mappa unica, organizzata e facilmente consultabile.
+Le aziende moderne gestiscono volumi sempre crescenti di dati, distribuiti su sistemi diversi (database, file Excel, CSV e altre fonti). Senza uno strumento di catalogazione, per gli utenti 
+sarà difficile sapere quali dati esistono, dove si trovano e quanto siano affidabili. Un Data Catalog risolve questo problema, creando una visione centralizzata e facilmente consultabile dell'intero patrimonio informativo aziendale.
 
 \subsubsection{Sicurezza e compliance normativa}
-Storicamente l'individuazione dei dati personali ai fini GDPR avveniva in modo manuale, producendo un semplice "catalogo grezzo". 
-L'adozione di un Data Catalog moderno automatizza questo processo scansionando i database e classificando i dati sensibili in autonomia.
-Il passaggio da un approccio manuale a un catalogo completo e automatizzato segna una forte crescita della maturità aziendale nella sicurezza e nel modello \gls{samm}. 
-Grazie a questa mappatura esatta e dinamica, l'azienda sa sempre dove e come applicare le necessarie policy di protezione, come il mascheramento o la pseudonimizzazione.
+Storicamente l'individuazione dei dati personali ai fini GDPR avveniva in modo manuale, producendo un semplice «catalogo grezzo». 
+L'adozione di un Data Catalog automatizza questo processo scansionando i database e classificando i dati sensibili in autonomia.
+Il passaggio da un approccio manuale a un catalogo completo e automatizzato rappresenta un avanzamento nella maturità aziendale in termini di sicurezza e nel modello \gls{samm}, 
+garantendo che l'azienda sappia sempre dove e come applicare le policy di protezione, come il mascheramento o la pseudonimizzazione.
 
 \subsubsection{Analisi dei dati e Business Intelligence}
 Gli analisti accedono al catalogo per cercare le informazioni di cui hanno bisogno per creare i loro report. 
 Se un analista ha bisogno del fatturato del 2023, cerca "Fatturato" nel Data Catalog: il sistema indica immediatamente in quale 
-database si trova, se il dato è aggiornato e di alta qualità, eliminando il rischio di commettere errori o di duplicare set di dati già predisposto in passato.
+database si trova, se il dato è aggiornato e di alta qualità, eliminando il rischio di commettere errori o di duplicare un set di dati già predisposto in passato.
 
 \subsubsection{Data Quality e Governance}
-Nel catalogo è possibile valutare la qualità delle informazioni, individuare il responsabile di una specifica tabella e capire come i dati sono collegati tra loro. 
-Ciò garantisce che chiunque in azienda prenda decisioni basandosi su informazioni affidabili, certificate e sicure, migliorando l'efficienza generale.
-
+Nel catalogo è possibile valutare la qualità delle informazioni, individuare il responsabile di una specifica tabella e comprendere le relazioni tra i dati. 
+Ciò garantisce che le decisioni aziendali siano basate su informazioni affidabili, certificate e sicure, migliorando l'efficienza generale.
 
 \section{Obiettivi dello stage}
 Gli obiettivi da raggiungere durante lo stage sono stati definiti in accordo con l'azienda e suddivisi in tre categorie in base alla loro priorità:
@@ -103,13 +102,13 @@ La selezione, l'installazione e l'impiego degli strumenti software hanno dovuto 
     \item \textbf{Infrastruttura e deployment}: Il Data Catalog doveva prevedere un'installazione semplice, scartando soluzioni infrastrutturali troppo onerose per gli scopi dello stage, come Kubernetes. Si è optato per Docker.
     \item \textbf{Architettura dei dati (on-premise)}: Per motivi di sicurezza, è stato vietato il caricamento di dati aziendali su ambienti Cloud o SaaS esterni. Il sistema doveva inoltre limitarsi all'estrazione dei soli metadati, senza duplicare o memorizzare i dati fisici nel catalogo.
     \item \textbf{Sicurezza e privacy}: Il sistema doveva supportare l'identificazione e la classificazione dei dati sensibili (\gls{pii}), garantendo la conformità al GDPR (UE 2016/679).
-    \item \textbf{Stack tecnologico}: Il progetto ha richiesto l'installazione locale di \textbf{Microsoft SQL Server} e \textbf{PostgreSQL}, la disponibilità di specifiche porte di rete (8585 e 8080) e l'uso di \textbf{Microsoft Power BI} con licenza \textbf{Pro}.
+    \item \textbf{Stack tecnologico}: Il progetto ha richiesto l'installazione locale di \textbf{Microsoft SQL Server} e \textbf{PostgreSQL}, la disponibilità di specifiche porte di rete (8585 e 8080) e l'uso di \textbf{Microsoft Power BI} con licenza \emph{Pro}.
 \end{itemize}
 
 \subsection{Vincoli metodologici}
 Il flusso di lavoro ha seguito le direttive interne di Wintech; in particolare, lo svolgimento dello stage ha dovuto rispettare i seguenti vincoli:
 \begin{itemize}
-    \item \textbf{Metodologia Agile e aggiornamenti continui}: L'organizzazione del lavoro si è ispirata ai principi della metodologia \emph{Agile}, comprendendo allineamenti giornalieri e riunioni di revisione settimanali con il tutor aziendale.
+    \item \textbf{Metodologia Agile}: L'organizzazione del lavoro si è ispirata ai principi della metodologia \emph{Agile}, comprendendo allineamenti giornalieri e riunioni di revisione settimanali con il tutor aziendale.
     \item \textbf{Comunicazione aziendale tramite Teams}: Microsoft Teams è stato il canale principale per qualsiasi comunicazione; la fase iniziale di stage ha incluso uno studio delle regole di comunicazione aziendale adottate da Wintech.
     \item \textbf{Produzione documentale esaustiva}: Redazione di tutta la documentazione utile alla riproducibilità e tracciabilità del lavoro svolto.
 \end{itemize}
@@ -124,22 +123,23 @@ Il flusso di lavoro ha seguito le direttive interne di Wintech; in particolare, 
 
 \subsection{Vincoli temporali}
 L'analisi, l'installazione e la configurazione del sistema sono state completate entro il limite delle 320 ore 
-lavorative previste dal progetto formativo, seguendo le scadenze definite nella Sezione 2.4 (Pianificazione del lavoro).
+lavorative previste dal progetto formativo, seguendo le scadenze definite nella Sezione \ref{sec:pianificazione-lavoro} (Pianificazione del lavoro).
 
 
 \section{Pianificazione del lavoro}
+\label{sec:pianificazione-lavoro} % label per fare riferimento da un'altra sezione
 Le attività previste per il percorso formativo, per un totale di 320 ore lavorative, sono state suddivise dal tutor aziendale in 8 macro-fasi principali. 
 A ciascuna fase è stato assegnato un budget temporale stimato di circa 40 ore. 
 Di seguito vengono descritte nel dettaglio le fasi del piano di lavoro concordato.
 
 \paragraph{Fase 1 - Formazione iniziale}
-Configurazione degli strumenti di collaborazione aziendale (Office 365) e studio delle metodologie di lavoro interne, con focus sul framework Scrum. Ripasso dei sistemi di versionamento (Git e GitHub) e del linguaggio SQL.
+Configurazione degli strumenti di collaborazione aziendale (Office 365) e studio delle metodologie di lavoro interne, con particolare attenzione al framework Scrum. Ripasso dei sistemi di versionamento (Git e GitHub) e del linguaggio SQL.
 
 \paragraph{Fase 2 - Studio e utilizzo dei database aziendali}
 Formazione completa sui database, dalle query di base, a viste e indici, fino alle procedure di backup e restore. Sono stati installati, studiati e testati i RDBMS aziendali, quali PostgreSQL e SQL Server.
 
 \paragraph{Fase 3 - Sviluppo sicuro e studio di altre tecnologie}
-Formazione relativa al trattamento dei dati sensibili in azienda e alle policy di sicurezza interne e introduzione al ciclo di sviluppo sicuro del software. Formazione relativa a macchine virtuali (VirtualBox) e a sistemi di containerizzazione (Docker).
+Formazione sul trattamento dei dati sensibili, sulle policy di sicurezza interne e sul ciclo di sviluppo sicuro del software. Introduzione alla virtualizzazione tramite VirtualBox e al \gls{wsl}, ripasso della containerizzazione tramite Docker.
 
 \paragraph{Fase 4 - Studio delle piattaforme di Data Catalog}
 Analisi dei requisiti e conseguente valutazione delle piattaforme di Data Catalog presenti sul mercato, al fine di trovare quella più adatta alle esigenze aziendali.
@@ -148,7 +148,7 @@ Analisi dei requisiti e conseguente valutazione delle piattaforme di Data Catalo
 Installazione di OpenMetadata, configurazione della piattaforma e connessioni alle fonti dati aziendali.
 
  \paragraph{Fase 6 - Data Quality e Data Observability}
- Test delle funzionalità principali di OpenMetadata, come implementazione di test di qualità sui dati, configurazione del sistema di alerting, gestione dei ruoli e degli accessi.
+ Test delle funzionalità principali di OpenMetadata, come implementazione di test di qualità sui dati, configurazione del sistema di notifiche e alerting, gestione dei ruoli e degli accessi.
 
  \paragraph{Fase 7 - Data Governance}
  Test del motore di individuazione e classificazione automatica dei dati sensibili, corretta gestione dei PII e funzionalità di anonimizzazione.
