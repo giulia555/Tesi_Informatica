@@ -46,6 +46,7 @@
 
 % \input{appendix/glossary-entries}
 \makeglossaries
+\defglsentryfmt[main]{\glsgenentryfmt\ifglsused{\glslabel}{}{\glsfirstoccur}}
 \loadglsentries{appendix/glossary-entries}
 % ESECUZIONE FORZATA NEL CASO NON ANDASSE IL GLOSSARIO: makeglossaries -d build thesis
 
