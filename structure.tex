@@ -25,8 +25,21 @@
 
     \backmatter
     \glsaddall % per stampare tutto anche se i termini non ci sono ancora nel testo
+
+    % fix intestazione acronimi e glossario
+    \cleardoublepage
+    % IMPONE IL NOME ACRONIMI o GLOSSARIO FISSO A SINISTRA NELL'INTESTAZIONE E NULLA A DESTRA
+    \fancyhead[L]{\fontsize{12}{14.5} \selectfont Acronimi e abbreviazioni}
+    \fancyhead[R]{} 
     \printglossary[type=\acronymtype, title=Acronimi e abbreviazioni, toctitle=Acronimi e abbreviazioni]
-    \printglossary[type=main, title=Glossario, toctitle=Glossario] % glossario e acronimi
-    \input{appendix/bibliography} % bibliografia
+
+    \cleardoublepage
+    \fancyhead[L]{\fontsize{12}{14.5} \selectfont Glossario}
+    \printglossary[type=main, title=Glossario, toctitle=Glossario]
+
+    % STESSA COSA PER BIBLIOGRAFIA E RINGRAZIAMENTI (se dovessero occupare più di una pagina)
+    \cleardoublepage
+    \fancyhead[L]{\fontsize{12}{14.5} \selectfont Bibliografia}
+    \input{appendix/bibliography}
     \input{appendix/acknowledgements} % ringraziamenti
 \end{document}
