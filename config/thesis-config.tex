@@ -8,21 +8,26 @@
 % \renewcommand{\labelitemiii}{$\diamond$}
 % \renewcommand{\labelitemiv}{$\ast$}
 
+\pagestyle{fancy} 
+\setlength{\headheight}{14.5pt}
+\fancyhf{} % Svuota le vecchie impostazioni
 
-\let\Chaptermark\chaptermark
-% \Chaptername gives current chapter name
-\def\chaptermark#1{\def\Chaptername{#1}\Chaptermark{#1}}
-\makeatletter
-% \currentname gives the current section name
-\newcommand*{\currentname}{\@currentlabelname}
-\makeatother
-
-% Uncomment the following line for a different header/footer style
-\pagestyle{fancy} \setlength{\headheight}{14.5pt} % per avere header e footer migliori
-\fancyhead[L]{\fontsize{12}{14.5} \selectfont \thechapter. \Chaptername}
-\fancyhead[R]{\fontsize{12}{14.5} \selectfont \currentname}
-% Page number always in footer
+% Configurazione delle intestazioni: testo non tutto in maiuscolo (nouppercase)
+\fancyhead[L]{\fontsize{12}{14.5}\selectfont\nouppercase{\leftmark}}
+\fancyhead[R]{\fontsize{12}{14.5}\selectfont\nouppercase{\rightmark}}
 \cfoot{\thepage}
+
+% Personalizzazione intestazione
+\makeatletter
+\renewcommand{\chaptermark}[1]{%
+  % Mostra solo "Numero. Titolo Capitolo" (es: 1. Contesto aziendale) ed elimina "Capitolo"
+  \markboth{\ifnum\c@secnumdepth>\m@ne \if@mainmatter \thechapter.\ \fi\fi #1}{}%
+}
+\renewcommand{\sectionmark}[1]{%
+  % Mostra solo il nome della sezione, eliminando completamente i numeri (es: Wintech Spa)
+  \markright{#1}%
+}
+\makeatother
 
 
 % Custom hyphenation rules

@@ -100,7 +100,7 @@ La selezione, l'installazione e l'impiego degli strumenti software hanno dovuto 
 \begin{itemize}
     \item \textbf{Licenze e costi}: Adozione obbligatoria di software con licenza \textit{Open Source}, che ne consentisse l'uso commerciale senza costi di licenza vincolanti per l'azienda.
     \item \textbf{Infrastruttura e deployment}: Il Data Catalog doveva prevedere un'installazione semplice, scartando soluzioni infrastrutturali troppo onerose per gli scopi dello stage, come Kubernetes. Si è optato per Docker.
-    \item \textbf{Architettura dei dati (on-premise)}: Per motivi di sicurezza, è stato vietato il caricamento di dati aziendali su ambienti Cloud o SaaS esterni. Il sistema doveva inoltre limitarsi all'estrazione dei soli metadati, senza duplicare o memorizzare i dati fisici nel catalogo.
+    \item \textbf{Architettura dei dati (\textit{on-premise})}: Per motivi di sicurezza, è stato vietato il caricamento di dati aziendali su ambienti Cloud o SaaS esterni. Il sistema doveva inoltre limitarsi all'estrazione dei soli metadati, senza duplicare o memorizzare i dati fisici nel catalogo.
     \item \textbf{Sicurezza e privacy}: Il sistema doveva supportare l'identificazione e la classificazione dei dati sensibili (\gls{pii}), garantendo la conformità al GDPR (UE 2016/679).
     \item \textbf{Stack tecnologico}: Il progetto ha richiesto l'installazione locale di \textbf{Microsoft SQL Server} e \textbf{PostgreSQL}, la disponibilità di specifiche porte di rete (8585 e 8080) e l'uso di \textbf{Microsoft Power BI} con licenza \emph{Pro}.
 \end{itemize}
