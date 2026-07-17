@@ -449,19 +449,19 @@ Ogni caso d'uso è identificato dalla seguente notazione:
     \label{uc:2_11_gestione_segnalazioni}
 \end{usecase}
 
-\begin{usecase}{2.12}{Gestione del Glossario aziendale}
+\begin{usecase}{2.12}{Gestione del glossario aziendale}
     \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
-    \usecasedesc{La piattaforma mette a disposizione uno strumento di Glossario aziendale che consente di definire e centralizzare i termini e i concetti comuni all'organizzazione. 
+    \usecasedesc{La piattaforma mette a disposizione uno strumento di glossario aziendale che consente di definire e centralizzare i termini e i concetti comuni all'organizzazione. 
     Gli utenti possono aggiungere o modificare i termini del glossario, organizzarli e raggrupparli per area tematica e associare i termini ai dataset del Data Catalog}
     \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di responsabile della Governance ed è presente almeno un set di dati nel Data Catalog}
-    \usecasepost{L'attore ha aggiunto dei termini al Glossario, che sono associati ai dataset e che sono usati dalla piattaforma per arricchire i risultati di ricerca}
+    \usecasepost{L'attore ha aggiunto dei termini al glossario, che sono associati ai dataset e che sono usati dalla piattaforma per arricchire i risultati di ricerca}
     \usecasemain{
         \begin{enumerate}
-            \item L'attore seleziona l'opzione che permette di modificare il Glossario.
+            \item L'attore seleziona l'opzione che permette di modificare il glossario.
             \item L'attore aggiunge un nuovo termine al Glossario, fornendo un nome, una descrizione e possibili sinonimi.
             \item L'attore classifica il termine, per esempio usando dei tag.
             \item L'attore associa il termine ai rispettivi set di dati.
-            \item Il sistema utilizza i termini del Glossario per arricchire i risultati di ricerca quando un utente cerca un dato nel catalogo.
+            \item Il sistema utilizza i termini del glossario per arricchire i risultati di ricerca quando un utente cerca un dato nel catalogo.
         \end{enumerate}
     }
     \label{uc:2_12_gestione_glossario}
@@ -645,15 +645,15 @@ Ogni caso d'uso è identificato dalla seguente notazione:
     \label{uc:3_9_verifica_qualita_dati}
 \end{usecase}
 
-\begin{usecase}{3.10}{Consultazione del Glossario aziendale}
+\begin{usecase}{3.10}{Consultazione del glossario aziendale}
     \usecaseactors{Analista, sviluppatore di BI o utente che consulta il catalogo}
-    \usecasedesc{L'utente può accedere al Glossario aziendale, aggiornato dai responsabili della Data Governance, per consultare e prendere visione della terminologia comune usata in ambito aziendale. 
-    La consultazione del Glossario è utile per comprendere il significato corretto di un termine prima di utilizzare i dati in analisi o report, e per individuare i nomi dei campi o delle colonne che identificano un dato particolare nelle diverse fonti dati}
-    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma ed è presente almeno un termine nel Glossario aziendale}
-    \usecasepost{L'attore ha consultato i termini di interesse nel Glossario e ha acquisito le informazioni necessarie per utilizzare correttamente i dati}
+    \usecasedesc{L'utente può accedere al glossario aziendale, aggiornato dai responsabili della Data Governance, per consultare e prendere visione della terminologia comune usata in ambito aziendale. 
+    La consultazione del glossario è utile per comprendere il significato corretto di un termine prima di utilizzare i dati in analisi o report, e per individuare i nomi dei campi o delle colonne che identificano un dato particolare nelle diverse fonti dati}
+    \usecasepre{L'attore ha effettuato l'accesso alla piattaforma ed è presente almeno un termine nel glossario aziendale}
+    \usecasepost{L'attore ha consultato i termini di interesse nel glossario e ha acquisito le informazioni necessarie per utilizzare correttamente i dati}
     \usecasemain{
         \begin{enumerate}
-            \item L'attore accede alla sezione dedicata al Glossario aziendale nella piattaforma.
+            \item L'attore accede alla sezione dedicata al glossario aziendale nella piattaforma.
             \item L'attore ricerca il termine di interesse inserendo parole chiave o navigando per area tematica.
             \item Il sistema restituisce i risultati della ricerca, mostrando i termini corrispondenti con la relativa descrizione, i sinonimi, i termini correlati e i dataset associati.
             \item L'attore consulta le informazioni disponibili e, se necessario, naviga verso i dataset collegati al termine per approfondire.
@@ -787,10 +787,10 @@ RF-O-23 & L'utente può impostare delle regole per eseguire test automatici e co
 RF-O-24 & Il sistema notifica l'utente se ci sono metadati nel catalogo non conformi alle normative o policy aziendali. & UC-2.8, 2.9 \\ \midrule
 RF-O-25 & L'utente può eseguire test di Data Quality manualmente o schedularne l'esecuzione automatica. & UC-2.9 \\ \midrule
 RF-O-26 & Il sistema permette di inviare notifiche e alert tramite strumenti aziendali integrati, notifiche nella piattaforma o e-mail. & UC-2.10 \\ \midrule
-RF-O-27 & L'utente può aggiungere termini a un Glossario aziendale, definendone nome e descrizione. & UC-2.12 \\ \midrule
-RF-O-28 & L'utente può modificare le informazioni di un termine esistente del Glossario. & UC-2.12 \\ \midrule
-RF-O-29 & L'utente può associare termini del Glossario ai dati del Data Catalog. & UC-2.12 \\ \midrule
-RF-O-30 & Se un termine del Glossario viene associato a un dato, il dato eredita i tag assegnati al termine. & UC-2.12 \\ \midrule
+RF-O-27 & L'utente può aggiungere termini a un glossario aziendale, definendone nome e descrizione. & UC-2.12 \\ \midrule
+RF-O-28 & L'utente può modificare le informazioni di un termine esistente del glossario. & UC-2.12 \\ \midrule
+RF-O-29 & L'utente può associare termini del glossario ai dati del Data Catalog. & UC-2.12 \\ \midrule
+RF-O-30 & Se un termine del glossario viene associato a un dato, il dato eredita i tag assegnati al termine. & UC-2.12 \\ \midrule
 RF-O-31 & L'utente può ricercare un dato usando il nome, la fonte o altre parole chiave collegate. & UC-3.1 \\ \midrule
 RF-O-32 & L'utente può usare i tag o altri metadati per ricercare o filtrare i dati. & UC-3.1 \\ \midrule
 RF-O-33 & L'utente può visualizzare tutte le fonti in cui è presente un dato o dataset. & UC-3.1, 3.2 \\ \midrule
@@ -798,8 +798,8 @@ RF-O-34 & L'utente può visualizzare in una scheda dedicata tutti i metadati e i
 RF-O-35 & L'utente può visualizzare la data di ultimo aggiornamento o sincronizzazione di un dato. & UC-3.2 \\ \midrule
 RF-O-36 & L'utente può segnalare un problema relativamente a un dataset o metadato. & UC-3.8 \\ \midrule
 RF-O-37 & Il sistema indirizza automaticamente la segnalazione all'utente autorizzato corretto in base alla natura del problema. & UC-3.8 \\ \midrule
-RF-O-38 & L'utente può consultare il Glossario aziendale per visualizzare il significato dei termini, sinonimi e dataset associati. & UC-3.10 \\ \midrule
-RF-O-39 & L'utente può ricercare termini nel Glossario usando parole chiave o navigando per area tematica. & UC-3.10 \\ \midrule
+RF-O-38 & L'utente può consultare il glossario aziendale per visualizzare il significato dei termini, sinonimi e dataset associati. & UC-3.10 \\ \midrule
+RF-O-39 & L'utente può ricercare termini nel glossario usando parole chiave o navigando per area tematica. & UC-3.10 \\ \midrule
 
 % REQUISITI DESIDERABILI
 RF-D-1 & Il sistema permette di connettere fonti semi-strutturate di dati al catalogo (come file JSON o CSV) e importarne i metadati. & UC-1.2 \\ \midrule
@@ -821,10 +821,10 @@ RF-D-16 & Il sistema monitora i dati con soglie di accettazione e notifica l'ute
 RF-D-17 & Il sistema permette di integrare strumenti di comunicazione (es. Microsoft Teams o Slack) per inviare avvisi. & UC-2.10 \\ \midrule
 RF-D-18 & L'utente che ne ha i privilegi riceve notifiche e alert per segnalazioni o domande direttamente sui dati interessati. & UC-2.11 \\ \midrule
 RF-D-19 & L'utente può prendere in carico o assegnare ad altri le segnalazioni o le domande ricevute. & UC-2.11 \\ \midrule
-RF-D-20 & L'utente può associare sinonimi o termini correlati a un termine del Glossario. & UC-2.12 \\ \midrule
-RF-D-21 & L'utente può organizzare i termini del Glossario in macroaree. & UC-2.12 \\ \midrule
-RF-D-22 & L'utente può classificare un termine del Glossario usando dei tag. & UC-2.12 \\ \midrule
-RF-D-23 & L'utente può assegnare tag mutualmente esclusivi a dataset o a termini del Glossario. & UC-2.12 \\ \midrule
+RF-D-20 & L'utente può associare sinonimi o termini correlati a un termine del glossario. & UC-2.12 \\ \midrule
+RF-D-21 & L'utente può organizzare i termini del glossario in macroaree. & UC-2.12 \\ \midrule
+RF-D-22 & L'utente può classificare un termine del glossario usando dei tag. & UC-2.12 \\ \midrule
+RF-D-23 & L'utente può assegnare tag mutualmente esclusivi a dataset o a termini del glossario. & UC-2.12 \\ \midrule
 RF-D-24 & Il sistema permette di risalire al Data Lineage di un dato o dataset. & UC-3.3 \\ \midrule
 RF-D-25 & L'utente può visualizzare l'elenco delle modifiche subite da un dataset. & UC-3.4 \\ \midrule
 RF-D-26 & Il sistema registra e rende visibile la lista degli accessi e delle ricerche effettuate su un dataset. & UC-3.4 \\ \midrule
@@ -841,9 +841,9 @@ RF-OP-1 & La piattaforma notifica l'utente se la classificazione automatica non 
 RF-OP-2 & L'utente può scegliere la modalità specifica di pseudonimizzazione dei dati. & UC-2.6 \\ \midrule
 RF-OP-3 & L'utente può esportare i risultati della ricerca dei dati sensibili per finalità di audit o reportistica. & UC-2.7 \\ \midrule
 RF-OP-4 & L'utente può visualizzare lo stato di salute dei dataset in una dashboard dedicata (anomalie, nulli, duplicati). & UC-2.9 \\ \midrule
-RF-OP-5 & La piattaforma garantisce funzionalità di verifica e revisione dei termini del Glossario prima di approvarli. & UC-2.12 \\ \midrule
-RF-OP-6 & La piattaforma supporta il Bulk Upload dei termini del Glossario (importazione in blocco). & UC-2.12 \\ \midrule
-RF-OP-7 & La piattaforma supporta il Bulk Export dei termini del Glossario (esportazione in blocco). & UC-2.12 \\ \midrule
+RF-OP-5 & La piattaforma garantisce funzionalità di verifica e revisione dei termini del glossario prima di approvarli. & UC-2.12 \\ \midrule
+RF-OP-6 & La piattaforma supporta il Bulk Upload dei termini del glossario (importazione in blocco). & UC-2.12 \\ \midrule
+RF-OP-7 & La piattaforma supporta il Bulk Export dei termini del glossario (esportazione in blocco). & UC-2.12 \\ \midrule
 RF-OP-8 & Il sistema assegna un numero di versione a un dataset dopo ogni modifica dei metadati, mantenendo lo storico. & UC-3.4 \\ \midrule
 RF-OP-9 & Il sistema supporta la connessione con Power BI come fonte dati per importarne i metadati. & UC-3.11 \\ \midrule
 RF-OP-10 & Il sistema permette di importare il lineage tra tabelle dei database e dashboard di Power BI. & UC-3.11 \\ \midrule

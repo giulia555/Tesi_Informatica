@@ -1,7 +1,101 @@
 % capitolo 4: valutazione di OpenMetadata e dei competitor
-
-\chapter{Valutazione di OpenMetadata e dei competitor}
+\chapter{Valutazione di piattaforme di Data Catalog}
 \label{cap:valutazione-competitor}
 
-\intro{Breve introduzione al capitolo}\\
+\intro{Dopo l'analisi dei requisiti aziendali, lo studio è proseguito con la valutazione e il confronto delle principali piattaforme open-source di Data Catalog 
+    presenti sul mercato, con l'obiettivo di individuare lo strumento più adatto alle esigenze di Wintech.}
+
+\section{Criteri di valutazione}
+Per individuare la piattaforma di Data Catalog più idonea all'infrastruttura aziendale, le diverse soluzioni software sono valutate e confrontate sulla base di cinque criteri principali, ordinati per priorità:
+\begin{enumerate}
+    \item \textbf{Licenze e costi infrastrutturali}: Natura \emph{open-source} del software, gratuità per uso commerciale, supporto per installazioni \emph{on-premise} e complessità di configurazione.
+    \item \textbf{Data Governance e Data Quality}: Gestione sicura degli accessi, individuazione e classificazione dei dati personali, configurazione di test di qualità e sistemi di \emph{alerting}.
+    \item \textbf{Data Lineage e \emph{query analytics}}: Possibilità di tracciare l'origine e le trasformazioni del dato, uso di query e strumenti di ottimizzazione e automazione.
+    \item \textbf{Collaborazione e funzionalità aggiuntive}: Integrazione con strumenti di collaborazione aziendale, presenza di un glossario aziendale, possibilità di integrare l'Intelligenza Artificiale.
+    \item \textbf{Integrazione con la Business Intelligence}: Connessione nativa con piattaforme di BI, in particolare con Microsoft Power BI.
+\end{enumerate}
+
+\section{Licenze e costi infrastrutturali}
+Il mercato dei Data Catalog offre tre tipologie principali di soluzioni: software proprietari a pagamento, servizi Cloud/SaaS (\emph{Software as a Service}) e piattaforme \emph{open-source}.
+
+In accordo con le direttive aziendali, sono state escluse le soluzioni proprietarie e quelle che necessitano di architetture infrastrutturali eccessivamente complesse 
+(come, ad esempio, l'uso obbligatorio di \gls{kubernetes}).
+
+Un ulteriore vincolo riguarda la fase di collaudo: la piattaforma scelta deve poter essere valutata in locale (\emph{on-premise}) o tramite \emph{demo} gratuite, 
+garantendo che i dati aziendali non vengano mai trasmessi o caricati su server esterni in \emph{Cloud}. 
+L'obiettivo quindi è individuare una soluzione \emph{enterprise} che soddisfi i requisiti aziendali e che sia testabile agilmente \emph{on-premise}.
+
+I software analizzati in questa fase sono stati selezionati partendo dalla repository GitHub \emph{Awesome Data Catalogs}\cite{site:awesome-data-catalogs}, poi approfonditi attraverso la documentazione ufficiale di ciascuna piattaforma.
+
+Nella seguente tabella vengono presentati i principali strumenti valutati, includendo, a puro scopo comparativo, anche soluzioni 
+\emph{Cloud} o proprietarie \emph{leader} del settore. Si precisa che durante il periodo di stage l'esplorazione ha coinvolto anche altre piattaforme, successivamente 
+scartate perchè offrivano funzionalità puramente verticali o richiedevano installazioni troppo onerose rispetto ai vincoli del progetto.
+
+\begin{longtable}{ p{0.25\textwidth} p{0.35\textwidth} p{0.35\textwidth} }
+\toprule
+\textbf{Piattaforma} & \textbf{Licenza e costi} & \textbf{Installazione} \\
+\midrule
+\endfirsthead
+
+\toprule
+\textbf{Piattaforma} & \textbf{Licenza e costi} & \textbf{Installazione} \\
+\midrule
+\endhead
+
+\midrule
+\noalign{\vspace{10pt}}
+\caption[]{Analisi dei costi e delle licenze per i principali Data Catalog} \\
+\endfoot
+
+% piè di pagina finale
+\bottomrule
+\noalign{\vspace{10pt}}
+\caption{Analisi dei costi e delle licenze per i principali Data Catalog}
+\label{tab:analisi_costi}\\
+\endlastfoot
+
+\textbf{Microsoft Purview} \newline 
+\vspace*{2pt} \includegraphics[width=2cm]{purview.png} & Proprietaria (SaaS). Costi legati all'ecosistema Azure. & Servizio Cloud gestito, non necessita di installazione locale. \\
+\midrule
+\textbf{Atlan} \newline 
+\vspace*{2pt} \includegraphics[width=2cm]{atlan.png} & Proprietaria (Enterprise). Costi elevati. & Servizio Cloud gestito, non necessita di installazione locale. \\
+\midrule
+\textbf{OpenMetadata} \newline 
+\vspace*{2pt} \includegraphics[width=2cm]{logo-openmetadata.png} & Open-source (Apache 2.0). Gratuito per uso \emph{enterprise}. & \emph{On-premise} (Docker nativo, macchina virtuale o Kubernetes). \\
+\midrule
+\textbf{DataHub} \newline 
+\vspace*{2pt} \includegraphics[width=2cm]{datahub.png} & Open-source (Apache 2.0). Gratuito (versione OSS). & \emph{On-premise} (Docker Desktop o Docker Compose). \\
+\midrule
+\textbf{Open Data Discovery} \newline 
+\vspace*{2pt} \includegraphics[width=3.5cm]{odd.png} & Open-source (Apache 2.0). Gratuito. & \emph{On-premise} (Docker Compose o Kubernetes). \\
+\midrule
+\textbf{Gravitino} \newline 
+\vspace*{2pt} \includegraphics[width=3.5cm]{gravitino.jpg} & Open-source (Apache 2.0). Gratuito. & \emph{On-premise} (Docker o \emph{build} da codice sorgente). \\
+
+\end{longtable}
+
+
+\subsection*{Considerazioni}
+Analizzando le caratteristiche delle piattaforme individuate, è stata effettuata una forte scrematura iniziale.
+Le soluzioni cloud e a pagamento (come Purview o Atlan) sono state scartate per incompatibilità con il \emph{budget} e con la volontà aziendale di mantenere i dati \emph{on-premise}, sebbene Microsoft Purview sia stato mantenuto teoricamente come metro di paragone funzionale di altissimo livello. 
+
+All'interno dell'ecosistema open-source, numerosi progetti sono stati scartati per limiti tecnici e architetturali:
+\begin{itemize}
+    \item \textbf{Eccessiva complessità:} Strumenti come Apache Atlas, Egeria e Magda richiedono infrastrutture troppo pesanti, quali ecosistemi Hadoop o l'uso esclusivo e obbligatorio di Kubernetes.
+    \item \textbf{Soluzioni troppo verticali:} Piattaforme come Elementary, Marquez o CKAN sono state scartate in quanto si focalizzano su singole funzionalità (rispettivamente Data Quality, Data Lineage e portali per enti pubblici) anziché fornire un catalogo completo.
+\end{itemize}
+
+La valutazione tecnica approfondita si è quindi concentrata su quattro finalisti: \textbf{OpenMetadata, DataHub, Open Data Discovery (ODD)} e \textbf{Gravitino}.
+
+
+\section{Data Governance e Data Quality}
+
+\section{Data Lineage e \emph{query analytics}}
+
+\section{Collaborazione e funzionalità aggiuntive}
+
+\section{Integrazione con la BI}
+
+
+\section{Valutazione finale}
 
