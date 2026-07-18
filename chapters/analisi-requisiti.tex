@@ -734,7 +734,7 @@ dove le voci assumono i seguenti significati:
 \subsection{Requisiti funzionali}
 I requisiti funzionali descrivono i comportamenti e i servizi che il sistema deve fornire. Rispondono alla domanda: \textit{"Cosa deve fare il software?"}.
 
-\begin{longtable}{ p{0.15\textwidth} p{0.65\textwidth} p{0.15\textwidth} }
+\begin{longtable}{ p{0.13\textwidth} p{0.64\textwidth} p{0.15\textwidth} }
 % intestazione prima pagina
 \toprule
 \textbf{Requisito} & \textbf{Descrizione} & \textbf{Casi d'Uso} \\
@@ -855,7 +855,7 @@ RF-OP-11 & Il sistema permette di pianificare la sincronizzazione automatica dei
 \subsection{Requisiti di vincolo}
 I requisiti di vincolo rappresentano le limitazioni tecnologiche, normative, architetturali o implementative imposte dall'esterno entro le quali il progetto deve muoversi.
 
-\begin{longtable}{ p{0.15\textwidth} p{0.65\textwidth} p{0.15\textwidth} }
+\begin{longtable}{ p{0.13\textwidth} p{0.64\textwidth} p{0.15\textwidth} }
 % intestazione prima pagina
 \toprule
 \textbf{Requisito} & \textbf{Descrizione} & \textbf{Fonte/Casi d'Uso} \\
@@ -895,7 +895,7 @@ RV-O-7 & L'importazione dei metadati da Power BI richiede una licenza Power BI P
 \subsection{Requisiti di qualità}
 I requisiti di qualità descrivono le caratteristiche misurabili che il sistema deve garantire, come prestazioni, sicurezza, usabilità o manutenibilità.
 
-\begin{longtable}{ p{0.15\textwidth} p{0.65\textwidth} p{0.15\textwidth} }
+\begin{longtable}{ p{0.13\textwidth} p{0.64\textwidth} p{0.15\textwidth} }
 % intestazione prima pagina
 \toprule
 \textbf{Requisito} & \textbf{Descrizione} & \textbf{Fonte/Casi d'Uso} \\
@@ -932,12 +932,14 @@ RQ-O-5 & Il sistema deve garantire un'alta disponibilità (uptime), assicurando 
 
 
 \subsection{Riepilogo dei requisiti}
+
 \begin{table}[H]
     \centering
     \renewcommand{\arraystretch}{1.5}
-    \begin{tabular}{ l c c c c }
+    \setlength{\tabcolsep}{10pt} % Aggiunge un po' di spazio tra le colonne
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l c c c c @{}}
         \toprule
-        \textbf{Tipologia} & \textbf{Obbligatori (O)} & \textbf{Desiderabili (D)} & \textbf{Opzionali (OP)} & \textbf{Totale} \\
+        \textbf{Tipologia} & \textbf{Obbligatori} & \textbf{Desiderabili} & \textbf{Opzionali} & \textbf{Totale} \\
         \midrule
         Requisiti Funzionali & 39 & 33 & 11 & \textbf{83} \\
         Requisiti di Vincolo & 7 & 0 & 0 & \textbf{7} \\
@@ -945,17 +947,16 @@ RQ-O-5 & Il sistema deve garantire un'alta disponibilità (uptime), assicurando 
         \midrule
         \textbf{Totale} & \textbf{51} & \textbf{33} & \textbf{11} & \textbf{95} \\
         \bottomrule
-    \end{tabular}
+    \end{tabular*}
     \caption{Riepilogo quantitativo dei requisiti}
     \label{tab:riepilogo_requisiti}
 \end{table}
-
 
 \section{Tracciamento dei requisiti}
 In questa sezione viene presentata la matrice di tracciabilità in avanti, che mappa le fonti di origine ai rispettivi requisiti generati.
 Questa mappatura garantisce il principio di \textbf{Sufficienza} (o completezza), assicurando che tutti i bisogni emersi durante l'analisi siano stati coperti da almeno un requisito.
 
-\begin{longtable}{ p{0.25\textwidth} p{0.70\textwidth} }
+\begin{longtable}{ p{0.24\textwidth} p{0.70\textwidth} }
 
 \toprule
 \textbf{Fonte/Caso d'Uso} & \textbf{Requisiti Generati} \\

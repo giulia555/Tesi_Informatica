@@ -5,7 +5,7 @@
 \intro{Dopo l'analisi dei requisiti aziendali, lo studio è proseguito con la valutazione e il confronto delle principali piattaforme open-source di Data Catalog 
     presenti sul mercato, con l'obiettivo di individuare lo strumento più adatto alle esigenze di Wintech.}
 
-\section{Criteri di valutazione}
+\section{Criteri di valutazione}\label{sec:criteri}
 Per individuare la piattaforma di Data Catalog più idonea all'infrastruttura aziendale, le diverse soluzioni software sono valutate e confrontate sulla base di cinque criteri principali, ordinati per priorità:
 \begin{enumerate}
     \item \textbf{Licenze e costi infrastrutturali}: Natura \emph{open-source} del software, gratuità per uso commerciale, supporto per installazioni \emph{on-premise} e complessità di configurazione.
@@ -15,7 +15,7 @@ Per individuare la piattaforma di Data Catalog più idonea all'infrastruttura az
     \item \textbf{Integrazione con la Business Intelligence}: Connessione nativa con piattaforme di BI, in particolare con Microsoft Power BI.
 \end{enumerate}
 
-\section{Licenze e costi infrastrutturali}
+\section{Costi infrastrutturali}
 Il mercato dei Data Catalog offre tre tipologie principali di soluzioni: software proprietari a pagamento, servizi Cloud/SaaS (\emph{Software as a Service}) e piattaforme \emph{open-source}.
 
 In accordo con le direttive aziendali, sono state escluse le soluzioni proprietarie e quelle che necessitano di architetture infrastrutturali eccessivamente complesse 
@@ -25,13 +25,13 @@ Un ulteriore vincolo riguarda la fase di collaudo: la piattaforma scelta deve po
 garantendo che i dati aziendali non vengano mai trasmessi o caricati su server esterni in \emph{Cloud}. 
 L'obiettivo quindi è individuare una soluzione \emph{enterprise} che soddisfi i requisiti aziendali e che sia testabile agilmente \emph{on-premise}.
 
-I software analizzati in questa fase sono stati selezionati partendo dalla repository GitHub \emph{Awesome Data Catalogs}\cite{site:awesome-data-catalogs}, poi approfonditi attraverso la documentazione ufficiale di ciascuna piattaforma.
+I software analizzati in questa fase sono stati selezionati partendo dal repository GitHub \emph{Awesome Data Catalogs}\cite{site:awesome-data-catalogs}, poi approfonditi attraverso la documentazione ufficiale di ciascuna piattaforma.
 
 Nella seguente tabella vengono presentati i principali strumenti valutati, includendo, a puro scopo comparativo, anche soluzioni 
 \emph{Cloud} o proprietarie \emph{leader} del settore. Si precisa che durante il periodo di stage l'esplorazione ha coinvolto anche altre piattaforme, successivamente 
-scartate perchè offrivano funzionalità puramente verticali o richiedevano installazioni troppo onerose rispetto ai vincoli del progetto.
+scartate perché offrivano funzionalità puramente verticali o richiedevano installazioni troppo onerose rispetto ai vincoli del progetto.
 
-\begin{longtable}{ p{0.25\textwidth} p{0.35\textwidth} p{0.35\textwidth} }
+\begin{longtable}{ p{0.24\textwidth} p{0.34\textwidth} p{0.34\textwidth} }
 \toprule
 \textbf{Piattaforma} & \textbf{Licenza e costi} & \textbf{Installazione} \\
 \midrule
@@ -47,54 +47,101 @@ scartate perchè offrivano funzionalità puramente verticali o richiedevano inst
 \caption[]{Analisi dei costi e delle licenze per i principali Data Catalog} \\
 \endfoot
 
-% piè di pagina finale
 \bottomrule
 \noalign{\vspace{10pt}}
 \caption{Analisi dei costi e delle licenze per i principali Data Catalog}
 \label{tab:analisi_costi}\\
 \endlastfoot
 
-\textbf{Microsoft Purview} \newline 
-\vspace*{2pt} \includegraphics[width=2cm]{purview.png} & Proprietaria (SaaS). Costi legati all'ecosistema Azure. & Servizio Cloud gestito, non necessita di installazione locale. \\
-\midrule
-\textbf{Atlan} \newline 
-\vspace*{2pt} \includegraphics[width=2cm]{atlan.png} & Proprietaria (Enterprise). Costi elevati. & Servizio Cloud gestito, non necessita di installazione locale. \\
-\midrule
-\textbf{OpenMetadata} \newline 
-\vspace*{2pt} \includegraphics[width=2cm]{logo-openmetadata.png} & Open-source (Apache 2.0). Gratuito per uso \emph{enterprise}. & \emph{On-premise} (Docker nativo, macchina virtuale o Kubernetes). \\
-\midrule
-\textbf{DataHub} \newline 
-\vspace*{2pt} \includegraphics[width=2cm]{datahub.png} & Open-source (Apache 2.0). Gratuito (versione OSS). & \emph{On-premise} (Docker Desktop o Docker Compose). \\
-\midrule
-\textbf{Open Data Discovery} \newline 
-\vspace*{2pt} \includegraphics[width=3.5cm]{odd.png} & Open-source (Apache 2.0). Gratuito. & \emph{On-premise} (Docker Compose o Kubernetes). \\
-\midrule
-\textbf{Gravitino} \newline 
-\vspace*{2pt} \includegraphics[width=3.5cm]{gravitino.jpg} & Open-source (Apache 2.0). Gratuito. & \emph{On-premise} (Docker o \emph{build} da codice sorgente). \\
-
+    \textbf{Ms Purview} \newline 
+    \vspace*{2pt} \includegraphics[height=1cm, keepaspectratio]{purview.png} & Proprietaria (SaaS). Costi legati all'ecosistema Azure. & Servizio Cloud gestito, non necessita di installazione locale.\\
+    \midrule
+    \textbf{Atlan} \newline 
+    \vspace*{2pt} \includegraphics[height=1cm, keepaspectratio]{atlan.png} & Proprietaria (Enterprise). Costi elevati. & Servizio Cloud gestito, non necessita di installazione locale.\\
+    \midrule
+    \textbf{OpenMetadata} \newline 
+    \vspace*{2pt} \includegraphics[height=1cm, keepaspectratio]{logo-openmetadata.png} & Open-source (Apache 2.0). Gratuito per uso \emph{enterprise}. & \emph{On-premise} (Docker nativo, macchina virtuale o Kubernetes).\\
+    \midrule
+    \textbf{DataHub} \newline 
+    \vspace*{2pt} \includegraphics[height=1cm, keepaspectratio]{datahub.png} & Open-source (Apache 2.0). Gratuito (versione OSS). & \emph{On-premise} (Docker Desktop o Docker Compose).\\
+    \midrule
+    \textbf{Open Data Discovery} \newline 
+    \vspace*{2pt} \includegraphics[height=0.4cm, keepaspectratio]{odd.png} & Open-source (Apache 2.0). Gratuito. & \emph{On-premise} (Docker Compose o Kubernetes).\\
+    \midrule
+    \textbf{Gravitino} \newline 
+    \vspace*{2pt} \includegraphics[height=0.8cm, keepaspectratio]{gravitino.jpg} & Open-source (Apache 2.0). Gratuito. & \emph{On-premise} (Docker o \emph{build} da codice sorgente).\\
 \end{longtable}
 
 
 \subsection*{Considerazioni}
-Analizzando le caratteristiche delle piattaforme individuate, è stata effettuata una forte scrematura iniziale.
-Le soluzioni cloud e a pagamento (come Purview o Atlan) sono state scartate per incompatibilità con il \emph{budget} e con la volontà aziendale di mantenere i dati \emph{on-premise}, sebbene Microsoft Purview sia stato mantenuto teoricamente come metro di paragone funzionale di altissimo livello. 
+Dopo aver analizzato le licenze e i requisiti infrastrutturali delle piattaforme individuate, è stata fatta una prima scrematura significativa. Le soluzioni proprietarie e Cloud (come Atlan, Microsoft Purview, Collibra, Alation) 
+sono state escluse per incompatibilità con il budget aziendale e con la necessità di mantenere i dati \emph{on-premise}.
 
-All'interno dell'ecosistema open-source, numerosi progetti sono stati scartati per limiti tecnici e architetturali:
+All’interno dell’ecosistema \emph{open-source}, numerosi software sono stati scartati per limiti tecnici o architetturali:
 \begin{itemize}
-    \item \textbf{Eccessiva complessità:} Strumenti come Apache Atlas, Egeria e Magda richiedono infrastrutture troppo pesanti, quali ecosistemi Hadoop o l'uso esclusivo e obbligatorio di Kubernetes.
-    \item \textbf{Soluzioni troppo verticali:} Piattaforme come Elementary, Marquez o CKAN sono state scartate in quanto si focalizzano su singole funzionalità (rispettivamente Data Quality, Data Lineage e portali per enti pubblici) anziché fornire un catalogo completo.
+    \item \textbf{Apache Atlas} ed \textbf{Egeria} richiedono infrastrutture Hadoop o Kubernetes obbligatorio;
+    \item \textbf{Magda} è utilizzabile esclusivamente con Kubernetes;
+    \item \textbf{Elementary} e \textbf{Marquez} si focalizzano su singole funzionalità, senza offrire un catalogo completo;
+    \item \textbf{CKAN} è orientato a portali pubblici e non all'uso aziendale interno.
 \end{itemize}
+La valutazione tecnica si concentrerà quindi su: \textbf{OpenMetadata, DataHub, Open Data Discovery} e \textbf{Gravitino}.
 
-La valutazione tecnica approfondita si è quindi concentrata su quattro finalisti: \textbf{OpenMetadata, DataHub, Open Data Discovery (ODD)} e \textbf{Gravitino}.
+
+\section{Confronto tecnico}
+Le piattaforme selezionate vengono confrontate sulla base dei criteri di valutazione definiti nella sezione \ref{sec:criteri}. 
+La tabella seguente offre una visione d’insieme dei risultati e riassume l’esito della valutazione dei software, approfonditi nelle sottosezioni successive.
+
+\renewcommand{\arraystretch}{1.4}
+\begin{longtable}{ 
+    p{0.27\textwidth} 
+    >{\centering\arraybackslash}p{0.18\textwidth} 
+    >{\centering\arraybackslash}p{0.13\textwidth} 
+    >{\centering\arraybackslash}p{0.13\textwidth} 
+    >{\centering\arraybackslash}p{0.13\textwidth} 
+}
+\toprule
+\textbf{Criterio} & \textbf{OpenMetadata} & \textbf{DataHub} & \textbf{ODD} & \textbf{Gravitino} \\
+\midrule
+\endfirsthead
+
+\toprule
+\textbf{Criterio} & \textbf{OpenMetadata} & \textbf{DataHub} & \textbf{ODD} & \textbf{Gravitino} \\
+\midrule
+\endhead
+
+\midrule
+\noalign{\vspace{10pt}}
+\caption[]{Confronto tecnico delle piattaforme di Data Catalog} \\
+\endfoot
+
+\bottomrule
+\noalign{\vspace{10pt}}
+\caption{Confronto tecnico delle piattaforme di Data Catalog}
+\label{tab:confronto_tecnico}\\
+\endlastfoot
+
+    Strumenti nativi di Data Quality e test automatici & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} \\ \midrule
+    Classificazione automatica dei dati sensibili & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} & \textcolor{red}{$\times$} & \textcolor{red}{$\times$} \\ \midrule
+    Audit e conformità normativa & \textcolor{green!60!black}{\checkmark} & \textcolor{orange!80!black}{\checkmark / $\times$} & \textcolor{orange!80!black}{\checkmark / $\times$} & \textcolor{red}{$\times$} \\ \midrule
+    Gestione degli accessi (RBAC) & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} \\ \midrule
+    Data Lineage e tracciamento modifiche & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} \\ \midrule
+    Query Analytics & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} & \textcolor{red}{$\times$} \\ \midrule
+    Glossario aziendale & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} \\ \midrule
+    Collaborazione e comunicazione & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} & \textcolor{orange!80!black}{\checkmark / $\times$} & \textcolor{red}{$\times$} \\ \midrule
+    Integrazione Power BI & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} & \textcolor{orange!80!black}{\checkmark / $\times$} & \textcolor{red}{$\times$} \\ \midrule
+    AI / MCP Server & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} & \textcolor{orange!80!black}{\checkmark / $\times$} & \textcolor{red}{$\times$} \\
+
+\end{longtable}
 
 
-\section{Data Governance e Data Quality}
 
-\section{Data Lineage e \emph{query analytics}}
+\subsection{Data Governance e Data Quality}
 
-\section{Collaborazione e funzionalità aggiuntive}
+\subsection{Data Lineage e \emph{query analytics}}
 
-\section{Integrazione con la BI}
+\subsection{Collaborazione e funzionalità aggiuntive}
+
+\subsection{Integrazione con la BI}
 
 
 \section{Valutazione finale}
