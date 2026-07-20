@@ -28,6 +28,17 @@
 \newacronym[description={\textit{Software Assurance Maturity Model}. Framework progettato per aiutare le organizzazioni a formulare, implementare e misurare una strategia su misura per la sicurezza all'interno del ciclo di vita dello sviluppo del software}]
     {samm}{SAMM}{Software Assurance Maturity Model}
 
+% NLP
+\newacronym[description={\textit{Natural Language Processing}. Branca dell'Intelligenza Artificiale che si occupa dell'interazione tra computer e linguaggio umano. Nel contesto dei Data Catalog, viene utilizzata per l'analisi testuale di metadati, descrizioni e campioni di dati, al fine di estrarre significato, classificare i dataset o generare documentazione automatica}]
+    {nlp}{NLP}{Natural Language Processing}
+
+% NER
+\newacronym[description={\textit{Named Entity Recognition}. Tecnica di \emph{Natural Language Processing} che identifica e classifica automaticamente le entità nominate presenti in un testo all'interno di categorie predefinite (es. nomi di persone, organizzazioni, indirizzi, numeri di telefono). È la tecnologia core utilizzata per il rilevamento automatico dei dati sensibili (PII)}]
+    {ner}{NER}{Named Entity Recognition}
+
+\newacronym[description={\textit{Software Development Life Cycle}. Processo strutturato utilizzato dall'industria del software per progettare, sviluppare, testare e distribuire prodotti di alta qualità. Include diverse fasi, dall'analisi dei requisiti alla manutenzione post-rilascio, garantendo il controllo, la sicurezza e la conformità di ogni fase dello sviluppo}]
+    {sdlc}{SDLC}{Software Development Life Cycle}
+
 
 % -------------------- VOCI DI GLOSSARIO ----------------------------
 \newglossaryentry{systemintegrator}{
@@ -94,4 +105,52 @@
     name={Kubernetes},
     sort=kubernetes,
     description={Sistema \emph{open-source} per l'orchestrazione e la gestione automatizzata di \emph{container} (come Docker). Permette di automatizzare il deployment, la scalabilità e le operazioni delle applicazioni containerizzate su \emph{cluster} di server. Sebbene sia lo standard per architetture \emph{enterprise} complesse, la sua installazione e manutenzione risultano spesso troppo onerose per ambienti di collaudo o infrastrutture \emph{on-premise} di dimensioni contenute}
+}
+
+\newglossaryentry{datacontract}{
+    name={Data Contract},
+    sort=datacontract,
+    description={Accordo formale e leggibile dalle macchine tra chi produce un dato (\emph{data producer}) e chi lo consuma (\emph{data consumer}), che definisce esplicitamente aspettative su schema, qualità, \emph{SLA} (livelli di servizio) e classificazione dei dati. Funge da contratto di garanzia per assicurare che le variazioni nei dati non interrompano i processi a valle}
+}
+
+\newglossaryentry{autoprovisioning}{
+    name={Auto-Provisioning},
+    sort=autoprovisioning,
+    description={Processo automatizzato di configurazione e allocazione di risorse, permessi o utenze in un sistema. Nel Data Catalog, si riferisce alla capacità della piattaforma di creare automaticamente utenti, ruoli o connessioni basandosi su configurazioni predefinite o eventi scatenati dal sistema, riducendo l'intervento manuale dell'amministratore}
+}
+
+\newglossaryentry{versionamento}{
+    name={Versionamento},
+    sort=versionamento,
+    description={Pratica di registrazione e tracciamento delle modifiche apportate a un asset (metadato, dataset o schema) nel tempo. Consente di mantenere uno storico delle evoluzioni, di confrontare diverse versioni dello stesso oggetto e di ripristinare stati precedenti in caso di errori o cambiamenti indesiderati}
+}
+
+\newglossaryentry{endtoendlineage}{
+    name={End-to-End Lineage},
+    sort=endtoendlineage,
+    description={Visualizzazione completa del percorso di un dato dalla sorgente originale fino alla destinazione finale (es. report o dashboard). Consente di tracciare le trasformazioni, le pipeline e i sistemi intermedi coinvolti nel flusso, fornendo una visione globale della circolazione dei dati nell'infrastruttura}
+}
+
+\newglossaryentry{dataobjectlineage}{
+    name={Data Object Lineage},
+    sort=dataobjectlineage,
+    description={Tracciabilità del percorso di un oggetto dati specifico (tavola, vista, file) tra i sistemi. A differenza del \emph{Column-Level Lineage}, si concentra sulle dipendenze tra entità di alto livello, tralasciando il dettaglio dei singoli campi}
+}
+
+\newglossaryentry{columnlevellineage}{
+    name={Column-Level Lineage},
+    sort=columnlevellineage,
+    description={Livello più granulare di tracciabilità, che identifica come una specifica colonna di un dataset di destinazione sia stata derivata da una o più colonne sorgente attraverso trasformazioni logiche o calcoli. È essenziale per l'analisi di impatto e per tracciare la propagazione di dati sensibili}
+}
+
+\newglossaryentry{productbacklog}{
+    name={Product Backlog},
+    sort=productbacklog,
+    description={Lista ordinata e dinamica di tutte le funzionalità, requisiti, modifiche e correzioni necessarie per il prodotto. Rappresenta la fonte unica di lavoro per il team di sviluppo nella metodologia Scrum, in cui gli elementi vengono selezionati e prioritizzati per l'inserimento negli \emph{Sprint}}
+}
+
+\newglossaryentry{datamesh}{
+    name={Data Mesh},
+    sort=datamesh,
+    description={Approccio architettonico e organizzativo alla gestione dei dati che supera il modello centralizzato del Data Warehouse/Data Lake. Si basa su quattro pilastri: proprietà decentralizzata dei dati (orientata ai domini), dati come prodotto (\emph{data as a product}), piattaforma di dati self-service e governance federata. Promuove l'autonomia dei team di business nella gestione dei propri dati}
 }
