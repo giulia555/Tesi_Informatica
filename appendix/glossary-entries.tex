@@ -36,8 +36,13 @@
 \newacronym[description={\textit{Named Entity Recognition}. Tecnica di \emph{Natural Language Processing} che identifica e classifica automaticamente le entità nominate presenti in un testo all'interno di categorie predefinite (es. nomi di persone, organizzazioni, indirizzi, numeri di telefono). È la tecnologia core utilizzata per il rilevamento automatico dei dati sensibili (PII)}]
     {ner}{NER}{Named Entity Recognition}
 
+% SDLC
 \newacronym[description={\textit{Software Development Life Cycle}. Processo strutturato utilizzato dall'industria del software per progettare, sviluppare, testare e distribuire prodotti di alta qualità. Include diverse fasi, dall'analisi dei requisiti alla manutenzione post-rilascio, garantendo il controllo, la sicurezza e la conformità di ogni fase dello sviluppo}]
     {sdlc}{SDLC}{Software Development Life Cycle}
+
+% MCP (Server)
+\newacronym[description={\textit{Model Context Protocol}. Standard aperto che normalizza la comunicazione tra i modelli linguistici di grandi dimensioni (LLM) e i sistemi informativi locali. Funge da livello semantico sicuro, permettendo agli assistenti AI di accedere al contesto dei metadati aziendali per rispondere alle interrogazioni senza esporre i dati originali all'esterno}]
+    {mcp}{MCP}{Model Context Protocol}
 
 
 % -------------------- VOCI DI GLOSSARIO ----------------------------
@@ -153,4 +158,16 @@
     name={Data Mesh},
     sort=datamesh,
     description={Approccio architettonico e organizzativo alla gestione dei dati che supera il modello centralizzato del Data Warehouse/Data Lake. Si basa su quattro pilastri: proprietà decentralizzata dei dati (orientata ai domini), dati come prodotto (\emph{data as a product}), piattaforma di dati self-service e governance federata. Promuove l'autonomia dei team di business nella gestione dei propri dati}
+}
+
+\newglossaryentry{embedding}{
+    name={embedding vettoriali},
+    sort=embedding,
+    description={Rappresentazione matematica di parole, frasi o concetti sotto forma di vettori numerici ad alta dimensionalità. Nel contesto della ricerca semantica, gli \emph{embedding} permettono al motore di ricerca di comprendere il significato e il contesto di una query espressa in linguaggio naturale, superando i limiti della semplice corrispondenza di parole chiave}
+}
+
+\newglossaryentry{opensearch}{
+    name={OpenSearch},
+    sort=opensearch,
+    description={Motore di ricerca e analisi distribuito \emph{open-source} (derivato da ElasticSearch). Nel contesto di OpenMetadata, viene utilizzato come \emph{backend} per alimentare le funzionalità di ricerca \emph{full-text} e la ricerca semantica, indicizzando tutti i metadati presenti nel catalogo per consentire interrogazioni rapide su grandi volumi di informazioni}
 }

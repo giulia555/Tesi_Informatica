@@ -15,7 +15,7 @@ Per individuare la piattaforma di Data Catalog più idonea all'infrastruttura az
     \item \textbf{Integrazione con la Business Intelligence}: Connessione nativa con piattaforme di BI, in particolare con Microsoft Power BI.
 \end{enumerate}
 
-\section{Costi infrastrutturali}
+\section{Licenze e costi infrastrutturali}
 Il mercato dei Data Catalog offre tre tipologie principali di soluzioni: software proprietari a pagamento, servizi Cloud/SaaS (\emph{Software as a Service}) e piattaforme \emph{open-source}.
 
 In accordo con le direttive aziendali, sono state escluse le soluzioni proprietarie e quelle che necessitano di architetture infrastrutturali eccessivamente complesse 
@@ -77,7 +77,7 @@ scartate perché offrivano funzionalità puramente verticali o richiedevano inst
 Dopo aver analizzato le licenze e i requisiti infrastrutturali delle piattaforme individuate, è stata fatta una prima scrematura significativa. Le soluzioni proprietarie e Cloud (come Atlan, Microsoft Purview, Collibra, Alation) 
 sono state escluse per incompatibilità con il budget aziendale e con la necessità di mantenere i dati \emph{on-premise}.
 
-All’interno dell’ecosistema \emph{open-source}, numerosi software sono stati scartati per limiti tecnici o architetturali:
+All'interno dell'ecosistema \emph{open-source}, numerosi software sono stati scartati per limiti tecnici o architetturali:
 \begin{itemize}
     \item \textbf{Apache Atlas} ed \textbf{Egeria} richiedono infrastrutture Hadoop o Kubernetes obbligatorio;
     \item \textbf{Magda} è utilizzabile esclusivamente con Kubernetes;
@@ -89,7 +89,7 @@ La valutazione tecnica si concentrerà quindi su: \textbf{OpenMetadata, DataHub,
 
 \section{Confronto tecnico}
 Le piattaforme selezionate vengono confrontate sulla base dei criteri di valutazione definiti nella sezione \ref{sec:criteri}. 
-La tabella seguente offre una visione d’insieme dei risultati e riassume l’esito della valutazione dei software, approfonditi nelle sottosezioni successive.
+La tabella seguente offre una visione d'insieme dei risultati e riassume l'esito della valutazione dei software, approfonditi nelle sottosezioni successive.
 
 \renewcommand{\arraystretch}{1.4}
 \begin{longtable}{ 
@@ -119,7 +119,7 @@ La tabella seguente offre una visione d’insieme dei risultati e riassume l’e
 \caption{Confronto tecnico delle piattaforme di Data Catalog}
 \label{tab:confronto_tecnico}\\
 \endlastfoot
-
+    % RIGHE
     Strumenti nativi di Data Quality e test automatici & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} \\ \midrule
     Classificazione automatica dei dati sensibili & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} & \textcolor{red}{$\times$} & \textcolor{red}{$\times$} \\ \midrule
     Audit e conformità normativa & \textcolor{green!60!black}{\checkmark} & \textcolor{orange!80!black}{\checkmark / $\times$} & \textcolor{orange!80!black}{\checkmark / $\times$} & \textcolor{red}{$\times$} \\ \midrule
@@ -130,19 +130,74 @@ La tabella seguente offre una visione d’insieme dei risultati e riassume l’e
     Collaborazione e comunicazione & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} & \textcolor{orange!80!black}{\checkmark / $\times$} & \textcolor{red}{$\times$} \\ \midrule
     Integrazione Power BI & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} & \textcolor{orange!80!black}{\checkmark / $\times$} & \textcolor{red}{$\times$} \\ \midrule
     AI / MCP Server & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} & \textcolor{orange!80!black}{\checkmark / $\times$} & \textcolor{red}{$\times$} \\
-
 \end{longtable}
 
+\subsection{Data Quality e Data Governance}
+La \textbf{Data Quality} riguarda la capacità di monitorare lo stato di salute dei dati, eseguire test automatici per verificarne la correttezza e configurare sistemi 
+di \emph{alerting} che notifichino gli utenti in caso di anomalie o soglie non rispettate. La \textbf{Data Governance} comprende invece gli strumenti per la gestione sicura degli accessi, 
+l'individuazione dei dati sensibili e la tracciabilità delle operazioni ai fini della conformità normativa.
 
+In questo ambito, OpenMetadata si distingue nettamente dalle altre piattaforme \emph{open-source}: offre la possibilità di definire e automatizzare test di qualità sui dati, 
+visualizzandone i risultati in una dashboard dedicata, e integra un sistema di \emph{alerting} nativo.
 
-\subsection{Data Governance e Data Quality}
+Open Data Discovery rappresenta una valida alternativa, con funzionalità di profilazione statistica e \emph{alerting}, ma non permette di configurare test automatici senza l'ausilio di strumenti di terze parti.  
+DataHub e Gravitino non dispongono di strumenti di Data Quality nativi, delegando queste funzioni a \emph{tool} esterni.
 
-\subsection{Data Lineage e \emph{query analytics}}
+Sul fronte dell'individuazione dei dati sensibili, OpenMetadata è l'unica piattaforma a offrire un motore di classificazione automatica integrato: il sistema scansiona i dati e identifica automaticamente 
+le informazioni personali o sensibili, tramite espressioni regolari e tecniche di \gls{nlp}.
+
+DataHub, ODD e Gravitino supportano esclusivamente l'assegnazione manuale dei \emph{tag} di classificazione, richiedendo uno sforzo maggiore per 
+garantire la sicurezza dei dati e la conformità alle normative.
+
+Tutte le piattaforme garantiscono la gestione degli accessi basata sui ruoli (RBAC), con la possibilità di definire permessi granulari su dataset e metadati in base al profilo dell'utente.
+
+\subsection{Data Lineage e \emph{Query Analytics}}
+Il \gls{datalineage} consente di tracciare visivamente il percorso completo di un dato dalla sorgente alla destinazione finale, sia a livello di tabella che di singola colonna. 
+A questo si affianca l'\emph{Impact Analysis}, che mostra automaticamente quali dataset, pipeline o report dipendono da un determinato campo e potrebbero essere influenzati da una sua modifica. 
+La \emph{Schema Evolution} permette invece di tracciare nel tempo le modifiche apportate alla struttura di un dataset, come l'aggiunta o la rimozione di colonne. 
+Infine, la \emph{Query Analytics} raccoglie e analizza i pattern di utilizzo delle query eseguite sui dati, fornendo informazioni su quali tabelle vengono interrogate più frequentemente e da chi.
+
+OpenMetadata, ODD e DataHub offrono tutti una visualizzazione grafica del Data Lineage con supporto all'\emph{Impact Analysis}; OpenMetadata e ODD supportano anche il tracciamento dell'evoluzione degli schemi nel tempo. 
+Sul fronte della \emph{Query Analytics}, OpenMetadata e DataHub si distinguono per la capacità di raccogliere i \emph{log} delle query eseguite sulle fonti dati, fornendo informazioni utili per l'ottimizzazione e la \emph{governance}; ODD non supporta questa funzionalità.
+
+Infine, OpenMetadata e ODD supportano il \emph{Popularity Scoring}, che assegna automaticamente un punteggio di popolarità ai dataset in base alla frequenza di consultazione, migliorando la qualità dei risultati di ricerca nella fase di Data Discovery. 
+
+Apache Gravitino, posizionandosi come catalogo puramente tecnico, non supporta nessuna di queste funzionalità.
+
 
 \subsection{Collaborazione e funzionalità aggiuntive}
+Il \textbf{glossario aziendale} consente di definire e centralizzare i termini e i concetti comuni all'organizzazione, collegandoli ai dataset del catalogo. 
+Gli strumenti di collaborazione permettono invece agli utenti di interagire direttamente sugli asset del catalogo, lasciando commenti, inviando richieste e ricevendo notifiche, 
+anche tramite l'integrazione con piattaforme di comunicazione aziendale come Microsoft Teams o Slack.
+
+Viene valutata anche la disponibilità di un server \gls{mcp}, che consente ad agenti AI di accedere al contesto dei metadati aziendali, e la presenza di funzionalità di ricerca semantica basata su \gls{embedding}.
+
+OpenMetadata supporta nativamente l'integrazione con Microsoft Teams, Slack e altri strumenti di comunicazione, consente di aprire conversazioni e assegnare task direttamente sugli asset 
+e dispone di un glossario aziendale completo. Sul fronte AI, è l'unica piattaforma a disporre di un server MCP integrato nativamente, compatibile con client come Claude e ChatGPT, 
+e supporta la ricerca semantica tramite embedding vettoriali con \gls{opensearch}.
+
+Sia ODD che DataHub offrono un glossario aziendale per la standardizzazione dei termini. 
+ODD si limita a supportare l'integrazione con Slack e la possibilità di lasciare commenti sui dataset, ma senza raggiungere la stessa profondità di integrazione di OpenMetadata. 
+In ambito AI, ODD espone API REST aperte che consentono l'integrazione con sistemi esterni, ma non dispone di un server MCP nativo né di funzionalità di ricerca semantica.
+
+DataHub e Gravitino non offrono integrazione con strumenti di comunicazione aziendale né funzionalità AI significative nella versione \emph{open-source}.
 
 \subsection{Integrazione con la BI}
+L'integrazione con le piattaforme di Business Intelligence consente di centralizzare nel catalogo anche le risorse analitiche aziendali, tracciando il Data Lineage completo 
+dalle tabelle dei database sorgente fino ai report e alle dashboard usati per le decisioni di \emph{business}. Per Wintech questo criterio riguarda la connessione nativa con \textbf{Microsoft Power BI}.
+
+OpenMetadata dispone di un connettore nativo che, tramite le API di Power BI, importa nel catalogo i metadati di report, dashboard e modelli dati, ricostruendo automaticamente il Data Lineage completo. L'integrazione richiede una licenza Power BI Pro.
+
+Open Data Discovery (ODD) offre un'integrazione tramite il modulo \emph{odd-collector-azure}, funzionale ma meno matura e che richiede una configurazione aggiuntiva rispetto al connettore nativo di OpenMetadata. 
+DataHub e Gravitino non supportano l'integrazione con Power BI nella versione \emph{open-source}.
 
 
 \section{Valutazione finale}
+L'analisi e la valutazione di OpenMetadata e dei \emph{competitor} si è conclusa confermando OpenMetadata come soluzione ottimale per l'introduzione di un Data Catalog all'interno dell'infrastruttura aziendale di Wintech.
 
+OpenMetadata si è dimostrato un software completo e capace di soddisfare pienamente i requisiti aziendali individuati in fase di Analisi dei Requisiti.
+
+Open Data Discovery (ODD) si è rivelato un solido candidato per quanto riguarda i software open-source. Tuttavia, in un confronto diretto, è risultato meno performante rispetto a OpenMetadata per quanto 
+riguarda alcune funzionalità, tra cui la classificazione automatica dei dati sensibili (PII), che è uno dei requisiti più importanti.
+
+A monte di queste considerazioni si è deciso di proseguire lo studio solo su \textbf{OpenMetadata}, testandone e documentandone le funzionalità e le caratteristiche.
