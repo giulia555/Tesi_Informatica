@@ -10,7 +10,7 @@ Per individuare la piattaforma di Data Catalog più idonea all'infrastruttura az
 \begin{enumerate}
     \item \textbf{Licenze e costi infrastrutturali}: Natura \emph{open-source} del software, gratuità per uso commerciale, supporto per installazioni \emph{on-premise} e complessità di configurazione.
     \item \textbf{Data Governance e Data Quality}: Gestione sicura degli accessi, individuazione e classificazione dei dati personali, configurazione di test di qualità e sistemi di \emph{alerting}.
-    \item \textbf{Data Lineage e \emph{query analytics}}: Possibilità di tracciare l'origine e le trasformazioni del dato, uso di query e strumenti di ottimizzazione e automazione.
+    \item \textbf{Data Lineage e \emph{Query Analytics}}: Possibilità di tracciare l'origine e le trasformazioni del dato, uso di query e strumenti di ottimizzazione e automazione.
     \item \textbf{Collaborazione e funzionalità aggiuntive}: Integrazione con strumenti di collaborazione aziendale, presenza di un glossario aziendale, possibilità di integrare l'Intelligenza Artificiale.
     \item \textbf{Integrazione con la Business Intelligence}: Connessione nativa con piattaforme di BI, in particolare con Microsoft Power BI.
 \end{enumerate}
@@ -22,13 +22,13 @@ In accordo con le direttive aziendali, sono state escluse le soluzioni proprieta
 (come, ad esempio, l'uso obbligatorio di \gls{kubernetes}).
 
 Un ulteriore vincolo riguarda la fase di collaudo: la piattaforma scelta deve poter essere valutata in locale (\emph{on-premise}) o tramite \emph{demo} gratuite, 
-garantendo che i dati aziendali non vengano mai trasmessi o caricati su server esterni in \emph{Cloud}. 
+garantendo che i dati aziendali non vengano mai trasmessi o caricati su server esterni in Cloud. 
 L'obiettivo quindi è individuare una soluzione \emph{enterprise} che soddisfi i requisiti aziendali e che sia testabile agilmente \emph{on-premise}.
 
 I software analizzati in questa fase sono stati selezionati partendo dal repository GitHub \emph{Awesome Data Catalogs}\cite{site:awesome-data-catalogs}, poi approfonditi attraverso la documentazione ufficiale di ciascuna piattaforma.
 
 Nella seguente tabella vengono presentati i principali strumenti valutati, includendo, a puro scopo comparativo, anche soluzioni 
-\emph{Cloud} o proprietarie \emph{leader} del settore. Si precisa che durante il periodo di stage l'esplorazione ha coinvolto anche altre piattaforme, successivamente 
+Cloud o proprietarie \emph{leader} del settore. Si precisa che durante il periodo di stage l'esplorazione ha coinvolto anche altre piattaforme, successivamente 
 scartate perché offrivano funzionalità puramente verticali o richiedevano installazioni troppo onerose rispetto ai vincoli del progetto.
 
 \begin{longtable}{ p{0.24\textwidth} p{0.34\textwidth} p{0.34\textwidth} }
@@ -123,8 +123,8 @@ La tabella seguente offre una visione d'insieme dei risultati e riassume l'esito
     Strumenti nativi di Data Quality e test automatici & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} \\ \midrule
     Classificazione automatica dei dati sensibili & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} & \textcolor{red}{$\times$} & \textcolor{red}{$\times$} \\ \midrule
     Audit e conformità normativa & \textcolor{green!60!black}{\checkmark} & \textcolor{orange!80!black}{\checkmark / $\times$} & \textcolor{orange!80!black}{\checkmark / $\times$} & \textcolor{red}{$\times$} \\ \midrule
-    Gestione degli accessi (\gls{rbac}) & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} \\ \midrule
-    Data Lineage e tracciamento modifiche & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} \\ \midrule
+    Gestione degli accessi & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} \\ \midrule
+    Data Lineage e tracciabilità delle modifiche & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} \\ \midrule
     Query Analytics & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} & \textcolor{red}{$\times$} \\ \midrule
     Glossario aziendale & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} \\ \midrule
     Collaborazione e comunicazione & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} & \textcolor{orange!80!black}{\checkmark / $\times$} & \textcolor{red}{$\times$} \\ \midrule
@@ -149,15 +149,16 @@ le informazioni personali o sensibili, tramite espressioni regolari e tecniche d
 DataHub, ODD e Gravitino supportano esclusivamente l'assegnazione manuale dei \emph{tag} di classificazione, richiedendo uno sforzo maggiore per 
 garantire la sicurezza dei dati e la conformità alle normative.
 
-Tutte le piattaforme garantiscono la gestione degli accessi basata sui ruoli (RBAC), con la possibilità di definire permessi granulari su dataset e metadati in base al profilo dell'utente.
+Tutte le piattaforme garantiscono la gestione degli accessi basata sui ruoli (\gls{rbac}), con la possibilità di definire permessi granulari su dataset e metadati in base al profilo dell'utente.
 
 \subsection{Data Lineage e \emph{Query Analytics}}
-Il \gls{datalineage} consente di tracciare visivamente il percorso completo di un dato dalla sorgente alla destinazione finale, sia a livello di tabella che di singola colonna. 
-A questo si affianca l'\emph{Impact Analysis}, che mostra automaticamente quali dataset, pipeline o report dipendono da un determinato campo e potrebbero essere influenzati da una sua modifica. 
-La \emph{Schema Evolution} permette invece di tracciare nel tempo le modifiche apportate alla struttura di un dataset, come l'aggiunta o la rimozione di colonne. 
-Infine, la \emph{Query Analytics} raccoglie e analizza i pattern di utilizzo delle query eseguite sui dati, fornendo informazioni su quali tabelle vengono interrogate più frequentemente e da chi.
+Il \textbf{\gls{datalineage}} consente di tracciare visivamente il percorso completo di un dato dalla sorgente alla destinazione finale, sia a livello di tabella che di singola colonna. 
+A questo si affianca l'\textbf{\emph{Impact Analysis}}, che mostra automaticamente quali dataset, pipeline o report dipendono da un determinato campo e potrebbero essere influenzati da una sua modifica. 
+La \textbf{\emph{Schema Evolution}} permette invece di tracciare nel tempo le modifiche apportate alla struttura di un dataset, come l'aggiunta o la rimozione di colonne. 
+Infine, la \textbf{\emph{Query Analytics}} raccoglie e analizza i pattern di utilizzo delle query eseguite sui dati, fornendo informazioni su quali tabelle vengono interrogate più frequentemente e da chi.
 
-OpenMetadata, ODD e DataHub offrono tutti una visualizzazione grafica del Data Lineage con supporto all'\emph{Impact Analysis}; OpenMetadata e ODD supportano anche il tracciamento dell'evoluzione degli schemi nel tempo. 
+OpenMetadata, ODD e DataHub offrono tutti una visualizzazione grafica del Data Lineage con supporto all'\emph{Impact Analysis}; OpenMetadata e ODD supportano anche il tracciamento dell'evoluzione degli schemi nel tempo.
+
 Sul fronte della \emph{Query Analytics}, OpenMetadata e DataHub si distinguono per la capacità di raccogliere i \emph{log} delle query eseguite sulle fonti dati, fornendo informazioni utili per l'ottimizzazione e la \emph{governance}; ODD non supporta questa funzionalità.
 
 Infine, OpenMetadata e ODD supportano il \emph{Popularity Scoring}, che assegna automaticamente un punteggio di popolarità ai dataset in base alla frequenza di consultazione, migliorando la qualità dei risultati di ricerca nella fase di Data Discovery. 
@@ -170,11 +171,11 @@ Il \textbf{glossario aziendale} consente di definire e centralizzare i termini e
 Gli strumenti di collaborazione permettono invece agli utenti di interagire direttamente sugli asset del catalogo, lasciando commenti, inviando richieste e ricevendo notifiche, 
 anche tramite l'integrazione con piattaforme di comunicazione aziendale come Microsoft Teams o Slack.
 
-Viene valutata anche la disponibilità di un server \gls{mcp}, che consente ad agenti AI di accedere al contesto dei metadati aziendali, e la presenza di funzionalità di ricerca semantica basata su \gls{embedding}.
+Viene valutata anche la disponibilità di un \textbf{server \gls{mcp}}, che consente ad agenti AI di accedere al contesto dei metadati aziendali, e la presenza di funzionalità di ricerca semantica basata su \gls{embedding}.
 
-OpenMetadata supporta nativamente l'integrazione con Microsoft Teams, Slack e altri strumenti di comunicazione, consente di aprire conversazioni e assegnare task direttamente sugli asset 
-e dispone di un glossario aziendale completo. Sul fronte AI, è l'unica piattaforma a disporre di un server MCP integrato nativamente, compatibile con client come Claude e ChatGPT, 
-e supporta la ricerca semantica tramite embedding vettoriali con \gls{opensearch}.
+OpenMetadata supporta nativamente l'integrazione con Microsoft Teams, Slack e altri strumenti di comunicazione, consente di aprire conversazioni e assegnare task direttamente sugli asset e dispone di un glossario aziendale completo.
+
+Sul fronte AI, è l'unica piattaforma a disporre di un server MCP integrato nativamente, compatibile con client come Claude e ChatGPT, e supporta la ricerca semantica tramite embedding vettoriali con \gls{opensearch}.
 
 Sia ODD che DataHub offrono un glossario aziendale per la standardizzazione dei termini. 
 ODD si limita a supportare l'integrazione con Slack e la possibilità di lasciare commenti sui dataset, ma senza raggiungere la stessa profondità di integrazione di OpenMetadata. 
@@ -193,11 +194,11 @@ DataHub e Gravitino non supportano l'integrazione con Power BI nella versione \e
 
 
 \section{Valutazione finale}
-L'analisi e la valutazione di OpenMetadata e dei \emph{competitor} si è conclusa confermando OpenMetadata come soluzione ottimale per l'introduzione di un Data Catalog all'interno dell'infrastruttura aziendale di Wintech.
+L'analisi e la valutazione di OpenMetadata e dei \emph{competitor} si è conclusa confermando \textbf{OpenMetadata} come soluzione ottimale per l'introduzione di un Data Catalog all'interno dell'infrastruttura aziendale di Wintech.
 
 OpenMetadata si è dimostrato un software completo e capace di soddisfare pienamente i requisiti aziendali individuati in fase di Analisi dei Requisiti.
 
 Open Data Discovery (ODD) si è rivelato un solido candidato per quanto riguarda i software open-source. Tuttavia, in un confronto diretto, è risultato meno performante rispetto a OpenMetadata per quanto 
-riguarda alcune funzionalità, tra cui la classificazione automatica dei dati sensibili (PII), che è uno dei requisiti più importanti.
+riguarda alcune funzionalità, tra cui la classificazione automatica dei dati sensibili, che è uno dei requisiti più importanti.
 
-A monte di queste considerazioni si è deciso di proseguire lo studio solo su \textbf{OpenMetadata}, testandone e documentandone le funzionalità e le caratteristiche.
+A monte di queste considerazioni si è deciso di proseguire lo studio solo su OpenMetadata, testandone e documentandone le funzionalità e le caratteristiche.

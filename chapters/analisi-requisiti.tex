@@ -294,8 +294,7 @@ Ogni caso d'uso è identificato dalla seguente notazione:
 
 \begin{usecase}{2.5}{Anonimizzazione dei dati}
     \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
-    \usecasedesc{La piattaforma permette di applicare regole di anonimizzazione ai dati presenti nel catalogo, mascherandone totalmente la visualizzazione agli utenti non autorizzati. I dati originali nelle fonti non vengono modificati: 
-    il catalogo applica il mascheramento esclusivamente a livello di visualizzazione, impedendo agli utenti privi delle autorizzazioni necessarie di accedere al contenuto del campo. Le regole di anonimizzazione possono essere applicate manualmente dall'attore oppure automaticamente dal sistema in base ai tag assegnati ai dati}
+    \usecasedesc{La piattaforma permette di applicare regole di \gls{anonimizzazione} ai dati presenti nel catalogo, mascherandone totalmente la visualizzazione agli utenti non autorizzati. I dati originali nelle fonti non vengono modificati: il catalogo applica il mascheramento esclusivamente a livello di visualizzazione, impedendo agli utenti privi delle autorizzazioni necessarie di accedere al contenuto del campo. Le regole di anonimizzazione possono essere applicate manualmente dall'attore oppure automaticamente dal sistema in base ai tag assegnati ai dati}
     \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di responsabile della Governance ed è presente almeno un set di dati nel Data Catalog}
     \usecasepost{Le regole di anonimizzazione sono state applicate ai dati selezionati. Gli utenti non autorizzati non possono visualizzare il contenuto dei campi anonimizzati. I dati originali nelle fonti rimangono invariati}
     \usecasemain{
@@ -317,7 +316,7 @@ Ogni caso d'uso è identificato dalla seguente notazione:
 
 \begin{usecase}{2.6}{Pseudonimizzazione dei dati}
     \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
-    \usecasedesc{La piattaforma permette di applicare regole di pseudonimizzazione ai dati presenti nel catalogo, mascherandone parzialmente la visualizzazione agli utenti non autorizzati. I dati originali nelle fonti non vengono modificati: 
+    \usecasedesc{La piattaforma permette di applicare regole di \gls{pseudonimizzazione} ai dati presenti nel catalogo, mascherandone parzialmente la visualizzazione agli utenti non autorizzati. I dati originali nelle fonti non vengono modificati: 
     il catalogo applica il mascheramento esclusivamente a livello di visualizzazione. Le regole di pseudonimizzazione possono essere applicate manualmente dall'attore oppure automaticamente dal sistema in base ai tag assegnati ai dati}
     \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di responsabile della Governance ed è presente almeno un set di dati nel Data Catalog}
     \usecasepost{Le regole di pseudonimizzazione sono state applicate ai dati selezionati. Gli utenti non autorizzati visualizzano il contenuto dei campi in forma parzialmente mascherata. I dati originali nelle fonti rimangono invariati}
