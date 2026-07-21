@@ -20,18 +20,18 @@ comprenderne il significato e il contesto e valutare come e quando usarli.
 Le aziende moderne gestiscono volumi sempre crescenti di dati, distribuiti su sistemi diversi (database, file Excel, CSV e altre fonti). Senza uno strumento di catalogazione, per gli utenti 
 sarà difficile sapere quali dati esistono, dove si trovano e quanto siano affidabili. Un Data Catalog risolve questo problema, creando una visione centralizzata e facilmente consultabile dell'intero patrimonio informativo aziendale.
 
-\subsubsection{Sicurezza e compliance normativa}
+\paragraph{Sicurezza e compliance normativa}
 Storicamente l'individuazione dei dati personali ai fini del \gls{gdpr} avveniva in modo manuale, producendo un semplice «catalogo grezzo». 
 L'adozione di un Data Catalog automatizza questo processo scansionando i database e classificando i dati sensibili in autonomia.
 Il passaggio da un approccio manuale a un catalogo completo e automatizzato rappresenta un avanzamento nella maturità aziendale in termini di sicurezza e nel modello \gls{samm}, 
 garantendo che l'azienda sappia sempre dove e come applicare le policy di protezione, come il mascheramento o la pseudonimizzazione.
 
-\subsubsection{Analisi dei dati e Business Intelligence}
+\paragraph{Analisi dei dati e Business Intelligence}
 Gli analisti accedono al catalogo per cercare le informazioni di cui hanno bisogno per creare i loro report. 
 Se un analista ha bisogno del fatturato del 2023, cerca "Fatturato" nel Data Catalog: il sistema indica immediatamente in quale 
 database si trova, se il dato è aggiornato e di alta qualità, eliminando il rischio di commettere errori o di duplicare un set di dati già predisposto in passato.
 
-\subsubsection{Data Quality e Governance}
+\paragraph{Data Quality e Governance}
 Nel catalogo è possibile valutare la qualità delle informazioni, individuare il responsabile di una specifica tabella e comprendere le relazioni tra i dati. 
 Ciò garantisce che le decisioni aziendali siano basate su informazioni affidabili, certificate e sicure, migliorando l'efficienza generale.
 
@@ -162,7 +162,7 @@ L'inserimento nel contesto aziendale ha previsto una fase iniziale di formazione
 impiegate nel progetto e volta a garantire un metodo di lavoro in linea con il \textit{Way of Working} aziendale.
 
 \subsection{Formazione}
-Le prime settimane di stage sono state dedicate allo studio o al ripasso delle competenze tecniche necessarie:
+Le prime settimane di stage sono state dedicate allo studio o al ripasso delle competenze tecniche necessarie.
 \begin{itemize}
     \item \textbf{Collaborazione e versionamento}: Strumenti di collaborazione aziendale (Microsoft 365, Teams) e sistemi di versionamento tramite Git e GitHub.
     \item \textbf{Database e SQL}: Linguaggio SQL (livelli base e intermedio) e concetti avanzati di gestione dei database, tra cui transazioni ACID, procedure di backup logico e fisico, viste, cursori e stored procedure.
@@ -174,24 +174,14 @@ Le prime settimane di stage sono state dedicate allo studio o al ripasso delle c
 
 \subsection{Tecnologie utilizzate}
 Di seguito vengono descritte le principali tecnologie utilizzate durante lo stage.
-
-\paragraph{Microsoft SQL Server e PostgreSQL}
-Sistemi di gestione di database relazionali utilizzati come fonti dati principali.
-
-\paragraph{Docker}
-Piattaforma di containerizzazione utilizzata per il deployment e l'esecuzione di OpenMetadata in ambienti isolati e riproducibili.
-
-\paragraph{VirtualBox e WSL}
-Strumenti di virtualizzazione utilizzati per configurare ambienti di sviluppo e test isolati dal sistema operativo host.
-
-\paragraph{OpenMetadata}
-Piattaforma open source per la gestione dei metadati aziendali, adottata come soluzione principale per la realizzazione del Data Catalog.
-
-\paragraph{Microsoft Power BI}
-Strumento di Business Intelligence per la creazione di dashboard e report aziendali.
-
-\paragraph{Microsoft Presidio, ARX e Hawk-Eye}
-Tool di Data Discovery utilizzati per l'individuazione, la classificazione e l'anonimizzazione dei dati personali nei dataset aziendali, in alternativa a OpenMetadata.
+\begin{itemize}
+    \item \textbf{Microsoft SQL Server e PostgreSQL}: Sistemi di gestione di database relazionali utilizzati come fonti dati principali.
+    \item \textbf{Docker}: Piattaforma di containerizzazione utilizzata per il deployment e l'esecuzione di OpenMetadata in ambienti isolati e riproducibili.
+    \item \textbf{VirtualBox e WSL}: Strumenti di virtualizzazione utilizzati per configurare ambienti di sviluppo e test isolati dal sistema operativo host.
+    \item \textbf{OpenMetadata}: Piattaforma open source per la gestione dei metadati aziendali, adottata come soluzione principale per la realizzazione del Data Catalog.
+    \item \textbf{Microsoft Power BI}: Strumento di Business Intelligence per la creazione di dashboard e report aziendali.
+    \item \textbf{Microsoft Presidio, ARX e Hawk-Eye}: Tool di Data Discovery utilizzati per l'individuazione, la classificazione e l'anonimizzazione dei dati personali nei dataset aziendali, in alternativa a OpenMetadata.
+\end{itemize}
 
 % loghi tecnologie
 \begin{figure}[H]
