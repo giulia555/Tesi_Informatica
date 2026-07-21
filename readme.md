@@ -24,7 +24,7 @@ tesi/
 │   ├── progetto-di-stage.tex
 │   ├── analisi-requisiti.tex
 │   ├── valutazione-competitor.tex
-│   ├── implementazione-tecnica.tex
+│   ├── installazione.tex
 │   ├── quality-observability.tex
 │   ├── sviluppo-sicuro.tex
 │   ├── business-intelligence.tex
