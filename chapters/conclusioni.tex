@@ -7,14 +7,159 @@ prefissati e riflettendo sul valore apportato all'azienda e sulle competenze acq
 
 % Raggiungimento degli obiettivi (da tabella cap. 2)
 \section{Bilancio sugli obiettivi}
+Tutti gli obiettivi obbligatori e desiderabili definiti nella fase di pianificazione (Capitolo \ref{cap:progetto-di-stage}) sono stati completati con successo. 
+Tra gli obiettivi facoltativi, l'unico non soddisfatto riguarda la connessione diretta tra OpenMetadata e Power BI, escluso per i vincoli legati alla licenza e ai permessi 
+e per motivi di priorità e di tempistiche.
+
+% tabella iniziale degli obiettivi aggiornata
+\begin{longtable}{ p{0.14\textwidth} p{0.63\textwidth} p{0.15\textwidth} }
+\toprule
+\textbf{Obiettivo} & \textbf{Descrizione} & \textbf{Esito} \\
+\midrule
+\endfirsthead
+
+\toprule
+\textbf{Obiettivo} & \textbf{Descrizione} & \textbf{Esito} \\
+\midrule
+\endhead
+
+\midrule
+\noalign{\vspace{10pt}}
+\caption[]{Tabella degli obiettivi raggiunti} \\
+\endfoot
+
+\bottomrule
+\noalign{\vspace{10pt}}
+\caption{Tabella degli obiettivi raggiunti}
+\label{tab:obiettivi-raggiunti}
+\endlastfoot
+    % OBBLIGATORI
+    O1 & Analisi e Data Discovery delle fonti dati aziendali, compreso lo studio dei motori di database aziendali (SQL Server e PostgreSQL). & Soddisfatto\\ \midrule
+    O2 & Studio dei principi dello sviluppo sicuro, dati personali, anonimizzazione e tecniche di mascheramento. & Soddisfatto\\ \midrule
+    O3 & Studio e valutazione delle principali piattaforme di Data Catalog. & Soddisfatto\\ \midrule
+    O4 & Creazione di un catalogo dati centralizzato e automatizzato con OpenMetadata. & Soddisfatto\\ \midrule
+    O5 & Applicazione di regole di Data Quality sui dataset del catalogo. & Soddisfatto\\ \midrule
+    O6 & Individuazione e classificazione dei dati sensibili e personali, in conformità alle normative sulla sicurezza e sulla privacy. & Soddisfatto\\ \midrule
+    O7 & Realizzazione di una dashboard per il monitoraggio della qualità dei dati. & Soddisfatto\\ \midrule
+    % DESIDERABILI
+    D1 & Studio dei casi d'uso e analisi dei requisiti. & Soddisfatto\\ \midrule
+    D2 & Produzione di una completa documentazione progettuale. & Soddisfatto\\ \midrule
+    D3 & Studio e applicazione pratica dei principi di Business Intelligence attraverso Power BI. & Soddisfatto\\ \midrule
+    % FACOLTATIVI
+    F1 & Proof of Concept contenente alcuni requisiti. & Soddisfatto\\ \midrule
+    F2 & Presentazione interna all'azienda. & Soddisfatto\\ \midrule
+    F3 & Documentazione di guida all'uso e manuale utente per i team aziendali. & Soddisfatto\\ \midrule
+    F4 & Connessione del catalogo a Power BI. & Non soddisfatto\\ \midrule
+    F5 & Valutazione di tool di Data Discovery e mascheramento dati, da integrare a Power BI. & Soddisfatto\\
+\end{longtable}
+
+
+\subsection{Requisiti soddisfatti}
+Oltre agli obiettivi ad alto livello, il progetto è stato guidato dall'Analisi dei Requisiti (Capitolo \ref{cap:analisi-requisiti}). 
+Al termine della fase di \emph{testing}, è stato possibile tracciare un bilancio conclusivo per verificare il livello di copertura dei requisiti garantito da OpenMetadata. 
+La piattaforma ha soddisfatto tutti i requisiti obbligatori e buona parte di quelli desiderabili e opzionali.
+
+% grafico a barre dei requisiti soddisfatti -> libreria pgfplots
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    ybar stacked,
+    bar width=55pt,
+    width=0.78\textwidth,
+    height=8cm,
+    symbolic x coords={Obbligatori (51), Desiderabili (33), Opzionali (11)},
+    xtick=data,
+    ymin=0, ymax=60,
+    ytick={0,10,20,30,40,50,60},
+    ylabel={Numero di requisiti},
+    ylabel style={font=\small},
+    tick label style={font=\small},
+    enlarge x limits=0.3,
+    legend style={
+        at={(0.5,-0.15)},
+        anchor=north,
+        legend columns=2,
+        font=\small,
+        draw=none,
+        column sep=10pt
+    },
+]
+\addplot+[fill=green!75!black, draw=none]
+    coordinates {(Obbligatori (51),51) (Desiderabili (33),24) (Opzionali (11),9)};
+
+\addplot+[fill=gray!45, draw=none]
+    coordinates {(Obbligatori (51),0) (Desiderabili (33),9) (Opzionali (11),2)};
+
+\legend{Soddisfatti, Non soddisfatti}
+\end{axis}
+\end{tikzpicture}
+\caption{Stato di soddisfacimento dei requisiti}
+\label{fig:requisiti-grafico}
+\end{figure}
+
+I pochi requisiti rimasti insoddisfatti riguardano principalmente funzionalità architetturali non supportate nativamente dallo strumento 
+(come l'estrazione di metadati da file non strutturati o logiche specifiche di mascheramento dei dati). 
+Tali limitazioni comunque non compromettono l'usabilità del catalogo dati, che si conferma una soluzione robusta e che risponde alle esigenze di Wintech. 
+Inoltre, per coprire queste esigenze specifiche, lo studio ha valutato e documentato altri strumenti specializzati che possono essere affiancati alla piattaforma all'occorrenza.
+
 
 % Valore aggiunto portato all'azienda da questo progetto: valutazione dell'azienda
 \section{Valore del progetto per Wintech}
+Al termine dello stage, è ragionevole ritenere che Wintech non adotterà una piattaforma di Data Catalog completa come OpenMetadata, almeno nel breve termine. 
+Tuttavia, sarebbe riduttivo attribuire il valore del progetto alla sola adozione del software: il vero beneficio per l'azienda deriva dalla consapevolezza acquisita in materia di gestione, 
+monitoraggio e sicurezza dei dati. Lo studio condotto ha infatti chiarito l'utilità degli strumenti di catalogazione e di Data Discovery, evidenziando gli scenari in cui questi concetti possono trovare un'applicazione concreta.
+
+Nello specifico, l'analisi dei principi di classificazione, anonimizzazione e tracciabilità dei dati ha suscitato un interesse trasversale all'interno di diversi reparti aziendali:
+\begin{itemize}
+    \item il \textbf{team Ricerca e Sviluppo}, che nella fase di sviluppo e test delle applicazioni si trova spesso a dover gestire dati reali, magari con la necessità di anonimizzarli per garantire la sicurezza durante i test;
+    \item il \textbf{reparto Business Intelligence}, che può trovarsi nella situazione di dover elaborare o mostrare ai clienti dati di terzi, i quali devono essere opportunamente tutelati, e che trae vantaggio dalla possibilità di sapere dove si trovano i dati aziendali, in quante fonti sono replicati e come reperirli in modo corretto;
+    \item il \textbf{reparto Compliance e Sicurezza}, che deve garantire il rispetto delle normative sulla privacy, la conformità agli standard ISO e la corretta gestione delle informazioni sensibili durante gli audit interni ed esterni. Avere visibilità completa sul percorso dei dati aziendali, sulle policy applicate e sulle modalità di accesso degli utenti è fondamentale per operare nel rispetto del GDPR, incluse situazioni come la gestione del diritto all'oblio, che impone l'eliminazione o l'anonimizzazione di tutti i dati riferibili a una persona.
+\end{itemize}
+
+Oltre al valore interno, il progetto apre opportunità concrete sul mercato. Molte aziende non dispongono di strumenti per la Data Discovery o per la classificazione dei dati, 
+affidandosi a terzi per garantire la conformità normativa. Wintech, grazie alle nuove conoscenze acquisite, potrebbe integrare tali strumenti nella propria offerta di servizi, 
+ampliandola e differenziandosi rispetto ai competitor. Si tratta di un vantaggio concreto, che porta valore anche ai clienti finali e rappresenta un'opportunità di crescita e fidelizzazione.
+
+In questo contesto, un altro punto di forza di Wintech è la presenza di un team di sviluppo interno, in grado di configurare, integrare e personalizzare questi strumenti in autonomia, 
+senza dover ricorrere a consulenze esterne. Non tutte le aziende dispongono di questa risorsa, in particolare se si tratta di aziende commerciali che esternalizzano interamente o quasi la gestione IT.
+
+L'azienda ha espresso l'intenzione di proseguire lo studio degli strumenti di Data Discovery e anonimizzazione, con l'obiettivo di adottare soluzioni mirate per casi d'uso specifici. 
+Rispetto all'integrazione di un catalogo unico e complesso come OpenMetadata, lo scenario più realistico per Wintech prevede l'utilizzo di \emph{tool} più leggeri e verticali, 
+ciascuno dedicato a un ambito specifico. Questa strategia consentirebbe di ottenere i benefici concreti già identificati, ma riducendo al contempo la complessità infrastrutturale e i costi di adozione.
+
 
 % Cosa ho imparato, che conoscenze non avevo già appreso durante la triennale, valutazione personale, se ci sono stati problemi
 \section{Bilancio formativo}
+Il corso di laurea in Informatica fornisce solide basi teoriche e un metodo di studio strutturato, ma per sua natura non può approfondire tutti 
+gli ambiti applicativi che si incontrano nel mondo del lavoro. Durante lo stage è emerso un gap formativo in alcune aree specifiche, come 
+la gestione avanzata dei database, la virtualizzazione e la containerizzazione con Docker, i principi di Business Intelligence e l'utilizzo di un sistema gestionale, 
+colmato però dalla formazione ricevuta nelle prime settimane di stage.
 
-\subsection{Gap formativo tra stage e corso di studi}
+Le basi fornite dal corso di laurea si sono comunque rivelate fondamentali: le conoscenze di database e SQL, la familiarità con strumenti come Git e 
+GitHub e la capacità di apprendere autonomamente nuove tecnologie hanno permesso di affrontare la formazione iniziale e le attività di progetto con efficacia. 
+Il percorso universitario non fornisce tutte le competenze specifiche richieste dal mondo del lavoro, ma costruisce la capacità di acquisirle in autonomia.
+
+Va infine sottolineata la forte trasversalità dello stage, che ha integrato le competenze informatiche con tematiche gestionali e normative. Questo approccio mi ha portato un valore 
+aggiunto concreto, aprendo la strada verso contesti lavorativi e ruoli professionali diversi.
+
 
 \subsection{Valutazione personale}
+L'esperienza di stage è stata formativa su due livelli distinti e complementari.
 
+Sul piano delle \textbf{competenze tecniche}, lo stage ha permesso di approfondire in modo trasversale diverse aree tematiche: dalla gestione e manipolazione dei dati 
+attraverso query, viste e \emph{stored procedure}, alle procedure di backup e restore dei database, fino alla containerizzazione con Docker e alla virtualizzazione. 
+Ho acquisito una maggiore conoscenza dei principi di privacy e sicurezza dei dati, temi di grande attualità e sempre maggiore importanza. 
+Ho testato in autonomia una piattaforma \emph{enterprise} reale, costruendo un \emph{Proof of Concept} che simulasse un caso d'uso concreto in azienda, 
+e prodotto documentazione tecnica completa pensata per diverse tipologie di utenti.
+
+Sul piano dell'\textbf{inserimento nel contesto lavorativo}, lavorare in una realtà strutturata come Wintech mi ha mostrato come applicare nella pratica le conoscenze teoriche. 
+Ho imparato a collaborare con i colleghi e a gestire un progetto reale, rispettando scadenze e un metodo di lavoro preciso.
+Ho avuto la possibilità di interagire con reparti differenti (Sviluppo, Business Intelligence, \emph{Compliance}) e di confrontarmi con figure dai ruoli diversi, 
+fornendomi una visione più chiara e concreta di come funziona un'azienda IT.
+
+Il supporto della mia tutor aziendale e la disponibilità dei colleghi hanno reso questo percorso stimolante e formativo, permettendo di calibrare al meglio il lavoro 
+grazie a confronti e feedback continui e costruttivi.
+
+Nel complesso, questa esperienza ha confermato che il percorso universitario e quello lavorativo si integrano in modo complementare: il corso di laurea fornisce le basi e 
+il metodo, mentre l'azienda insegna ad applicarli sul campo.
