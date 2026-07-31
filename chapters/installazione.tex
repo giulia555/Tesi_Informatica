@@ -5,8 +5,65 @@
 \intro{In questo capitolo vengono forniti i prerequisiti e le indicazioni per l'installazione e il \emph{setup} di OpenMetadata in ambiente locale.}\\
 
 \section{Prerequisiti}
+\label{sec:prerequisiti}
+L'installazione e l'esecuzione di OpenMetadata richiedono requisiti specifici, legati alle risorse hardware della macchina ospitante e 
+all'ambiente di esecuzione locale, basato in questo contesto sulla containerizzazione tramite Docker.
+
+Per garantire il corretto funzionamento di una distribuzione locale di test, la macchina ospitante (basata su sistema operativo Linux oppure su Windows 
+tramite \gls{wsl}2 o macchina virtuale) deve allocare all'\emph{engine} di Docker le seguenti risorse hardware minime:
+\begin{itemize}
+    \item \textbf{CPU:} almeno 4 vCPU;
+    \item \textbf{Memoria RAM:} almeno 6--8 GB di RAM interamente dedicati ai container;
+    \item \textbf{Spazio su disco:} almeno 30--40 GB di spazio libero.
+\end{itemize}
+
+Dal punto di vista software, i requisiti fondamentali prevedono Git per il controllo di versione, Docker Engine (versione 20.10.0 o superiore) e Docker Compose (versione v2.1.1 o superiore). 
+L'architettura locale di OpenMetadata viene orchestrata attraverso quattro container distinti:
+\begin{enumerate}
+    \item \textbf{Database di sistema:} un'istanza PostgreSQL (o MySQL) dedicata al salvataggio dello stato, delle configurazioni e dei metadati gestiti dalla piattaforma;
+    \item \textbf{OpenMetadata Server:} il backend centrale della piattaforma sviluppato in Java;
+    \item \textbf{OpenMetadata Ingestion (\emph{Apache Airflow}):} il motore di orchestrazione responsabile dell'esecuzione automatica e pianificata delle pipeline di estrazione dati;
+    \item \textbf{Motore di ricerca:} un container ElasticSearch (o \gls{opensearch}) dedicato all'indicizzazione dei metadati e alla ricerca \emph{full-text}.
+\end{enumerate}
+
+Per consentire la corretta fruizione dei servizi sul browser, l'ambiente di rete locale deve garantire che le porte 8585 (dedicata all'interfaccia utente di OpenMetadata) 
+e 8080 (dedicata al pannello di controllo di Apache Airflow) siano libere da conflitti.
+
+Infine, per testare la piattaforma senza violare i vincoli di riservatezza sui dati reali aziendali, durante lo stage è stato utilizzato il 
+database relazionale di esempio \emph{AdventureWorks} fornito da Microsoft\cite{site:adventureworks}. 
+Tale risorsa è stata ripristinata all'interno di un'istanza locale di Microsoft SQL Server, simulando uno scenario di produzione realistico, completo di 
+relazioni e chiavi esterne su cui eseguire le prime procedure di \emph{Data Ingestion} e \emph{Data Discovery}.
 
 \section{Installazione di OpenMetadata}
+\label{sec:installazione_openmetadata}
+Completata la predisposizione dell'ambiente di virtualizzazione e dei relativi prerequisiti software, la procedura di \emph{deployment} locale di OpenMetadata è stata eseguita tramite Docker e Docker Compose, sfruttando la configurazione ufficiale basata su microservizi containerizzati.
+
+I passaggi operativi seguiti per l'installazione e la prima configurazione della piattaforma si articolano come segue:
+\begin{enumerate}
+    \item \textbf{Creazione della directory di lavoro:} creazione di una cartella dedicata al progetto da terminale e posizionamento al suo interno:
+    \begin{verbatim}
+mkdir openmetadata-docker && cd openmetadata-docker
+    \end{verbatim}
+    \item \textbf{Download del file di configurazione:} scaricamento del file \texttt{docker-compose.yml} ufficiale dal repository del progetto (oppure del file \texttt{docker-compose-postgres.yml} qualora si preferisca utilizzare PostgreSQL come database di sistema al posto di MySQL);
+    \item \textbf{Avvio dei servizi:} esecuzione dell'architettura in modalità \emph{detached} (in background), tramite il comando:
+    \begin{verbatim}
+docker compose -f docker-compose.yml up --detach
+    \end{verbatim}
+\end{enumerate}
+
+Durante l'esecuzione di questo comando, Docker Compose provvede a scaricare dal Docker Hub le immagini ufficiali dei quattro componenti principali (database di sistema, OpenMetadata Server, OpenMetadata Ingestion basato su Apache Airflow ed ElasticSearch), ad allocare i volumi per la persistenza dei dati e a creare la rete virtuale condivisa.
+
+Al termine del processo di scaricamento e inizializzazione, l'effettivo avvio di tutti e quattro i container è stato verificato tramite il comando:
+\begin{verbatim}
+docker ps
+\end{verbatim}
+
+Una volta che i container risultano nello stato \emph{Up}, la piattaforma è pronta per l'utilizzo:
+\begin{itemize}
+    \item \textbf{Interfaccia utente di OpenMetadata:} raggiungibile da browser all'indirizzo \texttt{http://localhost:8585}. Al primo accesso vengono utilizzate le credenziali amministrative predefinite (\texttt{admin@open-metadata.org} / \texttt{admin}), da cui è poi possibile accedere alle impostazioni generali e configurare utenti e ruoli;
+    \item \textbf{Pannello di controllo di Apache Airflow:} raggiungibile all'indirizzo \texttt{http://localhost:8080} inserendo le credenziali di default (\texttt{admin} / \texttt{admin}). Airflow opera in background come motore di orchestrazione per le pipeline di \emph{ingestion} dei metadati; sebbene la gestione delle sincronizzazioni avvenga interamente dall'interfaccia di OpenMetadata, l'accesso diretto ad Airflow risulta fondamentale per l'analisi dei log e il \emph{debugging} avanzato in caso di fallimento delle pipeline.
+\end{itemize}
+
 
 \section{Data Ingestion}
 
