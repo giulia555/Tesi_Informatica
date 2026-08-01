@@ -9,7 +9,7 @@ L'installazione e l'esecuzione di OpenMetadata prevedono requisiti specifici, le
 all'ambiente di esecuzione locale, basato in questo contesto sulla containerizzazione tramite Docker.
 
 Per garantire il corretto funzionamento di una distribuzione locale di test, la macchina ospitante (basata su sistema operativo Linux oppure su Windows 
-tramite \gls{wsl}2 o macchina virtuale) deve allocare all'\emph{engine} di Docker le seguenti risorse hardware minime:
+tramite \gls{wsl}2 o macchina virtuale\footnote{Si è scelto di non utilizzare Docker Desktop, la cui licenza d'uso commerciale richiede un abbonamento a pagamento per aziende di determinate dimensioni, optando invece per l'installazione diretta di Docker Engine all'interno di un ambiente Linux (WSL2 o macchina virtuale).}) deve allocare al Docker Engine le seguenti risorse hardware minime:
 \begin{itemize}
     \item \textbf{CPU}: Almeno 4 vCPU.
     \item \textbf{Memoria RAM}: Almeno 6--8 GB di RAM interamente dedicati ai container.
@@ -46,9 +46,10 @@ mkdir openmetadata-docker && cd openmetadata-docker
     \begin{verbatim}
 docker compose -f docker-compose.yml up --detach
     \end{verbatim}
+    \item \textbf{Verifica dello stato dei container}: tramite il comando \texttt{docker ps} è stato verificato che tutti e quattro i container risultassero effettivamente in esecuzione (stato \texttt{Up}), prima di procedere con l'accesso alla piattaforma.
 \end{enumerate}
 
-Una volta che i container risultano operativi, la piattaforma è pronta per l'utilizzo:
+\noindent Una volta che i container risultano operativi, la piattaforma è pronta per l'utilizzo:
 \begin{itemize}
     \item \textbf{Interfaccia utente di OpenMetadata}: raggiungibile da browser all'indirizzo \nolinkurl{http://localhost:8585}. Al primo accesso, l'autenticazione avviene tramite le credenziali di default fornite dal sistema: \texttt{admin@open-metadata.org} come \emph{username} e \texttt{admin} come \emph{password}. Da qui è poi possibile accedere alle impostazioni generali e configurare nuovi utenti;
     \item \textbf{Pannello di controllo di Apache Airflow}: raggiungibile all'indirizzo \nolinkurl{http://localhost:8080} inserendo le credenziali di default (\texttt{admin} / \texttt{admin}). Airflow opera in background come motore di orchestrazione per le pipeline di \emph{ingestion} dei metadati; sebbene la gestione delle sincronizzazioni avvenga interamente dall'interfaccia di OpenMetadata, l'accesso diretto ad Airflow risulta fondamentale per l'analisi dei log e il \emph{debugging} avanzato in caso di fallimento delle pipeline.
