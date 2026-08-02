@@ -55,8 +55,80 @@ docker compose -f docker-compose.yml up --detach
     \item \textbf{Pannello di controllo di Apache Airflow}: raggiungibile all'indirizzo \nolinkurl{http://localhost:8080} inserendo le credenziali di default (\texttt{admin} / \texttt{admin}). Airflow opera in background come motore di orchestrazione per le pipeline di \emph{ingestion} dei metadati; sebbene la gestione delle sincronizzazioni avvenga interamente dall'interfaccia di OpenMetadata, l'accesso diretto ad Airflow risulta fondamentale per l'analisi dei log e il \emph{debugging} avanzato in caso di fallimento delle pipeline.
 \end{itemize}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{schermate/home.png}
+    \caption{Interfaccia principale di OpenMetadata al primo accesso}
+    \label{fig:home_OpenMetadata}
+\end{figure}
 
 \section{Data Ingestion}
+\label{sec:data_ingestion}
+La \emph{Data Ingestion} costituisce il processo attraverso cui OpenMetadata si connette alle sorgenti dati aziendali esterne (come database relazionali, fogli di calcolo, 
+piattaforme di Business Intelligence o sistemi di \emph{storage}) per estrarne e indicizzarne le informazioni strutturali e descrittive.
+
+Prima di analizzare i dettagli operativi, è opportuno fare una premessa: la \emph{Data Ingestion} non importa, non duplica e non 
+memorizza in alcun modo i dati reali all'interno del catalogo. La piattaforma si occupa esclusivamente di analizzare e scansionare le fonti originali per estrarne i metadati.
+
+Nello specifico, la piattaforma opera nel rispetto dei seguenti vincoli:
+\begin{itemize}
+    \item \textbf{Accesso in sola lettura (\emph{Read-Only})}: OpenMetadata si connette alle fonti dati esterne utilizzando credenziali dotate dei soli permessi di lettura sulle viste di sistema e sugli schemi dei dati.
+    \item \textbf{Integrità dei dati reali}: Il catalogo non possiede autorizzazioni di scrittura, modifica o cancellazione sui database sorgente; è escluso qualsiasi rischio di alterare o compromettere i record reali dell'azienda.
+    \item \textbf{Estrazione dei soli metadati}: La piattaforma acquisisce esclusivamente i \textbf{metadati}, ovvero informazioni quali nomi delle tabelle, tipi di dato delle colonne, chiavi primarie, vincoli relazionali, descrizioni e statistiche aggregate.
+    \item \textbf{Gestione dei dati campione}: I dati prelevati per la profilazione o la classificazione automatica vengono acquisiti come \emph{Sample Data} e resi consultabili all'interno della scheda di ciascun asset. L'accesso a tali campioni resta comunque soggetto al sistema di controllo degli accessi della piattaforma: qualora una colonna venga classificata come dato sensibile, i relativi valori campione vengono automaticamente oscurati nell'interfaccia per tutti gli utenti privi del ruolo di \emph{Owner} o \emph{Admin} sull'asset, come approfondito nel Capitolo~\ref{cap:sviluppo-sicuro}.
+\end{itemize}
+
+\subsection{Configurazione di un nuovo servizio}
+La configurazione di un nuovo servizio di database (per esempio Microsoft SQL Server o PostgreSQL) avviene tramite l'interfaccia di amministrazione della piattaforma e prevede i seguenti passaggi:
+\begin{enumerate}
+    \item \textbf{Selezione del connettore nativo}: Viene individuato il \gls{dbms} sorgente dall'elenco dei connettori supportati.
+    \item \textbf{Parametri di connessione e di rete}: Vengono inseriti l'indirizzo IP dell'\emph{host}, la porta di comunicazione dedicata e il nome del database da scansionare (per esempio il database \emph{AdventureWorks}).
+    \item \textbf{Credenziali dedicate}: Vengono fornite le credenziali di accesso, profilate secondo il \gls{minimoprivilegio} (\emph{Principle of Least Privilege}), sufficienti per accedere alle tabelle di sistema.
+    \item \textbf{Verifica e filtri di inclusione}: Dopo aver testato la connessione, vengono definite eventuali regole di filtraggio tramite espressioni regolari per limitare la scansione a specifici schemi o tabelle di interesse.
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{schermate/impostazioni.png}
+    \caption{Pannello delle impostazioni generali di OpenMetadata}
+    \label{fig:impostazioni}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{schermate/servizi.png}
+    \caption{Sezione dedicata alla configurazione dei servizi e dei connettori esterni}
+    \label{fig:servizi}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{schermate/database.png}
+    \caption{Selezione del connettore nativo Microsoft SQL Server per l'integrazione di un nuovo database}
+    \label{fig:database}
+\end{figure}
+
+Applicando tale procedura, il connettore mappa principalmente lo schema del database, senza duplicare l'intero contenuto delle tabelle sorgente: OpenMetadata registra la struttura, i nomi dei campi, i tipi di dato associati, 
+il conteggio totale delle righe e, se abilitato, un campione limitato di righe reali per finalità di profilazione e classificazione automatica.
+
+Completata la fase di \emph{ingestion}, ogni data asset importato è accessibile attraverso una scheda di dettaglio dedicata. 
+L'interfaccia raccoglie in un'unica vista i metadati generali, come la fonte di provenienza, l'\emph{owner}, il livello di importanza del dataset (\emph{tier}), 
+la descrizione e lo storico delle versioni, e la struttura tecnica dell'elemento, come l'elenco delle colonne e i relativi tipi di dato.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{schermate/overview_asset.png}
+    \caption{Scheda di dettaglio della tabella \texttt{Customer} del database \emph{AdventureWorks}}
+    \label{fig:overview_asset}
+\end{figure}
+
+\subsection{Modifica dei metadati tramite Bulk Import \& Export}
+Per facilitare la gestione del catalogo su larga scala, OpenMetadata supporta la funzionalità di \emph{Bulk Import \& Export} tramite file in formato CSV per tutti i principali asset. 
+
+L'operazione di \textbf{Bulk Export} consente di scaricare in locale un file CSV contenente l'inventario completo dei metadati di un asset. Tale file fa anche da modello per la successiva fase 
+di \textbf{Bulk Import}: l'utente può aggiornare o arricchire offline i metadati di un asset, per poi ricaricare il CSV sulla piattaforma. 
+Prima di applicare le modifiche, OpenMetadata mostra un'anteprima di validazione in tempo reale che permette di verificare e correggere eventuali errori direttamente da browser.
+
 
 \section{Ricerca e Data Discovery}
 
