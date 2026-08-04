@@ -5,6 +5,25 @@
 \intro{Il seguente capitolo illustra le funzionalità di Data Quality e gli strumenti di monitoraggio dei dati nativi di OpenMetadata.}\\
 
 \section{Agenti automatici}
+All'interno di OpenMetadata, la raccolta continuativa dei metadati e il monitoraggio dello stato di salute dei dati sono affidati all'architettura \textbf{AutoPilot}. 
+Si tratta di un sistema di agenti automatici che orchestrano le operazioni di estrazione, profilazione, classificazione e tracciamento senza richiedere configurazioni 
+manuali complesse o interventi ripetitivi da parte dell'utente.
+
+Gli agenti vengono attivati automaticamente nel momento in cui viene registrato un nuovo servizio e operano in background secondo una pianificazione (\emph{schedule}) 
+personalizzabile. Ciascun agente assolve a compiti specifici all'interno della filiera d'elaborazione:
+\begin{itemize}
+    \item \textbf{Metadata Agent:} costituisce l'agente primario ed è il prerequisito indispensabile per il funzionamento dell'intera piattaforma. Si occupa dell'estrazione e della sincronizzazione dei metadati strutturali dalle sorgenti collegate (nomi di database, schemi, tabelle, colonne, tipi di dato, chiavi primarie e vincoli relazionali);
+    \item \textbf{Profiler Agent:} raccoglie metriche e statistiche descrittive sui dati a livello di tabella e di singola colonna (percentuale di valori nulli, numero di valori distinti, cardinalità, intervalli minimi e massimi). I risultati alimentano direttamente la scheda \emph{Profiler \& Data Quality} di ciascun \emph{data asset} e forniscono la base quantitativa su cui vengono valutati i test di qualità;
+    \item \textbf{AutoClassification Agent:} analizza i campioni di testo prelevati dal Profiler Agent per alimentare il motore di \emph{Entity Recognition} basato su NLP (Microsoft Presidio), identificando automaticamente le informazioni personali e sensibili (PII) e applicando i relativi \emph{tag} di sicurezza;
+    \item \textbf{Lineage Agent:} analizza i log delle query SQL e le definizioni delle viste per ricostruire in modo automatico il grafo delle dipendenze tra i dati;
+    \item \textbf{Usage Agent e agenti specializzati:} raccoglie le statistiche di utilizzo delle tabelle per alimentare il punteggio di popolarità (\emph{Popularity Scoring}) e le \emph{Query Analytics}, affiancandosi ad agenti dedicati per l'integrazione con strumenti di trasformazione esterni (quali \emph{dbt Agent} e \emph{OpenLineage Agent}).
+\end{itemize}
+
+Dall'interfaccia di amministrazione della piattaforma, gli utenti autorizzati possono monitorare lo stato operativo di ogni agente (\emph{Active}, \emph{Pending}, 
+\emph{Success}, \emph{Failed}), ispezionarne i log di esecuzione per il \emph{debugging} o forzare un'esecuzione manuale estemporanea a seguito di modifiche strutturali 
+apportate ai database sorgente.
+
+
 
 \section{Test di qualità}
 

@@ -124,7 +124,7 @@ la descrizione e lo storico delle versioni, e la struttura tecnica dell'elemento
 \subsection{Modifica dei metadati tramite Bulk Import \& Export}
 Per facilitare la gestione del catalogo su larga scala, OpenMetadata supporta la funzionalità di \emph{Bulk Import} \& \emph{Export} tramite file in formato CSV per tutti i principali asset. 
 
-L'operazione di \textbf{Bulk Export} consente di scaricare in locale un file CSV contenente l'inventario completo dei metadati di un asset. Tale file fa anche da modello per la successiva fase 
+L'operazione di \textbf{Bulk Export} consente di scaricare in locale un file CSV contenente l'inventario completo dei metadati di un asset. Tale file funge anche da modello per la successiva fase 
 di \textbf{Bulk Import}: l'utente può aggiornare o arricchire offline i metadati di un asset, per poi ricaricare il CSV sulla piattaforma. 
 Prima di applicare le modifiche, OpenMetadata mostra un'anteprima di validazione in tempo reale che permette di verificare e correggere eventuali errori direttamente da browser.
 
@@ -199,9 +199,10 @@ illustrando come queste vengano estratte dalle sorgenti primarie, elaborate attr
 All'interno di OpenMetadata, il grafo del \emph{lineage} viene ricostruito in modo automatico dal \emph{Lineage Agent}, che analizza i log delle query SQL 
 eseguite sulle fonti originali, le definizioni delle viste e le configurazioni degli strumenti di BI, ricostruendo le relazioni di dipendenza secondo due principali livelli di granularità:
 \begin{itemize}
-    \item \textbf{Table-Level Lineage (End-to-End)}: Mostra le connessioni ad alto livello tra intere entità (database, tabelle e report), consentendo di risalire sia alla provenienza (\emph{upstream}) sia alla destinazione (\emph{downstream}) del dato.
+    \item \textbf{Table-Level Lineage}: Mostra le connessioni ad alto livello tra intere entità (database, tabelle e report), ricostruendo il percorso \emph{end-to-end} del dato dalla sorgente (\emph{upstream}) fino alla destinazione finale (\emph{downstream}).
     \item \textbf{Column-Level Lineage}: Traccia il percorso di derivazione fino al dettaglio della singola colonna. Questa funzionalità risulta fondamentale ai fini della conformità al GDPR, poiché permette di verificare esattamente come un campo contenente dati personali o sensibili si propaga tra le tabelle e i sistemi aziendali.
 \end{itemize}
+
 
 Qualora vi siano trasformazioni non tracciabili direttamente dai log SQL, OpenMetadata mette a disposizione un editor visuale \emph{no-code} (\textbf{\emph{Lineage} manuale}) 
 basato su meccanismi \emph{drag-and-drop}, consentendo agli utenti autorizzati di creare o integrare manualmente nodi e collegamenti.
@@ -216,14 +217,17 @@ basato su meccanismi \emph{drag-and-drop}, consentendo agli utenti autorizzati d
 \subsection{Analisi di impatto e livelli informativi}
 L'applicazione operativa più rilevante del \emph{Column-Level Lineage} è la cosiddetta \textbf{\emph{Impact Analysis}} (Analisi di Impatto). 
 Prima di apportare modifiche strutturali a una colonna o a una tabella (ad esempio l'eliminazione di un campo o il cambio del tipo di dato), l'utente può consultare il grafo 
-per identificare preventivamente quali tabelle, \emph{pipeline} e report verrebbero impattati o compromessi da tale modifica.
+per identificare preventivamente quali tabelle, \emph{pipeline} e report verrebbero impattati o coinvolti da tale modifica.
 
 L'interfaccia di visualizzazione del \emph{lineage} supporta inoltre l'attivazione di diversi livelli informativi (\emph{Layers}):
 \begin{itemize}
     \item \textbf{\emph{Column Layer}}: per evidenziare le dipendenze tra i singoli attributi;
     \item \textbf{\emph{Observability Layer}}: per integrare direttamente sul grafo gli esiti dei test di \emph{Data Quality}, consentendo di individuare visivamente il punto in cui si è verificata un'anomalia sui dati;
     \item \textbf{\emph{Data Product Layer}}: per evidenziare la composizione e l'origine dei dataset curati messi a disposizione dei vari domini aziendali.
+    \item \textbf{\emph{Service Layer}}: per visualizzare come i dati fluiscono attraverso piattaforme e servizi differenti.
+    \item \textbf{\emph{Domain Layer}}: per organizzare i dataset e gli asset raggruppandoli all'interno di categorie di business pertinenti.
 \end{itemize}
+
 
 \begin{figure}[H]
     \centering
