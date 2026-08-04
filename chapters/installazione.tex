@@ -121,6 +121,17 @@ la descrizione e lo storico delle versioni, e la struttura tecnica dell'elemento
     \label{fig:overview_asset}
 \end{figure}
 
+\subsection{Sincronizzazione automatica e schedulazione}
+Una volta completata la configurazione iniziale di un servizio, OpenMetadata garantisce che i metadati rimangano costantemente allineati alle fonti originali 
+attraverso la funzionalità di \textbf{sincronizzazione automatica}.
+
+Questo meccanismo assicura che se un asset viene modificato, per esempio aggiungendo campi o tabelle a un database, modificando lo schema di una relazione o aggiornando una dashboard, 
+tali variazioni vengano rilevate automaticamente e riflesse nel catalogo senza richiedere alcuna azione manuale da parte degli utenti.
+
+La pianificazione di questa attività viene definita dall'amministratore durante la creazione del servizio e può essere impostata con cadenza oraria, giornaliera, settimanale 
+o lasciata in modalità manuale. In background, l'orchestrazione di questi flussi periodici è affidata ad Apache Airflow, che attiva in sequenza gli agenti di estrazione 
+all'orario e con la frequenza stabiliti, preservando la coerenza delle informazioni nel tempo.
+
 \subsection{Modifica dei metadati tramite Bulk Import \& Export}
 Per facilitare la gestione del catalogo su larga scala, OpenMetadata supporta la funzionalità di \emph{Bulk Import} \& \emph{Export} tramite file in formato CSV per tutti i principali asset. 
 

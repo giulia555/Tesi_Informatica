@@ -1,11 +1,108 @@
 % capitolo 7: data governance e sviluppo sicuro
-
 \chapter{Data Governance e Sviluppo Sicuro}
 \label{cap:sviluppo-sicuro}
 
 \intro{Questo capitolo affronta le tematiche legate alla sicurezza e alla conformità normativa, in linea con i principi della \emph{Privacy by Design}.}\\
 
-\section{Principi di privacy e sviluppo sicuro}
+\section{Introduzione allo sviluppo sicuro}
+L'introduzione di un Data Catalog all'interno dell'infrastruttura aziendale non risponde solo alle esigenze di catalogazione dei dati e di gestione dei metadati, 
+ma rappresenta anche uno strumento per garantire la conformità normativa dei dati, l'adesione alle policy aziendali e il rispetto del \gls{gdpr}, nonché un mezzo per supportare il Ciclo di Sviluppo del Software Sicuro.
+
+A tal proposito, Wintech mette a disposizione una serie di documenti e linee guida per la protezione della privacy, la gestione dei dati sensibili e lo sviluppo sicuro del software.
+
+All'interno del contesto aziendale, viene definito il concetto di \emph{Privacy by Design (PbD)}, intesa come un approccio olistico concettuale che può essere applicato \emph{end-to-end} all'interno di un'organizzazione, 
+includendo le sue tecnologie informatiche, le sue pratiche commerciali, i suoi processi, la progettazione fisica e le infrastrutture di rete. 
+Questa definizione si basa su tre concetti fondamentali:
+\begin{itemize}
+    \item \textbf{Integrazione nativa fin dalla progettazione}: Qualsiasi progetto deve essere realizzato considerando la riservatezza e la protezione dei dati personali sin dalla sua prima fase di progettazione e nell'architettura dei sistemi IT. Non è una misura attuata successivamente a un evento o a un problema sorto.
+    \item \textbf{Approccio \emph{user centric}}: Secondo questa impostazione, l'utente deve essere posto al centro del sistema di protezione dei dati personali.
+    \item \textbf{Azione proattiva e preventiva}: La PbD è caratterizzata dall'adozione di misure proattive piuttosto che reattive. Il suo scopo primario è anticipare e prevenire gli eventi lesivi per la privacy prima che accadano, invece di attendere che il rischio si materializzi per poi correggerlo.
+\end{itemize}
+
+\subsection{Principi della privacy}
+Nella definizione delle proprie Linee Guida allo Sviluppo Sicuro, Wintech si ispira allo standard \textbf{ISO/IEC 29100:2011}, il quale raccoglie undici principi fondamentali 
+che indirizzano la progettazione, lo sviluppo e l'implementazione dei requisiti di protezione della privacy all'interno dei software. 
+Tali principi sono descritti in dettaglio di seguito:
+
+% \begin{longtable}{ p{0.30\textwidth} p{0.64\textwidth} }
+\begin{longtable}{ >{\raggedright\arraybackslash}p{0.30\textwidth} p{0.64\textwidth} }
+\toprule
+\textbf{Principio} & \textbf{Descrizione} \\
+\midrule
+\endfirsthead
+
+\toprule
+\textbf{Principio} & \textbf{Descrizione} \\
+\midrule
+\endhead
+
+\midrule
+\noalign{\vspace{10pt}}
+\caption[]{Principi della privacy secondo lo standard ISO/IEC 29100:2011} \\
+\endfoot
+
+\bottomrule
+\noalign{\vspace{10pt}}
+\caption{Principi della privacy secondo lo standard ISO/IEC 29100:2011}
+\label{tab:principi-privacy}
+\endlastfoot
+    \textbf{Consenso e Scelta} & L'interessato deve poter scegliere se acconsentire o meno al trattamento, in modo chiaro e accessibile.\\ \midrule
+    \textbf{Legittimità e Specifica delle Finalità} & Il trattamento deve essere conforme alla legge e basato su una base giuridica ammissibile.\\ \midrule
+    \textbf{Limitazione della Raccolta} & La raccolta dei dati deve limitarsi a ciò che è strettamente necessario per gli scopi prefissati.\\ \midrule
+    \textbf{Minimizzazione dei Dati} & I sistemi ICT devono essere progettati per ridurre al minimo i dati personali elaborati.\\ \midrule
+    \textbf{Limitazione dell'Utilizzo, Conservazione e Divulgazione} & I dati vanno usati e conservati solo per scopi specifici, espliciti e legittimi.\\ \midrule
+    \textbf{Accuratezza e Qualità} & I dati elaborati devono essere accurati, completi, aggiornati e pertinenti.\\ \midrule
+    \textbf{Apertura, Trasparenza e Informativa} & Devono essere fornite informazioni chiare e accessibili sulle procedure di trattamento.\\ \midrule
+    \textbf{Partecipazione Individuale e Accesso} & Agli interessati deve essere garantita la possibilità di accedere e rivedere i propri dati.\\ \midrule
+    \textbf{Responsabilizzazione} & Le politiche di privacy devono essere documentate, comunicate e assegnate a un responsabile specifico.\\ \midrule
+    \textbf{Sicurezza delle Informazioni} & I dati devono essere protetti da rischi come accesso non autorizzato, modifica, divulgazione o perdita.\\ \midrule
+    \textbf{Conformità alla Privacy} & Devono essere previste verifiche periodiche per dimostrare il rispetto della tutela della privacy.\\
+\end{longtable}
+
+\subsection{Adeguamento al GDPR nel Ciclo di Sviluppo del Software Sicuro}
+Il \gls{gdpr} ha un impatto profondo sul \gls{sdlc} per tutte le organizzazioni che progettano e implementano sistemi informativi all'interno dell'Unione Europea. 
+I requisiti funzionali e tecnici introdotti dal Regolamento influenzano quasi tutti gli aspetti della progettazione architetturale, a partire 
+dai livelli più bassi, come l'architettura dei dati (database) e i livelli di trasporto, per arrivare fino ai livelli applicativi e di presentazione. 
+Wintech si impegna a soddisfare tali requisiti fin dalle prime fasi dell'SDLC.
+
+Di seguito vengono mappati e spiegati alcuni dei principali articoli del GDPR e le misure che l'azienda si impegna ad adottare per garantire la \emph{Privacy by Design} e lo Sviluppo Sicuro.
+% DA VEDERE SE TENERLA COME TABELLA O STRUTTURARLA IN ALTRO MODO
+% \begin{longtable}{ p{0.18\textwidth} p{0.37\textwidth} p{0.37\textwidth} }
+\begin{longtable}{ >{\raggedright\arraybackslash}p{0.18\textwidth} p{0.37\textwidth} p{0.37\textwidth} }
+\toprule
+\textbf{Articolo del GDPR} & \textbf{Principio normativo} & \textbf{Impegno Wintech} \\
+\midrule
+\endfirsthead
+
+\toprule
+\textbf{Articolo del GDPR} & \textbf{Principio normativo} & \textbf{Impegno Wintech} \\
+\midrule
+\endhead
+
+\midrule
+\noalign{\vspace{10pt}}
+\caption[]{Mappatura dei principali articoli del GDPR rispetto agli impegni aziendali} \\
+\endfoot
+
+\bottomrule
+\noalign{\vspace{10pt}}
+\caption{Mappatura dei principali articoli del GDPR rispetto agli impegni aziendali}
+\label{tab:articoli-gdpr}
+\endlastfoot
+    \textbf{Art. 5 -- Principi applicabili al trattamento dei dati personali} & I dati personali sono raccolti in modo lecito, corretto e trasparente nei confronti dell'interessato e per finalità determinate, esplicite e legittime. Devono essere adeguati, pertinenti e limitati a quanto necessario per le finalità dichiarate; devono essere esatti, aggiornati e conservati per un arco di tempo non superiore al conseguimento delle finalità stesse. & Sotto la direzione del titolare, i dati sono protetti garantendone l'integrità e la riservatezza. Wintech implementa strategie di gestione dei registri elettronici affinché i dati vengano conservati solo per il tempo strettamente necessario; i dati personali scaduti non vengono memorizzati e l'interessato viene informato di tale periodo.\\ \midrule
+    \textbf{Art. 13 -- Informazioni da fornire al momento della raccolta} & Il titolare del trattamento deve fornire all'interessato le proprie informazioni di contatto, le finalità e la base giuridica del trattamento, gli eventuali destinatari, il periodo di conservazione, nonché l'esistenza dei diritti di accesso, rettifica, cancellazione e revoca del consenso. & I sistemi sono progettati affinché, al momento della raccolta dei dati, gli attributi del trattamento e le fasi elaborative vengano forniti all'utente per via elettronica o per iscritto, in forma chiara e facilmente comprensibile, garantendo assoluta trasparenza.\\ \midrule
+    \textbf{Art. 15 -- Diritto di accesso dell'interessato} & L'interessato ha il diritto di ottenere dal titolare del trattamento la conferma che sia o meno in corso un trattamento di dati personali che lo riguardano e, in tal caso, di ottenerne l'accesso. & Le architetture software devono garantire all'interessato il diritto di accedere ai propri dati e di controllarne il trattamento in qualsiasi momento. Inoltre, l'infrastruttura deve prevedere la possibilità di fornire all'interessato una copia dei propri dati in un formato comunemente utilizzato.\\ \midrule
+    \textbf{Art. 16 -- Diritto di rettifica} & L'interessato ha il diritto di ottenere dal titolare del trattamento la rettifica dei dati personali inesatti che lo riguardano senza ingiustificato ritardo e l'integrazione dei dati incompleti. & I sistemi informativi devono consentire all'interessato di ottenere gratuitamente l'aggiornamento dei propri dati in caso di errore. L'infrastruttura deve supportare l'esercizio di tale diritto richiedendo l'aggiornamento direttamente per via elettronica.\\ \midrule
+    \textbf{Art. 17 -- Diritto alla cancellazione (Diritto all'oblio)} & L'interessato ha il diritto di ottenere dal titolare la cancellazione dei dati personali che lo riguardano senza ingiustificato ritardo, qualora sussistano i motivi previsti dal Regolamento (es. revoca del consenso o cessazione delle finalità). & I sistemi informativi devono permettere la cancellazione immediata dei dati qualora richiesta. Inoltre, il dipartimento IT si impegna a mantenere inventari aggiornati dei dati interni ed esterni, in modo da sapere esattamente dove tali dati sono conservati da terze parti e poter comunicare tempestivamente l'ordine di cancellazione ad altre organizzazioni IT.\\ \midrule
+    \textbf{Art. 25 -- Protezione dei dati fin dalla progettazione} & Il titolare del trattamento mette in atto misure tecniche e organizzative adeguate a garantire che siano trattati solo i dati personali necessari per ogni specifica finalità, integrandovi le necessarie garanzie a tutela dei diritti degli interessati. & L'implementazione della protezione dei dati all'interno del sistema informativo e dell'organizzazione avviene in modo nativo, per progettazione e come impostazione predefinita. Wintech considera questo approccio un requisito necessario nello sviluppo IT.\\ \midrule
+    \textbf{Art. 32 -- Sicurezza del trattamento} & Il titolare e il responsabile del trattamento mettono in atto misure tecniche e organizzative per garantire un livello di sicurezza adeguato al rischio, tra cui la pseudonimizzazione e la cifratura dei dati personali. & L'infrastruttura IT di Wintech deve essere progettata avvalendosi di mezzi tecnici e organizzativi rigorosi. Ove possibile, i sistemi software sviluppati devono prevedere sempre l'uso della cifratura dei dati, nonché supportare l'anonimizzazione o la pseudonimizzazione delle informazioni.\\ \midrule
+    \textbf{Artt. 33 e 34 -- Notifica e comunicazione di violazione dei dati} & In caso di violazione della sicurezza che comporta la perdita o la divulgazione illecita di dati, il titolare deve notificarla all'autorità di controllo (entro 72 ore) e all'interessato, qualora la violazione presenti un rischio elevato per i suoi diritti. & I sistemi software devono essere dotati di un ambiente tecnico opportuno per individuare, tracciare e valutare quasi immediatamente le violazioni dei dati. Questo è necessario per stabilire in tempo reale se vi sia un rischio elevato e adempiere agli obblighi di comunicazione.\\
+\end{longtable}
+
+La gestione di tutti i requisiti normativi sopraelencati richiede una documentazione costante delle fasi di progettazione e un supporto tecnologico adeguato. 
+In questo scenario, l'adozione di un Data Catalog aziendale come OpenMetadata diventa una componente architetturale molto importante: automatizzando l'individuazione dei dati sensibili, 
+applicando i relativi tag di sicurezza e mappando i flussi informativi, il catalogo fornisce all'azienda uno strumento concreto per garantire la conformità al ciclo di sviluppo sicuro  
+e alle direttive imposte dal GDPR, trasformando i vincoli legali in regole tecniche implementate in modo proattivo.
 
 \section{Classificazione dei dati}
 
