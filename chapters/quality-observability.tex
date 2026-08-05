@@ -19,6 +19,13 @@ operando in background secondo una pianificazione personalizzabile. Ciascun agen
     \item \textbf{Usage Agent e agenti specializzati}: Raccolgono le statistiche di utilizzo delle tabelle per alimentare il punteggio di popolarità (\emph{Popularity Scoring}) e le \emph{Query Analytics}.
 \end{itemize}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{schermate/agenti_automatici.png}
+    \caption{Elenco degli agenti automatici configurati per un servizio, con relativi stati e pianificazioni}
+    \label{fig:agenti_automatici}
+\end{figure}
+
 Ogni agente è responsabile di una fase specifica del ciclo di vita dei metadati e opera in sequenza logica: poiché l'esecuzione di alcuni agenti è prerequisito per l'attivazione di altri, 
 è fondamentale che vengano eseguiti nell'ordine corretto.
 
@@ -26,10 +33,108 @@ Lo stato di ciascun agente è visibile all'interno della scheda \emph{Agents} ne
 autorizzati possono controllare lo stato di avanzamento delle attività (\emph{Active}, \emph{Pending}, \emph{Success}, \emph{Failed}), ispezionare i log di esecuzione per il 
 \emph{debugging} o forzare un'esecuzione manuale a seguito di modifiche strutturali apportate a uno specifico dataset o servizio sorgente.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{schermate/stato_agenti.png}
+    \caption{Cruscotto di monitoraggio con lo stato di esecuzione globale degli agenti AutoPilot}
+    \label{fig:stato_agenti}
+\end{figure}
 
 \section{Test di qualità}
+Per valutare lo stato di salute di un patrimonio informativo, è necessario definire dei parametri e delle metriche che consentano di misurare la qualità del dato 
+(\emph{Data Quality})\cite{site:ibm_data_quality}. In ambito ingegneristico, la qualità del dato è concepita come una misura multidimensionale 
+basata su sei criteri fondamentali, standardizzati a livello internazionale dal \emph{framework} di \textbf{DAMA UK}\cite{site:dama-dq-dimensions}:
+\begin{itemize}
+    \item \textbf{Accuratezza (\emph{Accuracy})}: Il grado con cui le informazioni rappresentano correttamente la realtà o aderiscono a una fonte autorevole di riferimento.
+    \item \textbf{Completezza (\emph{Completeness})}: La presenza di tutti i valori necessari e attesi per una specifica finalità d'uso, operando una distinzione tra campi informativi critici e opzionali.
+    \item \textbf{Coerenza (\emph{Consistency})}: L'assenza di contraddizioni logiche o discrepanze tra rappresentazioni dello stesso dato all'interno di tabelle o sistemi informativi differenti.
+    \item \textbf{Tempestività (\emph{Timeliness})}: Il livello di aggiornamento e disponibilità del dato rispetto ai tempi operativi richiesti dai processi aziendali.
+    \item \textbf{Validità (\emph{Validity})}: La conformità sintattica e formale del dato rispetto a formati standard, espressioni regolari o vincoli di dominio prestabiliti.
+    \item \textbf{Univocità (\emph{Uniqueness})}: L'assenza di record duplicati associati alla medesima entità logica o fisica.
+\end{itemize}
+
+\noindent Anche a livello nazionale, le \textbf{Linee Guida dell'AgID} (Agenzia per l'Italia Digitale) definiscono il controllo continuo della \emph{Data Quality} 
+come una condizione indispensabile per l'affidabilità e l'interoperabilità dei sistemi informativi\cite{site:agid-linee-guida}.
+
+Nel contesto del progetto di stage, per rispondere a questa esigenza e superare l'inefficienza dei controlli manuali, si è scelto di tradurre questi principi teorici 
+in regole di validazione programmabili e automatizzate, nonchè costantemente verificabili.
+
+Per facilitare il monitoraggio di queste asserzioni, OpenMetadata aggrega i risultati all'interno di una \emph{dashboard} centralizzata di \emph{Data Quality}, 
+che restituisce una panoramica globale sullo stato di copertura dei test e sulle singole dimensioni qualitative del dato.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{schermate/dashboard_dataquality.png}
+    \caption{Dashboard globale di Data Quality, con il dettaglio delle metriche aggregate per dimensione qualitativa}
+    \label{fig:dashboard_dataquality}
+\end{figure}
+
+\subsection{Architettura dei controlli: Table e Column Tests}
+L'infrastruttura di testing di OpenMetadata organizza i controlli secondo una gerarchia logica a due livelli, garantendo modularità e riusabilità dei controlli:
+\begin{itemize}
+    \item \textbf{Test a livello di tabella (\emph{Table Tests})}: Finalizzati a verificare l'integrità strutturale dell'intero dataset; monitorano metriche quali il volume totale delle righe o la stabilità dello schema, generando anomalie qualora colonne vengano rimosse o rinominate alla sorgente senza preavviso.
+    \item \textbf{Test a livello di colonna (\emph{Column Tests})}: Operano sui singoli campi per convalidare i singoli valori rispetto ai vincoli di dominio.
+\end{itemize}
+
+\noindent Ai fini della validazione del database di test, sono state configurate alcune regole di vincolo logico sui campi delle tabelle anagrafiche, per esempio:
+\begin{itemize}
+    \item \texttt{columnValuesToBeNotNull}: assicura la dimensione della \emph{completezza}, accertando l'assenza di valori nulli in chiavi esterne e campi obbligatori;
+    \item \texttt{columnValuesToBeUnique}: valida l'\emph{univocità}, impedendo la presenza di record duplicati su identificativi chiave;
+    \item \texttt{columnValuesToBeBetween}: garantisce la \emph{validità} e l'\emph{accuratezza}, limitando l'intervallo di valori numerici o temporali entro soglie logiche ammissibili;
+    \item \texttt{columnValuesToMatchRegex}: verifica la conformità sintattica delle stringhe tramite espressioni regolari strutturate.
+\end{itemize}
+
+\subsection{Caso di studio: Validazione sintattica e simulazione di anomalia}
+A titolo esemplificativo, per dimostrare l'efficacia del motore di \emph{Data Quality}, si è implementato un test di tipo \texttt{columnValuesToMatchRegex} sul campo 
+\texttt{EmailAddress} della tabella \texttt{Customer}, appartenente al database di test \emph{AdventureWorks}. Il vincolo di validità formale è stato imposto associando 
+al test la seguente espressione regolare per la verifica degli indirizzi e-mail:
+\begin{verbatim}
+^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$
+\end{verbatim}
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=1\textwidth]{schermate/configurazione_test.png}
+   \caption{Configurazione dell'espressione regolare per la validazione del campo EmailAddress}
+   \label{fig:configurazione_test}
+\end{figure}
+
+\noindent Come documentato durante le fasi di collaudo dello stage, l'esecuzione di questa \emph{Test Suite} ha registrato un fallimento, in quanto non tutti i \emph{record} 
+fittizi forniti dal database di test rispettavano il formato sintattico imposto. Questo risultato, mantenuto a fini esplicativi, ha permesso di validare 
+la reattività del sistema: il mancato superamento dell'asserzione ha innescato l'aggiornamento real-time degli indicatori cromatici nella scheda \emph{Data Observability} 
+e ha generato l'apertura automatica di un \emph{incidente}. Questo livello di monitoraggio proattivo è esattamente ciò che previene l'importazione di anomalie nei sistemi di 
+Business Intelligence situati a valle, preservando la correttezza della reportistica direzionale aziendale.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{schermate/fallimento_test.png}
+    \caption{Evidenza del fallimento del test e apertura del relativo incidente}
+    \label{fig:fallimento_test}
+\end{figure}
+
+
 
 \section{Gestione degli incidenti}
+Nelle moderne architetture orientate al paradigma \emph{DataOps}, la rilevazione di un'anomalia qualitativa sui dati rappresenta solo il primo passo di un processo più ampio di risoluzione del problema. Trattare i fallimenti dei controlli di qualità come semplici messaggi di log isolati genera frammentazione e ritardi nei tempi di ripristino (\emph{Mean Time to Resolution} --- MTTR), a causa del coordinamento manuale tra i team via e-mail o chat aziendali\cite{site:secure-docs}. 
+
+Per ovviare a questo problema, in linea con i requisiti di gestione delle segnalazioni e di collaborazione sui problemi dei dati, OpenMetadata integra un modulo nativo di gestione degli incidenti (\textbf{\emph{Incident Manager}})\cite{site:openmetadata-docs, site:manuale-utente}. Questo strumento centralizzato, accessibile sia a livello di singolo asset sia tramite una dashboard globale (\emph{Observability > Incidents}), traduce i fallimenti dei test di qualità in flussi di lavoro collaborativi, strutturati e storicizzabili\cite{site:openmetadata-docs, site:manuale-utente}.
+
+\subsection{Ciclo di vita dell'anomalia}
+L'evoluzione dell'incidente viene monitorata e gestita attraverso quattro fasi operative e transizioni di stato sequenziali, mutuate dalle migliori pratiche di \emph{IT Service Management} (\gls{sdlc})\cite{site:secure-docs, site:manuale-utente}:
+\begin{enumerate}
+    \item \textbf{Rilevamento e Creazione (Stato \emph{New}):} al primo fallimento di un'asserzione logica nella \emph{Test Suite}, la piattaforma genera automaticamente un nuovo record di incidente nello stato \emph{New}\cite{site:openmetadata-docs, site:manuale-utente}. Il sistema compila autonomamente la scheda descrittiva includendo tutte le evidenze tecniche raccolte: l'asset compromesso (tabella e colonna), il nome del test fallito, la marca temporale dell'esecuzione e la stringa di errore diagnostico dettagliata\cite{site:openmetadata-docs, site:manuale-utente};
+    \item \textbf{Presa in Carico (Stato \emph{Acknowledged}):} un amministratore o un \emph{Data Steward} associato al dominio di appartenenza prende visione della notifica e dichiara la presa in carico dell'anomalia, modificando lo stato in \emph{Ack} (o \emph{Acknowledged})\cite{site:openmetadata-docs, site:manuale-utente}. Questa transizione segnala al resto dell'organizzazione l'avvio formale delle attività di ispezione e analisi della causa radice, sfruttando la sezione commenti integrata per raccogliere considerazioni e scambiare feedback tecnici senza uscire dalla piattaforma (\textbf{RF-D-31})\cite{site:openmetadata-docs, site:manuale-utente};
+    \item \textbf{Assegnazione (Stato \emph{Assigned}):} la responsabilità della risoluzione pratica del problema sui database sorgente viene formalmente delegata a un utente o a un team di sviluppo specifico\cite{site:openmetadata-docs, site:manuale-utente}. La piattaforma tiene traccia dell'assegnatario, garantendo la chiara suddivisione delle responsabilità e facilitando il monitoraggio dei tempi di intervento\cite{site:openmetadata-docs, site:manuale-utente};
+    \item \textbf{Risoluzione e Chiusura (Stato \emph{Resolved}):} una volta corretta la causa dell'anomalia (ad esempio bonificando i record corrotti all'origine o aggiornando la \emph{Test Suite} in caso di evoluzione dello schema), l'incaricato imposta lo stato su \emph{Resolved}\cite{site:openmetadata-docs, site:manuale-utente}. Ai fini di una corretta storicizzazione e per supportare l'analisi statistica successiva sui flussi (\emph{post-mortem audit}), OpenMetadata impone la categorizzazione obbligatoria della causa della chiusura, selezionabile tra le classi standardizzate\cite{site:openmetadata-docs, site:manuale-utente}:
+    \begin{itemize}
+        \item \emph{False Positive:} l'errore era dovuto a un'errata configurazione del test o a una soglia non aggiornata;
+        \item \emph{Missing Data:} assenza parziale o totale di record attesi;
+        \item \emph{Duplicates:} presenza di chiavi duplicate o record ridondanti;
+        \item \emph{Out of Bounds:} valori numerici o temporali fuori dai range di accettazione;
+        \item \emph{Other:} cause residue non incluse nelle categorie precedenti.
+    \end{itemize}
+\end{enumerate}
+
 
 \section{Sistemi di alerting e notifica}
 % e anche data collaboration
