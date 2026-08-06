@@ -12,17 +12,17 @@ Per garantire il corretto funzionamento di una distribuzione locale di test, la 
 tramite \gls{wsl}2 o macchina virtuale\footnote{Si è scelto di non utilizzare Docker Desktop, la cui licenza d'uso commerciale richiede un abbonamento a pagamento per aziende di determinate dimensioni, optando invece per l'installazione diretta di Docker Engine all'interno di un ambiente Linux (WSL2 o macchina virtuale).}) deve allocare al Docker Engine le seguenti risorse hardware minime:
 \begin{itemize}
     \item \textbf{CPU}: Almeno 4 vCPU.
-    \item \textbf{Memoria RAM}: Almeno 6--8 GB di RAM interamente dedicati ai container.
+    \item \textbf{Memoria RAM}: Almeno 6--8 GB di RAM interamente dedicati ai Container.
     \item \textbf{Spazio su disco}: Almeno 30--40 GB di spazio libero.
 \end{itemize}
 
 Dal punto di vista software, i requisiti fondamentali prevedono Git per il controllo di versione, Docker Engine (versione 20.10.0 o superiore) e Docker Compose (versione 2.1.1 o superiore). 
-L'architettura locale di OpenMetadata viene orchestrata attraverso quattro container distinti:
+L'architettura locale di OpenMetadata viene orchestrata attraverso quattro Container distinti:
 \begin{enumerate}
     \item \textbf{Database di sistema}: Un'istanza PostgreSQL o MySQL dedicata al salvataggio dello stato, delle configurazioni e dei metadati gestiti dalla piattaforma.
     \item \textbf{OpenMetadata Server}: Il backend centrale della piattaforma sviluppato in Java.
-    \item \textbf{OpenMetadata Ingestion (Apache Airflow)}: Il motore di orchestrazione responsabile dell'esecuzione automatica e pianificata delle pipeline di estrazione dati.
-    \item \textbf{Motore di ricerca}: Un container ElasticSearch (o \gls{opensearch}) dedicato all'indicizzazione dei metadati e alla ricerca \emph{full-text}.
+    \item \textbf{OpenMetadata Ingestion (Apache Airflow)}: Il motore di orchestrazione responsabile dell'esecuzione automatica e pianificata delle \emph{pipeline} di estrazione dati.
+    \item \textbf{Motore di ricerca}: Un Container ElasticSearch (o \gls{opensearch}) dedicato all'indicizzazione dei metadati e alla ricerca \emph{full-text}.
 \end{enumerate}
 
 Per consentire la corretta fruizione dei servizi sul browser, l'ambiente di rete locale deve garantire che le porte 8585 (dedicata all'interfaccia utente di OpenMetadata) 
@@ -31,10 +31,10 @@ e 8080 (dedicata al pannello di controllo di Apache Airflow) siano libere da con
 Infine, per testare la piattaforma senza violare i vincoli di riservatezza sui dati reali aziendali, durante lo stage è stato utilizzato il 
 database relazionale di esempio \emph{AdventureWorks} fornito da Microsoft\cite{site:adventureworks}. 
 Tale risorsa è stata ripristinata all'interno di un'istanza locale di Microsoft SQL Server, simulando uno scenario di produzione realistico, completo di 
-relazioni e chiavi esterne su cui eseguire le prime procedure di \emph{Data Ingestion} e \emph{Data Discovery}.
+relazioni e chiavi esterne su cui eseguire le prime procedure di Data Ingestion e Data Discovery.
 
 \section{Installazione di OpenMetadata}
-Una volta soddisfatti tutti i prerequisiti, la procedura di deployment locale di OpenMetadata è stata eseguita tramite Docker e Docker Compose, 
+Una volta soddisfatti tutti i prerequisiti, la procedura di \emph{deployment} locale di OpenMetadata è stata eseguita tramite Docker e Docker Compose, 
 seguendo i passaggi della documentazione ufficiale\cite{site:openmetadata-docs}, di seguito elencati:
 \begin{enumerate}
     \item \textbf{Creazione della directory di lavoro}: è stata creata una cartella dedicata al progetto:
@@ -42,17 +42,17 @@ seguendo i passaggi della documentazione ufficiale\cite{site:openmetadata-docs},
 mkdir openmetadata-docker && cd openmetadata-docker
     \end{verbatim}
     \item \textbf{Download del file di configurazione}: è stato scaricato il file \texttt{docker-compose.yml} ufficiale dal repository\cite{site:openmetadata-repo} del progetto (oppure il file \texttt{docker-compose-postgres.yml} qualora si preferisca utilizzare PostgreSQL come database di sistema al posto di MySQL).
-    \item \textbf{Avvio dei servizi}: i container Docker di OpenMetadata sono stati eseguiti tramite il seguente comando:
+    \item \textbf{Avvio dei servizi}: i Container Docker di OpenMetadata sono stati eseguiti tramite il seguente comando:
     \begin{verbatim}
 docker compose -f docker-compose.yml up --detach
     \end{verbatim}
-    \item \textbf{Verifica dello stato dei container}: tramite il comando \texttt{docker ps} è stato verificato che tutti e quattro i container risultassero effettivamente in esecuzione (stato \texttt{Up}), prima di procedere con l'accesso alla piattaforma.
+    \item \textbf{Verifica dello stato dei Container}: tramite il comando \texttt{docker ps} è stato verificato che tutti e quattro i Container risultassero effettivamente in esecuzione (stato \texttt{Up}), prima di procedere con l'accesso alla piattaforma.
 \end{enumerate}
 
-\noindent Una volta che i container risultano operativi, la piattaforma è pronta per l'utilizzo:
+\noindent Una volta che i Container risultano operativi, la piattaforma è pronta per l'utilizzo:
 \begin{itemize}
     \item \textbf{Interfaccia utente di OpenMetadata}: raggiungibile da browser all'indirizzo \nolinkurl{http://localhost:8585}. Al primo accesso, l'autenticazione avviene tramite le credenziali di default fornite dal sistema: \texttt{admin@open-metadata.org} come \emph{username} e \texttt{admin} come \emph{password}. Da qui è poi possibile accedere alle impostazioni generali e configurare nuovi utenti;
-    \item \textbf{Pannello di controllo di Apache Airflow}: raggiungibile all'indirizzo \nolinkurl{http://localhost:8080} inserendo le credenziali di default (\texttt{admin} / \texttt{admin}). Airflow opera in background come motore di orchestrazione per le pipeline di \emph{ingestion} dei metadati; sebbene la gestione delle sincronizzazioni avvenga interamente dall'interfaccia di OpenMetadata, l'accesso diretto ad Airflow risulta fondamentale per l'analisi dei log e il \emph{debugging} avanzato in caso di fallimento delle pipeline.
+    \item \textbf{Pannello di controllo di Apache Airflow}: raggiungibile all'indirizzo \nolinkurl{http://localhost:8080} inserendo le credenziali di default (\texttt{admin} / \texttt{admin}). Airflow opera in background come motore di orchestrazione per le \emph{pipeline} di \emph{ingestion} dei metadati; sebbene la gestione delle sincronizzazioni avvenga interamente dall'interfaccia di OpenMetadata, l'accesso diretto ad Airflow risulta fondamentale per l'analisi dei log e il \emph{debugging} avanzato in caso di fallimento delle \emph{pipeline}.
 \end{itemize}
 
 \begin{figure}[H]
@@ -64,10 +64,10 @@ docker compose -f docker-compose.yml up --detach
 
 \section{Data Ingestion}
 \label{sec:data_ingestion}
-La \emph{Data Ingestion} costituisce il processo attraverso cui OpenMetadata si connette alle sorgenti dati aziendali esterne (come database relazionali, fogli di calcolo, 
+La \textbf{Data Ingestion} costituisce il processo attraverso cui OpenMetadata si connette alle sorgenti dati aziendali esterne (come database relazionali, fogli di calcolo, 
 piattaforme di Business Intelligence o sistemi di \emph{storage}) per estrarne e indicizzarne le informazioni strutturali e descrittive.
 
-Prima di analizzare i dettagli operativi, è opportuno fare una premessa: la \emph{Data Ingestion} non importa, non duplica e non 
+Prima di analizzare i dettagli operativi, è opportuno fare una premessa: la Data Ingestion non importa, non duplica e non 
 memorizza in alcun modo i dati reali all'interno del catalogo. La piattaforma si occupa esclusivamente di analizzare e scansionare le fonti originali per estrarne i metadati. 
 Nello specifico, la piattaforma opera nel rispetto dei seguenti vincoli:
 \begin{itemize}
@@ -81,7 +81,7 @@ Nello specifico, la piattaforma opera nel rispetto dei seguenti vincoli:
 La configurazione di un nuovo servizio di database (per esempio Microsoft SQL Server o PostgreSQL) avviene tramite l'interfaccia di amministrazione della piattaforma e prevede i seguenti passaggi:
 \begin{enumerate}
     \item \textbf{Selezione del connettore nativo}: viene individuato il \gls{dbms} sorgente dall'elenco dei connettori supportati;
-    \item \textbf{Parametri di connessione e di rete}: vengono inseriti l'indirizzo IP dell'\emph{host}, la porta di comunicazione dedicata e il nome del database da scansionare (per esempio il database \emph{AdventureWorks});
+    \item \textbf{Parametri di connessione e di rete}: vengono inseriti l'indirizzo IP dell'host, la porta di comunicazione dedicata e il nome del database da scansionare (per esempio il database \emph{AdventureWorks});
     \item \textbf{Credenziali dedicate}: vengono fornite le credenziali di accesso, profilate secondo il \gls{minimoprivilegio} (\emph{Principle of Least Privilege}), sufficienti per accedere alle tabelle di sistema;
     \item \textbf{Verifica e filtri di inclusione}: dopo aver testato la connessione, vengono definite eventuali regole di filtraggio tramite espressioni regolari per limitare la scansione a specifici schemi o tabelle di interesse.
 \end{enumerate}
@@ -141,7 +141,7 @@ Prima di applicare le modifiche, OpenMetadata mostra un'anteprima di validazione
 
 
 \section{Ricerca e Data Discovery}
-La funzionalità di \emph{Data Discovery} rappresenta il principale punto di accesso al catalogo dati. È accessibile da qualsiasi pagina tramite la barra di ricerca posta in alto. 
+La funzionalità di \textbf{Data Discovery} rappresenta il principale punto di accesso al catalogo dati. È accessibile da qualsiasi pagina tramite la barra di ricerca posta in alto. 
 Nella pratica, OpenMetadata funziona come un vero e proprio motore di ricerca interno: permette a tutti gli utenti di trovare velocemente le informazioni relative a qualsiasi asset aziendale.
 
 \subsection{Ricerca semplice e filtri rapidi}
@@ -160,12 +160,12 @@ Questi ultimi permettono di restringere il perimetro di esplorazione in base a p
 
 \subsection{Ricerca avanzata tramite Query Builder}
 Per gestire cataloghi complessi e grandi volumi di metadati, OpenMetadata mette a disposizione la funzionalità di ricerca avanzata (\emph{Advanced Search}), 
-basata su un \emph{query builder} visuale. Questo strumento consente di comporre interrogazioni complesse combinando molteplici condizioni attraverso gli operatori logici
+basata su un \emph{Query Builder} visuale. Questo strumento consente di comporre interrogazioni complesse combinando molteplici condizioni attraverso gli operatori logici
  \texttt{AND} e \texttt{OR}. I filtri possono essere applicati a diversi parametri chiave, tra cui:
 \begin{itemize}
     \item \textbf{\emph{Owner}}: Il proprietario o il team responsabile dell'asset.
     \item \textbf{\emph{Tag}}: La classificazione di sicurezza o riservatezza assegnata (es. \texttt{PII.Sensitive}).
-    \item \textbf{\emph{Tier}}: Il livello di importanza strategica dell'\emph{asset} per l'organizzazione.
+    \item \textbf{\emph{Tier}}: Il livello di importanza strategica dell'asset per l'organizzazione.
     \item \textbf{\emph{Service} e \emph{Database Schema}}: Il servizio di origine e lo schema logico di appartenenza.
     \item \textbf{\emph{Column}}: La presenza di specifiche colonne all'interno della struttura della tabella.
 \end{itemize}
@@ -189,7 +189,7 @@ mirate, quali ad esempio: «Mostra tutte le tabelle del database AdventureWorks,
 \subsection{Ricerca semantica con embedding vettoriali}
 Dal punto di vista architetturale, è opportuno distinguere i due motori di ricerca integrabili nella piattaforma:
 \begin{itemize}
-    \item \textbf{Ricerca \emph{Full-Text} (Elasticsearch)}: Configurazione predefinita nelle installazioni locali standard; garantisce un'indicizzazione rapida e risposte ad altissima velocità basate sulla corrispondenza esatta di parole chiave e sottostringhe.
+    \item \textbf{Ricerca \emph{full-text} (Elasticsearch)}: Configurazione predefinita nelle installazioni locali standard; garantisce un'indicizzazione rapida e risposte ad altissima velocità basate sulla corrispondenza esatta di parole chiave e sottostringhe.
     \item \textbf{Ricerca semantica (OpenSearch)}: Funzionalità avanzata destinata agli ambienti di produzione; richiede OpenSearch come backend e si integra con servizi esterni di \emph{embedding} vettoriali (come OpenAI o AWS Bedrock).
 \end{itemize}
 
@@ -202,7 +202,7 @@ nell'installazione locale di default, ma rappresenta un'evoluzione strategica pe
 
 
 \section{Data Lineage}
-Il \emph{Data Lineage} rappresenta la mappatura del ciclo di vita del dato, dalla sua origine fino alla destinazione finale. All'interno di un catalogo aziendale, 
+Il \textbf{Data Lineage} rappresenta la mappatura del ciclo di vita del dato, dalla sua origine fino alla destinazione finale. All'interno di un catalogo aziendale, 
 questo concetto si traduce nella rappresentazione visiva ed \emph{end-to-end} del percorso e delle trasformazioni delle informazioni, 
 illustrando come queste vengano estratte dalle sorgenti primarie, elaborate attraverso \emph{pipeline} di trasformazione e, infine, esposte nei report aziendali.
 
@@ -221,7 +221,7 @@ basato su meccanismi \emph{drag-and-drop}, consentendo agli utenti autorizzati d
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{schermate/lineage.png}
-    \caption{Esempio di grafo di \emph{Data Lineage} della tabella \texttt{Customer} in OpenMetadata}
+    \caption{Esempio di grafo di Data Lineage della tabella \texttt{Customer} in OpenMetadata}
     \label{fig:lineage}
 \end{figure}
 
@@ -233,7 +233,7 @@ per identificare preventivamente quali tabelle, \emph{pipeline} e report verrebb
 L'interfaccia di visualizzazione del \emph{lineage} supporta inoltre l'attivazione di diversi livelli informativi (\emph{Layers}):
 \begin{itemize}
     \item \textbf{\emph{Column Layer}}: per evidenziare le dipendenze tra i singoli attributi;
-    \item \textbf{\emph{Observability Layer}}: per integrare direttamente sul grafo gli esiti dei test di \emph{Data Quality}, consentendo di individuare visivamente il punto in cui si è verificata un'anomalia sui dati;
+    \item \textbf{\emph{Observability Layer}}: per integrare direttamente sul grafo gli esiti dei test di Data Quality, consentendo di individuare visivamente il punto in cui si è verificata un'anomalia sui dati;
     \item \textbf{\emph{Data Product Layer}}: per evidenziare la composizione e l'origine dei dataset curati messi a disposizione dei vari domini aziendali;
     \item \textbf{\emph{Service Layer}}: per visualizzare come i dati fluiscono attraverso piattaforme e servizi differenti;
     \item \textbf{\emph{Domain Layer}}: per organizzare i dataset e gli asset raggruppandoli all'interno di categorie di business pertinenti.
@@ -243,6 +243,6 @@ L'interfaccia di visualizzazione del \emph{lineage} supporta inoltre l'attivazio
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{schermate/lineage_layers.png}
-    \caption{Applicazione dei livelli informativi (\emph{Layers}) sul grafo del \emph{Data Lineage}}
+    \caption{Applicazione dei livelli informativi (\emph{Layers}) sul grafo del Data Lineage}
     \label{fig:lineage_layers}
 \end{figure}

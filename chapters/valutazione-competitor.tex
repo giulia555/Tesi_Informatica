@@ -2,7 +2,7 @@
 \chapter{Valutazione di piattaforme di Data Catalog}
 \label{cap:valutazione-competitor}
 
-\intro{Dopo l'analisi dei requisiti aziendali, lo studio è proseguito con la valutazione e il confronto delle principali piattaforme open-source di Data Catalog 
+\intro{Dopo l'analisi dei requisiti aziendali, lo studio è proseguito con la valutazione e il confronto delle principali piattaforme \emph{open-source} di Data Catalog 
     presenti sul mercato, con l'obiettivo di individuare lo strumento più adatto alle esigenze di Wintech.}\\
 
 \section{Criteri di valutazione}\label{sec:criteri}
@@ -57,19 +57,19 @@ scartate perché offrivano funzionalità puramente verticali o richiedevano inst
     \vspace*{2pt} \includegraphics[height=1cm, keepaspectratio]{purview.png} & Proprietaria (SaaS). Costi legati all'ecosistema Azure. & Servizio Cloud gestito, non necessita di installazione locale.\\
     \midrule
     \textbf{Atlan} \newline 
-    \vspace*{2pt} \includegraphics[height=1cm, keepaspectratio]{atlan.png} & Proprietaria (Enterprise). Costi elevati. & Servizio Cloud gestito, non necessita di installazione locale.\\
+    \vspace*{2pt} \includegraphics[height=1cm, keepaspectratio]{atlan.png} & Proprietaria (\emph{enterprise}). Costi elevati. & Servizio Cloud gestito, non necessita di installazione locale.\\
     \midrule
     \textbf{OpenMetadata} \newline 
-    \vspace*{2pt} \includegraphics[height=1cm, keepaspectratio]{logo-openmetadata.png} & Open-source (Apache 2.0). Gratuito per uso \emph{enterprise}. & \emph{On-premise} (Docker nativo, macchina virtuale o Kubernetes).\\
+    \vspace*{2pt} \includegraphics[height=1cm, keepaspectratio]{logo-openmetadata.png} & \emph{open-source} (Apache 2.0). Gratuito per uso \emph{enterprise}. & \emph{On-premise} (Docker nativo, macchina virtuale o Kubernetes).\\
     \midrule
     \textbf{DataHub} \newline 
-    \vspace*{2pt} \includegraphics[height=1cm, keepaspectratio]{datahub.png} & Open-source (Apache 2.0). Gratuito (versione OSS). & \emph{On-premise} (Docker Desktop o Docker Compose).\\
+    \vspace*{2pt} \includegraphics[height=1cm, keepaspectratio]{datahub.png} & \emph{open-source} (Apache 2.0). Gratuito (versione OSS). & \emph{On-premise} (Docker Desktop o Docker Compose).\\
     \midrule
     \textbf{Open Data Discovery} \newline 
-    \vspace*{2pt} \includegraphics[height=0.4cm, keepaspectratio]{odd.png} & Open-source (Apache 2.0). Gratuito. & \emph{On-premise} (Docker Compose o Kubernetes).\\
+    \vspace*{2pt} \includegraphics[height=0.4cm, keepaspectratio]{odd.png} & \emph{open-source} (Apache 2.0). Gratuito. & \emph{On-premise} (Docker Compose o Kubernetes).\\
     \midrule
     \textbf{Gravitino} \newline 
-    \vspace*{2pt} \includegraphics[height=0.8cm, keepaspectratio]{gravitino.jpg} & Open-source (Apache 2.0). Gratuito. & \emph{On-premise} (Docker o \emph{build} da codice sorgente).\\
+    \vspace*{2pt} \includegraphics[height=0.8cm, keepaspectratio]{gravitino.jpg} & \emph{open-source} (Apache 2.0). Gratuito. & \emph{On-premise} (Docker o \emph{build} da codice sorgente).\\
 \end{longtable}
 
 
@@ -125,7 +125,7 @@ La tabella seguente offre una visione d'insieme dei risultati e riassume l'esito
     Audit e conformità normativa & \textcolor{green!60!black}{\checkmark} & \textcolor{orange!80!black}{\checkmark / $\times$} & \textcolor{orange!80!black}{\checkmark / $\times$} & \textcolor{red}{$\times$} \\ \midrule
     Gestione degli accessi & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} \\ \midrule
     Data Lineage e tracciabilità delle modifiche & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} \\ \midrule
-    Query Analytics & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} & \textcolor{red}{$\times$} \\ \midrule
+    \emph{Query Analytics} & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} & \textcolor{red}{$\times$} \\ \midrule
     Glossario aziendale & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} \\ \midrule
     Collaborazione e comunicazione & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} & \textcolor{orange!80!black}{\checkmark / $\times$} & \textcolor{red}{$\times$} \\ \midrule
     Integrazione Power BI & \textcolor{green!60!black}{\checkmark} & \textcolor{red}{$\times$} & \textcolor{orange!80!black}{\checkmark / $\times$} & \textcolor{red}{$\times$} \\ \midrule
@@ -146,20 +146,20 @@ DataHub e Gravitino non dispongono di strumenti di Data Quality nativi, delegand
 Sul fronte dell'individuazione dei dati sensibili, OpenMetadata è l'unica piattaforma a offrire un motore di classificazione automatica integrato: il sistema scansiona i dati e identifica automaticamente 
 le informazioni personali o sensibili, tramite espressioni regolari e tecniche di \gls{nlp}.
 
-DataHub, ODD e Gravitino supportano esclusivamente l'assegnazione manuale dei \emph{tag} di classificazione, richiedendo uno sforzo maggiore per 
+DataHub, ODD e Gravitino supportano esclusivamente l'assegnazione manuale dei tag di classificazione, richiedendo uno sforzo maggiore per 
 garantire la sicurezza dei dati e la conformità alle normative.
 
 Tutte le piattaforme garantiscono la gestione degli accessi basata sui ruoli (\gls{rbac}), con la possibilità di definire permessi granulari su dataset e metadati in base al profilo dell'utente.
 
 \subsection{Data Lineage e \emph{Query Analytics}}
 Il \textbf{\gls{datalineage}} consente di tracciare visivamente il percorso completo di un dato dalla sorgente alla destinazione finale, sia a livello di tabella che di singola colonna. 
-A questo si affianca l'\textbf{\emph{Impact Analysis}}, che mostra automaticamente quali dataset, pipeline o report dipendono da un determinato campo e potrebbero essere influenzati da una sua modifica. 
+A questo si affianca l'\textbf{\emph{Impact Analysis}}, che mostra automaticamente quali dataset, \emph{pipeline} o report dipendono da un determinato campo e potrebbero essere influenzati da una sua modifica. 
 La \textbf{\emph{Schema Evolution}} permette invece di tracciare nel tempo le modifiche apportate alla struttura di un dataset, come l'aggiunta o la rimozione di colonne. 
 Infine, la \textbf{\emph{Query Analytics}} raccoglie e analizza i pattern di utilizzo delle query eseguite sui dati, fornendo informazioni su quali tabelle vengono interrogate più frequentemente e da chi.
 
 OpenMetadata, ODD e DataHub offrono tutti una visualizzazione grafica del Data Lineage con supporto all'\emph{Impact Analysis}; OpenMetadata e ODD supportano anche il tracciamento dell'evoluzione degli schemi nel tempo.
 
-Sul fronte della \emph{Query Analytics}, OpenMetadata e DataHub si distinguono per la capacità di raccogliere i \emph{log} delle query eseguite sulle fonti dati, fornendo informazioni utili per l'ottimizzazione e la \emph{governance}; ODD non supporta questa funzionalità.
+Sul fronte della \emph{Query Analytics}, OpenMetadata e DataHub si distinguono per la capacità di raccogliere i log delle query eseguite sulle fonti dati, fornendo informazioni utili per l'ottimizzazione e la \emph{governance}; ODD non supporta questa funzionalità.
 
 Infine, OpenMetadata e ODD supportano il \emph{Popularity Scoring}, che assegna automaticamente un punteggio di popolarità ai dataset in base alla frequenza di consultazione, migliorando la qualità dei risultati di ricerca nella fase di Data Discovery. 
 
@@ -171,11 +171,11 @@ Il \textbf{glossario aziendale} consente di definire e centralizzare i termini e
 Gli strumenti di collaborazione permettono invece agli utenti di interagire direttamente sugli asset del catalogo, lasciando commenti, inviando richieste e ricevendo notifiche, 
 anche tramite l'integrazione con piattaforme di comunicazione aziendale come Microsoft Teams o Slack.
 
-Viene valutata anche la disponibilità di un \textbf{server \gls{mcp}}, che consente ad agenti AI di accedere al contesto dei metadati aziendali, e la presenza di funzionalità di ricerca semantica basata su \gls{embedding}.
+Viene valutata anche la disponibilità di un \textbf{server \gls{mcp}}, che consente ad agenti AI di accedere al contesto dei metadati aziendali, e la presenza di funzionalità di ricerca semantica basata su \emph{\gls{embedding}}.
 
 OpenMetadata supporta nativamente l'integrazione con Microsoft Teams, Slack e altri strumenti di comunicazione, consente di aprire conversazioni e assegnare task direttamente sugli asset e dispone di un glossario aziendale completo.
 
-Sul fronte AI, è l'unica piattaforma a disporre di un server MCP integrato nativamente, compatibile con client come Claude e ChatGPT, e supporta la ricerca semantica tramite embedding vettoriali con \gls{opensearch}.
+Sul fronte AI, è l'unica piattaforma a disporre di un server MCP integrato nativamente, compatibile con client come Claude e ChatGPT, e supporta la ricerca semantica tramite \emph{embedding} vettoriali con \gls{opensearch}.
 
 Sia ODD che DataHub offrono un glossario aziendale per la standardizzazione dei termini. 
 ODD si limita a supportare l'integrazione con Slack e la possibilità di lasciare commenti sui dataset, ma senza raggiungere la stessa profondità di integrazione di OpenMetadata. 
@@ -185,7 +185,7 @@ DataHub e Gravitino non offrono integrazione con strumenti di comunicazione azie
 
 \subsection{Integrazione con la BI}
 L'integrazione con le piattaforme di Business Intelligence consente di centralizzare nel catalogo anche le risorse analitiche aziendali, tracciando il Data Lineage completo 
-dalle tabelle dei database sorgente fino ai report e alle dashboard usati per le decisioni di \emph{business}. Per Wintech questo criterio riguarda la connessione nativa con \textbf{Microsoft Power BI}.
+dalle tabelle dei database sorgente fino ai report e alle dashboard usati per le decisioni di business. Per Wintech questo criterio riguarda la connessione nativa con \textbf{Microsoft Power BI}.
 
 OpenMetadata dispone di un connettore nativo che, tramite le API di Power BI, importa nel catalogo i metadati di report, dashboard e modelli dati, ricostruendo automaticamente il Data Lineage completo. L'integrazione richiede una licenza Power BI Pro.
 
@@ -198,7 +198,7 @@ L'analisi e la valutazione di OpenMetadata e dei \emph{competitor} si è conclus
 
 OpenMetadata si è dimostrato un software completo e capace di soddisfare pienamente i requisiti aziendali individuati in fase di Analisi dei Requisiti.
 
-Open Data Discovery (ODD) si è rivelato un solido candidato per quanto riguarda i software open-source. Tuttavia, in un confronto diretto, è risultato meno performante rispetto a OpenMetadata per quanto 
+Open Data Discovery (ODD) si è rivelato un solido candidato per quanto riguarda i software \emph{open-source}. Tuttavia, in un confronto diretto, è risultato meno performante rispetto a OpenMetadata per quanto 
 riguarda alcune funzionalità, tra cui la classificazione automatica dei dati sensibili, che è uno dei requisiti più importanti.
 
 A monte di queste considerazioni si è deciso di proseguire lo studio solo su OpenMetadata, testandone e documentandone le funzionalità e le caratteristiche.

@@ -5,11 +5,11 @@
 % 1. Necessità: ogni requisito inserito nella lista deve soddisfare un bisogno aziendale reale ed esplicito.
 % 2. Sufficienza: I requisiti elencati devono coprire tutti i bisogni dell'azienda.
 
-\intro{In questa sezione vengono analizzati i casi d'uso e i requisiti aziendali riguardanti l'introduzione di un \textit{Data Catalog} nell'infrastruttura di Wintech. 
+\intro{In questa sezione vengono analizzati i casi d'uso e i requisiti aziendali riguardanti l'introduzione di un Data Catalog nell'infrastruttura di Wintech. 
 L'analisi ha lo scopo di filtrare gli strumenti attualmente presenti sul mercato, individuando quelli che meglio rispondono ai requisiti dell'azienda e alle sue reali esigenze operative.}\\
 
 \section{Attori del sistema}
-In ambito aziendale possono essere molteplici le figure che hanno la necessità di accedere a un \textit{Data Catalog}, ognuna con esigenze e competenze diverse. 
+In ambito aziendale possono essere molteplici le figure che hanno la necessità di accedere a un Data Catalog, ognuna con esigenze e competenze diverse. 
 Ai fini dell'analisi dei requisiti, si individuano i seguenti attori principali:
 \begin{itemize}
     \item \textbf{Analista o sviluppatore di BI}: Utente finale del catalogo, il cui obiettivo è ricercare e accedere ai dati provenienti da varie fonti, comprenderne il significato e 
@@ -20,7 +20,7 @@ Ai fini dell'analisi dei requisiti, si individuano i seguenti attori principali:
 
 
 \section{Casi d'uso}
-In questa sezione vengono analizzati i casi d'uso e gli scenari per cui l'azienda ha bisogno di adottare un \textit{Data Catalog}. 
+In questa sezione vengono analizzati i casi d'uso e gli scenari per cui l'azienda ha bisogno di adottare un Data Catalog. 
 Per maggiore chiarezza organizzativa, i casi d'uso vengono suddivisi in tre macroaree raggruppate in base all'attore primario coinvolto.\\
 Ogni caso d'uso è identificato dalla seguente notazione:
 \begin{center}
@@ -86,9 +86,9 @@ Ogni caso d'uso è identificato dalla seguente notazione:
 
 \begin{usecase}{1.4}{Visualizzazione delle fonti dati collegate}
     \usecaseactors{Amministratore di sistema, Utente generico}
-    \usecasedesc{L'amministratore visualizza l'inventario delle fonti dati, cioè l'insieme delle fonti di dati che popolano il \textit{Data Catalog}}
+    \usecasedesc{L'amministratore visualizza l'inventario delle fonti dati, cioè l'insieme delle fonti di dati che popolano il Data Catalog}
     \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di amministratore}
-    \usecasepost{L'attore accede all'elenco completo delle fonti di dati importate nel \textit{Data Catalog}}
+    \usecasepost{L'attore accede all'elenco completo delle fonti di dati importate nel Data Catalog}
     \usecasemain{
         \begin{enumerate}
             \item L'attore seleziona l'opzione per visualizzare l'elenco delle fonti dati del catalogo dati.
@@ -251,7 +251,7 @@ Ogni caso d'uso è identificato dalla seguente notazione:
 \begin{usecase}{2.3}{Classificazione manuale dei dati tramite flag}
     \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
     \usecasedesc{L'attore assegna manualmente tag ai dati presenti nel catalogo per classificarli secondo diversi parametri, tra cui la sensibilità del dato, l'area tematica 
-    di appartenenza, il reparto di riferimento o altri criteri aziendali. Questo caso d'uso si applica sia come fallback quando il motore di classificazione automatica non ha 
+    di appartenenza, il reparto di riferimento o altri criteri aziendali. Questo caso d'uso si applica sia come \emph{fallback} quando il motore di classificazione automatica non ha 
     individuato un dato sensibile, sia in modo indipendente per arricchire la classificazione dei dati con tag personalizzati}
     \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di responsabile della governance ed è presente almeno un set di dati nel Data Catalog}
     \usecasepost{I dati selezionati sono stati classificati tramite tag e il sistema li riconosce e li tratta di conseguenza, applicando le regole associate a ciascun tag}
@@ -552,13 +552,13 @@ Ogni caso d'uso è identificato dalla seguente notazione:
 
 \begin{usecase}{3.5}{Monitoraggio di un dataset}
     \usecaseactors{Analista, sviluppatore di BI o utente che consulta il catalogo}
-    \usecasedesc{L'utente monitora un particolare dataset di suo interesse "seguendolo" (\textit{Follow}) o salvandolo nei preferiti, al fine di ricevere notifiche automatiche in caso di aggiornamenti o modifiche strutturali, e per potervi accedere rapidamente tramite un elenco di preferiti}
+    \usecasedesc{L'utente monitora un particolare dataset di suo interesse "seguendolo" (\emph{Follow}) o salvandolo nei preferiti, al fine di ricevere notifiche automatiche in caso di aggiornamenti o modifiche strutturali, e per potervi accedere rapidamente tramite un elenco di preferiti}
     \usecasepre{L'attore ha effettuato l'accesso alla piattaforma ed è presente almeno un set di dati nel Data Catalog}
     \usecasepost{L'attore ha aggiunto il dataset ai preferiti e riceve notifiche automatiche in caso di modifiche o aggiornamenti}
     \usecasemain{
         \begin{enumerate}
             \item L'attore accede alla pagina di dettaglio di un dato di suo interesse.
-            \item L'attore seleziona l'opzione per seguire/salvare il dato (per esempio un pulsante Follow o Bookmark).
+            \item L'attore seleziona l'opzione per seguire/salvare il dato (per esempio un pulsante \emph{Follow} o \emph{Bookmark}).
             \item Il sistema aggiunge il dato alla dashboard personale dell'utente o a una sezione apposita per l'accesso rapido.
             \item Il sistema invia notifiche all'attore se il dato subisce variazioni, aggiornamenti o segnalazioni.
         \end{enumerate}
@@ -703,7 +703,7 @@ Ogni caso d'uso è identificato dalla seguente notazione:
 
 \section{Requisiti}
 In questa sezione vengono elencati e descritti i requisiti derivanti dallo studio dei casi d'uso, con l'obiettivo di avere un quadro chiaro delle caratteristiche 
-che un \textit{Data Catalog} deve avere per rispondere alle esigenze aziendali. Per ogni requisito vengono forniti una descrizione e il tracciamento verso i casi d'uso correlati.\\
+che un Data Catalog deve avere per rispondere alle esigenze aziendali. Per ogni requisito vengono forniti una descrizione e il tracciamento verso i casi d'uso correlati.\\
 
 Ogni requisito è identificato dalla seguente notazione:
 \begin{center}
@@ -841,8 +841,8 @@ RF-OP-2 & L'utente può scegliere la modalità specifica di pseudonimizzazione d
 RF-OP-3 & L'utente può esportare i risultati della ricerca dei dati sensibili per finalità di audit o reportistica. & UC-2.7 \\ \midrule
 RF-OP-4 & L'utente può visualizzare lo stato di salute dei dataset in una dashboard dedicata (anomalie, nulli, duplicati). & UC-2.9 \\ \midrule
 RF-OP-5 & La piattaforma garantisce funzionalità di verifica e revisione dei termini del glossario prima di approvarli. & UC-2.12 \\ \midrule
-RF-OP-6 & La piattaforma supporta il Bulk Upload dei termini del glossario (importazione in blocco). & UC-2.12 \\ \midrule
-RF-OP-7 & La piattaforma supporta il Bulk Export dei termini del glossario (esportazione in blocco). & UC-2.12 \\ \midrule
+RF-OP-6 & La piattaforma supporta il \emph{Bulk Upload/Import} dei termini del glossario (importazione in blocco). & UC-2.12 \\ \midrule
+RF-OP-7 & La piattaforma supporta il \emph{Bulk Export} dei termini del glossario (esportazione in blocco). & UC-2.12 \\ \midrule
 RF-OP-8 & Il sistema assegna un numero di versione a un dataset dopo ogni modifica dei metadati, mantenendo lo storico. & UC-3.4 \\ \midrule
 RF-OP-9 & Il sistema supporta la connessione con Power BI come fonte dati per importarne i metadati. & UC-3.11 \\ \midrule
 RF-OP-10 & Il sistema permette di importare il lineage tra tabelle dei database e dashboard di Power BI. & UC-3.11 \\ \midrule
@@ -882,9 +882,9 @@ I requisiti di vincolo rappresentano le limitazioni tecnologiche, normative, arc
 
 % REQUISITI OBBLIGATORI
 RV-O-1 & Il sistema deve garantire l'identificazione e la classificazione automatica o manuale dei dati sensibili (PII) per assicurare la piena conformità aziendale al regolamento GDPR (UE 2016/679). & UC-1.7, 2.1 \\ \midrule
-RV-O-2 & L'applicativo deve poter essere rilasciato e gestito tramite tecnologia a container (es. Docker) o codice sorgente per integrarsi nell'infrastruttura IT esistente. & Wintech Spa \\ \midrule
+RV-O-2 & L'applicativo deve poter essere rilasciato e gestito tramite tecnologia a Container (es. Docker) o codice sorgente per integrarsi nell'infrastruttura IT esistente. & Wintech Spa \\ \midrule
 RV-O-3 & L'interfaccia utente del Data Catalog deve essere accessibile dai principali browser web supportati dall'azienda (es. Google Chrome, Microsoft Edge, Mozilla Firefox). & Wintech Spa \\ \midrule
-RV-O-4 & Il software deve possedere una licenza Open Source che ne permetta l'uso e la modifica a fini commerciali senza costi di licenza vincolanti. & Wintech Spa \\ \midrule
+RV-O-4 & Il software deve possedere una licenza \emph{open-source} che ne permetta l'uso e la modifica a fini commerciali senza costi di licenza vincolanti. & Wintech Spa \\ \midrule
 RV-O-5 & L'architettura del sistema deve limitarsi all'estrazione e indicizzazione dei soli metadati, garantendo che i dati fisici non vengano in alcun caso duplicati o memorizzati nel catalogo. & Wintech Spa \\ \midrule
 RV-O-6 & L'infrastruttura aziendale deve garantire che le porte di rete 8585 (per l'interfaccia utente di OpenMetadata) e 8080 (per il motore di orchestrazione Apache Airflow) siano libere e accessibili. & - \\ \midrule
 RV-O-7 & L'importazione dei metadati da Power BI richiede una licenza Power BI Pro o superiore. & UC-3.11 \\
@@ -921,11 +921,11 @@ I requisiti di qualità descrivono le caratteristiche misurabili che il sistema 
 \endlastfoot
 
 % REQUISITI OBBLIGATORI
-RQ-O-1 & Il sistema deve integrare nativamente un modello di sicurezza Role-Based Access Control (RBAC), garantendo che solo le figure autorizzate possano gestire policy e permessi. & UC-1.5, 2.1 \\ \midrule
+RQ-O-1 & Il sistema deve integrare nativamente un modello di sicurezza \gls{rbac}, garantendo che solo le figure autorizzate possano gestire policy e permessi. & UC-1.5, 2.1 \\ \midrule
 RQ-O-2 & Il sistema in ambiente di produzione richiede risorse hardware stimate per 10-16 GB di RAM, 150-200 GB di spazio disco e 4 vCPU. & - \\ \midrule
 RQ-O-3 & Il tempo di risposta dell'interfaccia utente per l'esecuzione di una ricerca testuale all'interno del catalogo deve essere istantaneo (inferiore a 1 secondo nel 95\% dei casi). & - \\ \midrule
 RQ-O-4 & Il sistema deve fornire una rappresentazione puramente visiva e interattiva del Data Lineage, permettendo agli utenti di navigare le dipendenze senza scrivere query. & UC-3.3 \\ \midrule
-RQ-O-5 & Il sistema deve garantire un'alta disponibilità (uptime), assicurando che l'accesso al catalogo sia garantito per almeno il 99\% del tempo di operatività richiesto. & - \\
+RQ-O-5 & Il sistema deve garantire un'alta disponibilità, assicurando che l'accesso al catalogo sia garantito per almeno il 99\% del tempo di operatività richiesto. & - \\
 
 \end{longtable}
 
