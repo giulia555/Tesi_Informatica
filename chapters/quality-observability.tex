@@ -84,7 +84,7 @@ L'infrastruttura di testing di OpenMetadata organizza i controlli secondo una ge
     \item \texttt{columnValuesToMatchRegex}: verifica la conformità sintattica delle stringhe tramite espressioni regolari strutturate.
 \end{itemize}
 
-\subsection{Caso di studio: Validazione sintattica e simulazione di anomalia}
+\subsection{Applicazione pratica: validazione sintattica sul database di test}
 A titolo esemplificativo, per dimostrare l'efficacia del motore di \emph{Data Quality}, si è implementato un test di tipo \texttt{columnValuesToMatchRegex} sul campo 
 \texttt{EmailAddress} della tabella \texttt{Customer}, appartenente al database di test \emph{AdventureWorks}. Il vincolo di validità formale è stato imposto associando 
 al test la seguente espressione regolare per la verifica degli indirizzi e-mail:
@@ -113,28 +113,124 @@ Business Intelligence situati a valle, preservando la correttezza della reportis
 \end{figure}
 
 
+\subsection{Gestione degli incidenti}
+Quando un controllo di qualità rileva un'anomalia, la semplice registrazione dell'errore nei log di sistema non è sufficiente. L'assenza di un tracciamento diretto 
+costringe i team a coordinarsi tramite e-mail o chat esterne, causando frammentazione e ritardi nei tempi di risoluzione.
 
-\section{Gestione degli incidenti}
-Nelle moderne architetture orientate al paradigma \emph{DataOps}, la rilevazione di un'anomalia qualitativa sui dati rappresenta solo il primo passo di un processo più ampio di risoluzione del problema. Trattare i fallimenti dei controlli di qualità come semplici messaggi di log isolati genera frammentazione e ritardi nei tempi di ripristino (\emph{Mean Time to Resolution} --- MTTR), a causa del coordinamento manuale tra i team via e-mail o chat aziendali\cite{site:secure-docs}. 
+Per ovviare a questo problema, OpenMetadata integra un modulo nativo di gestione degli incidenti (\textbf{\emph{Incident Manager}}). Questo strumento centralizzato trasforma 
+il fallimento di un test da un semplice errore di log a un vero e proprio flusso di lavoro collaborativo, strutturato e storicizzabile.
 
-Per ovviare a questo problema, in linea con i requisiti di gestione delle segnalazioni e di collaborazione sui problemi dei dati, OpenMetadata integra un modulo nativo di gestione degli incidenti (\textbf{\emph{Incident Manager}})\cite{site:openmetadata-docs, site:manuale-utente}. Questo strumento centralizzato, accessibile sia a livello di singolo asset sia tramite una dashboard globale (\emph{Observability > Incidents}), traduce i fallimenti dei test di qualità in flussi di lavoro collaborativi, strutturati e storicizzabili\cite{site:openmetadata-docs, site:manuale-utente}.
+\subsubsection{Ciclo di vita dell'anomalia}
+L'evoluzione di un incidente viene monitorata attraverso quattro transizioni di stato, visibili sia sulla pagina del singolo asset di dati sia in una dashboard globale riepilogativa:
+\begin{itemize}
+    \item \textbf{Rilevamento e creazione (Stato \emph{New})}: La piattaforma apre automaticamente l'incidente al primo fallimento della \emph{Test Suite}, compilando una scheda diagnostica con tutte le evidenze tecniche raccolte(asset compromesso, nome del test fallito e stringa d'errore).
+    \item \textbf{Presa in carico (Stato \emph{Acknowledged})}: Il \emph{Data Steward} o l'amministratore competente riceve la notifica e aggiorna lo stato in \emph{Ack}, ovvero dichiara la presa in carico dell'anomalia. Questo passaggio segnala al resto dell'azienda l'avvio formale delle attività di analisi e abilita una sezione commenti per coordinare il lavoro direttamente sulla piattaforma.
+    \item \textbf{Assegnazione (Stato \emph{Assigned})}: L'intervento pratico per correggere il dato alla sorgente viene delegato a un utente o a un team di sviluppo specifico, definendo in modo chiaro le responsabilità operative.
+    \item \textbf{Risoluzione e chiusura (Stato \emph{Resolved})}: Una volta corretta la causa dell'anomalia, l'operatore incaricato chiude definitivamente l'incidente.
+\end{itemize}
 
-\subsection{Ciclo di vita dell'anomalia}
-L'evoluzione dell'incidente viene monitorata e gestita attraverso quattro fasi operative e transizioni di stato sequenziali, mutuate dalle migliori pratiche di \emph{IT Service Management} (\gls{sdlc})\cite{site:secure-docs, site:manuale-utente}:
+Per garantire una reportistica adeguata, la piattaforma impone di motivare la chiusura dell'incidente; l'utente deve infatti categorizzare la causa radice selezionandola 
+tra cinque classi standardizzate:
+\begin{itemize}
+    \item \emph{False Positive}: l'errore era dovuto a un'errata configurazione del test o a una soglia non aggiornata;
+    \item \emph{Missing Data}: assenza parziale o totale di record attesi;
+    \item \emph{Duplicates}: presenza di chiavi duplicate o record ridondanti;
+    \item \emph{Out of Bounds}: valori numerici o temporali fuori dai range di accettazione;
+    \item \emph{Other}: cause non incluse nelle categorie precedenti.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{schermate/incident_manager.png}
+    \caption{Dashboard globale \emph{Incident Manager}, raffigurante un incidente assegnato in fase di risoluzione}
+    \label{fig:incident_manager}
+\end{figure}
+
+\section{Data collaboration e sistemi di notifica}
+Affinché le procedure di \emph{Data Quality} e la gestione degli incidenti risultino realmente efficaci, la sola rilevazione tecnica delle anomalie non è sufficiente: 
+gli utenti, gli sviluppatori e gli analisti devono poter comunicare in modo fluido e tempestivo. I metodi di monitoraggio tradizionali, basati esclusivamente sul controllo 
+manuale dei cruscotti o sullo scambio di e-mail o messaggi, si rivelano spesso inefficienti e dispersivi.
+
+Per questo motivo, OpenMetadata non si limita a catalogare i dati, ma integra strumenti di collaborazione (\emph{Data Collaboration}) e sistemi di avviso automatico 
+(\emph{alerting}) che mantengono gli utenti costantemente aggiornati. 
+
+Il valore aggiunto della \emph{Data Collaboration} risiede nella contestualizzazione delle comunicazioni: invece di utilizzare chat generiche, 
+gli utenti possono segnalare anomalie, avvisi o modifiche direttamente all'interno della scheda del dato interessato. Questo approccio fornisce un contesto preciso alla 
+comunicazione, ne previene la frammentazione e garantisce che lo storico delle decisioni rimanga ordinato e sempre accessibile.
+
+\subsection{Strumenti di Data Collaboration}
+Durante lo stage, sono state testate le principali funzionalità di collaborazione offerte nativamente dalla piattaforma:
+\begin{itemize}
+    \item \textbf{\emph{Conversation Threads}}: In qualsiasi pagina del catalogo, gli utenti possono avviare conversazioni, lasciare commenti e menzionare direttamente altri utenti. Questo elimina la necessità di utilizzare piattaforme esterne per chiedere chiarimenti su uno specifico dataset.
+    \item \textbf{Gestione dei \emph{Task}}: Qualora un utente rilevi una mancanza (ad esempio, una descrizione assente o un tag mancante), può aprire un \emph{task} e assegnarlo a un utente. La risoluzione del compito è tracciabile e integrata nella piattaforma.
+    \item \textbf{Annunci (\emph{Announcements})}: Permettono agli amministratori di impostare dei \emph{banner} informativi visibili a tutti gli utenti che seguono un determinato dataset, rivelandosi particolarmente utili per comunicare imminenti manutenzioni, modifiche strutturali o deprecazioni.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{schermate/risoluzion_task.png}
+    \caption{Interfaccia di tracciamento e risoluzione di un task assegnato a un utente per l'aggiornamento della descrizione di una tabella}
+    \label{fig:risoluzione_task}
+   \end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{schermate/annuncio_home.png}
+    \caption{Visualizzazione di un annuncio globale (\emph{Announcement}) nella pagina principale per avvisare gli utenti di modifiche imminenti ai dati}
+    \label{fig:annuncio_home}
+\end{figure}
+
+Ogni interazione alimenta un pannello riepilogativo generale, definito \emph{Activity Feed}, che consente agli operatori di avere una panoramica immediata e centralizzata 
+sulle attività e sulle menzioni che li riguardano.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{schermate/activity_feed.png}
+    \caption{Il pannello \emph{Activity Feed}, che accentra tutte le interazioni, i \emph{task} e gli aggiornamenti di stato per l'utente}
+    \label{fig:activity_feed}
+\end{figure}
+
+\subsection{Configurazione degli alert}
+Agli strumenti di collaborazione manuale si affianca un sistema di \emph{alerting} proattivo, progettato per recapitare istantaneamente le notifiche generate dalla piattaforma. 
+OpenMetadata differenzia gli allarmi in due macro-categorie:
 \begin{enumerate}
-    \item \textbf{Rilevamento e Creazione (Stato \emph{New}):} al primo fallimento di un'asserzione logica nella \emph{Test Suite}, la piattaforma genera automaticamente un nuovo record di incidente nello stato \emph{New}\cite{site:openmetadata-docs, site:manuale-utente}. Il sistema compila autonomamente la scheda descrittiva includendo tutte le evidenze tecniche raccolte: l'asset compromesso (tabella e colonna), il nome del test fallito, la marca temporale dell'esecuzione e la stringa di errore diagnostico dettagliata\cite{site:openmetadata-docs, site:manuale-utente};
-    \item \textbf{Presa in Carico (Stato \emph{Acknowledged}):} un amministratore o un \emph{Data Steward} associato al dominio di appartenenza prende visione della notifica e dichiara la presa in carico dell'anomalia, modificando lo stato in \emph{Ack} (o \emph{Acknowledged})\cite{site:openmetadata-docs, site:manuale-utente}. Questa transizione segnala al resto dell'organizzazione l'avvio formale delle attività di ispezione e analisi della causa radice, sfruttando la sezione commenti integrata per raccogliere considerazioni e scambiare feedback tecnici senza uscire dalla piattaforma (\textbf{RF-D-31})\cite{site:openmetadata-docs, site:manuale-utente};
-    \item \textbf{Assegnazione (Stato \emph{Assigned}):} la responsabilità della risoluzione pratica del problema sui database sorgente viene formalmente delegata a un utente o a un team di sviluppo specifico\cite{site:openmetadata-docs, site:manuale-utente}. La piattaforma tiene traccia dell'assegnatario, garantendo la chiara suddivisione delle responsabilità e facilitando il monitoraggio dei tempi di intervento\cite{site:openmetadata-docs, site:manuale-utente};
-    \item \textbf{Risoluzione e Chiusura (Stato \emph{Resolved}):} una volta corretta la causa dell'anomalia (ad esempio bonificando i record corrotti all'origine o aggiornando la \emph{Test Suite} in caso di evoluzione dello schema), l'incaricato imposta lo stato su \emph{Resolved}\cite{site:openmetadata-docs, site:manuale-utente}. Ai fini di una corretta storicizzazione e per supportare l'analisi statistica successiva sui flussi (\emph{post-mortem audit}), OpenMetadata impone la categorizzazione obbligatoria della causa della chiusura, selezionabile tra le classi standardizzate\cite{site:openmetadata-docs, site:manuale-utente}:
-    \begin{itemize}
-        \item \emph{False Positive:} l'errore era dovuto a un'errata configurazione del test o a una soglia non aggiornata;
-        \item \emph{Missing Data:} assenza parziale o totale di record attesi;
-        \item \emph{Duplicates:} presenza di chiavi duplicate o record ridondanti;
-        \item \emph{Out of Bounds:} valori numerici o temporali fuori dai range di accettazione;
-        \item \emph{Other:} cause residue non incluse nelle categorie precedenti.
-    \end{itemize}
+    \item \textbf{\emph{System \& Governance Alerts}}: Monitorano le variazioni ai metadati e le attività di collaborazione (es. modifiche alle descrizioni, assegnazione di nuovi \emph{task} o l'inserimento di un nuovo termine nel Glossario).
+    \item \textbf{\emph{Data Observability Alerts}}: Rilevano le anomalie prettamente tecniche (es. fallimento dei test di qualità, interruzione delle \emph{pipeline} di estrazione o mutamenti non previsti nella struttura delle tabelle).
 \end{enumerate}
 
+La configurazione di queste notifiche è modulare e si basa su regole di instradamento molto precise. L'amministratore definisce innanzitutto la sorgente dell'evento 
+(\emph{Source}), applica dei filtri per circoscrivere l'allarme (ad esempio, limitando le notifiche alle sole tabelle di un determinato dominio) e stabilisce infine il 
+canale di destinazione (\emph{Destination}), che può comprendere utenti interni alla piattaforma o sistemi aziendali esterni.
 
-\section{Sistemi di alerting e notifica}
-% e anche data collaboration
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{schermate/nuovo_alert.png}
+    \caption{Configurazione della sorgente di un \emph{alert}, con l'isolamento degli eventi legati ai test di qualità (\emph{Test case})}
+    \label{fig:nuovo_alert}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{schermate/destinazioni_alert.png}
+    \caption{Selezione del canale di destinazione dell'allarme}
+    \label{fig:destinazioni_alert}
+\end{figure}
+
+\subsection{Integrazione con Microsoft Teams}
+Poiché Wintech adotta la \emph{suite} Microsoft 365 come ambiente primario di comunicazione aziendale, durante lo stage si è collaudata la fattibilità tecnica dell'integrazione 
+tra OpenMetadata, i server di posta elettronica e la piattaforma \textbf{Microsoft Teams}.
+
+Per quanto concerne la notifica via e-mail, la configurazione ha richiesto l'associazione di un server \emph{relay} SMTP aziendale, permettendo al catalogo di inviare messaggi 
+formali in caso di fallimento dei controlli qualitativi.
+
+L'integrazione con Microsoft Teams, invece, è stata testata sfruttando il \emph{framework} dei \textbf{Workflow Webhooks}, in sostituzione dei vecchi \emph{Office 365 Connectors}. 
+Il flusso di comunicazione automatico collaudato prevede i seguenti passaggi:
+\begin{enumerate}
+    \item In presenza di un evento rilevante (come il fallimento del test sull'indirizzo e-mail analizzato in precedenza), OpenMetadata genera un pacchetto di dati (\emph{payload}) strutturato in formato JSON, contenente i metadati dell'anomalia.
+    \item Il pacchetto viene inviato tramite una richiesta di rete a un indirizzo univoco e sicuro generato da Microsoft Teams.
+    \item La notifica viene renderizzata nel canale di destinazione utilizzando il formato standardizzato \textbf{Adaptive Cards}, che consente di visualizzare blocchi informativi interattivi.
+\end{enumerate}
+
+L'esito di questo collaudo ha dimostrato come l'uso delle \emph{Adaptive Cards} (?) consenta al \emph{team} di visualizzare direttamente su Teams la natura dell'errore e 
+di cliccare su appositi pulsanti di azione rapida per essere reindirizzati istantaneamente alla pagina dell'incidente su OpenMetadata, azzerando di fatto i tempi di latenza 
+nella comunicazione dei guasti.
