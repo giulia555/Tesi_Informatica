@@ -12,11 +12,11 @@ manuali complesse o interventi ripetitivi da parte dell'utente.
 Gli agenti si attivano automaticamente nel momento in cui viene registrato un nuovo servizio o quando viene avviata una sincronizzazione con le fonti originali, 
 operando in background secondo una pianificazione personalizzabile. Ciascun agente assolve a compiti specifici e mirati all'interno della piattaforma:
 \begin{itemize}
-    \item \textbf{Metadata Agent}: Costituisce l'agente primario ed è prerequisito per il funzionamento dell'intera piattaforma. Si occupa dell'estrazione e della sincronizzazione dei metadati dalle sorgenti collegate.
-    \item \textbf{Profiler Agent}: Raccoglie metriche e statistiche descrittive sui dati a livello di tabella e di singola colonna (per esempio, calcolando la percentuale di valori nulli, il numero di valori distinti, gli intervalli minimi e massimi). I risultati alimentano direttamente la scheda di \emph{Data Quality} di ciascun dataset e forniscono la base quantitativa su cui vengono valutati i test di qualità.
-    \item \textbf{AutoClassification Agent}: Analizza i campioni di testo prelevati dal Profiler Agent per alimentare il motore di \emph{Entity Recognition} basato su tecniche NLP, identificando automaticamente le informazioni personali e sensibili e applicando i relativi tag di sicurezza.
-    \item \textbf{Lineage Agent}: Analizza i log delle query SQL e le definizioni delle viste per ricostruire in modo automatico il grafo delle dipendenze tra i dati.
-    \item \textbf{Usage Agent e agenti specializzati}: Raccolgono le statistiche di utilizzo delle tabelle per alimentare il punteggio di popolarità (\emph{Popularity Scoring}) e le \emph{Query Analytics}.
+    \item \textbf{\emph{Metadata Agent}}: Costituisce l'agente primario ed è prerequisito per il funzionamento dell'intera piattaforma. Si occupa dell'estrazione e della sincronizzazione dei metadati dalle sorgenti collegate.
+    \item \textbf{\emph{Profiler Agent}}: Raccoglie metriche e statistiche descrittive sui dati a livello di tabella e di singola colonna (per esempio, calcolando la percentuale di valori nulli, il numero di valori distinti, gli intervalli minimi e massimi). I risultati alimentano direttamente la scheda di \emph{Data Quality} di ciascun dataset e forniscono la base quantitativa su cui vengono valutati i test di qualità.
+    \item \textbf{\emph{AutoClassification Agent}}: Analizza i campioni di testo prelevati dal \emph{Profiler Agent} per alimentare il motore di \emph{Entity Recognition} basato su tecniche NLP, identificando automaticamente le informazioni personali e sensibili e applicando i relativi tag di sicurezza.
+    \item \textbf{\emph{Lineage Agent}}: Analizza i log delle query SQL e le definizioni delle viste per ricostruire in modo automatico il grafo delle dipendenze tra i dati.
+    \item \textbf{\emph{Usage Agent} e agenti specializzati}: Raccolgono le statistiche di utilizzo delle tabelle per alimentare il punteggio di popolarità (\emph{Popularity Scoring}) e le \emph{Query Analytics}.
 \end{itemize}
 
 \begin{figure}[H]
@@ -57,7 +57,7 @@ basata su sei criteri fondamentali, standardizzati a livello internazionale dal 
 come una condizione indispensabile per l'affidabilità e l'interoperabilità dei sistemi informativi\cite{site:agid-linee-guida}.
 
 Nel contesto del progetto di stage, per rispondere a questa esigenza e superare l'inefficienza dei controlli manuali, si è scelto di tradurre questi principi teorici 
-in regole di validazione programmabili e automatizzate, nonchè costantemente verificabili.
+in regole di validazione programmabili e automatizzate, nonché costantemente verificabili.
 
 Per facilitare il monitoraggio di queste asserzioni, OpenMetadata aggrega i risultati all'interno di una \emph{dashboard} centralizzata di \emph{Data Quality}, 
 che restituisce una panoramica globale sullo stato di copertura dei test e sulle singole dimensioni qualitative del dato.
@@ -65,7 +65,7 @@ che restituisce una panoramica globale sullo stato di copertura dei test e sulle
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{schermate/dashboard_dataquality.png}
-    \caption{Dashboard globale di Data Quality, con il dettaglio delle metriche aggregate per dimensione qualitativa}
+    \caption{Dashboard globale di \emph{Data Quality}, con il dettaglio delle metriche aggregate per dimensione qualitativa}
     \label{fig:dashboard_dataquality}
 \end{figure}
 
@@ -93,10 +93,10 @@ al test la seguente espressione regolare per la verifica degli indirizzi e-mail:
 \end{verbatim}
 
 \begin{figure}[H]
-   \centering
-   \includegraphics[width=1\textwidth]{schermate/configurazione_test.png}
-   \caption{Configurazione dell'espressione regolare per la validazione del campo EmailAddress}
-   \label{fig:configurazione_test}
+    \centering
+    \includegraphics[width=1\textwidth]{schermate/configurazione_test.png}
+    \caption{Configurazione dell'espressione regolare per la validazione del campo EmailAddress}
+    \label{fig:configurazione_test}
 \end{figure}
 
 \noindent Come documentato durante le fasi di collaudo dello stage, l'esecuzione di questa \emph{Test Suite} ha registrato un fallimento, in quanto non tutti i \emph{record} 
@@ -146,12 +146,12 @@ tra cinque classi standardizzate:
     \label{fig:incident_manager}
 \end{figure}
 
-\section{Data collaboration e sistemi di notifica}
+\section{Data Collaboration e sistemi di notifica}
 Affinché le procedure di \emph{Data Quality} e la gestione degli incidenti risultino realmente efficaci, la sola rilevazione tecnica delle anomalie non è sufficiente: 
 gli utenti, gli sviluppatori e gli analisti devono poter comunicare in modo fluido e tempestivo. I metodi di monitoraggio tradizionali, basati esclusivamente sul controllo 
 manuale dei cruscotti o sullo scambio di e-mail o messaggi, si rivelano spesso inefficienti e dispersivi.
 
-Per questo motivo, OpenMetadata non si limita a catalogare i dati, ma integra strumenti di collaborazione (\emph{Data Collaboration}) e sistemi di avviso automatico 
+Per questo motivo, OpenMetadata non si limita a catalogare i dati, ma integra strumenti di collaborazione (\textbf{\emph{Data Collaboration}}) e sistemi di avviso automatico 
 (\emph{alerting}) che mantengono gli utenti costantemente aggiornati. 
 
 Il valore aggiunto della \emph{Data Collaboration} risiede nella contestualizzazione delle comunicazioni: invece di utilizzare chat generiche, 
@@ -171,12 +171,12 @@ Durante lo stage, sono state testate le principali funzionalità di collaborazio
     \includegraphics[width=1\textwidth]{schermate/risoluzion_task.png}
     \caption{Interfaccia di tracciamento e risoluzione di un task assegnato a un utente per l'aggiornamento della descrizione di una tabella}
     \label{fig:risoluzione_task}
-   \end{figure}
+\end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{schermate/annuncio_home.png}
-    \caption{Visualizzazione di un annuncio globale (\emph{Announcement}) nella pagina principale per avvisare gli utenti di modifiche imminenti ai dati}
+    \caption{Visualizzazione di un annuncio globale nella pagina principale per avvisare gli utenti di modifiche ai dati}
     \label{fig:annuncio_home}
 \end{figure}
 
@@ -186,51 +186,55 @@ sulle attività e sulle menzioni che li riguardano.
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{schermate/activity_feed.png}
-    \caption{Il pannello \emph{Activity Feed}, che accentra tutte le interazioni, i \emph{task} e gli aggiornamenti di stato per l'utente}
+    \caption{Il pannello \emph{Activity Feed}, che raccoglie interazioni, \emph{task} e aggiornamenti per l'utente}
     \label{fig:activity_feed}
 \end{figure}
 
 \subsection{Configurazione degli alert}
-Agli strumenti di collaborazione manuale si affianca un sistema di \emph{alerting} proattivo, progettato per recapitare istantaneamente le notifiche generate dalla piattaforma. 
+Per evitare controlli manuali continui delle dashboard di \emph{Data Quality}, la piattaforma offre un sistema di \emph{alerting} automatico, che notifica tempestivamente eventi critici agli utenti. 
 OpenMetadata differenzia gli allarmi in due macro-categorie:
 \begin{enumerate}
     \item \textbf{\emph{System \& Governance Alerts}}: Monitorano le variazioni ai metadati e le attività di collaborazione (es. modifiche alle descrizioni, assegnazione di nuovi \emph{task} o l'inserimento di un nuovo termine nel Glossario).
-    \item \textbf{\emph{Data Observability Alerts}}: Rilevano le anomalie prettamente tecniche (es. fallimento dei test di qualità, interruzione delle \emph{pipeline} di estrazione o mutamenti non previsti nella struttura delle tabelle).
+    \item \textbf{\emph{Data Observability Alerts}}: Rilevano le anomalie tecniche (es. fallimento dei test di qualità, interruzione delle \emph{pipeline} di estrazione o mutamenti non previsti nella struttura delle tabelle).
 \end{enumerate}
 
-La configurazione di queste notifiche è modulare e si basa su regole di instradamento molto precise. L'amministratore definisce innanzitutto la sorgente dell'evento 
-(\emph{Source}), applica dei filtri per circoscrivere l'allarme (ad esempio, limitando le notifiche alle sole tabelle di un determinato dominio) e stabilisce infine il 
-canale di destinazione (\emph{Destination}), che può comprendere utenti interni alla piattaforma o sistemi aziendali esterni.
+La configurazione di questi allarmi segue una logica modulare strutturata in tre fasi sequenziali:
+\begin{itemize}
+    \item Si definisce la sorgente dell'evento (\emph{Source}).
+    \item Si applicano dei filtri per limitare il raggio d'azione (\emph{Filters}), ad esempio circoscrivendo la notifica ai soli dati di un dominio specifico.
+    \item Si imposta il canale di destinazione (\emph{Destination}), decidendo se recapitare il messaggio all'interno della piattaforma stessa oppure instradarlo verso i sistemi aziendali esterni.
+\end{itemize}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{schermate/nuovo_alert.png}
-    \caption{Configurazione della sorgente di un \emph{alert}, con l'isolamento degli eventi legati ai test di qualità (\emph{Test case})}
+    \caption{Configurazione della sorgente di un \emph{alert} in riferimento a test di qualità}
     \label{fig:nuovo_alert}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{schermate/destinazioni_alert.png}
-    \caption{Selezione del canale di destinazione dell'allarme}
+    \caption{Selezione del canale di destinazione dell'alert}
     \label{fig:destinazioni_alert}
 \end{figure}
 
 \subsection{Integrazione con Microsoft Teams}
-Poiché Wintech adotta la \emph{suite} Microsoft 365 come ambiente primario di comunicazione aziendale, durante lo stage si è collaudata la fattibilità tecnica dell'integrazione 
+Poiché Wintech adotta la \emph{suite} Microsoft 365 come ambiente primario di comunicazione aziendale, durante lo stage si è testata la fattibilità tecnica dell'integrazione 
 tra OpenMetadata, i server di posta elettronica e la piattaforma \textbf{Microsoft Teams}.
 
-Per quanto concerne la notifica via e-mail, la configurazione ha richiesto l'associazione di un server \emph{relay} SMTP aziendale, permettendo al catalogo di inviare messaggi 
+Per quanto concerne le notifiche via e-mail, la configurazione ha richiesto l'associazione di un server SMTP aziendale, permettendo al catalogo di inviare comunicazioni 
 formali in caso di fallimento dei controlli qualitativi.
 
-L'integrazione con Microsoft Teams, invece, è stata testata sfruttando il \emph{framework} dei \textbf{Workflow Webhooks}, in sostituzione dei vecchi \emph{Office 365 Connectors}. 
-Il flusso di comunicazione automatico collaudato prevede i seguenti passaggi:
+L'integrazione con Microsoft Teams, invece, può essere configurata sfruttando la tecnologia dei \emph{Webhook}, un meccanismo standard per la comunicazione in tempo reale tra 
+applicazioni web. Va precisato che, in seguito alla dismissione dei precedenti \emph{Office 365 Connector} da parte di Microsoft, l'integrazione si basa oggi sui più recenti \emph{Workflow Webhook}, 
+che veicolano le notifiche in formato \emph{Adaptive Card}. Il flusso automatico di notifica prevede i seguenti passaggi:
 \begin{enumerate}
-    \item In presenza di un evento rilevante (come il fallimento del test sull'indirizzo e-mail analizzato in precedenza), OpenMetadata genera un pacchetto di dati (\emph{payload}) strutturato in formato JSON, contenente i metadati dell'anomalia.
+    \item In presenza di un evento critico (come il fallimento di un test), OpenMetadata genera un pacchetto di dati (\emph{payload}) strutturato in formato JSON, contenente i dettagli dell'anomalia.
     \item Il pacchetto viene inviato tramite una richiesta di rete a un indirizzo univoco e sicuro generato da Microsoft Teams.
-    \item La notifica viene renderizzata nel canale di destinazione utilizzando il formato standardizzato \textbf{Adaptive Cards}, che consente di visualizzare blocchi informativi interattivi.
+    \item La notifica viene ricevuta dal sistema ed elaborata per essere pubblicata istantaneamente come messaggio formattato all'interno del canale aziendale prescelto.
 \end{enumerate}
 
-L'esito di questo collaudo ha dimostrato come l'uso delle \emph{Adaptive Cards} (?) consenta al \emph{team} di visualizzare direttamente su Teams la natura dell'errore e 
-di cliccare su appositi pulsanti di azione rapida per essere reindirizzati istantaneamente alla pagina dell'incidente su OpenMetadata, azzerando di fatto i tempi di latenza 
-nella comunicazione dei guasti.
+L'adozione di questo approccio consente al team di visualizzare direttamente sulla propria chat di Teams la natura dell'errore. La presenza di collegamenti diretti 
+all'interno della notifica permette all'utente di essere reindirizzato immediatamente alla pagina dell'incidente su OpenMetadata, abbattendo di fatto i tempi di 
+latenza nella gestione dei guasti.

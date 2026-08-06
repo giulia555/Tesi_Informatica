@@ -16,12 +16,12 @@ tramite \gls{wsl}2 o macchina virtuale\footnote{Si è scelto di non utilizzare D
     \item \textbf{Spazio su disco}: Almeno 30--40 GB di spazio libero.
 \end{itemize}
 
-Dal punto di vista software, i requisiti fondamentali prevedono Git per il controllo di versione, Docker Engine (versione 20.10.0 o superiore) e Docker Compose (versione v2.1.1 o superiore). 
+Dal punto di vista software, i requisiti fondamentali prevedono Git per il controllo di versione, Docker Engine (versione 20.10.0 o superiore) e Docker Compose (versione 2.1.1 o superiore). 
 L'architettura locale di OpenMetadata viene orchestrata attraverso quattro container distinti:
 \begin{enumerate}
     \item \textbf{Database di sistema}: Un'istanza PostgreSQL o MySQL dedicata al salvataggio dello stato, delle configurazioni e dei metadati gestiti dalla piattaforma.
     \item \textbf{OpenMetadata Server}: Il backend centrale della piattaforma sviluppato in Java.
-    \item \textbf{OpenMetadata Ingestion (\emph{Apache Airflow})}: Il motore di orchestrazione responsabile dell'esecuzione automatica e pianificata delle pipeline di estrazione dati.
+    \item \textbf{OpenMetadata Ingestion (Apache Airflow)}: Il motore di orchestrazione responsabile dell'esecuzione automatica e pianificata delle pipeline di estrazione dati.
     \item \textbf{Motore di ricerca}: Un container ElasticSearch (o \gls{opensearch}) dedicato all'indicizzazione dei metadati e alla ricerca \emph{full-text}.
 \end{enumerate}
 
@@ -135,8 +135,8 @@ all'orario e con la frequenza stabiliti, preservando la coerenza delle informazi
 \subsection{Modifica dei metadati tramite Bulk Import \& Export}
 Per facilitare la gestione del catalogo su larga scala, OpenMetadata supporta la funzionalità di \emph{Bulk Import} \& \emph{Export} tramite file in formato CSV per tutti i principali asset. 
 
-L'operazione di \textbf{Bulk Export} consente di scaricare in locale un file CSV contenente l'inventario completo dei metadati di un asset. Tale file funge anche da modello per la successiva fase 
-di \textbf{Bulk Import}: l'utente può aggiornare o arricchire offline i metadati di un asset, per poi ricaricare il CSV sulla piattaforma. 
+L'operazione di \textbf{\emph{Bulk Export}} consente di scaricare in locale un file CSV contenente l'inventario completo dei metadati di un asset. Tale file funge anche da modello per la successiva fase 
+di \textbf{\emph{Bulk Import}}: l'utente può aggiornare o arricchire offline i metadati di un asset, per poi ricaricare il CSV sulla piattaforma. 
 Prima di applicare le modifiche, OpenMetadata mostra un'anteprima di validazione in tempo reale che permette di verificare e correggere eventuali errori direttamente da browser.
 
 
@@ -171,7 +171,7 @@ basata su un \emph{query builder} visuale. Questo strumento consente di comporre
 \end{itemize}
 
 Attraverso gli operatori di confronto messi a disposizione (tra cui \emph{Equal to}, \emph{Any in}, \emph{Contains} e le rispettive negazioni), l'utente può formulare interrogazioni 
-mirate, quali ad esempio: \emph{"Mostra tutte le tabelle del database AdventureWorks, schema SalesLT, che possiedono il tag PII.Sensitive e il cui proprietario è un Admin"}.
+mirate, quali ad esempio: «Mostra tutte le tabelle del database AdventureWorks, schema SalesLT, che possiedono il tag \texttt{PII.Sensitive} e il cui proprietario è un \emph{Admin}».
 
 \begin{figure}[H]
     \centering
@@ -210,8 +210,8 @@ illustrando come queste vengano estratte dalle sorgenti primarie, elaborate attr
 All'interno di OpenMetadata, il grafo del \emph{lineage} viene ricostruito in modo automatico dal \emph{Lineage Agent}, che analizza i log delle query SQL 
 eseguite sulle fonti originali, le definizioni delle viste e le configurazioni degli strumenti di BI, ricostruendo le relazioni di dipendenza secondo due principali livelli di granularità:
 \begin{itemize}
-    \item \textbf{Table-Level Lineage}: Mostra le connessioni ad alto livello tra intere entità (database, tabelle e report), ricostruendo il percorso \emph{end-to-end} del dato dalla sorgente (\emph{upstream}) fino alla destinazione finale (\emph{downstream}).
-    \item \textbf{Column-Level Lineage}: Traccia il percorso di derivazione fino al dettaglio della singola colonna. Questa funzionalità risulta fondamentale ai fini della conformità al GDPR, poiché permette di verificare esattamente come un campo contenente dati personali o sensibili si propaga tra le tabelle e i sistemi aziendali.
+    \item \textbf{\emph{Table-Level Lineage}}: Mostra le connessioni ad alto livello tra intere entità (database, tabelle e report), ricostruendo il percorso \emph{end-to-end} del dato dalla sorgente (\emph{upstream}) fino alla destinazione finale (\emph{downstream}).
+    \item \textbf{\emph{Column-Level Lineage}}: Traccia il percorso di derivazione fino al dettaglio della singola colonna. Questa funzionalità risulta fondamentale ai fini della conformità al GDPR, poiché permette di verificare esattamente come un campo contenente dati personali o sensibili si propaga tra le tabelle e i sistemi aziendali.
 \end{itemize}
 
 
@@ -234,8 +234,8 @@ L'interfaccia di visualizzazione del \emph{lineage} supporta inoltre l'attivazio
 \begin{itemize}
     \item \textbf{\emph{Column Layer}}: per evidenziare le dipendenze tra i singoli attributi;
     \item \textbf{\emph{Observability Layer}}: per integrare direttamente sul grafo gli esiti dei test di \emph{Data Quality}, consentendo di individuare visivamente il punto in cui si è verificata un'anomalia sui dati;
-    \item \textbf{\emph{Data Product Layer}}: per evidenziare la composizione e l'origine dei dataset curati messi a disposizione dei vari domini aziendali.
-    \item \textbf{\emph{Service Layer}}: per visualizzare come i dati fluiscono attraverso piattaforme e servizi differenti.
+    \item \textbf{\emph{Data Product Layer}}: per evidenziare la composizione e l'origine dei dataset curati messi a disposizione dei vari domini aziendali;
+    \item \textbf{\emph{Service Layer}}: per visualizzare come i dati fluiscono attraverso piattaforme e servizi differenti;
     \item \textbf{\emph{Domain Layer}}: per organizzare i dataset e gli asset raggruppandoli all'interno di categorie di business pertinenti.
 \end{itemize}
 
