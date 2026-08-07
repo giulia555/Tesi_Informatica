@@ -104,11 +104,211 @@ In questo scenario, l'adozione di un Data Catalog aziendale come OpenMetadata di
 applicando i relativi tag di sicurezza e mappando i flussi informativi, il catalogo fornisce all'azienda uno strumento concreto per garantire la conformità al ciclo di sviluppo sicuro  
 e alle direttive imposte dal GDPR, trasformando i vincoli legali in regole tecniche implementate in modo proattivo.
 
+
 \section{Classificazione dei dati}
+Nel contesto della Data Governance, la classificazione dei dati rappresenta il processo logico mediante il quale si associano etichette semantiche (tag) agli asset informativi 
+per descriverne in modo standardizzato la natura, l'area di business, l'appartenenza aziendale e il livello di riservatezza. Questa operazione agevola le attività di Data Discovery, 
+consentendo agli utenti di cercare e filtrare gli elementi del catalogo, e sta alla base del rispetto delle policy di sicurezza e della conformità normativa, con particolare riferimento al GDPR.
+
+Per configurare correttamente un catalogo dati aziendale, è fondamentale riconoscere quali tipologie di informazioni necessitano di maggiore tutela, come i 
+dati sensibili e personali. A tal proposito, l'Articolo 4 del GDPR fornisce la seguente definizione di \textbf{dato personale}\cite{site:gdpr}:
+\begin{quoting}
+    «Qualsiasi informazione riguardante una persona fisica identificata o identificabile (\emph{interessato}); si considera identificabile la persona fisica che può essere identificata, direttamente o indirettamente, con particolare riferimento a un identificativo come 
+    il nome, un numero di identificazione, dati relativi all'ubicazione, un identificativo online o a uno o più elementi caratteristici della sua identità fisica, fisiologica, genetica, psichica, economica, culturale o sociale.»
+\end{quoting}
+
+Le linee guida aziendali di Wintech si adeguano a questa normativa, classificando le informazioni nelle seguenti macro-categorie:
+\begin{itemize}
+    \item \textbf{Dati identificativi (\gls{pii})}: Dati che consentono di identificare direttamente o indirettamente una persona.
+    \item \textbf{Dati particolari/sensibili (Art. 9 GDPR)}: Dati personali che necessitano di una maggiore protezione poiché il loro trattamento potrebbe creare rischi significativi ai diritti o alle libertà fondamentali dell'interessato; si tratta per esempio di: origine razziale o etnica, opinione politica, ideologie religiose o filosofiche, appartenenza sindacale, dati genetici o biometrici, dati relativi alla salute o alla vita sessuale.
+    \item \textbf{Dati giudiziari}: Dati relativi alle condanne penali e ai reati o a connesse misure di sicurezza; la gestione di queste informazioni è consentita sotto il controllo di un'autorità pubblica.
+\end{itemize}
+
+\noindent Viene fatta anche una distinzione tra i seguenti concetti:
+\begin{itemize}
+    \item \textbf{Dati pseudonimizzati}: Dati che vengono sostituiti da pseudonimi, in cui l'assegnazione degli pseudonimi è tale da non poter essere invertita e gli attributi collegati allo pseudonimo non sono sufficienti per identificare l'interessato. Tuttavia, i dati pseudonimizzati possono essere violati e l'interessato può essere identificato, pertanto sono soggetti al GDPR.
+    \item \textbf{Dati anonimizzati}: Informazioni modificate in modo irreversibile, al punto che il titolare del trattamento non può identificare l'interessato. I dati resi anonimi non sono più considerati personali e quindi escono dal perimetro del GDPR.
+    \item \textbf{Metadati}: I dati personali possono essere memorizzati in un sistema ICT in modo tale da non essere facilmente visibili all'utente del sistema. L'interessato deve essere a conoscenza dell'esistenza di tali dati sotto forma di metadati o del loro trattamento per tale scopo.
+    \item \textbf{Dati non richiesti}: Informazioni personali fornite volontariamente dall'utente anche quando non richieste dal trattamento. Il rischio di raccogliere informazioni personali indesiderate può essere ridotto considerando le misure di tutela della privacy al momento della progettazione del software.
+\end{itemize}
+
+\noindent Data la specificità di queste categorie, una gestione manuale efficace della classificazione e del controllo dei dati personali risulterebbe molto complessa. 
+In questo contesto, la funzionalità di auto-classificazione di un Data Catalog come OpenMetadata assume un ruolo chiave: la piattaforma scansiona gli asset di dati 
+alla ricerca di queste categorie, sfruttando motori di Intelligenza Artificiale o espressioni regolari.
+
+\subsection{Tassonomia dei tag}
+OpenMetadata organizza i tag all'interno di categorie logiche centralizzate, denominate \emph{Classifications}. Per garantire una corretta gestione dei 
+metadati e tradurre i requisiti normativi in regole tecniche, la piattaforma fornisce alcune classificazioni di sistema predefinite. Tali categorie non possono essere 
+eliminate, ma guidano l'assegnazione corretta delle etichette:
+\begin{itemize}
+    \item \textbf{PII}: Classificazione standard concepita per l'identificazione e la mappatura delle informazioni personali, fondamentale per la conformità al GDPR. Include il tag \texttt{PII.NonSensitive}, utilizzato per dati identificativi generici e a basso rischio (come nome, cognome o e-mail aziendale), e il tag \texttt{PII.Sensitive}, obbligatorio per gli identificatori critici (come codici fiscali, password o coordinate bancarie). L'assegnazione di quest'ultimo innesca automaticamente logiche di anonimizzazione per gli utenti sprovvisti dei privilegi giusti.
+    \item \textbf{PersonalData}: Classificazione complementare per mappare i dati riferibili a persone fisiche, suddivisa in \texttt{PersonalData.Personal} e \texttt{PersonalData.SpecialCategory}. Quest'ultimo tag è destinato ai dati particolari (Art. 9 del GDPR, come dati biometrici o sanitari) e ai dati giudiziari, imponendo un approccio di massima chiusura che ne limita l'accesso esclusivamente alle autorità o ai ruoli aziendali espressamente autorizzati.
+    \item \textbf{\emph{Tier} (Livello)}: Utilizzata per suddividere gli asset in base alla loro rilevanza strategica e architetturale per l'organizzazione. Comprende cinque livelli gerarchici standard, da \texttt{Tier.Tier1} (assegnato ad asset contenenti dati critici e insostituibili per il business) fino a \texttt{Tier.Tier5} (associato a informazioni marginali o secondarie).
+    \item \textbf{\emph{Certification} (Certificazione)}: Impiegata all'interno delle procedure di Data Quality per qualificare visivamente l'affidabilità di un dataset. Questa tassonomia si articola nei tag gerarchici \texttt{Bronze}, \texttt{Silver} e \texttt{Gold}, permettendo agli analisti di Business Intelligence di verificare all'istante se un dato è stato validato e approvato prima di importarlo nei report.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.9\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{schermate/tag_pii.png}
+        \caption{Tassonomia PII}
+    \end{subfigure}
+    
+    \vspace{0.4cm}
+    
+    \begin{subfigure}[b]{0.9\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{schermate/tag_tier.png}
+        \caption{Tassonomia Tier}
+    \end{subfigure}
+    
+    \caption{Pannelli di gestione delle classificazioni di sistema}
+    \label{fig:tassonomie_sistema}
+\end{figure}
+
+\noindent Oltre alle tassonomie predefinite, la piattaforma supporta la creazione di classificazioni personalizzate, adattabili alle specifiche policy interne 
+di Wintech, per esempio per contrassegnare dati con un tag che ne indica il livello di «confidenzialità».
+
+Ogni classificazione può essere configurata attivando l'opzione di mutua esclusione. Se abilitata, questa proprietà garantisce l'integrità logica della classificazione, 
+impedendo che a un singolo asset vengano associati contemporaneamente due tag contrastanti appartenenti alla medesima tassonomia.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{schermate/tag_personalizzato.png}
+    \caption[Esempio di classificazione personalizzata]{Esempio di classificazione personalizzata \texttt{DataClassification}, configurata con l'opzione di mutua esclusione (\emph{Mutually Exclusive}) attivata}
+    \label{fig:tag_personalizzato}
+\end{figure}
+
+\subsection{Classificazione automatica}
+L'\emph{Auto-Classification} è un workflow di OpenMetadata che rileva e classifica automaticamente i dati sensibili nelle colonne dei database, eliminando la necessità 
+di tagging manuale. Questa procedura, eseguita in background e integrabile all'interno delle \emph{pipeline} di sincronizzazione programmata, sfrutta l'operato 
+dell'\emph{AutoClassification Agent} per scansionare le sorgenti collegate, applicando o suggerendo etichette come \texttt{PII.Sensitive} e \texttt{PII.NonSensitive}.
+
+Il motore di \emph{auto-classificazione} utilizza due approcci complementari: 
+\begin{enumerate}
+    \item \textbf{\emph{Column Name Scanner}}: Esegue una scansione strutturale rapida dei metadati, confrontando i nomi fisici delle colonne del database con un elenco di espressioni regolari (regex) predefinite o parole chiave note (identificando, ad esempio, colonne nominate \texttt{email}, \texttt{phone} o \texttt{fiscal\_code}).
+    \item \textbf{\emph{Named Entity Recognition} (NER)}: Qualora sia stata abilitata la raccolta di dati campione (\emph{Sample Data}) durante la fase di \emph{ingestion}, il motore NLP analizza il contenuto testuale reale dei record estratti per dedurne semanticamente la natura, identificando le informazioni personali anche in presenza di colonne con nomenclatura generica o non strutturata.
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{schermate/dati_sensibili.png}
+    \caption[Tabella con tag PII applicati automaticamente]{Esempio di una tabella in cui il motore di auto-classificazione ha applicato automaticamente il tag \texttt{PII.Sensitive} alle colonne contenenti dati personali}
+    \label{fig:dati_sensibili}
+\end{figure}
+
+\subsubsection{Funzionamento dell'algoritmo di NER}
+Il modulo di NER si basa sul \emph{framework} \emph{open-source} \textbf{Microsoft Presidio}, uno strumento specializzato nella rilevazione e anonimizzazione 
+dei dati personali che si appoggia a librerie NLP (come spaCy o Stanza). 
+
+In OpenMetadata, Presidio opera come pacchetto Python eseguito direttamente all'interno dell'ambiente di Data Ingestion, gestendo il flusso dei dati in modo \emph{stateless}. 
+I dati campione prelevati dal database vengono caricati temporaneamente nella RAM del Container ed elaborati dal modello, il quale restituisce un file in formato JSON 
+contenente le informazioni rilevate. Al termine della scansione, il campione viene immediatamente distrutto dalla memoria e l'agente trasmette al server centrale 
+esclusivamente il metadato risultante (il tag di classificazione da applicare).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{autoclassificazione.png}
+    \vspace{0.2cm}
+    \caption[Rappresentazione del flusso di auto-classificazione]{Rappresentazione architetturale del flusso di auto-classificazione: i record reali vengono elaborati e distrutti all'interno del container locale, mentre al server centrale vengono trasmessi esclusivamente i metadati di classificazione. \textit{Nota: La presente infografica è stata generata con l'ausilio di un sistema di Intelligenza Artificiale}}
+    \label{fig:flusso_autoclassificazione}
+\end{figure}
+
+Per rispettare il GDPR e i vincoli di sicurezza imposti dall'infrastruttura di Wintech, l'intero processo avviene in locale e offline. A differenza degli assistenti basati 
+su cloud, i modelli linguistici necessari per l'analisi vengono scaricati una sola volta durante la fase iniziale di compilazione e installazione del Container. 
+A riprova di questo, su reti aziendali dotate di rigide policy di sicurezza, il Container può restituire l'errore \texttt{SSL: CERTIFICATE\_VERIFY\_FAILED} 
+al primo avvio, venendo bloccato dal firewall aziendale durante il tentativo di download del modello; una volta scaricato manualmente, il sistema opera totalmente 
+offline garantendo che nessuna informazione sensibile venga trasmessa all'esterno della rete aziendale.
+
+Infine, l'architettura basata su Presidio garantisce una notevole scalabilità tramite i cosiddetti \emph{Custom Recognizers}. Qualora l'azienda necessiti di intercettare 
+formati di dati specifici o interni (per esempio la sintassi proprietaria di un ID Cliente), è sufficiente sviluppare e integrare un riconoscitore personalizzato 
+all'interno della \emph{pipeline} Python, estendendo le capacità di rilevamento senza alterare i protocolli di sicurezza.
+
+
+\subsection{Limiti dell'automazione e classificazione manuale}
+Durante i test di implementazione, è emerso che la funzionalità di classificazione automatica non è esente da imprecisioni contestuali e presenta alcune limitazioni architetturali. 
+
+In primo luogo, l'efficacia del rilevamento automatico sui database aziendali dipende dall'ottimizzazione di parametri tecnici specifici:
+\begin{itemize}
+    \item \textbf{Propagazione dei prerequisiti logici}: l'esecuzione dell'\emph{AutoClassification Agent} è strettamente subordinata all'avvenuto completamento delle attività del \emph{Profiler Agent}. Poiché il motore NLP necessita del contenuto testuale reale dei record (\emph{Sample Data}) per applicare la Named Entity Recognition, è indispensabile pianificare l'esecuzione delle \emph{pipeline} garantendo che il profilo dei dati venga generato prima della scansione di classificazione;
+    \item \textbf{Regolazione del livello di fiducia (\emph{confidence level})}: per bilanciare la precisione del rilevamento, il sistema consente di calibrare una soglia minima di confidenza. Questo parametro è fondamentale per evitare sia l'insorgere di falsi positivi (dati innocui scambiati per sensibili) sia di falsi negativi (dati sensibili non rilevati).
+\end{itemize}
+
+In secondo luogo, è stato rilevato un importante vincolo relativo alla versione \emph{open-source} di OpenMetadata: il modulo è progettato per operare una classificazione 
+prevalentemente binaria a livello di GDPR, etichettando i campi sensibili in modo generico come \texttt{PII.Sensitive} o \texttt{PII.NonSensitive}. La capacità di associare 
+automaticamente tag più granulari (come \texttt{Address} o \texttt{Name}) è una funzionalità esclusiva della distribuzione commerciale (\emph{Collate}) e non è direttamente 
+fruibile nell'installazione locale standard. 
+
+A fronte di questi limiti tecnici e per garantire la massima conformità alle policy aziendali, è indispensabile una fase di classificazione e revisione manuale.
+
+In questo passaggio, figure qualificate come i \emph{data steward} o i proprietari del dato (\emph{data owners}) intervengono per validare, correggere o raffinare le 
+etichette suggerite dalla piattaforma. Questa attività permette anche di arricchire i metadati dell'asset: l'utente può inserire descrizioni contestuali dettagliate, 
+definire l'appartenenza a specifici domini aziendali e associare i campi ai termini formalizzati nel glossario.
+
+
+\subsection{Integrazione dell'AI Generativa tramite MCP} % prendere dall'appendice
+A completamento delle analisi architetturali svolte durante lo stage, si è esplorata la possibilità di integrare strumenti di Intelligenza Artificiale Generativa 
+in cloud (quali ChatGPT di OpenAI o Claude di Anthropic) per abilitare la ricerca semantica e l'interrogazione del catalogo in linguaggio naturale.
+
+Questa estensione è resa possibile dall'integrazione nativa all'interno di OpenMetadata di un server basato sullo standard \textbf{Model Context Protocol (MCP)}. % da mettere nel glossario
+L'MCP agisce come uno strato di comunicazione aperto e sicuro che espone il patrimonio dei metadati agli assistenti AI esterni, risolvendo le principali criticità 
+legate alla sicurezza dei dati e alla sovranità digitale aziendale secondo i seguenti criteri:
+\begin{itemize}
+    \item \textbf{Totale isolamento dei dati reali:} l'assistente AI in cloud non stabilisce alcuna connessione diretta con i database fisici dell'azienda. Il modello interagisce unicamente con il server MCP di OpenMetadata, il quale trasmette all'esterno esclusivamente metadati strutturali (schema delle tabelle, nomi dei campi, definizioni del glossario, tag applicati). Le informazioni effettive contenute nei database (i record reali) non lasciano mai il perimetro aziendale, garantendo la conformità alle direttive sulla sicurezza;
+    \item \textbf{Preservazione del controllo degli accessi:} l'interfacciamento dell'AI tramite server MCP eredita direttamente le policy di Data Governance e il modello di controllo degli accessi basato sui ruoli (RBAC) configurato sulla piattaforma. La connessione al server richiede un'autenticazione sicura: se l'account dell'utente che interroga l'AI non dispone delle autorizzazioni per visualizzare un determinato database, il server MCP bloccherà la richiesta, impedendo all'AI di accedere ai relativi metadati e di includerli nella risposta, escludendo qualsiasi rischio di bypass delle policy aziendali.
+\end{itemize}
+
 
 \section{Mascheramento dei dati}
+A differenza di quanto ipotizzato in fase di Analisi dei Requisiti, OpenMetadata non dispone di impostazioni personalizzabili e configurabili per l’anonimizzazione e la pseudonimizzazione dei dati, in riferimento alla possibilità di definire delle regole personalizzate per il mascheramento, totale o parziale, dei dati.
+OpenMetadata ha comunque un meccanismo automatico di mascheramento totale (anonimizzazione) dei dati classificati come PII.Sensitive e basato sui ruoli: quando una colonna o una tabella vengono classificate come PII, i relativi Sample Data vengono mascherati automaticamente e mostrati come asterischi (******) nell’interfaccia. Questo avviene solo per gli utenti che non sono Admin o Owner dell’asset.
+Gli Owner e gli Admin infatti continueranno a vedere i valori reali anche dei dati sensibili.
+Negli screenshot che seguono vengono mostrati i dati classificati come PII e successivamente anonimizzati.
+
+\subsection{Limitazioni}
+Limiti riscontrati
+•	Non è possibile scegliere tra anonimizzazione e pseudonimizzazione: il comportamento del meccanismo di mascheramento è predefinito e uguale per tutti gli asset di dati classificati come PII.Senstive.
+•	Non è possibile configurare autonomamente regole di mascheramento basate sull'aggiunta di nuovi tag di classificazione.
+•	Non sono previste funzionalità di propagazione del mascheramento ad altri sistemi esterni.
+•	Il meccanismo dipende interamente dal sistema di ownership e ruoli (RBAC): una corretta configurazione di Owner e permessi è quindi un prerequisito indispensabile affinché la protezione dei dati sensibili sia effettivamente garantita.
+OpenMetadata quindi offre solo una funzionalità di base per l'anonimizzazione dei dati, ma comunque sufficiente a soddisfare i relativi requisiti e le esigenze pratiche dell’azienda.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{schermate/anonimizzazione.png}
+    \vspace{0.2cm}
+    \caption[Applicazione dell'anonimizzazione]{Applicazione pratica dell'anonimizzazione ai dati classificati come sensibili}
+    \label{fig:anonimizzazione}
+\end{figure}
 
 \section{Gestione degli accessi}
 
-\section{Glossario aziendale e domini}
 
+% sezioni più brevi: 
+\section{Glossario aziendale}
+% da aggiungere perchè serve e perchè potrebbe essere importante per l'azienda - qual è il valore aggiunto che danno
+Un \textbf{Glossario Aziendale} (\emph{Business Glossary}) è un vocabolario che raccoglie e descrive concetti e termini rilevanti nel contesto aziendale, 
+a cui ogni persona all'interno dell'azienda può fare riferimento per comprendere un particolare concetto o reperire informazioni.
+
+Lo scopo del glossario è raccogliere termini usati nel contesto aziendale, fornire una descrizione e un significato comune, associare sinonimi e termini correlati 
+e fornire a tutti gli utenti una raccolta di termini standard da usare. I termini del Glossario possono essere usati per descrivere e categorizzare ulteriormente i dataset, come metadati aggiuntivi a quelli esistenti.
+
+È possibile definire più glossari diversi all'interno di un'organizzazione, a seconda del dominio. I termini del Glossario si possono organizzare in una gerarchia,
+ definendo termini “genitori” e termini “figli”; possono inoltre essere specificate altre informazioni quando si crea un termine, tra cui: % da riassumere o togliere:
+•	descrizione
+•	tags per classificare i termini; quando si aggiunge un termine ad un dataset, il dataset eredita i tags già associati al termine
+•	sinonimi
+•	termini “figli”, per descrivere termini più specifici
+•	termini correlati, per costruire una rete di termini collegati 
+•	link e references esterne
+•	termini mutualmente esclusivi: opzione che se abilitata impedisce di assegnare due termini appartenenti allo stesso Glossario a un dataset
+•	reviewers, uno o più utenti abilitati a validare i termini del Glossario
+•	assets, dataset associati al termine
+
+
+\section{Domini e data products}
+OpenMetadata permette di organizzare gli asset di dati in gruppi o domini (domains) per organizzarli in modo più efficacie. Un Dominio permette di categorizzare e gestire asset di dati, glossari, team e altre entità sotto una struttura unificata, 
+supportando un'architettura decentralizzata dove ogni dominio è gestito in modo indipendente con ownership distribuita.
+
+% da spiegare brevemente perchè servono e perchè potrebbero essere importanti per l'azienda, cioè qual è il valore aggiunto che danno
