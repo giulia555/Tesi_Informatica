@@ -124,7 +124,7 @@ il fallimento di un test da un semplice errore di log a un vero e proprio flusso
 L'evoluzione di un incidente viene monitorata attraverso quattro transizioni di stato, visibili sia sulla pagina del singolo asset di dati sia in una dashboard globale riepilogativa:
 \begin{itemize}
     \item \textbf{Rilevamento e creazione (Stato \emph{New})}: La piattaforma apre automaticamente l'incidente al primo fallimento della \emph{Test Suite}, compilando una scheda diagnostica con tutte le evidenze tecniche raccolte(asset compromesso, nome del test fallito e stringa d'errore).
-    \item \textbf{Presa in carico (Stato \emph{Acknowledged})}: Il \emph{Data Steward} o l'amministratore competente riceve la notifica e aggiorna lo stato in \emph{Ack}, ovvero dichiara la presa in carico dell'anomalia. Questo passaggio segnala al resto dell'azienda l'avvio formale delle attività di analisi e abilita una sezione commenti per coordinare il lavoro direttamente sulla piattaforma.
+    \item \textbf{Presa in carico (Stato \emph{Acknowledged})}: Il \emph{data steward} o l'amministratore competente riceve la notifica e aggiorna lo stato in \emph{Ack}, ovvero dichiara la presa in carico dell'anomalia. Questo passaggio segnala al resto dell'azienda l'avvio formale delle attività di analisi e abilita una sezione commenti per coordinare il lavoro direttamente sulla piattaforma.
     \item \textbf{Assegnazione (Stato \emph{Assigned})}: L'intervento pratico per correggere il dato alla sorgente viene delegato a un utente o a un team di sviluppo specifico, definendo in modo chiaro le responsabilità operative.
     \item \textbf{Risoluzione e chiusura (Stato \emph{Resolved})}: Una volta corretta la causa dell'anomalia, l'operatore incaricato chiude definitivamente l'incidente.
 \end{itemize}
@@ -162,7 +162,7 @@ comunicazione, ne previene la frammentazione e garantisce che lo storico delle d
 Durante lo stage, sono state testate le principali funzionalità di collaborazione offerte nativamente dalla piattaforma:
 \begin{itemize}
     \item \textbf{\emph{Conversation Threads}}: In qualsiasi pagina del catalogo, gli utenti possono avviare conversazioni, lasciare commenti e menzionare direttamente altri utenti. Questo elimina la necessità di utilizzare piattaforme esterne per chiedere chiarimenti su uno specifico dataset.
-    \item \textbf{Gestione dei \emph{Task}}: Qualora un utente rilevi una mancanza (ad esempio, una descrizione assente o un tag mancante), può aprire un \emph{task} e assegnarlo a un utente. La risoluzione del compito è tracciabile e integrata nella piattaforma.
+    \item \textbf{Gestione dei Task}: Qualora un utente rilevi una mancanza (ad esempio, una descrizione assente o un tag mancante), può aprire un task e assegnarlo a un utente. La risoluzione del compito è tracciabile e integrata nella piattaforma.
     \item \textbf{Annunci (\emph{Announcements})}: Permettono agli amministratori di impostare dei \emph{banner} informativi visibili a tutti gli utenti che seguono un determinato dataset, rivelandosi particolarmente utili per comunicare imminenti manutenzioni, modifiche strutturali o deprecazioni.
 \end{itemize}
 
@@ -186,7 +186,7 @@ sulle attività e sulle menzioni che li riguardano.
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{schermate/activity_feed.png}
-    \caption{Il pannello \emph{Activity Feed}, che raccoglie interazioni, \emph{task} e aggiornamenti per l'utente}
+    \caption{Il pannello \emph{Activity Feed}, che raccoglie interazioni, task e aggiornamenti per l'utente}
     \label{fig:activity_feed}
 \end{figure}
 
@@ -194,7 +194,7 @@ sulle attività e sulle menzioni che li riguardano.
 Per evitare controlli manuali continui delle dashboard di Data Quality, la piattaforma offre un sistema di \emph{alerting} automatico, che notifica tempestivamente eventi critici agli utenti. 
 OpenMetadata differenzia gli allarmi in due macro-categorie:
 \begin{enumerate}
-    \item \textbf{\emph{System \& Governance Alerts}}: Monitorano le variazioni ai metadati e le attività di collaborazione (es. modifiche alle descrizioni, assegnazione di nuovi \emph{task} o l'inserimento di un nuovo termine nel Glossario).
+    \item \textbf{\emph{System \& Governance Alerts}}: Monitorano le variazioni ai metadati e le attività di collaborazione (es. modifiche alle descrizioni, assegnazione di nuovi task o l'inserimento di un nuovo termine nel Glossario).
     \item \textbf{\emph{Data Observability Alerts}}: Rilevano le anomalie tecniche (es. fallimento dei test di qualità, interruzione delle \emph{pipeline} di estrazione o mutamenti non previsti nella struttura delle tabelle).
 \end{enumerate}
 
