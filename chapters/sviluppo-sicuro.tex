@@ -66,7 +66,6 @@ dai livelli più bassi, come l'architettura dei dati (database) e i livelli di t
 Wintech si impegna a soddisfare tali requisiti fin dalle prime fasi dell'SDLC.
 
 Di seguito vengono mappati e spiegati alcuni dei principali articoli del GDPR e le misure che l'azienda si impegna ad adottare per garantire la \emph{Privacy by Design} e lo Sviluppo Sicuro.
-% DA VEDERE SE TENERLA COME TABELLA O STRUTTURARLA IN ALTRO MODO
 % \begin{longtable}{ p{0.18\textwidth} p{0.37\textwidth} p{0.37\textwidth} }
 \begin{longtable}{ >{\raggedright\arraybackslash}p{0.18\textwidth} p{0.37\textwidth} p{0.37\textwidth} }
 \toprule
@@ -209,9 +208,9 @@ esclusivamente il metadato risultante (il tag di classificazione da applicare).
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{autoclassificazione.png}
+    \includegraphics[width=0.75\textwidth]{autoclassificazione.png}
     \vspace{0.2cm}
-    \caption[Rappresentazione del flusso di auto-classificazione]{Rappresentazione architetturale del flusso di auto-classificazione: i record reali vengono elaborati e distrutti all'interno del container locale, mentre al server centrale vengono trasmessi esclusivamente i metadati di classificazione. \textit{Nota: La presente infografica è stata generata con l'ausilio di un sistema di Intelligenza Artificiale}}
+    \caption[Rappresentazione del flusso di auto-classificazione]{Architettura dell'auto-classificazione: i dati reali vengono elaborati e distrutti localmente, trasmettendo al server centrale solo i metadati. \textit{Nota: La presente infografica è stata generata con l'ausilio di un sistema di Intelligenza Artificiale}}
     \label{fig:flusso_autoclassificazione}
 \end{figure}
 
@@ -240,77 +239,179 @@ prevalentemente binaria a livello di GDPR, etichettando i campi sensibili in mod
 automaticamente tag più granulari (come \texttt{Address} o \texttt{Name}) è una funzionalità esclusiva della distribuzione commerciale (\emph{Collate}) e non è direttamente 
 fruibile nell'installazione locale standard. 
 
-A fronte di questi limiti tecnici e per garantire la massima conformità alle policy aziendali, è indispensabile una fase di classificazione e revisione manuale.
-
+A fronte di questi limiti tecnici e per garantire la massima conformità alle policy aziendali, è indispensabile una fase di classificazione e revisione manuale. 
 In questo passaggio, figure qualificate come i \emph{data steward} o i proprietari del dato (\emph{data owners}) intervengono per validare, correggere o raffinare le 
 etichette suggerite dalla piattaforma. Questa attività permette anche di arricchire i metadati dell'asset: l'utente può inserire descrizioni contestuali dettagliate, 
 definire l'appartenenza a specifici domini aziendali e associare i campi ai termini formalizzati nel glossario.
 
+\subsection{Integrazione dell'AI Generativa tramite MCP}
+A completamento delle analisi architetturali svolte durante lo stage, si è esplorata la possibilità di integrare strumenti di Intelligenza Artificiale generativa 
+in cloud (come ChatGPT  o Claude) per abilitare la ricerca semantica e l'interrogazione del catalogo in linguaggio naturale. Questo è possibile grazie all'integrazione 
+nativa all'interno di OpenMetadata, disponibile anche nella versione \emph{open-source}, di un server basato sullo standard \textbf{\gls{mcp}}. 
 
-\subsection{Integrazione dell'AI Generativa tramite MCP} % prendere dall'appendice
-A completamento delle analisi architetturali svolte durante lo stage, si è esplorata la possibilità di integrare strumenti di Intelligenza Artificiale Generativa 
-in cloud (quali ChatGPT di OpenAI o Claude di Anthropic) per abilitare la ricerca semantica e l'interrogazione del catalogo in linguaggio naturale.
+Il protocollo MCP fa da interfaccia di comunicazione sicura tra il catalogo dati e gli assistenti AI esterni. Condividendo esclusivamente i metadati, 
+questa soluzione risponde ai requisiti di sicurezza attraverso i seguenti meccanismi:
 
-Questa estensione è resa possibile dall'integrazione nativa all'interno di OpenMetadata di un server basato sullo standard \textbf{Model Context Protocol (MCP)}. % da mettere nel glossario
-L'MCP agisce come uno strato di comunicazione aperto e sicuro che espone il patrimonio dei metadati agli assistenti AI esterni, risolvendo le principali criticità 
-legate alla sicurezza dei dati e alla sovranità digitale aziendale secondo i seguenti criteri:
 \begin{itemize}
-    \item \textbf{Totale isolamento dei dati reali:} l'assistente AI in cloud non stabilisce alcuna connessione diretta con i database fisici dell'azienda. Il modello interagisce unicamente con il server MCP di OpenMetadata, il quale trasmette all'esterno esclusivamente metadati strutturali (schema delle tabelle, nomi dei campi, definizioni del glossario, tag applicati). Le informazioni effettive contenute nei database (i record reali) non lasciano mai il perimetro aziendale, garantendo la conformità alle direttive sulla sicurezza;
-    \item \textbf{Preservazione del controllo degli accessi:} l'interfacciamento dell'AI tramite server MCP eredita direttamente le policy di Data Governance e il modello di controllo degli accessi basato sui ruoli (RBAC) configurato sulla piattaforma. La connessione al server richiede un'autenticazione sicura: se l'account dell'utente che interroga l'AI non dispone delle autorizzazioni per visualizzare un determinato database, il server MCP bloccherà la richiesta, impedendo all'AI di accedere ai relativi metadati e di includerli nella risposta, escludendo qualsiasi rischio di bypass delle policy aziendali.
+    \item \textbf{Totale isolamento dei dati reali}: L'assistente AI non stabilisce alcuna connessione diretta con i database fisici dell'azienda, precludendo 
+    l'accesso ai dati in chiaro. Il modello interagisce unicamente con il server MCP di OpenMetadata, il quale trasmette all'esterno esclusivamente metadati 
+    strutturali (schema delle tabelle, nomi dei campi, definizioni del glossario, tag di classificazione applicati). Le informazioni effettive contenute nei 
+    database non vengono mai elaborate dall'AI e non lasciano il perimetro aziendale, garantendo la conformità alle direttive sulla sicurezza.
+    \item \textbf{Preservazione del controllo degli accessi}: L'utilizzo dell'AI tramite server MCP è subordinato al rispetto delle policy di Data Governance, impedendo 
+    all'Intelligenza Artificiale di bypassare i sistemi di sicurezza interni. La connessione al server richiede un'autenticazione sicura: l'assistente AI eredita 
+    direttamente i permessi dell'utente che ha effettuato l'accesso, seguendo il modello di controllo degli accessi basato sui ruoli (RBAC) configurato sulla piattaforma. 
+    Se l'account dell'utente che interroga l'AI non dispone delle autorizzazioni necessarie per visualizzare una determinata area del catalogo, il server MCP bloccherà 
+    la richiesta alla fonte, impedendo all'AI di accedere ai relativi metadati e di includerli nella risposta.
 \end{itemize}
 
 
 \section{Mascheramento dei dati}
-A differenza di quanto ipotizzato in fase di Analisi dei Requisiti, OpenMetadata non dispone di impostazioni personalizzabili e configurabili per l’anonimizzazione e la pseudonimizzazione dei dati, in riferimento alla possibilità di definire delle regole personalizzate per il mascheramento, totale o parziale, dei dati.
-OpenMetadata ha comunque un meccanismo automatico di mascheramento totale (anonimizzazione) dei dati classificati come PII.Sensitive e basato sui ruoli: quando una colonna o una tabella vengono classificate come PII, i relativi Sample Data vengono mascherati automaticamente e mostrati come asterischi (******) nell’interfaccia. Questo avviene solo per gli utenti che non sono Admin o Owner dell’asset.
-Gli Owner e gli Admin infatti continueranno a vedere i valori reali anche dei dati sensibili.
-Negli screenshot che seguono vengono mostrati i dati classificati come PII e successivamente anonimizzati.
+A differenza di quanto ipotizzato in fase di analisi dei requisiti, la piattaforma non dispone di impostazioni personalizzabili di anonimizzazione o pseudonimizzazione dei dati. 
+Tuttavia, OpenMetadata integra un meccanismo automatico di mascheramento totale (anonimizzazione) strettamente dipendente dal modello di accesso basato sui ruoli.
 
-\subsection{Limitazioni}
-Limiti riscontrati
-•	Non è possibile scegliere tra anonimizzazione e pseudonimizzazione: il comportamento del meccanismo di mascheramento è predefinito e uguale per tutti gli asset di dati classificati come PII.Senstive.
-•	Non è possibile configurare autonomamente regole di mascheramento basate sull'aggiunta di nuovi tag di classificazione.
-•	Non sono previste funzionalità di propagazione del mascheramento ad altri sistemi esterni.
-•	Il meccanismo dipende interamente dal sistema di ownership e ruoli (RBAC): una corretta configurazione di Owner e permessi è quindi un prerequisito indispensabile affinché la protezione dei dati sensibili sia effettivamente garantita.
-OpenMetadata quindi offre solo una funzionalità di base per l'anonimizzazione dei dati, ma comunque sufficiente a soddisfare i relativi requisiti e le esigenze pratiche dell’azienda.
+Quando una colonna o una tabella viene classificata con il tag \texttt{PII.Sensitive}, i relativi \emph{Sample Data} vengono oscurati e sostituiti visivamente da asterischi 
+(\texttt{******}) all'interno dell'interfaccia. Questo blocco visivo viene applicato in automatico a tutti gli utenti standard, garantendo invece la visualizzazione dei valori 
+in chiaro esclusivamente agli amministratori di sistema (\emph{Admin}) e ai proprietari (\emph{owner}) del singolo asset.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{schermate/anonimizzazione.png}
     \vspace{0.2cm}
-    \caption[Applicazione dell'anonimizzazione]{Applicazione pratica dell'anonimizzazione ai dati classificati come sensibili}
+    \caption[Applicazione dell'anonimizzazione nell'interfaccia]{Applicazione pratica dell'anonimizzazione: i \emph{Sample Data} classificati come sensibili vengono oscurati per gli utenti non autorizzati}
     \label{fig:anonimizzazione}
 \end{figure}
 
+\subsection{Limiti architetturali}
+Durante l'analisi e il collaudo della funzionalità, sono state riscontrate alcune limitazioni:
+\begin{itemize}
+    \item \textbf{Assenza di pseudonimizzazione}: Non è possibile scegliere tra anonimizzazione e pseudonimizzazione. Il comportamento del meccanismo di mascheramento è predefinito e si applica in modo uniforme (mascheramento totale) a tutti gli asset etichettati come \texttt{PII.Sensitive}.
+    \item \textbf{Rigidità configurativa}: Non è permesso configurare autonomamente regole di mascheramento basate sull'assegnazione di tag di classificazione personalizzati.
+    \item \textbf{Mancata propagazione esterna}: Non sono previste funzionalità per propagare le direttive di mascheramento ai sistemi esterni a valle (come, ad esempio, gli strumenti di Business Intelligence).
+    \item \textbf{Dipendenza dal modello RBAC}: Il meccanismo si basa interamente sul sistema di \emph{ownership} e ruoli. Una rigorosa configurazione dei permessi rappresenta quindi un prerequisito architetturale indispensabile affinché la protezione dei dati sensibili sia garantita.
+\end{itemize}
+
+Nonostante questi vincoli tecnici, OpenMetadata offre una funzionalità di base per l'anonimizzazione dei dati che risulta comunque sufficiente per soddisfare i requisiti normativi e le esigenze aziendali.
+
+
 \section{Gestione degli accessi}
+Nelle moderne infrastrutture informative, l'efficacia delle politiche di Data Governance e la conformità alle prescrizioni del GDPR dipendono in misura critica dalla 
+capacità di regolare l'accesso ai metadati e alle risorse in modo granulare, sicuro e centralizzato. L'introduzione di un data catalog aziendale non deve tradursi in 
+una declassificazione indiscriminata delle informazioni sensibili; al contrario, la piattaforma deve agire come un punto di controllo flessibile in grado di garantire 
+il pieno rispetto del \emph{Principle of Least Privilege}. 
+
+Per soddisfare questa esigenza, OpenMetadata implementa un modello integrato di controllo degli accessi basato sulla stretta combinazione tra la mappatura gerarchica 
+dell'organigramma aziendale e un motore di autorizzazione basato sui ruoli (RBAC).
 
 
-% sezioni più brevi: 
-% DA SISTEMARE ANCHE DIMENSIONI IMMAGINI E IN GENERALE SPAZI VUOTI
+\subsection{Mappatura dell'organigramma: utenti e team}
+Il primo pilastro del sistema di sicurezza è rappresentato dalla gestione delle identità, configurabile all'interno della scheda di amministrazione dedicata. 
+La piattaforma consente la definizione di singoli utenti (\emph{User}) e la loro organizzazione all'interno di gruppi (\emph{Team}). Questa struttura è progettata 
+per mappare l'organigramma reale di Wintech S.p.A., organizzando l'albero aziendale secondo cinque tipologie logiche standard e sequenziali (\emph{teamType}):
+\begin{itemize}
+    \item \textbf{\emph{Organization}}: Costituisce il nodo radice dell'intera gerarchia, non può possedere nodi genitori e funge da contenitore globale per tutti i dipendenti e i sottogruppi dell'azienda.
+    \item \textbf{\emph{BusinessUnit}}: Rappresenta le divisioni di primo livello dell'azienda (es. Direzione, Ricerca e Sviluppo), potendo avere come genitore unicamente l'unità radice (\emph{Organization}) o un'altra \emph{BusinessUnit}.
+    \item \textbf{\emph{Division}}: Definisce partizioni operative intermedie collocate al di sotto delle unità di business primarie, potendo avere un solo nodo genitore (\emph{Organization}, \emph{BusinessUnit} o un'altra \emph{Division}).
+    \item \textbf{\emph{Department}}: Individua aree di competenza specialistiche e, a differenza dei livelli superiori, può ereditare proprietà da molteplici nodi genitori, garantendo flessibilità logica.
+    \item \textbf{\emph{Group}}: Rappresenta l'ultimo livello gerarchico (nodo foglia) e non può avere ulteriori sottogruppi, ma si compone esclusivamente di singoli membri operativi (\emph{User}). All'interno del Data Catalog, i team classificati con questo tipo detengono un privilegio esclusivo: sono le uniche entità collettive abilitate a detenere formalmente la proprietà (\emph{Ownership}) degli asset di dati.
+\end{itemize}
+
+Oltre all'inserimento manuale da parte degli amministratori di sistema, l'infrastruttura di OpenMetadata consente la centralizzazione degli accessi tramite 
+l'integrazione nativa con protocolli di Single Sign-On (SSO) quali Microsoft Entra ID, Google Workspace e Okta. Questa configurazione abilita la fondamentale 
+funzionalità di \emph{Auto-Provisioning}: al momento del primo login effettuato da un dipendente tramite le proprie credenziali aziendali, la piattaforma 
+interroga l'\emph{identity provider} esterno e crea in automatico il relativo profilo utente all'interno del catalogo, abbattendo drasticamente l'onere amministrativo 
+di gestione del personale.
+
+
+
+
+\subsection{L'architettura Role-Based Access Control}
+Una volta definita la struttura degli utenti e dei team, la determinazione delle autorizzazioni operative viene governata dal sistema RBAC della piattaforma. 
+Dal punto di vista architetturale, il motore di controllo degli accessi si scompone in tre livelli logici interconnessi:
+\begin{enumerate}
+    \item \textbf{Rules (Regole)}: Rappresentano il livello atomico del framework di sicurezza. Ciascuna regola definisce la liceità di una specifica azione (es. modificare i tag, aggiornare la descrizione, estrarre il lineage, visualizzare i dati campione) applicata su una determinata tipologia di risorsa del catalogo.
+    \item \textbf{Policies (Politiche)}: Costituiscono insiemi coerenti e ordinati di regole logiche raggruppate per rispondere a specifiche finalità di sicurezza o conformità (es. una policy per il monitoraggio della qualità, una policy per la gestione dei domini).
+    \item \textbf{Roles (Ruoli)}: Si collocano al vertice della gerarchia ed associano una o più politiche a profili utente definiti. Assegnando un ruolo specifico a un utente o a un intero team, la piattaforma propaga istantaneamente a tutti i membri le relative autorizzazioni ereditate dal ruolo aziendale.
+\end{enumerate}
+
+\subsection{Algoritmo di valutazione delle autorizzazioni} % ma questo esiste davvero? non so dove l'hai trovato
+Nel momento in cui un utente tenta di compiere un'operazione su un determinato asset, il motore di OpenMetadata intercetta la richiesta ed esegue un algoritmo 
+di valutazione per autorizzare o bloccare l'azione, basandosi su quattro criteri gerarchici di risoluzione:
+\begin{itemize}
+    \item \textbf{Permessi di base (Default):} per impostazione predefinita, qualsiasi profilo registrato riceve i privilegi minimi di consultazione associati alla politica globale dell'organizzazione (\emph{OrganizationPolicy}) e al ruolo di base (\emph{Data Consumer Role})[cite: 2]. Ciò garantisce che ogni utente possa ricercare e leggere i dati effettuando attività di Data Discovery, escludendo tuttavia qualsiasi facoltà di alterazione o scrittura dei metadati[cite: 2];
+    \item \textbf{Ereditarietà dai team:} l'algoritmo calcola l'unione logica dei permessi assegnati direttamente al profilo dell'utente con la totalità dei privilegi ereditati da ciascuno dei team a cui egli risulta associato nell'organigramma[cite: 2];
+    \item \textbf{Eccezione di \emph{Ownership} (Proprietà):} costituisce una deroga fondamentale alle restrizioni dei ruoli standard. Qualora un utente (o un team) venga designato come proprietario di uno specifico asset, egli acquisisce in modo automatico i privilegi completi per gestirlo e modificarlo, indipendentemente dai limiti imposti dal suo ruolo ordinario[cite: 2];
+    \item \textbf{Priorità assoluta dei divieti (\emph{Deny over Allow}):} rappresenta la regola aurea di sicurezza logica che previene conflitti e bypass accidentali. Nel definire le regole all'interno delle \emph{policy}, l'amministratore può impostare l'effetto dell'azione come consentito (\emph{Allow}) o espressamente vietato (\emph{Deny})[cite: 2]. Se l'utente dispone di un permesso abilitante ereditato da un ruolo, ma al contempo appartiene a un team soggetto a una \emph{policy} restrittiva che nega esplicitamente la medesima operazione, l'asserzione di divieto prevale in modo assoluto, bloccando l'esecuzione dell'azione[cite: 2].
+\end{itemize}
+
+
+
+
+
 
 \section{Glossario aziendale}
-% da aggiungere perchè serve e perchè potrebbe essere importante per l'azienda - qual è il valore aggiunto che danno
-Un \textbf{Glossario Aziendale} (\emph{Business Glossary}) è un vocabolario che raccoglie e descrive concetti e termini rilevanti nel contesto aziendale, 
-a cui ogni persona all'interno dell'azienda può fare riferimento per comprendere un particolare concetto o reperire informazioni.
+Un \textbf{Glossario aziendale} (\emph{Business Glossary}) è un vocabolario centralizzato che raccoglie, definisce e standardizza i concetti e la terminologia 
+rilevante all'interno dell'organizzazione. Rappresenta uno strumento di Data Governance fondamentale, a cui ogni utente può fare riferimento per risolvere ambiguità 
+semantiche e comprendere appieno il significato del patrimonio informativo.
 
-Lo scopo del glossario è raccogliere termini usati nel contesto aziendale, fornire una descrizione e un significato comune, associare sinonimi e termini correlati 
-e fornire a tutti gli utenti una raccolta di termini standard da usare. I termini del Glossario possono essere usati per descrivere e categorizzare ulteriormente i dataset, come metadati aggiuntivi a quelli esistenti.
+L'obiettivo principale di questo strumento è stabilire un linguaggio aziendale comune, colmando la distanza comunicativa tra i diversi reparti 
+attraverso la definizione di un significato comune per ogni termine. All'interno di OpenMetadata, i concetti formalizzati nel glossario assumono il ruolo di veri e propri 
+metadati: possono essere infatti assegnati agli asset per descrivere e categorizzare ulteriormente tabelle e dataset.
 
-È possibile definire più glossari diversi all'interno di un'organizzazione, a seconda del dominio. I termini del Glossario si possono organizzare in una gerarchia,
- definendo termini “genitori” e termini “figli”; possono inoltre essere specificate altre informazioni quando si crea un termine, tra cui: % da riassumere o togliere:
-•	descrizione
-•	tags per classificare i termini; quando si aggiunge un termine ad un dataset, il dataset eredita i tags già associati al termine
-•	sinonimi
-•	termini “figli”, per descrivere termini più specifici
-•	termini correlati, per costruire una rete di termini collegati 
-•	link e references esterne
-•	termini mutualmente esclusivi: opzione che se abilitata impedisce di assegnare due termini appartenenti allo stesso Glossario a un dataset
-•	reviewers, uno o più utenti abilitati a validare i termini del Glossario
-•	assets, dataset associati al termine
+Un'organizzazione può definire molteplici glossari indipendenti, strutturandoli in base agli specifici domini aziendali (ad esempio Amministrazione, Risorse Umane o Vendite). 
+I termini all'interno di ciascun glossario possono essere organizzati secondo una gerarchia logica e possono essere arricchiti con una serie di proprietà avanzate:
+\begin{itemize}
+    \item \textbf{Contesto semantico}: descrizioni testuali, sinonimi, riferimenti a link esterni e associazioni con altri termini correlati;
+    \item \textbf{Propagazione delle classificazioni}: possibilità di associare tag di classificazione direttamente al termine. Quando il concetto viene applicato a un dataset, quest'ultimo eredita automaticamente anche i tag associati al termine stesso;
+    \item \textbf{Vincoli di assegnazione}: funzionalità di mutua esclusione (\emph{Mutually Exclusive}), che impedisce di assegnare simultaneamente due termini concettualmente in conflitto al medesimo asset;
+    \item \textbf{Validazione e ownership}: designazione di specifici utenti revisori (\emph{reviewer}), incaricati di validare i termini, approvare le modifiche e garantire l'accuratezza del glossario nel tempo.
+\end{itemize}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{schermate/glossario_wintech.png}
+    \vspace{0.2cm}
+    \caption{Interfaccia principale del Glossario aziendale}
+    \label{fig:glossario_generale}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{schermate/glossario_termini.png}
+    \vspace{0.2cm}
+    \caption{Struttura gerarchica dei termini nel Glossario}
+    \label{fig:glossario_gerarchia}
+\end{figure}
 
 \section{Domini e data products}
-OpenMetadata permette di organizzare gli asset di dati in gruppi o domini (domains) per organizzarli in modo più efficacie. Un Dominio permette di categorizzare e gestire asset di dati, glossari, team e altre entità sotto una struttura unificata, 
-supportando un'architettura decentralizzata dove ogni dominio è gestito in modo indipendente con ownership distribuita.
+OpenMetadata permette di organizzare gli asset di dati in gruppi logici, definiti Domini (\emph{domain}), per strutturare il patrimonio informativo in modo più efficace. 
+Un Dominio consente di categorizzare e gestire asset, glossari, team e altre entità sotto una struttura logica unificata, supportando un'architettura decentralizzata in 
+cui ogni area è gestita in modo indipendente con un'\emph{ownership} distribuita.
 
-% da spiegare brevemente perchè servono e perchè potrebbero essere importanti per l'azienda, cioè qual è il valore aggiunto che danno
+\subsection{Valore aziendale e Data Product}
+L'introduzione dei Domini permette di decentralizzare la gestione dei dati: delegando la responsabilità ai singoli dipartimenti (come Risorse Umane o Marketing), 
+la cura e la documentazione del dato vengono affidate a chi ne possiede le reali competenze. Questo approccio elimina i colli di bottiglia e agevola l'applicazione 
+delle policy di sicurezza.
+
+All'interno di ciascun Dominio, gli asset possono essere ulteriormente raggruppati in \textbf{Data Product}. Un Data Product è semplicemente un sottoinsieme di 
+dati organizzato per rispondere a un'esigenza specifica (ad esempio, raggruppare solo i dati relativi alle campagne pubblicitarie). Questa suddivisione trasforma 
+i dati grezzi in un vero e proprio "prodotto" pronto all'uso, facilmente consultabile dagli utenti o analizzabile tramite strumenti di Business Intelligence.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{1\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{schermate/domini.png}
+        \caption{Vista generale dei Domini configurati nella piattaforma}
+    \end{subfigure}
+    
+    \vspace{0.4cm}
+    
+    \begin{subfigure}[b]{1\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{schermate/data_products.png}
+        \caption{Dettaglio dei Data Product (\emph{Advertising} e \emph{Social Media Management}) nel dominio Marketing}
+    \end{subfigure}
+    
+    \caption{Organizzazione logica in Domini e Data Product}
+    \label{fig:domini_data_products}
+\end{figure}
