@@ -87,6 +87,7 @@ Questo livello si posiziona tra le fonti grezze e i report finali, affidando l'i
 % PER SPIEGARE BENE QUAL è L'IDEA DIETRO LA CONNESSIONE DATA CATALOG - POWER BI
 % NON SPIEGO LA CONNESSIONE TRA OPENMETADATA E POWER BI PERCHè NON L'HO FATTA
 
+
 Nell'era della reportistica aziendale distribuita, comunemente definita \emph{self-service BI}, la necessità di accedere rapidamente ai dati si scontra inevitabilmente 
 con le rigide prescrizioni di sicurezza del GDPR e con l'esigenza di garantire l'affidabilità delle metriche visualizzate. In assenza di un coordinamento strutturato, 
 gli analisti di business intelligence si trovano spesso a operare direttamente sui database di produzione, affrontando gravi inefficienze operative:
@@ -167,7 +168,6 @@ Tra i tool testati ci sono (da descrivere brevemente):
 L’obiettivo è infatti quello di prendere i dati grezzi da un db per esempio, farli ripulire e classificare ed eventualmente anonimizzare da uno di questi tool e passarli poi a Power BI, che quindi prenderà in analisi solo dati utili, puliti e sicuri.
 Bisogna però capire che questi tool NON vanno a modificare direttamente le fonti originali: non sovrascrivono i dati presenti nel db e non li mascherano direttamente nel db. Quello che fanno però è far arrivare a Power BI o altri strumenti di analisi i dati sicuri. Quindi Power BI non dovrà più connettersi ai db direttamente, ma a questi strumenti.
 Altra cosa da capire è che praticamente tutti non automatizzano il processo di scansione dei dati e individuazione dei PII, ma si deve necessariamente fare un lavoro di sviluppo per creare per esempio degli script che passino i dati dalle fonti originali al tool, poi dal tool a Power BI oppure al database iniziale (x es. se si vuole anonimizzare i dati nel db) - cosa più che fattibile in questa azienda dato che abbiamo gli sviluppatori, ma non scontata in altre aziende che magari si occupano solo di dati e non hanno un ufficio di sviluppo. Questo potrebbe essere anche un vantaggio su altri competitor e un valore aggiunto per i clienti Wintech.
-
 
 
 
