@@ -4,11 +4,174 @@
 
 \intro{Questo capitolo mette in relazione i due temi studiati durante il percorso di stage, il catalogo dati e la Business Intelligence, delineando il flusso ideale e sicuro delle informazioni.}\\
 
+\section{Introduzione alla Business Intelligence}
+La Business Intelligence (BI) è una disciplina che combina infrastrutture tecnologiche, strumenti di analisi dei dati, visualizzazioni avanzate e \emph{best practice} 
+organizzative con l'obiettivo di supportare le aziende nell'adozione di decisioni basate su evidenze empiriche ed oggettive (\emph{data-driven decision making})\cite{site:business-intelligence}.
+
+Dal punto di vista teorico e operativo, il flusso della Business Intelligence si articola in quattro passaggi sequenziali fondamentali:
+\begin{enumerate}
+    \item \textbf{Raccolta ed estrazione}: i dati grezzi provenienti da fonti eterogenee (quali database, fogli di calcolo Excel o sistemi \emph{on-premise}) vengono estratti e centralizzati in depositi unificati;
+    \item \textbf{Analisi descrittiva}: le informazioni memorizzate vengono elaborate per comprendere l'andamento storico e corrente dell'azienda. In questa fase si opera una distinzione essenziale rispetto alla Business Analytics (BA): mentre la Business Intelligence si concentra sull'analisi descrittiva (rispondendo alle domande \emph{cosa} e \emph{come}), la Business Analytics dà priorità all'analisi predittiva e prescrittiva, sfruttando modelli statistici per prevedere eventi futuri (rispondendo alla domanda \emph{perché});
+    \item \textbf{Visualizzazione dei dati}: i risultati dell'elaborazione analitica vengono convertiti in rappresentazioni grafiche intuitive (istogrammi, diagrammi a torta, \emph{scatter plot}), rendendo le metriche complesse accessibili e leggibili anche per gli utenti di business non tecnici;
+    \item \textbf{Azione basata su informazioni in tempo reale}: la visualizzazione delle performance storiche e attuali, calata nel contesto aziendale, consente ai \emph{decision maker} di intervenire prontamente per ottimizzare i processi operativi.
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{bi/bi_concept.png}
+    \caption[Flusso logico della Business Intelligence]{Rappresentazione del flusso logico della Business Intelligence. \textit{Nota: La presente infografica è stata generata con l'ausilio di un sistema di Intelligenza Artificiale}}
+    \label{fig:bi_concept}
+\end{figure}
+
+All'interno dell'infrastruttura di Wintech, la piattaforma di riferimento per l'analisi aziendale e la Business Intelligence è Microsoft Power BI\cite{site:powerbi-docs}. 
+Questa soluzione fornisce servizi e strumenti in grado di connettere, trasformare e condividere i dati dell'organizzazione, traducendoli in informazioni dettagliate e visualizzazioni grafiche.
+
+Utilizzato quotidianamente dall'azienda, Power BI soddisfa nativamente numerosi requisiti legati all'osservabilità e alla gestione del dato, offrendo:
+\begin{itemize}
+    \item \textbf{Centralizzazione delle fonti}: la capacità di connettere in un unico ambiente un'ampia varietà di dati strutturati (come database SQL Server, PostgreSQL) e non strutturati (come file JSON, CSV, fogli Excel), fungendo da singola fonte di verità per la reportistica aziendale;
+    \item \textbf{Sincronizzazione programmata}: l'allineamento costante e automatico delle informazioni con le fonti originali, tramite Power BI Service e i \emph{Gateway} dati locali;
+    \item \textbf{Organizzazione logica}: la strutturazione dei modelli di dati attraverso prospettive distinte (vista Report, vista Tabella, vista Modello), che permettono di esplorare le relazioni tra le entità importate;
+    \item \textbf{Sicurezza e gestione degli accessi}: l'implementazione di standard di sicurezza, includendo un sistema RBAC a livello di \emph{workspace} e la sicurezza a livello di riga (RLS - \emph{Row-Level Security}).
+\end{itemize}
+
+\subsection{La piattaforma Microsoft Power BI}
+Wintech adotta Microsoft Power BI come soluzione di riferimento per lo sviluppo dei propri sistemi di reporting interni e per la consulenza offerta ai clienti. 
+Si tratta di una piattaforma avanzata di Business Intelligence che fornisce una \emph{suite} di servizi, applicazioni e connettori che trasformano molteplici 
+fonti di dati in informazioni strategiche, dettagliate e visivamente interattive.
+
+La piattaforma offre tre ambienti operativi principali, che supportano l'analista durante l'intero ciclo di modellazione e fruizione dei dati:
+\begin{itemize}
+    \item \textbf{Power BI Desktop}: Applicazione client di sviluppo utilizzata per connettersi alle sorgenti, effettuare la pulizia e la modellazione dei dati tramite il Power Query Editor, definire le misure in linguaggio DAX (\emph{Data Analysis Expressions}) e creare i report visivi.
+    \item \textbf{Power BI Service}: Servizio in cloud basato su modello SaaS (\emph{Software as a Service}) che permette la pubblicazione, condivisione e distribuzione sicura dei report all'interno dell'organizzazione, nonché la creazione di dashboard riepilogative destinate al \emph{management}.
+    \item \textbf{Power BI Mobile}: Applicazioni per dispositivi mobili ottimizzate per visualizzare i report in mobilità, sfruttando specifici layout reattivi.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.25\textwidth]{logo-powerbi.png}
+    \caption{Logo ufficiale di Microsoft Power BI}
+    \label{fig:power_bi_logo}
+\end{figure}
+
+\subsection{Contesto aziendale}
+In Wintech S.p.A., la Business Intelligence ha un ruolo strategico. In qualità di consulente e \emph{System Integrator}, l'azienda aiuta i clienti a integrare 
+sistemi ERP e a creare dashboard personalizzate, che permettono di monitorare facilmente le vendite, la logistica, le risorse umane e l'andamento finanziario.
+
+Durante lo stage, lo studio di Power BI ha permesso di comprendere l'utilità pratica dello strumento, sviluppando report basati sia sul database di test \emph{AdventureWorks} 
+sia sui movimenti contabili reali estratti in ambiente sicuro dai sistemi gestionali aziendali.
+
+A titolo esemplificativo, la Figura~\ref{fig:report_powerbi} mostra l'interfaccia di un report sviluppato sui dati di test, evidenziando le funzionalità di 
+Data Visualization e il pannello per la configurazione degli avvisi di monitoraggio.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{bi/report_powerbi.png}
+    \caption[Interfaccia di un report in Microsoft Power BI]{Esempio di dashboard analitica sviluppata in Power BI sui dati di \emph{AdventureWorks}. Sulla destra è visibile il pannello di configurazione degli avvisi, utile per il monitoraggio parziale dei dati}
+    \label{fig:report_powerbi}
+\end{figure}
+
+Tuttavia, Power BI è uno strumento progettato specificamente per la Data Visualization e la reportistica. Proprio per questo motivo, elabora le informazioni 
+esattamente come vengono estratte, senza verificarne preventivamente la qualità o la presenza di dati personali alla sorgente. 
+
+Affinché la Business Intelligence sia davvero affidabile e conforme alle normative sulla privacy, è necessario creare un flusso informativo intermedio. 
+Questo livello si posiziona tra le fonti grezze e i report finali, affidando l'ispezione, la pulizia e la classificazione dei dati a piattaforme specifiche di Data Discovery e Data Governance.
+
+
+
+
+
+
 \section{Flusso dei dati}
 % con grafico del flusso:  dati grezzi → catalogazione → classificazione PII → data quality e monitoraggio → mascheramento → 
 % governance e policy → strumenti BI che consumano solo dati puliti, sicuri e certificati
 % PER SPIEGARE BENE QUAL è L'IDEA DIETRO LA CONNESSIONE DATA CATALOG - POWER BI
 % NON SPIEGO LA CONNESSIONE TRA OPENMETADATA E POWER BI PERCHè NON L'HO FATTA
+
+Nell'era della reportistica aziendale distribuita, comunemente definita \emph{self-service BI}, la necessità di accedere rapidamente ai dati si scontra inevitabilmente 
+con le rigide prescrizioni di sicurezza del GDPR e con l'esigenza di garantire l'affidabilità delle metriche visualizzate. In assenza di un coordinamento strutturato, 
+gli analisti di business intelligence si trovano spesso a operare direttamente sui database di produzione, affrontando gravi inefficienze operative:
+\begin{itemize}
+    \item \textbf{Perdita di tempo nella Data Discovery}: gli utenti di business spendono risorse significative per localizzare fisicamente le tabelle di interesse o per decifrare il significato semantico di colonne nominate con sigle tecniche incomprensibili;
+    \item \textbf{Esposizione incontrollata di informazioni personali}: l'accesso diretto ai database operazionali da parte degli strumenti di business intelligence aumenta esponenzialmente il rischio di violazione accidentale della privacy, esponendo record in chiaro non necessari per le finalità del report;
+    \item \textbf{Propagazione di anomalie qualitative}: qualora un processo di estrazione si interrompa o i database ricevano record incompleti o nulli, lo strumento di reporting importerà passivamente tali errori, aggiornando i grafici direzionali con dati incorretti e compromettendo i processi decisionali (\emph{decision making}).
+\end{itemize}
+
+Per superare queste criticità e implementare i principi di \emph{Privacy by Design}, l'architettura dei dati aziendali deve prevedere l'adozione di un Data Catalog come 
+vero e proprio prerequisito e guardiano logico (\emph{gatekeeper}) a monte della Business Intelligence. Il Data Catalog si interpone tra i sistemi transazionali operativi 
+e le piattaforme di reporting, regolando il ciclo di vita del dato attraverso un flusso strutturato in sei macro-fasi sequenziali:
+\begin{enumerate}
+    \item \textbf{Estrazione dei soli metadati (\emph{Data Ingestion})}: la piattaforma di catalogazione interroga periodicamente e in modalità di sola lettura i database sorgente dell'azienda per estrarne esclusivamente la struttura tecnica (schemi, tabelle, colonne, tipi di dato) e un campione limitato di record (\emph{Sample Data}), escludendo la memorizzazione fisica e la duplicazione dei dati aziendali nel catalogo;
+    \item \textbf{Arricchimento semantico e contestualizzazione}: i metadati tecnici vengono associati ai termini standardizzati del glossario aziendale, definendo la responsabilità d'uso (\emph{ownership}) in capo a specifici team per eliminare le ambiguità e facilitare la Data Discovery;
+    \item \textbf{Individuazione e classificazione dei PII}: tramite l'esecuzione automatica del modulo di Auto-Classification (basato su motori NLP e \emph{regex}) o tramite tagging manuale, la piattaforma individua e contrassegna i dati personali, mappandone accuratamente la presenza sui database aziendali;
+    \item \textbf{Verifica della qualità (Data Quality e monitoraggio)}: il sistema esegue costantemente i test di qualità programmati (es. controllo di valori nulli o duplicati). Qualora si verifichi un fallimento qualitativo, la piattaforma blocca la certificazione dell'asset (Data Product), aggiorna le dashboard di Data Observability e invia \emph{alert} in tempo reale ai responsabili prima che l'errore si propaghi a valle;
+    \item \textbf{Mascheramento e anonimizzazione}: a livello logico nel Data Catalog, l'accesso ai dati campione sensibili viene ristretto tramite policy \gls{rbac}. A livello fisico, per consentire uno sviluppo sicuro ed eliminare il rischio di esporre dati in chiaro, i flussi diretti verso la Business Intelligence vengono bonificati e anonimizzati tramite \emph{script} automatizzati o \emph{tool} specialistici esterni (come ARX o Microsoft Presidio), che preservano l'utilità statistica o relazionale dei dati mascherando i soli PII;
+    \item \textbf{Consumo sicuro e certificato}: le dashboard di Microsoft Power BI vengono configurate per connettersi esclusivamente a fonti di \emph{staging} sicure contenenti dati preventivamente controllati, puliti e anonimizzati, azzerando il rischio di violazione dei dati sensibili e garantendo l'assoluta affidabilità delle decisioni strategiche aziendali.
+\end{enumerate}
+
+
+\subsection{Connessione logica e limiti infrastrutturali}
+Durante lo stage, a causa dei vincoli infrastrutturali legati alla disponibilità di licenze Microsoft Power BI Pro e alle policy di rete interne necessarie per 
+l'esposizione delle API, non è stata testata la connessione fisica e bilaterale tra l'istanza locale di OpenMetadata e Power BI.
+
+È opportuno specificare un dettaglio tecnico: Power BI funge da sorgente dati per OpenMetadata (che ne estrarrà i metadati relativi a report, 
+\emph{workspace} e Data Lineage), ma la connessione inversa non è applicabile. Power BI non può interrogare OpenMetadata per importare tabelle o estrarre dati anonimizzati, 
+in quanto il Data Catalog non agisce come un database fisico, bensì come un inventario logico di metadati. 
+Nonostante questo vincolo, l'attività si è concentrata sulla progettazione e validazione del modello logico-architetturale del flusso informativo sicuro.
+
+Come rappresentato nello schema (da inserire!!!), la separazione netta tra il piano transazionale di produzione e il piano analitico di Business Intelligence si realizza disaccoppiando 
+l'accesso fisico ai dati. Gli strumenti di reporting come Power BI non devono, in alcun caso, disporre delle credenziali di accesso diretto ai database di produzione 
+contenenti informazioni personali in chiaro.
+
+L'architettura sicura testata (tramite altri strumenti di Data Discovery) prevede che uno script di estrazione prelevi in sola lettura i dati grezzi, applichi i 
+modelli matematici di anonimizzazione deterministica (come la \emph{k-Anonymity}) e depositi il dataset bonificato (in formato CSV o in database dedicati) in un'area 
+di \emph{staging} protetta. La piattaforma Power BI si connette unicamente a quest'area di \emph{staging}, garantendo che gli analisti interroghino ed elaborino informazioni 
+intrinsecamente sicure e conformi al GDPR fin dalla progettazione (\emph{Privacy by Design}).
+
+
+
+
+
+
+% spiegare cos'è la BI, cos'è power bi e dare un'introduzione del fatto che ho fatto formazione con powerBI
+%In Power BI si possono ritrovare alcune caratteristiche di un Data Catalog:
+%•	Power BI consente di connettere tutte le fonti di dati aziendali nello stesso ambiente, pertanto la piattaforma funge da singola fonte di verità per quanto riguarda i dati aziendali.
+%•	Power BI permette di connettere e sincronizzare i dati da diverse fonti, in modo da essere sempre aggiornato con le fonti di dati.
+%•	Power BI fornisce informazioni relative ai dati, permette di analizzarli e costruire report e dashboard.
+%•	Power BI consente a tutti gli utenti di accedere ai dati in modo semplice e con un’interfaccia più intuitiva e facile da usare.
+%Ci sono altri requisiti però che Power BI non può soddisfare da solo e per cui si discosta da un vero Data Catalog:
+%•	Power BI è uno strumento di Data Visualization e di reporting: il suo scopo è quello di raccogliere i dati grezzi e presentarli sotto forma di grafici, report e dashboard per aiutare a comprenderli meglio e prendere decisioni sulla base di quelli; è uno strumento di Decision Making. Al contrario, un Data Catalog è un “inventario” centralizzato di metadati, ovvero dati che descrivono altri dati. Il suo scopo sono la Data Governance, la Data Quality e la Data Discovery.
+%•	Power BI non è progettato per scansionare i dati aziendali e trovare i dati sensibili o PII: la classificazione PII di Power BI opera solo sui dataset già importati nel modello, non sulle tabelle originali. Un Data Catalog invece individua e classifica i dati sensibili direttamente sulla fonte.
+%•	Power BI non offre un ambiente centralizzato dove gli utenti possono aprire task e segnalare problemi. Al contrario, un Data Catalog come OpenMetadata permette di segnalare errori e anomalie, inviare richieste o feedback e lasciare commenti direttamente sulle pagine dei dati.
+%•	Power BI non fa controlli sui dati: per esempio se un processo si blocca e la colonna di un database si riempie di valori errati o nulli, Power BI non lo capisce e aggiorna i grafici e i report con dati errati. Lo scopo di un Data Catalog invece è proprio quello della Data Quality e Observability, cioè rilevare anomalie sulle fonti e impostare soglie di accettazione e alerting automatico sui dati, per correggerli PRIMA che arrivino a Power BI.
+%Un Data Catalog aziendale non può essere sostituito unicamente da Power BI; piuttosto, un Data Catalog è un prerequisito per una buona Business Intelligence: il Data Catalog si collega alle fonti dati aziendali, estrae i metadati, classifica i dati e li monitora. Power BI poi si collega alle fonti già controllate e classificate all’interno del catalogo e per questo più affidabili e sicure.
+
+
+OpenMetadata permette di connettere in modo nativo Power BI e anche altri strumenti di business intelligence o per la creazione di dashboard. Per connettere Power BI ovviamente bisogna avere almeno la licenza Pro e avere i privilegi di admin. Oltre a questo bisogna creare delle credenziali per la connessione nella piattaforma di Microsoft Azure, motivi per i quali questa connessione non è stata testata da me.
+Da precisare che Power BI può essere fonte dati per OpenMetadata, ma non il contrario: Power BI non può importare i dati direttamente da OpenMetadata, perché nel catalogo non ci sono i dati veri e propri ma sono i metadati. Power BI non può usare OpenMetadata come fonte dati da cui estrarre tabelle anonimizzate. Quindi Power BI non può per esempio prendere dati già anonimizzati, anche perché è solo una vista in OpenMetatada, in più la connessione non funziona in questo verso.
+
+È stata esplorata anche l’ipotesi di sostituire completamente OpenMetadata con PowerBI, ipotesi scartata perché nonostante PowerBI offra molte funzionalità, non sarebbe come un data catalog completo.
+Oltre a questa si è esplorata l’ipotesi che OpenMetadata potesse essere sostituito da Power BI con l’aggiunta di un tool più piccolo e meno complesso che si occupa di PII e data discovery.
+Questa seconda ipotesi risulta più fattibile, perché ci sono dei tool che offrono funzionalità complementari a quelle di Power BI ma più semplici e leggeri da installare rispetto a OpenMetadata. In particolare le caratteristiche da ricercare in questi tool sono:
+●	Individuazione e classificazione automatica (o manuale) dei dati sensibili o PII.
+●	Anonimizzazione o pseudonimizzazione dei dati sensibili.
+Mentre Power BI offre già da solo le funzionalità di:
+●	Centralizzazione delle fonti dati
+●	Sicurezza e gestione degli accessi
+●	Sincronizzazione e aggiornamento programmato dei dati
+●	Organizzazione e separazione logica dei dati, attraverso diverse viste tra cui quella del modello
+●	Monitoraggio dei dati e collaborazione + integrazione nativa con Teams
+Tra i tool testati ci sono (da descrivere brevemente):
+●	ARX - comodo perché ha un’interfaccia grafica chiara, facile da installare. Si connette a diverse fonti di dati, quindi diciamo i requisiti principali dell’azienda sarebbero coperti. Permette di applicare regole diverse di mascheramento e di personalizzare le impostazioni, quindi diciamo è molto flessibile.
+●	Hawk-Eye - installazione tramite python, tool accessibile da terminale, ci sono alcuni file/script di configurazione da scrivere. Scansiona database ma NON SQL Server (solo postgreSQL) e scansiona anche file docx e pdf (dati non strutturati) trovando i dati sensibili. Il risultato della scansione si può salvare in json per essere usato da altri processi.
+●	Microsoft Presidio – forse il più scalabile e completo, perché anche se nativamente non supporta molto, è organizzato in moduli che analizzano, scansionano e anonimizzano dati, e si può estendere integrando librerie apposite. Quindi può scansionare database, dati strutturati, semi e non strutturati, docx e pdf, installando le giuste librerie, vedi esempio. Semplice da installare ma richiede script di configurazione.
+L’obiettivo è infatti quello di prendere i dati grezzi da un db per esempio, farli ripulire e classificare ed eventualmente anonimizzare da uno di questi tool e passarli poi a Power BI, che quindi prenderà in analisi solo dati utili, puliti e sicuri.
+Bisogna però capire che questi tool NON vanno a modificare direttamente le fonti originali: non sovrascrivono i dati presenti nel db e non li mascherano direttamente nel db. Quello che fanno però è far arrivare a Power BI o altri strumenti di analisi i dati sicuri. Quindi Power BI non dovrà più connettersi ai db direttamente, ma a questi strumenti.
+Altra cosa da capire è che praticamente tutti non automatizzano il processo di scansione dei dati e individuazione dei PII, ma si deve necessariamente fare un lavoro di sviluppo per creare per esempio degli script che passino i dati dalle fonti originali al tool, poi dal tool a Power BI oppure al database iniziale (x es. se si vuole anonimizzare i dati nel db) - cosa più che fattibile in questa azienda dato che abbiamo gli sviluppatori, ma non scontata in altre aziende che magari si occupano solo di dati e non hanno un ufficio di sviluppo. Questo potrebbe essere anche un vantaggio su altri competitor e un valore aggiunto per i clienti Wintech.
+
+
+
+
+
 
 
 \section{Strumenti di Data Discovery}
