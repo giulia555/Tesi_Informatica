@@ -294,58 +294,87 @@ Nonostante questi vincoli tecnici, OpenMetadata offre una funzionalità di base 
 
 
 \section{Gestione degli accessi}
-Nelle moderne infrastrutture informative, l'efficacia delle politiche di Data Governance e la conformità alle prescrizioni del GDPR dipendono in misura critica dalla 
-capacità di regolare l'accesso ai metadati e alle risorse in modo granulare, sicuro e centralizzato. L'introduzione di un data catalog aziendale non deve tradursi in 
-una declassificazione indiscriminata delle informazioni sensibili; al contrario, la piattaforma deve agire come un punto di controllo flessibile in grado di garantire 
-il pieno rispetto del \emph{Principle of Least Privilege}. 
+L'efficacia della Data Governance e la conformità al GDPR richiedono una gestione degli accessi sicura, granulare e centralizzata. L'adozione di un Data Catalog 
+aziendale deve garantire il rispetto del \emph{Principle of Least Privilege}, fungendo da unico punto di controllo per l'accesso ai metadati e proteggendo in particolare le informazioni sensibili.
 
-Per soddisfare questa esigenza, OpenMetadata implementa un modello integrato di controllo degli accessi basato sulla stretta combinazione tra la mappatura gerarchica 
-dell'organigramma aziendale e un motore di autorizzazione basato sui ruoli (RBAC).
-
+Per rispondere a questa esigenza, OpenMetadata utilizza un modello di controllo degli accessi basato sui ruoli (RBAC), combinato con una fedele mappatura 
+gerarchica dell'organigramma aziendale, possibile grazie alla definizione di utenti e team.
 
 \subsection{Mappatura dell'organigramma: utenti e team}
-Il primo pilastro del sistema di sicurezza è rappresentato dalla gestione delle identità, configurabile all'interno della scheda di amministrazione dedicata. 
-La piattaforma consente la definizione di singoli utenti (\emph{User}) e la loro organizzazione all'interno di gruppi (\emph{Team}). Questa struttura è progettata 
-per mappare l'organigramma reale di Wintech S.p.A., organizzando l'albero aziendale secondo cinque tipologie logiche standard e sequenziali (\emph{teamType}):
+Il primo livello di sicurezza riguarda la gestione delle identità. Dalla scheda di amministrazione è possibile configurare i singoli utenti (\emph{User}) e 
+raggrupparli in gruppi di lavoro (\emph{Team}). Questa struttura permette di replicare fedelmente l'organigramma di Wintech all'interno del sistema. 
+OpenMetadata permette di organizzare l'albero aziendale secondo cinque livelli logici (\emph{teamType}):
 \begin{itemize}
-    \item \textbf{\emph{Organization}}: Costituisce il nodo radice dell'intera gerarchia, non può possedere nodi genitori e funge da contenitore globale per tutti i dipendenti e i sottogruppi dell'azienda.
-    \item \textbf{\emph{BusinessUnit}}: Rappresenta le divisioni di primo livello dell'azienda (es. Direzione, Ricerca e Sviluppo), potendo avere come genitore unicamente l'unità radice (\emph{Organization}) o un'altra \emph{BusinessUnit}.
-    \item \textbf{\emph{Division}}: Definisce partizioni operative intermedie collocate al di sotto delle unità di business primarie, potendo avere un solo nodo genitore (\emph{Organization}, \emph{BusinessUnit} o un'altra \emph{Division}).
-    \item \textbf{\emph{Department}}: Individua aree di competenza specialistiche e, a differenza dei livelli superiori, può ereditare proprietà da molteplici nodi genitori, garantendo flessibilità logica.
-    \item \textbf{\emph{Group}}: Rappresenta l'ultimo livello gerarchico (nodo foglia) e non può avere ulteriori sottogruppi, ma si compone esclusivamente di singoli membri operativi (\emph{User}). All'interno del Data Catalog, i team classificati con questo tipo detengono un privilegio esclusivo: sono le uniche entità collettive abilitate a detenere formalmente la proprietà (\emph{Ownership}) degli asset di dati.
+    \item \textbf{\emph{Organization}}: È il nodo radice della gerarchia. Contiene tutti i dipendenti e i sottogruppi dell'azienda e non possiede nodi genitori.
+    \item \textbf{\emph{BusinessUnit}}: Rappresenta le divisioni di primo livello dell'azienda (es. Direzione, Ricerca e Sviluppo). Può dipendere esclusivamente dall'\emph{Organization} o da un'altra \emph{BusinessUnit}.
+    \item \textbf{\emph{Division}}: È una partizione operativa intermedia. Dipende gerarchicamente da un solo nodo superiore (\emph{Organization}, \emph{BusinessUnit} o un'altra \emph{Division}).
+    \item \textbf{\emph{Department}}: Individua aree di competenza specialistiche. A differenza degli altri livelli, può ereditare proprietà da più nodi genitori, offrendo maggiore flessibilità organizzativa.
+    \item \textbf{\emph{Group}}: Rappresenta il nodo foglia della gerarchia. Non può contenere sottogruppi, ma è formato solo da singoli \emph{User}. Nel Data Catalog, solo i team di tipo \emph{Group} possono detenere formalmente la proprietà (\emph{Ownership}) degli asset.
 \end{itemize}
 
-Oltre all'inserimento manuale da parte degli amministratori di sistema, l'infrastruttura di OpenMetadata consente la centralizzazione degli accessi tramite 
-l'integrazione nativa con protocolli di Single Sign-On (SSO) quali Microsoft Entra ID, Google Workspace e Okta. Questa configurazione abilita la fondamentale 
-funzionalità di \emph{Auto-Provisioning}: al momento del primo login effettuato da un dipendente tramite le proprie credenziali aziendali, la piattaforma 
-interroga l'\emph{identity provider} esterno e crea in automatico il relativo profilo utente all'interno del catalogo, abbattendo drasticamente l'onere amministrativo 
-di gestione del personale.
+L'inserimento degli utenti può avvenire manualmente, ma l'infrastruttura supporta anche la centralizzazione degli accessi tramite l'integrazione con protocolli di 
+Single Sign-On (SSO), forniti da provider come Microsoft Entra ID, Google Workspace e Okta. 
+Questa configurazione abilita il provisioning automatico (\emph{Auto-Provisioning}). Al momento del primo accesso di un utente tramite credenziali aziendali, 
+la piattaforma interroga il provider e crea in automatico il relativo profilo nel catalogo, riducendo l'onere amministrativo per la gestione del personale.
 
-
-
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{1\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{schermate/user.png}
+        \caption{Pannello di amministrazione dei singoli utenti (\emph{User})}
+    \end{subfigure}
+    
+    \vspace{0.4cm}
+    
+    \begin{subfigure}[b]{1\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{schermate/team.png}
+        \caption{Mappatura gerarchica dell'organigramma tramite i \emph{Team}}
+    \end{subfigure}
+    
+    \caption[Pannelli di gestione degli utenti e dei team]{Interfacce per la gestione delle identità in OpenMetadata: visualizzazione dell'elenco utenti (sopra) e dell'organizzazione gerarchica in dipartimenti o \emph{BusinessUnit} (sotto)}
+    \label{fig:gestione_utenti_team}
+\end{figure}
 
 \subsection{L'architettura Role-Based Access Control}
-Una volta definita la struttura degli utenti e dei team, la determinazione delle autorizzazioni operative viene governata dal sistema RBAC della piattaforma. 
-Dal punto di vista architetturale, il motore di controllo degli accessi si scompone in tre livelli logici interconnessi:
+Una volta definita la struttura degli utenti e dei team, la piattaforma permette di definire autorizzazioni e permessi attraverso il sistema \gls{rbac}.
+Dal punto di vista architetturale, il motore di controllo degli accessi si basa su tre componenti interconnessi:
 \begin{enumerate}
-    \item \textbf{Rules (Regole)}: Rappresentano il livello atomico del framework di sicurezza. Ciascuna regola definisce la liceità di una specifica azione (es. modificare i tag, aggiornare la descrizione, estrarre il lineage, visualizzare i dati campione) applicata su una determinata tipologia di risorsa del catalogo.
-    \item \textbf{Policies (Politiche)}: Costituiscono insiemi coerenti e ordinati di regole logiche raggruppate per rispondere a specifiche finalità di sicurezza o conformità (es. una policy per il monitoraggio della qualità, una policy per la gestione dei domini).
-    \item \textbf{Roles (Ruoli)}: Si collocano al vertice della gerarchia ed associano una o più politiche a profili utente definiti. Assegnando un ruolo specifico a un utente o a un intero team, la piattaforma propaga istantaneamente a tutti i membri le relative autorizzazioni ereditate dal ruolo aziendale.
+    \item \textbf{Rules (Regole)}: Sono l'elemento base della sicurezza. Definiscono se una specifica azione (es. modificare tag, visualizzare dati campione) è permessa o negata su un certo tipo di risorsa.
+    \item \textbf{Policies (Politiche)}: Sono raggruppamenti logici di regole. Vengono create per rispondere a specifiche esigenze di sicurezza aziendale (es. policy per la qualità dei dati, policy per la gestione dei domini).
+    \item \textbf{Roles (Ruoli)}: Associano una o più politiche ai profili utente. Assegnando un ruolo a un utente o a un intero team, le relative autorizzazioni vengono propagate istantaneamente a tutti i membri.
 \end{enumerate}
 
-\subsection{Algoritmo di valutazione delle autorizzazioni} % ma questo esiste davvero? non so dove l'hai trovato
-Nel momento in cui un utente tenta di compiere un'operazione su un determinato asset, il motore di OpenMetadata intercetta la richiesta ed esegue un algoritmo 
-di valutazione per autorizzare o bloccare l'azione, basandosi su quattro criteri gerarchici di risoluzione:
+\subsection{Logica di valutazione dei permessi}
+Quando un utente tenta di eseguire un'operazione su un asset, il motore di OpenMetadata valuta la richiesta. La decisione di autorizzare o bloccare l'azione segue 
+quattro principi fondamentali:
 \begin{itemize}
-    \item \textbf{Permessi di base (Default):} per impostazione predefinita, qualsiasi profilo registrato riceve i privilegi minimi di consultazione associati alla politica globale dell'organizzazione (\emph{OrganizationPolicy}) e al ruolo di base (\emph{Data Consumer Role})[cite: 2]. Ciò garantisce che ogni utente possa ricercare e leggere i dati effettuando attività di Data Discovery, escludendo tuttavia qualsiasi facoltà di alterazione o scrittura dei metadati[cite: 2];
-    \item \textbf{Ereditarietà dai team:} l'algoritmo calcola l'unione logica dei permessi assegnati direttamente al profilo dell'utente con la totalità dei privilegi ereditati da ciascuno dei team a cui egli risulta associato nell'organigramma[cite: 2];
-    \item \textbf{Eccezione di \emph{Ownership} (Proprietà):} costituisce una deroga fondamentale alle restrizioni dei ruoli standard. Qualora un utente (o un team) venga designato come proprietario di uno specifico asset, egli acquisisce in modo automatico i privilegi completi per gestirlo e modificarlo, indipendentemente dai limiti imposti dal suo ruolo ordinario[cite: 2];
-    \item \textbf{Priorità assoluta dei divieti (\emph{Deny over Allow}):} rappresenta la regola aurea di sicurezza logica che previene conflitti e bypass accidentali. Nel definire le regole all'interno delle \emph{policy}, l'amministratore può impostare l'effetto dell'azione come consentito (\emph{Allow}) o espressamente vietato (\emph{Deny})[cite: 2]. Se l'utente dispone di un permesso abilitante ereditato da un ruolo, ma al contempo appartiene a un team soggetto a una \emph{policy} restrittiva che nega esplicitamente la medesima operazione, l'asserzione di divieto prevale in modo assoluto, bloccando l'esecuzione dell'azione[cite: 2].
+    \item \textbf{Permessi di base (Default)}: Ogni utente registrato ottiene i privilegi minimi associati al ruolo base (\emph{Data Consumer Role}) e alla policy globale (\emph{OrganizationPolicy}). Questo garantisce che chiunque possa cercare e leggere i dati (Data Discovery), escludendo però le operazioni di modifica.
+    \item \textbf{Ereditarietà dai team}: I permessi sono cumulativi. Il sistema calcola l'unione logica tra i privilegi assegnati direttamente al profilo e quelli ereditati da tutti i team a cui l'utente appartiene.
+    \item \textbf{Eccezione di Proprietà (\emph{Ownership})}: È una deroga fondamentale alle regole standard. Se un utente o un team è designato come proprietario di un asset, ne ottiene automaticamente la gestione completa, superando i limiti del proprio ruolo ordinario.
+    \item \textbf{Priorità dei divieti (\emph{Deny over Allow})}: È la regola di sicurezza che previene i conflitti. Le regole all'interno delle policy possono consentire (\emph{Allow}) o vietare (\emph{Deny}) un'azione. Se un utente eredita un permesso abilitante, ma appartiene a un team con una regola restrittiva esplicita (\emph{Deny}) per la stessa azione, il divieto prevale sempre e l'operazione viene bloccata.
 \end{itemize}
 
-
-
-
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{1\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{schermate/ruolo_datagovmanager.png}
+        \caption{Assegnazione di una \emph{policy} di sicurezza allo specifico ruolo di \emph{Data Governance Manager}}
+    \end{subfigure}
+    
+    \vspace{0.4cm}
+    
+    \begin{subfigure}[b]{1\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{schermate/policy_gdpr.png}
+        \caption{Dettaglio della \emph{policy}: regola con effetto di divieto (\emph{Deny}) basata sui tag}
+    \end{subfigure}
+    
+    \caption[Esempio di architettura RBAC per la conformità GDPR]{Applicazione pratica dell'architettura RBAC: il Ruolo (sopra) eredita la \emph{policy} dedicata al rispetto del GDPR, la quale (sotto) definisce una regola di divieto (\emph{Deny}) per impedire la visualizzazione in chiaro dei dati etichettati come sensibili}
+    \label{fig:rbac_gdpr}
+\end{figure}
 
 
 \section{Glossario aziendale}
