@@ -28,7 +28,7 @@ garantendo che l'azienda sappia sempre dove e come applicare le policy di protez
 
 \paragraph{Analisi dei dati e Business Intelligence}
 Gli analisti accedono al catalogo per cercare le informazioni di cui hanno bisogno per creare i loro report. 
-Se un analista ha bisogno del fatturato del 2023, cerca "Fatturato" nel Data Catalog: il sistema indica immediatamente in quale 
+Se un analista ha bisogno del fatturato del 2023, cerca «Fatturato» nel Data Catalog: il sistema indica immediatamente in quale 
 database si trova, se il dato è aggiornato e di alta qualità, eliminando il rischio di commettere errori o di duplicare un set di dati già predisposto in passato.
 
 \paragraph{Data Quality e Governance}
@@ -100,7 +100,7 @@ La selezione, l'installazione e l'impiego degli strumenti software hanno dovuto 
 \begin{itemize}
     \item \textbf{Licenze e costi}: Adozione obbligatoria di software con licenza \emph{open-source}, che ne consentisse l'uso commerciale senza costi di licenza vincolanti per l'azienda.
     \item \textbf{Infrastruttura e \emph{deployment}}: Il Data Catalog doveva prevedere un'installazione semplice, scartando soluzioni infrastrutturali troppo onerose per gli scopi dello stage, come Kubernetes. Si è optato per Docker.
-    \item \textbf{Architettura dei dati (\textit{on-premise})}: Per motivi di sicurezza, è stato vietato il caricamento di dati aziendali su ambienti Cloud o SaaS esterni. Il sistema doveva inoltre limitarsi all'estrazione dei soli metadati, senza duplicare o memorizzare i dati fisici nel catalogo.
+    \item \textbf{Architettura dei dati (\emph{on-premise})}: Per motivi di sicurezza, è stato vietato il caricamento di dati aziendali su ambienti Cloud o SaaS esterni. Il sistema doveva inoltre limitarsi all'estrazione dei soli metadati, senza duplicare o memorizzare i dati fisici nel catalogo.
     \item \textbf{Sicurezza e privacy}: Il sistema doveva supportare l'identificazione e la classificazione dei dati sensibili (\gls{pii}), garantendo la conformità al GDPR (UE 2016/679).
     \item \textbf{Stack tecnologico}: Il progetto ha richiesto l'installazione locale di \textbf{Microsoft SQL Server} e \textbf{PostgreSQL}, la disponibilità di specifiche porte di rete (8585 e 8080) e l'uso di \textbf{Microsoft Power BI} con licenza \emph{Pro}.
 \end{itemize}
@@ -147,26 +147,25 @@ Analisi dei requisiti e conseguente valutazione delle piattaforme di Data Catalo
 \paragraph{Fase 5 - OpenMetadata, installazione e Data Discovery}
 Installazione di OpenMetadata, configurazione della piattaforma e connessioni alle fonti dati aziendali.
 
- \paragraph{Fase 6 - Data Quality e Data Observability}
- Test delle funzionalità principali di OpenMetadata, come implementazione di test di qualità sui dati, configurazione del sistema di notifiche e \emph{alerting}, gestione dei ruoli e degli accessi.
+\paragraph{Fase 6 - Data Quality e Data Observability}
+Test delle funzionalità principali di OpenMetadata, come implementazione di test di qualità sui dati, configurazione del sistema di notifiche e \emph{alerting}, gestione dei ruoli e degli accessi.
 
- \paragraph{Fase 7 - Data Governance}
- Test del motore di individuazione e classificazione automatica dei dati sensibili, corretta gestione dei PII e funzionalità di anonimizzazione.
+\paragraph{Fase 7 - Data Governance}
+Test del motore di individuazione e classificazione automatica dei dati sensibili, corretta gestione dei PII e funzionalità di anonimizzazione.
 
- \paragraph{Fase 8 - Integrazione con la BI}
- Integrazione del catalogo dati con Microsoft Power BI e studio teorico su altri strumenti di Data Discovery e anonimizzazione dei dati.
-
+\paragraph{Fase 8 - Integrazione con la BI}
+Integrazione del catalogo dati con Microsoft Power BI e studio teorico su altri strumenti di Data Discovery e anonimizzazione dei dati.
 
 \section{Formazione e tecnologie}
 L'inserimento nel contesto aziendale ha previsto una fase iniziale di formazione, propedeutica all'utilizzo delle tecnologie 
-impiegate nel progetto e volta a garantire un metodo di lavoro in linea con il \textit{Way of Working} aziendale.
+impiegate nel progetto e volta a garantire un metodo di lavoro in linea con il \emph{Way of Working} aziendale.
 
 \subsection{Formazione}
 Le prime settimane di stage sono state dedicate allo studio o al ripasso delle competenze tecniche necessarie.
 \begin{itemize}
     \item \textbf{Collaborazione e versionamento}: Strumenti di collaborazione aziendale (Microsoft 365, Teams) e sistemi di versionamento tramite Git e GitHub.
     \item \textbf{Database e SQL}: Linguaggio SQL (livelli base e intermedio) e concetti avanzati di gestione dei database, tra cui transazioni ACID, procedure di backup logico e fisico, viste, cursori e stored procedure.
-    \item \textbf{Sviluppo sicuro}: Studio dei documenti del Sistema di Gestione Integrato di Wintech relativi alla \textit{Privacy by Design}, con focus sulle tecniche di anonimizzazione e pseudonimizzazione dei dati personali.
+    \item \textbf{Sviluppo sicuro}: Studio dei documenti del Sistema di Gestione Integrato di Wintech relativi alla \emph{Privacy by Design}, con focus sulle tecniche di anonimizzazione e pseudonimizzazione dei dati personali.
     \item \textbf{Infrastruttura}: Formazione teorica e pratica sulla creazione di macchine virtuali e sulla containerizzazione tramite Docker.
     \item \textbf{Sistema gestionale aziendale}: Introduzione al sistema gestionale di Wintech (ESOLVER).
     \item \textbf{Business Intelligence}: Studio dei principi di \gls{bi} e attività pratiche con Microsoft Power BI.

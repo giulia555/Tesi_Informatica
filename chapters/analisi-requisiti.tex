@@ -189,7 +189,7 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item L'attore riceve una notifica e accede alla sezione dedicata agli alert e agli avvisi.
             \item Il sistema mostra i dettagli dell'alert, come la causa, la fonte dati coinvolta e il momento in cui si è verificato il problema.
             \item L'attore esamina le informazioni disponibili e interviene per risolvere il problema.
-            \item Il sistema non mostra più l'alert o lo marchia come "risolto".
+            \item Il sistema non mostra più l'alert o lo marchia come «risolto».
         \end{enumerate}
     }
     \label{uc:1_9_gestione_alert_tecnici}
@@ -457,7 +457,7 @@ Ogni caso d'uso è identificato dalla seguente notazione:
     \usecasemain{
         \begin{enumerate}
             \item L'attore seleziona l'opzione che permette di modificare il glossario.
-            \item L'attore aggiunge un nuovo termine al Glossario, fornendo un nome, una descrizione e possibili sinonimi.
+            \item L'attore aggiunge un nuovo termine al glossario, fornendo un nome, una descrizione e possibili sinonimi.
             \item L'attore classifica il termine, per esempio usando dei tag.
             \item L'attore associa il termine ai rispettivi set di dati.
             \item Il sistema utilizza i termini del glossario per arricchire i risultati di ricerca quando un utente cerca un dato nel catalogo.
@@ -552,7 +552,7 @@ Ogni caso d'uso è identificato dalla seguente notazione:
 
 \begin{usecase}{3.5}{Monitoraggio di un dataset}
     \usecaseactors{Analista, sviluppatore di BI o utente che consulta il catalogo}
-    \usecasedesc{L'utente monitora un particolare dataset di suo interesse "seguendolo" (\emph{Follow}) o salvandolo nei preferiti, al fine di ricevere notifiche automatiche in caso di aggiornamenti o modifiche strutturali, e per potervi accedere rapidamente tramite un elenco di preferiti}
+    \usecasedesc{L'utente monitora un particolare dataset di suo interesse «seguendolo» (\emph{Follow}) o salvandolo nei preferiti, al fine di ricevere notifiche automatiche in caso di aggiornamenti o modifiche strutturali, e per potervi accedere rapidamente tramite un elenco di preferiti}
     \usecasepre{L'attore ha effettuato l'accesso alla piattaforma ed è presente almeno un set di dati nel Data Catalog}
     \usecasepost{L'attore ha aggiunto il dataset ai preferiti e riceve notifiche automatiche in caso di modifiche o aggiornamenti}
     \usecasemain{
@@ -679,7 +679,7 @@ Ogni caso d'uso è identificato dalla seguente notazione:
             \item L'attore accede alla sezione di configurazione dei connettori della piattaforma.
             \item L'attore seleziona Power BI come tipo di connettore e inserisce le credenziali di autenticazione richieste.
             \item Il sistema verifica la connessione e conferma l'esito.
-            \item L'attore seleziona quali dashboard, grafici e datamodel importare e definendo eventuali filtri.
+            \item L'attore seleziona quali dashboard, grafici e datamodel importare e definisce eventuali filtri.
             \item L'attore pianifica la sincronizzazione automatica dei metadati di Power BI.
             \item Il sistema importa i metadati e li rende disponibili nel catalogo, incluso il lineage tra le tabelle dei database e le dashboard di Power BI.
         \end{enumerate}
@@ -731,7 +731,7 @@ dove le voci assumono i seguenti significati:
 
 % TABELLE DEI REQUISITI
 \subsection{Requisiti funzionali}
-I requisiti funzionali descrivono i comportamenti e i servizi che il sistema deve fornire. Rispondono alla domanda: \textit{"Cosa deve fare il software?"}.
+I requisiti funzionali descrivono i comportamenti e i servizi che il sistema deve fornire. Rispondono alla domanda: «Cosa deve fare il software?».
 
 \begin{longtable}{ p{0.13\textwidth} p{0.64\textwidth} p{0.15\textwidth} }
 % intestazione prima pagina
@@ -828,7 +828,7 @@ RF-D-24 & Il sistema permette di risalire al Data Lineage di un dato o dataset. 
 RF-D-25 & L'utente può visualizzare l'elenco delle modifiche subite da un dataset. & UC-3.4 \\ \midrule
 RF-D-26 & Il sistema registra e rende visibile la lista degli accessi e delle ricerche effettuate su un dataset. & UC-3.4 \\ \midrule
 RF-D-27 & L'utente può visualizzare le interazioni di altri utenti su un certo dataset. & UC-3.4 \\ \midrule
-RF-D-28 & Il sistema permette all'utente di salvare specifici asset nei preferiti (o di "seguirlo") e ricevere notifiche. & UC-3.5 \\ \midrule
+RF-D-28 & Il sistema permette all'utente di salvare specifici asset nei preferiti (o di «seguirlo») e ricevere notifiche. & UC-3.5 \\ \midrule
 RF-D-29 & L'utente può lasciare un commento o un feedback direttamente sulla pagina del dataset. & UC-3.6 \\ \midrule
 RF-D-30 & L'utente può inviare una domanda o fare una richiesta relativamente a un dataset. & UC-3.7 \\ \midrule
 RF-D-31 & Il sistema notifica gli utenti autorizzati quando viene lasciato un commento, una richiesta o un problema su un dataset. & UC-3.6, 3.7, 3.8 \\ \midrule
