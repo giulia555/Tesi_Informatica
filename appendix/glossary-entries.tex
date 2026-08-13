@@ -45,6 +45,10 @@
 \newacronym[description={\textit{Model Context Protocol}. Standard aperto che normalizza la comunicazione tra i modelli linguistici di grandi dimensioni (LLM) e i sistemi informativi locali. Funge da livello semantico sicuro, permettendo agli assistenti AI di accedere al contesto dei metadati aziendali per rispondere alle interrogazioni senza esporre i dati originali all'esterno}]
     {mcp}{MCP}{Model Context Protocol}
 
+% OCR
+\newacronym[description={\textit{Optical Character Recognition} (Riconoscimento Ottico dei Caratteri). Tecnologia che consente di identificare e convertire il testo presente in formati non strutturati (come documenti cartacei scansionati, file PDF non ricercabili o immagini digitali) in dati testuali elaborabili e analizzabili da un \emph{software}}]
+    {ocr}{OCR}{Optical Character Recognition}
+
 
 % -------------------- VOCI DI GLOSSARIO ----------------------------
 \newglossaryentry{systemintegrator}{
@@ -173,10 +177,23 @@
     description={Motore di ricerca e analisi distribuito \emph{open-source} (derivato da ElasticSearch). Nel contesto di OpenMetadata, viene utilizzato come \emph{backend} per alimentare le funzionalità di ricerca \emph{full-text} e la ricerca semantica, indicizzando tutti i metadati presenti nel catalogo per consentire interrogazioni rapide su grandi volumi di informazioni}
 }
 
-
-
 \newglossaryentry{minimoprivilegio}{
     name={Principio del Minimo Privilegio},
     sort=minimoprivilegio,
     description={Principio di sicurezza informatica e governance secondo cui a ciascun utente, ruolo o processo applicativo devono essere assegnate esclusivamente le autorizzazioni e i permessi di accesso strettamente necessari allo svolgimento delle proprie mansioni. Questo approccio consente di ridurre al minimo la superficie di attacco, proteggere i dati sensibili da accessi non autorizzati e limitare i rischi connessi a errori umani o compromissioni dei profili}
+}
+
+\newglossaryentry{k-anonymity}{
+    name={\emph{k-Anonymity}},
+    description={Modello formale di privacy introdotto per proteggere i dati personali rilasciati in dataset pubblici. Garantisce che le informazioni di un singolo individuo non possano essere distinte da quelle di almeno altri $k-1$ individui all'interno dello stesso dataset, mascherando o generalizzando gli attributi quasi-identificatori (es. CAP, età, sesso)}
+}
+
+\newglossaryentry{l-diversity}{
+    name={\emph{l-Diversity}},
+    description={Estensione del modello della \emph{k-Anonymity} ideata per mitigare gli attacchi di omogeneità. Richiede che all'interno di ogni gruppo di $k$ record indistinguibili (classe di equivalenza) siano presenti almeno $l$ valori ben distinti e rappresentati per l'attributo sensibile (es. la diagnosi medica), evitando che un utente malintenzionato possa dedurre il dato sensibile con certezza}
+}
+
+\newglossaryentry{t-closeness}{
+    name={\emph{t-Closeness}},
+    description={Ulteriore affinamento del modello \emph{l-Diversity} che protegge i dati contro gli attacchi basati sulla distribuzione asimmetrica delle informazioni. Garantisce che la distribuzione di un attributo sensibile all'interno di ogni singola classe di equivalenza sia "vicina" (con una distanza massima pari a $t$) alla distribuzione di quel medesimo attributo nell'intero dataset}
 }
