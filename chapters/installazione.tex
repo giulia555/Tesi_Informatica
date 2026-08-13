@@ -22,7 +22,7 @@ L'architettura locale di OpenMetadata viene orchestrata attraverso quattro Conta
     \item \textbf{Database di sistema}: Un'istanza PostgreSQL o MySQL dedicata al salvataggio dello stato, delle configurazioni e dei metadati gestiti dalla piattaforma.
     \item \textbf{OpenMetadata Server}: Il backend centrale della piattaforma sviluppato in Java.
     \item \textbf{OpenMetadata Ingestion (Apache Airflow)}: Il motore di orchestrazione responsabile dell'esecuzione automatica e pianificata delle \emph{pipeline} di estrazione dati.
-    \item \textbf{Motore di ricerca}: Un Container ElasticSearch (o \gls{opensearch}) dedicato all'indicizzazione dei metadati e alla ricerca \emph{full-text}.
+    \item \textbf{Motore di ricerca}: Un Container Elasticsearch (o \gls{opensearch}) dedicato all'indicizzazione dei metadati e alla ricerca \emph{full-text}.
 \end{enumerate}
 
 Per consentire la corretta fruizione dei servizi sul browser, l'ambiente di rete locale deve garantire che le porte 8585 (dedicata all'interfaccia utente di OpenMetadata) 
@@ -41,7 +41,7 @@ seguendo i passaggi della documentazione ufficiale~\cite{site:openmetadata-docs}
     \begin{verbatim}
 mkdir openmetadata-docker && cd openmetadata-docker
     \end{verbatim}
-    \item \textbf{Download del file di configurazione}: è stato scaricato il file \texttt{docker-compose.yml} ufficiale dal repository~\cite{site:openmetadata-repo} del progetto (oppure il file \texttt{docker-compose-postgres.yml} qualora si preferisca utilizzare PostgreSQL come database di sistema al posto di MySQL).
+    \item \textbf{Download del file di configurazione}: è stato scaricato il file \texttt{docker-compose.yml} ufficiale dal repository~\cite{site:openmetadata-repo} del progetto (oppure il file \texttt{docker-compose-postgres.yml} qualora si preferisca utilizzare PostgreSQL come database di sistema al posto di MySQL);
     \item \textbf{Avvio dei servizi}: i Container Docker di OpenMetadata sono stati eseguiti tramite il seguente comando:
     \begin{verbatim}
 docker compose -f docker-compose.yml up --detach
@@ -132,8 +132,8 @@ La pianificazione di questa attività viene definita dall'amministratore durante
 o lasciata in modalità manuale. In background, l'orchestrazione di questi flussi periodici è affidata ad Apache Airflow, che attiva in sequenza gli agenti di estrazione 
 all'orario e con la frequenza stabiliti, preservando la coerenza delle informazioni nel tempo.
 
-\subsection{Modifica dei metadati tramite Bulk Import \& Export}
-Per facilitare la gestione del catalogo su larga scala, OpenMetadata supporta la funzionalità di \emph{Bulk Import} \& \emph{Export} tramite file in formato CSV per tutti i principali asset. 
+\subsection{Modifica dei metadati tramite Bulk Import ed Export}
+Per facilitare la gestione del catalogo su larga scala, OpenMetadata supporta la funzionalità di \emph{Bulk Import} ed \emph{Export} tramite file in formato CSV per tutti i principali asset. 
 
 L'operazione di \textbf{\emph{Bulk Export}} consente di scaricare in locale un file CSV contenente l'inventario completo dei metadati di un asset. Tale file funge anche da modello per la successiva fase 
 di \textbf{\emph{Bulk Import}}: l'utente può aggiornare o arricchire offline i metadati di un asset, per poi ricaricare il CSV sulla piattaforma. 
@@ -171,7 +171,7 @@ basata su un \emph{Query Builder} visuale. Questo strumento consente di comporre
 \end{itemize}
 
 Attraverso gli operatori di confronto messi a disposizione (tra cui \emph{Equal to}, \emph{Any in}, \emph{Contains} e le rispettive negazioni), l'utente può formulare interrogazioni 
-mirate, quali ad esempio: «Mostra tutte le tabelle del database AdventureWorks, schema SalesLT, che possiedono il tag \texttt{PII.Sensitive} e il cui proprietario è un \emph{Admin}».
+mirate, quali ad esempio: «Mostra tutte le tabelle del database \emph{AdventureWorks}, schema SalesLT, che possiedono il tag \texttt{PII.Sensitive} e il cui proprietario è un \emph{Admin}».
 
 \begin{figure}[H]
     \centering
@@ -232,11 +232,11 @@ per identificare preventivamente quali tabelle, \emph{pipeline} e report verrebb
 
 L'interfaccia di visualizzazione del \emph{lineage} supporta inoltre l'attivazione di diversi livelli informativi (\emph{Layers}):
 \begin{itemize}
-    \item \textbf{\emph{Column Layer}}: per evidenziare le dipendenze tra i singoli attributi;
-    \item \textbf{\emph{Observability Layer}}: per integrare direttamente sul grafo gli esiti dei test di Data Quality, consentendo di individuare visivamente il punto in cui si è verificata un'anomalia sui dati;
-    \item \textbf{\emph{Data Product Layer}}: per evidenziare la composizione e l'origine dei dataset curati messi a disposizione dei vari domini aziendali;
-    \item \textbf{\emph{Service Layer}}: per visualizzare come i dati fluiscono attraverso piattaforme e servizi differenti;
-    \item \textbf{\emph{Domain Layer}}: per organizzare i dataset e gli asset raggruppandoli all'interno di categorie di business pertinenti.
+    \item \textbf{\emph{Column Layer}}: Per evidenziare le dipendenze tra i singoli attributi.
+    \item \textbf{\emph{Observability Layer}}: Per integrare direttamente sul grafo gli esiti dei test di Data Quality, consentendo di individuare visivamente il punto in cui si è verificata un'anomalia sui dati.
+    \item \textbf{\emph{Data Product Layer}}: Per evidenziare la composizione e l'origine dei dataset curati messi a disposizione dei vari domini aziendali.
+    \item \textbf{\emph{Service Layer}}: Per visualizzare come i dati fluiscono attraverso piattaforme e servizi differenti.
+    \item \textbf{\emph{Domain Layer}}: Per organizzare i dataset e gli asset raggruppandoli all'interno di categorie di business pertinenti.
 \end{itemize}
 
 

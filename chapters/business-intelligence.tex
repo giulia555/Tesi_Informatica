@@ -168,6 +168,47 @@ e gestione degli incidenti qualitativi).
 
 
 
+% da sistemare
+
+Durante l'analisi condotta nel percorso di stage, un quesito strategico fondamentale ha guidato la valutazione dell'architettura aziendale: è strettamente indispensabile 
+introdurre una piattaforma di Data Catalog complessa e centralizzata come OpenMetadata, o è possibile soddisfare i requisiti di Data Governance combinando le funzionalità 
+di Microsoft Power BI con strumenti verticali e leggeri di PII Discovery?
+
+Power BI, ampiamente integrato nel perimetro operativo di Wintech S.p.A., si attesta come un eccellente strumento di reportistica e visualizzazione, ma implementa nativamente 
+anche alcune funzionalità tipiche di un catalogo dati:
+\begin{itemize}
+    \item \textbf{Centralizzazione delle fonti:} si connette a una vastissima gamma di fonti dati strutturate e non strutturate, fungendo da \emph{Single Source of Truth};
+    \item \textbf{Sincronizzazione:} garantisce l'aggiornamento programmato dei dati allineandoli alle fonti originali;
+    \item \textbf{Sicurezza e gestione accessi:} governa la visibilità del dato tramite controlli a livello di \emph{workspace} e \emph{Row-Level Security} (RLS);
+    \item \textbf{Data Collaboration e Observability:} supporta l'esplorazione dei modelli semantici, la condivisione sicura tramite Microsoft Teams e l'attivazione di \emph{alert} automatici sui KPI.
+\end{itemize}
+
+Tuttavia, essendo uno strumento orientato al \emph{Decision Making}, la Business Intelligence da sola non è in grado di garantire il controllo qualitativo e la 
+conformità normativa alla sorgente. Power BI importa i dati passivamente: non effettua test di \emph{Data Quality} automatici sui database originari per intercettare 
+valori nulli o errati e, soprattutto, non dispone di algoritmi per scovare le informazioni personali (\emph{PII}) nei database relazionali prima che queste vengano 
+importate nei report. Infine, manca di un ambiente centralizzato per l'apertura di \emph{task} e la segnalazione di anomalie documentali.
+
+Per colmare questo divario senza incorrere nella complessità sistemistica di un Data Catalog completo, lo stage ha previsto la valutazione di cinque soluzioni 
+specialistiche (\emph{tool} di \emph{PII Discovery} e anonimizzazione), analizzandone l'utilità, le caratteristiche e la fattibilità di integrazione nell'infrastruttura 
+aziendale:
+\begin{enumerate}
+    \item \textbf{Fides (di Ethyca)}: una piattaforma \emph{open-source} di \emph{privacy engineering} basata sulla metodologia \emph{Privacy-as-Code}, progettata per automatizzare il rispetto del GDPR e la mappatura dei dati[cite: 5]. Richiede tuttavia un'orchestrazione infrastrutturale complessa tramite microservizi e \emph{container} Docker, risultando sovradimensionata (\emph{over-engineering}) rispetto ai requisiti aziendali[cite: 5];
+    \item \textbf{Bytebase}: uno strumento focalizzato sul \emph{DevSecOps} e sulla gestione del ciclo di vita dei database[cite: 5]. Sebbene consenta l'applicazione di \emph{policy} di mascheramento dinamico (\emph{dynamic data masking}) basato sui ruoli, la sua adozione implicherebbe un cambiamento troppo radicale nei flussi di lavoro dei database aziendali[cite: 5];
+    \item \textbf{Hawk-Eye}: una potente \emph{utility} a riga di comando (CLI) in Python, progettata per scansionare sia fonti strutturate (es. PostgreSQL) sia risorse non strutturate (file PDF, Word, immagini e video) grazie all'uso combinato di \emph{pattern matching} e tecnologie OCR[cite: 5]. Pur eccellendo nella fase di \emph{auditing} e \emph{discovery}, presenta due limiti significativi: non supporta nativamente Microsoft SQL Server e non applica alcuna tecnica di mascheramento, limitandosi a segnalare la presenza dei dati sensibili[cite: 5];
+    \item \textbf{ARX (Data Anonymization Tool)}: uno strumento \emph{open-source} dotato di interfaccia grafica, dedicato alla de-identificazione fisica dei dati strutturati[cite: 5]. Si distingue per la capacità di connettersi nativamente ai database relazionali, analizzare preventivamente il rischio statistico di re-identificazione e applicare modelli matematici formali di privacy, quali la \emph{k-Anonymity}, la \emph{l-Diversity} e la \emph{t-Closeness}, esportando in formato CSV tabelle bonificate e sicure per la Business Intelligence[cite: 5];
+    \item \textbf{Microsoft Presidio}: un \emph{framework open-source} e \emph{stateless} sviluppato da Microsoft, specializzato nell'individuazione e nell'anonimizzazione delle PII tramite modelli NLP locali (spaCy) ed espressioni regolari[cite: 5]. Poiché non dispone di connettori nativi per i database ma elabora le informazioni ricevute in memoria tramite API o codice, richiede uno sforzo di sviluppo iniziale, ma risulta estremamente flessibile per essere integrato all'interno di \emph{pipeline} Python personalizzate per l'automazione dei flussi[cite: 5].
+\end{enumerate}
+
+La combinazione di Power BI con un applicativo di \emph{PII Discovery} e anonimizzazione mirato (come l'adozione di ARX o Microsoft Presidio) rappresenta un'alternativa 
+concreta, efficiente ed economicamente vantaggiosa all'implementazione di un Data Catalog. Questa architettura ibrida permette di blindare la sicurezza del dato 
+alla radice e di abilitare un \emph{reporting} intrinsecamente sicuro. Tale approccio richiede tuttavia di rinunciare ad alcune funzionalità esclusive di una piattaforma di 
+Data Governance nativa, quali la gestione di un Glossario aziendale centralizzato, la tracciabilità visiva del \emph{Data Lineage} \emph{end-to-end} e gli strumenti di 
+collaborazione diretta (apertura di \emph{task} e gestione degli incidenti qualitativi).
+
+
+
+% e aggiungere alla bibliografia i siti della documentazione dei vari tool
+
 \section{Considerazioni sull'adozione}
 A completamento del \emph{Proof of Concept} sviluppato in ambiente locale, la scelta strategica sulla futura evoluzione dello stack tecnologico di Wintech S.p.A. 
 deve fondarsi su un bilancio oggettivo tra i benefici operativi e l'onere di adozione, manutenzione e gestione infrastrutturale delle diverse soluzioni analizzate.

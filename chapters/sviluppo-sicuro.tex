@@ -230,8 +230,8 @@ Durante i test di implementazione, è emerso che la funzionalità di classificaz
 
 In primo luogo, l'efficacia del rilevamento automatico sui database aziendali dipende dall'ottimizzazione di parametri tecnici specifici:
 \begin{itemize}
-    \item \textbf{Propagazione dei prerequisiti logici}: l'esecuzione dell'\emph{AutoClassification Agent} è strettamente subordinata all'avvenuto completamento delle attività del \emph{Profiler Agent}. Poiché il motore NLP necessita del contenuto testuale reale dei record (\emph{Sample Data}) per applicare la Named Entity Recognition, è indispensabile pianificare l'esecuzione delle \emph{pipeline} garantendo che il profilo dei dati venga generato prima della scansione di classificazione;
-    \item \textbf{Regolazione del livello di fiducia (\emph{confidence level})}: per bilanciare la precisione del rilevamento, il sistema consente di calibrare una soglia minima di confidenza. Questo parametro è fondamentale per evitare sia l'insorgere di falsi positivi (dati innocui scambiati per sensibili) sia di falsi negativi (dati sensibili non rilevati).
+    \item \textbf{Propagazione dei prerequisiti logici}: L'esecuzione dell'\emph{AutoClassification Agent} è strettamente subordinata all'avvenuto completamento delle attività del \emph{Profiler Agent}. Poiché il motore NLP necessita del contenuto testuale reale dei record (\emph{Sample Data}) per applicare la \emph{Named Entity Recognition}, è indispensabile pianificare l'esecuzione delle \emph{pipeline} garantendo che il profilo dei dati venga generato prima della scansione di classificazione.
+    \item \textbf{Regolazione del livello di fiducia (\emph{confidence level})}: Per bilanciare la precisione del rilevamento, il sistema consente di calibrare una soglia minima di confidenza. Questo parametro è fondamentale per evitare sia l'insorgere di falsi positivi (dati innocui scambiati per sensibili) sia di falsi negativi (dati sensibili non rilevati).
 \end{itemize}
 
 In secondo luogo, è stato rilevato un importante vincolo relativo alla versione \emph{open-source} di OpenMetadata: il modulo è progettato per operare una classificazione 
@@ -308,7 +308,7 @@ OpenMetadata permette di organizzare l'albero aziendale secondo cinque livelli l
     \item \textbf{\emph{Organization}}: È il nodo radice della gerarchia. Contiene tutti i dipendenti e i sottogruppi dell'azienda e non possiede nodi genitori.
     \item \textbf{\emph{BusinessUnit}}: Rappresenta le divisioni di primo livello dell'azienda (es. Direzione, Ricerca e Sviluppo). Può dipendere esclusivamente dall'\emph{Organization} o da un'altra \emph{BusinessUnit}.
     \item \textbf{\emph{Division}}: È una partizione operativa intermedia. Dipende gerarchicamente da un solo nodo superiore (\emph{Organization}, \emph{BusinessUnit} o un'altra \emph{Division}).
-    \item \textbf{\emph{Department}}: Individua aree di competenza specialistiche. A differenza degli altri livelli, può ereditare proprietà da più nodi genitori, offrendo maggiore flessibilità organizzativa.
+    \item \textbf{\emph{Department}}: Individua aree di competenza specialistiche. Può ereditare proprietà da più nodi genitori, offrendo maggiore flessibilità organizzativa.
     \item \textbf{\emph{Group}}: Rappresenta il nodo foglia della gerarchia. Non può contenere sottogruppi, ma è formato solo da singoli \emph{User}. Nel Data Catalog, solo i team di tipo \emph{Group} possono detenere formalmente la proprietà (\emph{Ownership}) degli asset.
 \end{itemize}
 
@@ -361,7 +361,7 @@ quattro principi fondamentali:
     \begin{subfigure}[b]{1\textwidth}
         \centering
         \includegraphics[width=\textwidth]{schermate/ruolo_datagovmanager.png}
-        \caption{Assegnazione di una \emph{policy} di sicurezza allo specifico ruolo di \emph{Data Governance Manager}}
+        \caption{Assegnazione di una policy di sicurezza allo specifico ruolo di \emph{Data Governance Manager}}
     \end{subfigure}
     
     \vspace{0.4cm}
@@ -369,16 +369,16 @@ quattro principi fondamentali:
     \begin{subfigure}[b]{1\textwidth}
         \centering
         \includegraphics[width=\textwidth]{schermate/policy_gdpr.png}
-        \caption{Dettaglio della \emph{policy}: regola con effetto di divieto (\emph{Deny}) basata sui tag}
+        \caption{Dettaglio della policy: regola con effetto di divieto (\emph{Deny}) basata sui tag}
     \end{subfigure}
     
-    \caption[Esempio di architettura RBAC per la conformità GDPR]{Applicazione pratica dell'architettura RBAC: il Ruolo (sopra) eredita la \emph{policy} dedicata al rispetto del GDPR, la quale (sotto) definisce una regola di divieto (\emph{Deny}) per impedire la visualizzazione in chiaro dei dati etichettati come sensibili}
+    \caption[Esempio di architettura RBAC per la conformità GDPR]{Applicazione pratica dell'architettura RBAC: il Ruolo (sopra) eredita la policy dedicata al rispetto del GDPR, la quale (sotto) definisce una regola di divieto (\emph{Deny}) per impedire la visualizzazione in chiaro dei dati etichettati come sensibili}
     \label{fig:rbac_gdpr}
 \end{figure}
 
 
 \section{Glossario aziendale}
-Un \textbf{Glossario aziendale} (\emph{Business Glossary}) è un vocabolario centralizzato che raccoglie, definisce e standardizza i concetti e la terminologia 
+Un \textbf{glossario aziendale} (\emph{Business Glossary}) è un vocabolario centralizzato che raccoglie, definisce e standardizza i concetti e la terminologia 
 rilevante all'interno dell'organizzazione. Rappresenta uno strumento di Data Governance fondamentale, a cui ogni utente può fare riferimento per risolvere ambiguità 
 semantiche e comprendere appieno il significato del patrimonio informativo.
 
@@ -389,17 +389,17 @@ metadati: possono essere infatti assegnati agli asset per descrivere e categoriz
 Un'organizzazione può definire molteplici glossari indipendenti, strutturandoli in base agli specifici domini aziendali (ad esempio Amministrazione, Risorse Umane o Vendite). 
 I termini all'interno di ciascun glossario possono essere organizzati secondo una gerarchia logica e possono essere arricchiti con una serie di proprietà avanzate:
 \begin{itemize}
-    \item \textbf{Contesto semantico}: descrizioni testuali, sinonimi, riferimenti a link esterni e associazioni con altri termini correlati;
-    \item \textbf{Propagazione delle classificazioni}: possibilità di associare tag di classificazione direttamente al termine. Quando il concetto viene applicato a un dataset, quest'ultimo eredita automaticamente anche i tag associati al termine stesso;
-    \item \textbf{Vincoli di assegnazione}: funzionalità di mutua esclusione (\emph{Mutually Exclusive}), che impedisce di assegnare simultaneamente due termini concettualmente in conflitto al medesimo asset;
-    \item \textbf{Validazione e ownership}: designazione di specifici utenti revisori (\emph{reviewer}), incaricati di validare i termini, approvare le modifiche e garantire l'accuratezza del glossario nel tempo.
+    \item \textbf{Contesto semantico}: Descrizioni testuali, sinonimi, riferimenti a link esterni e associazioni con altri termini correlati.
+    \item \textbf{Propagazione delle classificazioni}: Possibilità di associare tag di classificazione direttamente al termine. Quando il concetto viene applicato a un dataset, quest'ultimo eredita automaticamente anche i tag associati al termine stesso.
+    \item \textbf{Vincoli di assegnazione}: Funzionalità di mutua esclusione (\emph{Mutually Exclusive}), che impedisce di assegnare simultaneamente due termini concettualmente in conflitto al medesimo asset.
+    \item \textbf{Validazione e ownership}: Designazione di specifici utenti revisori (\emph{reviewer}), incaricati di validare i termini, approvare le modifiche e garantire l'accuratezza del glossario nel tempo.
 \end{itemize}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{schermate/glossario_wintech.png}
     \vspace{0.2cm}
-    \caption{Interfaccia principale del Glossario aziendale}
+    \caption{Interfaccia principale del glossario aziendale}
     \label{fig:glossario_generale}
 \end{figure}
 
@@ -407,7 +407,7 @@ I termini all'interno di ciascun glossario possono essere organizzati secondo un
     \centering
     \includegraphics[width=1\textwidth]{schermate/glossario_termini.png}
     \vspace{0.2cm}
-    \caption{Struttura gerarchica dei termini nel Glossario}
+    \caption{Struttura gerarchica dei termini nel glossario}
     \label{fig:glossario_gerarchia}
 \end{figure}
 

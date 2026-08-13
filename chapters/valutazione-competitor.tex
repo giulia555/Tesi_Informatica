@@ -74,7 +74,7 @@ scartate perché offrivano funzionalità puramente verticali o richiedevano inst
 
 
 \subsection*{Considerazioni}
-Dopo aver analizzato le licenze e i requisiti infrastrutturali delle piattaforme individuate, è stata fatta una prima scrematura significativa. Le soluzioni proprietarie e Cloud (come Atlan, Microsoft Purview, Collibra, Alation) 
+Dopo aver analizzato le licenze e i requisiti infrastrutturali delle piattaforme individuate, è stata fatta una prima selezione significativa. Le soluzioni proprietarie e Cloud (come Atlan, Microsoft Purview, Collibra, Alation) 
 sono state escluse per incompatibilità con il budget aziendale e con la necessità di mantenere i dati \emph{on-premise}.
 
 All'interno dell'ecosistema \emph{open-source}, numerosi software sono stati scartati per limiti tecnici o architetturali:
@@ -147,13 +147,14 @@ DataHub e Gravitino non dispongono di strumenti di Data Quality nativi, delegand
 Sul fronte dell'individuazione dei dati sensibili, OpenMetadata è l'unica piattaforma a offrire un motore di classificazione automatica integrato: il sistema scansiona i dati e identifica automaticamente 
 le informazioni personali o sensibili, tramite espressioni regolari e tecniche di \gls{nlp}.
 
-DataHub, ODD e Gravitino supportano esclusivamente l'assegnazione manuale dei tag di classificazione, richiedendo uno sforzo maggiore per 
+DataHub, Open Data Discovery (ODD) e Gravitino supportano esclusivamente l'assegnazione manuale dei tag di classificazione, richiedendo uno sforzo maggiore per 
 garantire la sicurezza dei dati e la conformità alle normative.
 
 Tutte le piattaforme garantiscono la gestione degli accessi basata sui ruoli (\gls{rbac}), con la possibilità di definire permessi granulari su dataset e metadati in base al profilo dell'utente.
 
 \subsection{Data Lineage e \emph{Query Analytics}}
-Il \textbf{\gls{datalineage}} consente di tracciare visivamente il percorso completo di un dato dalla sorgente alla destinazione finale, sia a livello di tabella che di singola colonna. 
+Il \textbf{\gls{datalineage}} consente di tracciare visivamente il percorso completo di un dato dalla sorgente alla destinazione finale, sia a livello di tabella che di singola 
+colonna, aspetto particolarmente rilevante ai fini della conformità normativa, poiché consente di tracciare con precisione il flusso di dati personali o sensibili attraverso i sistemi. 
 A questo si affianca l'\textbf{\emph{Impact Analysis}}, che mostra automaticamente quali dataset, \emph{pipeline} o report dipendono da un determinato campo e potrebbero essere influenzati da una sua modifica. 
 La \textbf{\emph{Schema Evolution}} permette invece di tracciare nel tempo le modifiche apportate alla struttura di un dataset, come l'aggiunta o la rimozione di colonne. 
 Infine, la \textbf{\emph{Query Analytics}} raccoglie e analizza i pattern di utilizzo delle query eseguite sui dati, fornendo informazioni su quali tabelle vengono interrogate più frequentemente e da chi.
@@ -176,7 +177,7 @@ Viene valutata anche la disponibilità di un \textbf{server \gls{mcp}}, che cons
 
 OpenMetadata supporta nativamente l'integrazione con Microsoft Teams, Slack e altri strumenti di comunicazione, consente di aprire conversazioni e assegnare task direttamente sugli asset e dispone di un glossario aziendale completo.
 
-Sul fronte AI, è l'unica piattaforma a disporre di un server MCP integrato nativamente, compatibile con client come Claude e ChatGPT, e supporta la ricerca semantica tramite \emph{embedding} vettoriali con \gls{opensearch}.
+Sul fronte AI, è l'unica piattaforma a disporre di un server MCP integrato nativamente, compatibile con client come Claude e ChatGPT, e supporta la ricerca semantica tramite \emph{embedding} vettoriali, funzionalità però non attiva di default (l'installazione standard usa Elasticsearch) e che richiede la configurazione di OpenSearch come backend.
 
 Sia ODD che DataHub offrono un glossario aziendale per la standardizzazione dei termini. 
 ODD si limita a supportare l'integrazione con Slack e la possibilità di lasciare commenti sui dataset, ma senza raggiungere la stessa profondità di integrazione di OpenMetadata. 
@@ -190,7 +191,7 @@ dalle tabelle dei database sorgente fino ai report e alle dashboard usati per le
 
 OpenMetadata dispone di un connettore nativo che, tramite le API di Power BI, importa nel catalogo i metadati di report, dashboard e modelli dati, ricostruendo automaticamente il Data Lineage completo. L'integrazione richiede una licenza Power BI Pro.
 
-Open Data Discovery (ODD) offre un'integrazione tramite il modulo \texttt{odd-collector-azure}, funzionale ma meno matura e che richiede una configurazione aggiuntiva rispetto al connettore nativo di OpenMetadata. 
+Open Data Discovery offre un'integrazione tramite il modulo \texttt{odd-collector-azure}, funzionale ma meno matura e che richiede una configurazione aggiuntiva rispetto al connettore nativo di OpenMetadata. 
 DataHub e Gravitino non supportano l'integrazione con Power BI nella versione \emph{open-source}.
 
 
@@ -199,7 +200,7 @@ L'analisi e la valutazione di OpenMetadata e dei competitor si è conclusa confe
 
 OpenMetadata si è dimostrato un software completo e capace di soddisfare pienamente i requisiti aziendali individuati in fase di Analisi dei Requisiti.
 
-Open Data Discovery (ODD) si è rivelato un solido candidato per quanto riguarda i software \emph{open-source}. Tuttavia, in un confronto diretto, è risultato meno performante rispetto a OpenMetadata per quanto 
+Open Data Discovery si è rivelato un solido candidato per quanto riguarda i software \emph{open-source}. Tuttavia, in un confronto diretto, è risultato meno performante rispetto a OpenMetadata per quanto 
 riguarda alcune funzionalità, tra cui la classificazione automatica dei dati sensibili, che è uno dei requisiti più importanti.
 
 A monte di queste considerazioni si è deciso di proseguire lo studio esclusivamente su OpenMetadata, testandone e documentandone le funzionalità e le caratteristiche.

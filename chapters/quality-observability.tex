@@ -99,10 +99,10 @@ al test la seguente espressione regolare per la verifica degli indirizzi e-mail:
     \label{fig:configurazione_test}
 \end{figure}
 
-\noindent Come documentato durante le fasi di collaudo dello stage, l'esecuzione di questa \emph{Test Suite} ha registrato un fallimento, in quanto non tutti i \emph{record} 
+\noindent Come documentato durante le fasi di collaudo dello stage, l'esecuzione di questa \emph{Test Suite} ha registrato un fallimento, in quanto non tutti i record 
 fittizi forniti dal database di test rispettavano il formato sintattico imposto. Questo risultato, mantenuto a fini esplicativi, ha permesso di validare 
 la reattività del sistema: il mancato superamento dell'asserzione ha innescato l'aggiornamento real-time degli indicatori cromatici nella scheda di Data Observability 
-e ha generato l'apertura automatica di un \emph{incidente}. Questo livello di monitoraggio proattivo è esattamente ciò che previene l'importazione di anomalie nei sistemi di 
+e ha generato l'apertura automatica di un incidente. Questo livello di monitoraggio proattivo è esattamente ciò che previene l'importazione di anomalie nei sistemi di 
 Business Intelligence situati a valle, preservando la correttezza della reportistica direzionale aziendale.
 
 \begin{figure}[H]
@@ -123,7 +123,7 @@ il fallimento di un test da un semplice errore di log a un vero e proprio flusso
 \subsubsection{Ciclo di vita dell'anomalia}
 L'evoluzione di un incidente viene monitorata attraverso quattro transizioni di stato, visibili sia sulla pagina del singolo asset di dati sia in una dashboard globale riepilogativa:
 \begin{itemize}
-    \item \textbf{Rilevamento e creazione (Stato \emph{New})}: La piattaforma apre automaticamente l'incidente al primo fallimento della \emph{Test Suite}, compilando una scheda diagnostica con tutte le evidenze tecniche raccolte(asset compromesso, nome del test fallito e stringa d'errore).
+    \item \textbf{Rilevamento e creazione (Stato \emph{New})}: La piattaforma apre automaticamente l'incidente al primo fallimento della \emph{Test Suite}, compilando una scheda diagnostica con tutte le evidenze tecniche raccolte (asset compromesso, nome del test fallito e stringa d'errore).
     \item \textbf{Presa in carico (Stato \emph{Acknowledged})}: Il \emph{data steward} o l'amministratore competente riceve la notifica e aggiorna lo stato in \emph{Ack}, ovvero dichiara la presa in carico dell'anomalia. Questo passaggio segnala al resto dell'azienda l'avvio formale delle attività di analisi e abilita una sezione commenti per coordinare il lavoro direttamente sulla piattaforma.
     \item \textbf{Assegnazione (Stato \emph{Assigned})}: L'intervento pratico per correggere il dato alla sorgente viene delegato a un utente o a un team di sviluppo specifico, definendo in modo chiaro le responsabilità operative.
     \item \textbf{Risoluzione e chiusura (Stato \emph{Resolved})}: Una volta corretta la causa dell'anomalia, l'operatore incaricato chiude definitivamente l'incidente.
@@ -132,11 +132,11 @@ L'evoluzione di un incidente viene monitorata attraverso quattro transizioni di 
 Per garantire una reportistica adeguata, la piattaforma impone di motivare la chiusura dell'incidente; l'utente deve infatti categorizzare la causa radice selezionandola 
 tra cinque classi standardizzate:
 \begin{itemize}
-    \item \emph{False Positive}: l'errore era dovuto a un'errata configurazione del test o a una soglia non aggiornata;
-    \item \emph{Missing Data}: assenza parziale o totale di record attesi;
-    \item \emph{Duplicates}: presenza di chiavi duplicate o record ridondanti;
-    \item \emph{Out of Bounds}: valori numerici o temporali fuori dai range di accettazione;
-    \item \emph{Other}: cause non incluse nelle categorie precedenti.
+    \item \emph{False Positive}: L'errore era dovuto a un'errata configurazione del test o a una soglia non aggiornata.
+    \item \emph{Missing Data}: Assenza parziale o totale di record attesi.
+    \item \emph{Duplicates}: Presenza di chiavi duplicate o record ridondanti.
+    \item \emph{Out of Bounds}: Valori numerici o temporali fuori dai range di accettazione.
+    \item \emph{Other}: Cause non incluse nelle categorie precedenti.
 \end{itemize}
 
 \begin{figure}[H]
@@ -163,7 +163,7 @@ Durante lo stage, sono state testate le principali funzionalità di collaborazio
 \begin{itemize}
     \item \textbf{\emph{Conversation Threads}}: In qualsiasi pagina del catalogo, gli utenti possono avviare conversazioni, lasciare commenti e menzionare direttamente altri utenti. Questo elimina la necessità di utilizzare piattaforme esterne per chiedere chiarimenti su uno specifico dataset.
     \item \textbf{Gestione dei Task}: Qualora un utente rilevi una mancanza (ad esempio, una descrizione assente o un tag mancante), può aprire un task e assegnarlo a un utente. La risoluzione del compito è tracciabile e integrata nella piattaforma.
-    \item \textbf{Annunci (\emph{Announcements})}: Permettono agli amministratori di impostare dei \emph{banner} informativi visibili a tutti gli utenti che seguono un determinato dataset, rivelandosi particolarmente utili per comunicare imminenti manutenzioni, modifiche strutturali o deprecazioni.
+    \item \textbf{Annunci (\emph{Announcements})}: Permettono agli amministratori di impostare dei banner informativi visibili a tutti gli utenti che seguono un determinato dataset, rivelandosi particolarmente utili per comunicare imminenti manutenzioni, modifiche strutturali o deprecazioni.
 \end{itemize}
 
 \begin{figure}[H]
@@ -208,7 +208,7 @@ La configurazione di questi allarmi segue una logica modulare strutturata in tre
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{schermate/nuovo_alert.png}
-    \caption{Configurazione della sorgente di un \emph{alert}}
+    \caption{Configurazione della sorgente di un alert}
     \label{fig:nuovo_alert}
 \end{figure}
 
