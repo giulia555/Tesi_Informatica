@@ -25,10 +25,10 @@ Un ulteriore vincolo riguarda la fase di collaudo: la piattaforma scelta deve po
 garantendo che i dati aziendali non vengano mai trasmessi o caricati su server esterni in Cloud. 
 L'obiettivo quindi è individuare una soluzione \emph{enterprise} che soddisfi i requisiti aziendali e che sia testabile agilmente \emph{on-premise}.
 
-I software analizzati in questa fase sono stati selezionati partendo dal repository GitHub \emph{Awesome Data Catalogs}\cite{site:awesome-data-catalogs}, poi approfonditi attraverso la documentazione ufficiale di ciascuna piattaforma.
+I software analizzati in questa fase sono stati selezionati partendo dal repository GitHub \emph{Awesome Data Catalogs}~\cite{site:awesome-data-catalogs}, poi approfonditi attraverso la documentazione ufficiale di ciascuna piattaforma.
 
 Nella seguente tabella vengono presentati i principali strumenti valutati, includendo, a puro scopo comparativo, anche soluzioni 
-Cloud o proprietarie \emph{leader} del settore. Si precisa che durante il periodo di stage l'esplorazione ha coinvolto anche altre piattaforme, successivamente 
+Cloud o proprietarie leader del settore. Si precisa che durante il periodo di stage l'esplorazione ha coinvolto anche altre piattaforme, successivamente 
 scartate perché offrivano funzionalità puramente verticali o richiedevano installazioni troppo onerose rispetto ai vincoli del progetto.
 
 \begin{longtable}{ p{0.24\textwidth} p{0.34\textwidth} p{0.34\textwidth} }
@@ -79,8 +79,9 @@ sono state escluse per incompatibilità con il budget aziendale e con la necessi
 
 All'interno dell'ecosistema \emph{open-source}, numerosi software sono stati scartati per limiti tecnici o architetturali:
 \begin{itemize}
-    \item \textbf{Apache Atlas} ed \textbf{Egeria} richiedono infrastrutture Hadoop o Kubernetes obbligatorio;
-    \item \textbf{Magda} è utilizzabile esclusivamente con Kubernetes;
+    \item \textbf{Apache Atlas} richiede un'infrastruttura Hadoop;
+    \item \textbf{Egeria} richiede Kubernetes obbligatorio;
+    \item \textbf{Magda} richiede Kubernetes obbligatorio;
     \item \textbf{Elementary} e \textbf{Marquez} si focalizzano su singole funzionalità, senza offrire un catalogo completo;
     \item \textbf{CKAN} è orientato a portali pubblici e non all'uso aziendale interno.
 \end{itemize}
@@ -171,7 +172,7 @@ Il \textbf{glossario aziendale} consente di definire e centralizzare i termini e
 Gli strumenti di collaborazione permettono invece agli utenti di interagire direttamente sugli asset del catalogo, lasciando commenti, inviando richieste e ricevendo notifiche, 
 anche tramite l'integrazione con piattaforme di comunicazione aziendale come Microsoft Teams o Slack.
 
-Viene valutata anche la disponibilità di un \textbf{server \gls{mcp}}, che consente ad agenti AI di accedere al contesto dei metadati aziendali, e la presenza di funzionalità di ricerca semantica basata su \emph{\gls{embedding}}.
+Viene valutata anche la disponibilità di un \textbf{server \gls{mcp}}, che consente ad agenti AI di accedere al contesto dei metadati aziendali, e la presenza di funzionalità di ricerca semantica basata su \gls{embedding}.
 
 OpenMetadata supporta nativamente l'integrazione con Microsoft Teams, Slack e altri strumenti di comunicazione, consente di aprire conversazioni e assegnare task direttamente sugli asset e dispone di un glossario aziendale completo.
 
@@ -189,7 +190,7 @@ dalle tabelle dei database sorgente fino ai report e alle dashboard usati per le
 
 OpenMetadata dispone di un connettore nativo che, tramite le API di Power BI, importa nel catalogo i metadati di report, dashboard e modelli dati, ricostruendo automaticamente il Data Lineage completo. L'integrazione richiede una licenza Power BI Pro.
 
-Open Data Discovery (ODD) offre un'integrazione tramite il modulo \emph{odd-collector-azure}, funzionale ma meno matura e che richiede una configurazione aggiuntiva rispetto al connettore nativo di OpenMetadata. 
+Open Data Discovery (ODD) offre un'integrazione tramite il modulo \texttt{odd-collector-azure}, funzionale ma meno matura e che richiede una configurazione aggiuntiva rispetto al connettore nativo di OpenMetadata. 
 DataHub e Gravitino non supportano l'integrazione con Power BI nella versione \emph{open-source}.
 
 
@@ -201,4 +202,4 @@ OpenMetadata si è dimostrato un software completo e capace di soddisfare pienam
 Open Data Discovery (ODD) si è rivelato un solido candidato per quanto riguarda i software \emph{open-source}. Tuttavia, in un confronto diretto, è risultato meno performante rispetto a OpenMetadata per quanto 
 riguarda alcune funzionalità, tra cui la classificazione automatica dei dati sensibili, che è uno dei requisiti più importanti.
 
-A monte di queste considerazioni si è deciso di proseguire lo studio solo su OpenMetadata, testandone e documentandone le funzionalità e le caratteristiche.
+A monte di queste considerazioni si è deciso di proseguire lo studio esclusivamente su OpenMetadata, testandone e documentandone le funzionalità e le caratteristiche.

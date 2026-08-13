@@ -110,7 +110,7 @@ per descriverne in modo standardizzato la natura, l'area di business, l'apparten
 consentendo agli utenti di cercare e filtrare gli elementi del catalogo, e sta alla base del rispetto delle policy di sicurezza e della conformità normativa, con particolare riferimento al GDPR.
 
 Per configurare correttamente un catalogo dati aziendale, è fondamentale riconoscere quali tipologie di informazioni necessitano di maggiore tutela, come i 
-dati sensibili e personali. A tal proposito, l'Articolo 4 del GDPR fornisce la seguente definizione di \textbf{dato personale}\cite{site:gdpr}:
+dati sensibili e personali. A tal proposito, l'Articolo 4 del GDPR fornisce la seguente definizione di \textbf{dato personale}~\cite{site:gdpr}:
 \begin{quoting}
     «Qualsiasi informazione riguardante una persona fisica identificata o identificabile (\emph{interessato}); si considera identificabile la persona fisica che può essere identificata, direttamente o indirettamente, con particolare riferimento a un identificativo come 
     il nome, un numero di identificazione, dati relativi all'ubicazione, un identificativo online o a uno o più elementi caratteristici della sua identità fisica, fisiologica, genetica, psichica, economica, culturale o sociale.»
@@ -215,7 +215,7 @@ esclusivamente il metadato risultante (il tag di classificazione da applicare).
 \end{figure}
 
 Per rispettare il GDPR e i vincoli di sicurezza imposti dall'infrastruttura di Wintech, l'intero processo avviene in locale e offline. A differenza degli assistenti basati 
-su cloud, i modelli linguistici necessari per l'analisi vengono scaricati una sola volta durante la fase iniziale di compilazione e installazione del Container. 
+su Cloud, i modelli linguistici necessari per l'analisi vengono scaricati una sola volta durante la fase iniziale di compilazione e installazione del Container. 
 A riprova di questo, su reti aziendali dotate di rigide policy di sicurezza, il Container può restituire l'errore \texttt{SSL: CERTIFICATE\_VERIFY\_FAILED} 
 al primo avvio, venendo bloccato dal firewall aziendale durante il tentativo di download del modello; una volta scaricato manualmente, il sistema opera totalmente 
 offline garantendo che nessuna informazione sensibile venga trasmessa all'esterno della rete aziendale.
@@ -246,7 +246,7 @@ definire l'appartenenza a specifici domini aziendali e associare i campi ai term
 
 \subsection{Integrazione dell'AI Generativa tramite MCP}
 A completamento delle analisi architetturali svolte durante lo stage, si è esplorata la possibilità di integrare strumenti di Intelligenza Artificiale generativa 
-in cloud (come ChatGPT  o Claude) per abilitare la ricerca semantica e l'interrogazione del catalogo in linguaggio naturale. Questo è possibile grazie all'integrazione 
+in Cloud (come ChatGPT o Claude) per abilitare la ricerca semantica e l'interrogazione del catalogo in linguaggio naturale. Questo è possibile grazie all'integrazione 
 nativa all'interno di OpenMetadata, disponibile anche nella versione \emph{open-source}, di un server basato sullo standard \textbf{\gls{mcp}}. 
 
 Il protocollo MCP fa da interfaccia di comunicazione sicura tra il catalogo dati e gli assistenti AI esterni. Condividendo esclusivamente i metadati, 

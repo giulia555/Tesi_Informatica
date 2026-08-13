@@ -6,7 +6,7 @@
 
 \section{Introduzione alla Business Intelligence}
 La Business Intelligence (BI) è una disciplina che combina infrastrutture tecnologiche, strumenti di analisi dei dati, visualizzazioni avanzate e \emph{best practice} 
-organizzative con l'obiettivo di supportare le aziende nell'adozione di decisioni basate su evidenze empiriche ed oggettive (\emph{data-driven decision making})\cite{site:business-intelligence}.
+organizzative con l'obiettivo di supportare le aziende nell'adozione di decisioni basate su evidenze empiriche ed oggettive (\emph{data-driven decision making})~\cite{site:business-intelligence}.
 
 Dal punto di vista teorico e operativo, il flusso della Business Intelligence si articola in quattro passaggi sequenziali fondamentali:
 \begin{enumerate}
@@ -23,7 +23,7 @@ Dal punto di vista teorico e operativo, il flusso della Business Intelligence si
     \label{fig:bi_concept}
 \end{figure}
 
-All'interno dell'infrastruttura di Wintech, la piattaforma di riferimento per l'analisi aziendale e la Business Intelligence è Microsoft Power BI\cite{site:powerbi-docs}. 
+All'interno dell'infrastruttura di Wintech, la piattaforma di riferimento per l'analisi aziendale e la Business Intelligence è Microsoft Power BI~\cite{site:powerbi-docs}. 
 Questa soluzione fornisce servizi e strumenti in grado di connettere, trasformare e condividere i dati dell'organizzazione, traducendoli in informazioni dettagliate e visualizzazioni grafiche.
 
 Utilizzato quotidianamente dall'azienda, Power BI soddisfa nativamente numerosi requisiti legati all'osservabilità e alla gestione del dato, offrendo:
@@ -42,7 +42,7 @@ fonti di dati in informazioni strategiche, dettagliate e visivamente interattive
 La piattaforma offre tre ambienti operativi principali, che supportano l'analista durante l'intero ciclo di modellazione e fruizione dei dati:
 \begin{itemize}
     \item \textbf{Power BI Desktop}: Applicazione client di sviluppo utilizzata per connettersi alle sorgenti, effettuare la pulizia e la modellazione dei dati tramite il Power Query Editor, definire le misure in linguaggio DAX (\emph{Data Analysis Expressions}) e creare i report visivi.
-    \item \textbf{Power BI Service}: Servizio in cloud basato su modello SaaS (\emph{Software as a Service}) che permette la pubblicazione, condivisione e distribuzione sicura dei report all'interno dell'organizzazione, nonché la creazione di dashboard riepilogative destinate al \emph{management}.
+    \item \textbf{Power BI Service}: Servizio in Cloud basato su modello SaaS (\emph{Software as a Service}) che permette la pubblicazione, condivisione e distribuzione sicura dei report all'interno dell'organizzazione, nonché la creazione di dashboard riepilogative destinate al \emph{management}.
     \item \textbf{Power BI Mobile}: Applicazioni per dispositivi mobili ottimizzate per visualizzare i report in mobilità, sfruttando specifici layout reattivi.
 \end{itemize}
 
@@ -132,7 +132,6 @@ ad archiviare e indicizzare i metadati descrittivi e qualitativi degli asset est
 ad altri strumenti, che operano a livello di base dati o staging area, lasciando a OpenMetadata il solo ruolo di tracciamento e controllo di conformità.
 
 
-
 \section{Strumenti di Data Discovery}
 Durante l'analisi condotta nel percorso di stage, un quesito strategico fondamentale ha guidato la valutazione dell'architettura aziendale: è strettamente indispensabile 
 introdurre una piattaforma di data catalog complessa e centralizzata come OpenMetadata, o è possibile soddisfare i requisiti di Data Governance combinando le funzionalità 
@@ -175,9 +174,9 @@ deve fondarsi su un bilancio oggettivo tra i benefici operativi e l'onere di ado
 
 Il primo parametro discriminante è rappresentato dai requisiti hardware e dalla complessità di installazione e manutenzione delle piattaforme di catalogazione:
 \begin{itemize}
-    \item \textbf{OpenMetadata}: richiede l'esecuzione simultanea di quattro container Docker (il database transazionale MySQL/PostgreSQL, il server centrale in Java, il motore di ingestion basato su Apache Airflow e il cluster di indicizzazione Elasticsearch/OpenSearch), con un consumo minimo garantito di 6-8 GB di RAM e 4 vCPU per ambienti di produzione\cite{site:openmetadata-docs, site:manuale-utente};
+    \item \textbf{OpenMetadata}: richiede l'esecuzione simultanea di quattro container Docker (il database transazionale MySQL/PostgreSQL, il server centrale in Java, il motore di ingestion basato su Apache Airflow e il cluster di indicizzazione Elasticsearch/OpenSearch), con un consumo minimo garantito di 6-8 GB di RAM e 4 vCPU per ambienti di produzione;
     \item \textbf{Open Data Discovery (ODD)}: si attesta come un candidato \emph{open-source} alternativo più leggero, richiedendo solo tre componenti (la piattaforma ODD, un database PostgreSQL e l'agente collector), con requisiti sistemistici ridotti a 4 GB di RAM e 2 vCPU. Tuttavia, non dispone di un motore nativo di Auto-Classification per i dati sensibili, vanificando parte dei vantaggi della catalogazione automatica;
-    \item \textbf{Microsoft Purview}: rappresenta il modello di riferimento enterprise per l'ecosistema Microsoft aziendale, integrando nativamente l'intelligenza artificiale e la Data Compliance in \emph{cloud}, ma comporta costi di licenza e complessità di configurazione (richiedendo spesso l'uso di Kubernetes) sproporzionati rispetto alle reali necessità correnti dell'organizzazione;
+    \item \textbf{Microsoft Purview}: rappresenta il modello di riferimento enterprise per l'ecosistema Microsoft aziendale, integrando nativamente l'intelligenza artificiale e la Data Compliance in Cloud, ma comporta costi di licenza e complessità di configurazione (richiedendo spesso l'uso di Kubernetes) sproporzionati rispetto alle reali necessità correnti dell'organizzazione;
     \item \textbf{Tool leggeri standalone (ARX, Presidio, Hawk-Eye)}: non richiedono un'infrastruttura server sempre attiva (24/7), potendo essere eseguiti come script Python locali schedulati periodicamente in background (tramite Windows Task Scheduler o cron in Linux), riducendo a zero l'onere sistemistico fisso e azzerando i costi di adozione.
 \end{itemize}
 

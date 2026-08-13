@@ -7,7 +7,7 @@
 \section{L'idea}
 Lo scopo del progetto di stage è quello di analizzare, testare e documentare le funzionalità di un catalogo dati, valutandone la possibile adozione all'interno dell'infrastruttura dati di Wintech.
 
-Secondo Gartner\cite{gartner:data-catalog-2017}:
+Secondo Gartner~\cite{gartner:data-catalog-2017}:
 \begin{quoting}
     «Un Data Catalog mantiene un inventario delle risorse di dati attraverso la scoperta, la descrizione e l'organizzazione di dataset. Il catalogo 
     fornisce il contesto per consentire ad analisti, \emph{data scientist}, \emph{data steward} e altri utenti di trovare e comprendere un dataset rilevante ai fini dell'estrazione di valore aziendale.»
@@ -102,7 +102,7 @@ La selezione, l'installazione e l'impiego degli strumenti software hanno dovuto 
     \item \textbf{Infrastruttura e \emph{deployment}}: Il Data Catalog doveva prevedere un'installazione semplice, scartando soluzioni infrastrutturali troppo onerose per gli scopi dello stage, come Kubernetes. Si è optato per Docker.
     \item \textbf{Architettura dei dati (\emph{on-premise})}: Per motivi di sicurezza, è stato vietato il caricamento di dati aziendali su ambienti Cloud o SaaS esterni. Il sistema doveva inoltre limitarsi all'estrazione dei soli metadati, senza duplicare o memorizzare i dati fisici nel catalogo.
     \item \textbf{Sicurezza e privacy}: Il sistema doveva supportare l'identificazione e la classificazione dei dati sensibili (\gls{pii}), garantendo la conformità al GDPR (UE 2016/679).
-    \item \textbf{Stack tecnologico}: Il progetto ha richiesto l'installazione locale di \textbf{Microsoft SQL Server} e \textbf{PostgreSQL}, la disponibilità di specifiche porte di rete (8585 e 8080) e l'uso di \textbf{Microsoft Power BI} con licenza \emph{Pro}.
+    \item \textbf{Stack tecnologico}: Il progetto ha richiesto l'installazione locale di \textbf{Microsoft SQL Server} e \textbf{PostgreSQL}, la disponibilità di specifiche porte di rete (8585 e 8080) e l'uso di \textbf{Microsoft Power BI} con licenza Pro.
 \end{itemize}
 
 \subsection{Vincoli metodologici}

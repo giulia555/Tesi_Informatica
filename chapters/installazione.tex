@@ -29,19 +29,19 @@ Per consentire la corretta fruizione dei servizi sul browser, l'ambiente di rete
 e 8080 (dedicata al pannello di controllo di Apache Airflow) siano libere da conflitti.
 
 Infine, per testare la piattaforma senza violare i vincoli di riservatezza sui dati reali aziendali, durante lo stage è stato utilizzato il 
-database relazionale di esempio \emph{AdventureWorks} fornito da Microsoft\cite{site:adventureworks}. 
+database relazionale di esempio \emph{AdventureWorks} fornito da Microsoft~\cite{site:adventureworks}. 
 Tale risorsa è stata ripristinata all'interno di un'istanza locale di Microsoft SQL Server, simulando uno scenario di produzione realistico, completo di 
 relazioni e chiavi esterne su cui eseguire le prime procedure di Data Ingestion e Data Discovery.
 
 \section{Installazione di OpenMetadata}
 Una volta soddisfatti tutti i prerequisiti, la procedura di \emph{deployment} locale di OpenMetadata è stata eseguita tramite Docker e Docker Compose, 
-seguendo i passaggi della documentazione ufficiale\cite{site:openmetadata-docs}, di seguito elencati:
+seguendo i passaggi della documentazione ufficiale~\cite{site:openmetadata-docs}, di seguito elencati:
 \begin{enumerate}
     \item \textbf{Creazione della directory di lavoro}: è stata creata una cartella dedicata al progetto:
     \begin{verbatim}
 mkdir openmetadata-docker && cd openmetadata-docker
     \end{verbatim}
-    \item \textbf{Download del file di configurazione}: è stato scaricato il file \texttt{docker-compose.yml} ufficiale dal repository\cite{site:openmetadata-repo} del progetto (oppure il file \texttt{docker-compose-postgres.yml} qualora si preferisca utilizzare PostgreSQL come database di sistema al posto di MySQL).
+    \item \textbf{Download del file di configurazione}: è stato scaricato il file \texttt{docker-compose.yml} ufficiale dal repository~\cite{site:openmetadata-repo} del progetto (oppure il file \texttt{docker-compose-postgres.yml} qualora si preferisca utilizzare PostgreSQL come database di sistema al posto di MySQL).
     \item \textbf{Avvio dei servizi}: i Container Docker di OpenMetadata sono stati eseguiti tramite il seguente comando:
     \begin{verbatim}
 docker compose -f docker-compose.yml up --detach
