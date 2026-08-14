@@ -31,7 +31,7 @@ e 8080 (dedicata al pannello di controllo di Apache Airflow) siano libere da con
 Infine, per testare la piattaforma senza violare i vincoli di riservatezza sui dati reali aziendali, durante lo stage è stato utilizzato il 
 database relazionale di esempio \emph{AdventureWorks} fornito da Microsoft~\cite{site:adventureworks}. 
 Tale risorsa è stata ripristinata all'interno di un'istanza locale di Microsoft SQL Server, simulando uno scenario di produzione realistico, completo di 
-relazioni e chiavi esterne su cui eseguire le prime procedure di Data Ingestion e Data Discovery.
+relazioni e chiavi esterne su cui eseguire le prime azioni di Data Ingestion e Data Discovery.
 
 \section{Installazione di OpenMetadata}
 Una volta soddisfatti tutti i prerequisiti, la procedura di \emph{deployment} locale di OpenMetadata è stata eseguita tramite Docker e Docker Compose, 
@@ -107,7 +107,7 @@ La configurazione di un nuovo servizio di database (per esempio Microsoft SQL Se
     \label{fig:database}
 \end{figure}
 
-Applicando tale procedura, il connettore mappa principalmente lo schema del database, senza duplicare l'intero contenuto delle tabelle sorgente: OpenMetadata registra la struttura, i nomi dei campi, i tipi di dato associati, 
+Applicando tale procedura, il connettore mappa lo schema del database senza duplicare l'intero contenuto delle tabelle sorgente: OpenMetadata registra la struttura, i nomi dei campi, i tipi di dato associati, 
 il conteggio totale delle righe e, se abilitato, un campione limitato di righe reali per finalità di profilazione e classificazione automatica.
 
 Completata la fase di \emph{ingestion}, ogni data asset importato è accessibile attraverso una scheda di dettaglio dedicata. 
@@ -125,7 +125,7 @@ la descrizione e lo storico delle versioni, e la struttura tecnica dell'elemento
 Una volta completata la configurazione iniziale di un servizio, OpenMetadata garantisce che i metadati rimangano costantemente allineati alle fonti originali 
 attraverso la funzionalità di \textbf{sincronizzazione automatica}.
 
-Questo meccanismo assicura che se un asset viene modificato, per esempio aggiungendo campi o tabelle a un database, modificando lo schema di una relazione o aggiornando una dashboard, 
+Questo meccanismo assicura che se un asset viene modificato, per esempio aggiungendo campi o tabelle a un database, modificando una relazione o aggiornando una dashboard, 
 tali variazioni vengano rilevate automaticamente e riflesse nel catalogo senza richiedere alcuna azione manuale da parte degli utenti.
 
 La pianificazione di questa attività viene definita dall'amministratore durante la creazione del servizio e può essere impostata con cadenza oraria, giornaliera, settimanale 
@@ -146,7 +146,7 @@ Nella pratica, OpenMetadata funziona come un vero e proprio motore di ricerca in
 
 \subsection{Ricerca semplice e filtri rapidi}
 La ricerca semplice consente di individuare le risorse di interesse digitando parole chiave in testo libero. Il motore di ricerca interno confronta la query dell'utente con i nomi 
-degli asset ed estende la ricerca anche alle descrizioni testuali, ai nomi di singole colonne di una tabella o ai grafici di un report.
+degli asset ed estende la ricerca anche alle descrizioni testuali, ai nomi di singole colonne di una tabella o ai termini del glossario aziendale.
 
 I risultati vengono restituiti in tempo reale, suddivisi per tipologia di risorsa, e possono essere filtrati attraverso l'impiego dei \emph{Quick Filter}. 
 Questi ultimi permettono di restringere il perimetro di esplorazione in base a parametri chiave come la fonte di provenienza, il dominio aziendale o i tag di classificazione.
@@ -171,7 +171,7 @@ basata su un \emph{Query Builder} visuale. Questo strumento consente di comporre
 \end{itemize}
 
 Attraverso gli operatori di confronto messi a disposizione (tra cui \emph{Equal to}, \emph{Any in}, \emph{Contains} e le rispettive negazioni), l'utente può formulare interrogazioni 
-mirate, quali ad esempio: «Mostra tutte le tabelle del database \emph{AdventureWorks}, schema SalesLT, che possiedono il tag \texttt{PII.Sensitive} e il cui proprietario è un \emph{Admin}».
+mirate, quali ad esempio: «Mostra tutte le tabelle del database \emph{AdventureWorks} che possiedono il tag \texttt{PII.Sensitive} e il cui proprietario è un \emph{Admin}».
 
 \begin{figure}[H]
     \centering
@@ -202,7 +202,7 @@ nell'installazione locale di default, ma rappresenta un'evoluzione strategica pe
 
 
 \section{Data Lineage}
-Il \textbf{Data Lineage} rappresenta la mappatura del ciclo di vita del dato, dalla sua origine fino alla destinazione finale. All'interno di un catalogo aziendale, 
+Il \textbf{Data Lineage} rappresenta la mappatura del ciclo di vita del dato, dalla sua origine fino alla destinazione finale. All'interno di un catalogo, 
 questo concetto si traduce nella rappresentazione visiva ed \emph{end-to-end} del percorso e delle trasformazioni delle informazioni, 
 illustrando come queste vengano estratte dalle sorgenti primarie, elaborate attraverso \emph{pipeline} di trasformazione e, infine, esposte nei report aziendali.
 
@@ -210,7 +210,7 @@ illustrando come queste vengano estratte dalle sorgenti primarie, elaborate attr
 All'interno di OpenMetadata, il grafo del \emph{lineage} viene ricostruito in modo automatico dal \emph{Lineage Agent}, che analizza i log delle query SQL 
 eseguite sulle fonti originali, le definizioni delle viste e le configurazioni degli strumenti di BI, ricostruendo le relazioni di dipendenza secondo due principali livelli di granularità:
 \begin{itemize}
-    \item \textbf{\emph{Table-Level Lineage}}: Mostra le connessioni ad alto livello tra intere entità (database, tabelle e report), ricostruendo il percorso \emph{end-to-end} del dato dalla sorgente (\emph{upstream}) fino alla destinazione finale (\emph{downstream}).
+    \item \textbf{\emph{Table-Level Lineage}}: Mostra le connessioni ad alto livello tra intere entità (database, tabelle e report), ricostruendo il percorso \emph{end-to-end} del dato dalla sorgente (\emph{upstream}) alla destinazione (\emph{downstream}).
     \item \textbf{\emph{Column-Level Lineage}}: Traccia il percorso di derivazione fino al dettaglio della singola colonna. Questa funzionalità risulta fondamentale ai fini della conformità al GDPR, poiché permette di verificare esattamente come un campo contenente dati personali o sensibili si propaga tra le tabelle e i sistemi aziendali.
 \end{itemize}
 
@@ -230,11 +230,11 @@ L'applicazione operativa più rilevante del \emph{Column-Level Lineage} è la co
 Prima di apportare modifiche strutturali a una colonna o a una tabella (ad esempio l'eliminazione di un campo o il cambio del tipo di dato), l'utente può consultare il grafo 
 per identificare preventivamente quali tabelle, \emph{pipeline} e report verrebbero impattati o coinvolti da tale modifica.
 
-L'interfaccia di visualizzazione del \emph{lineage} supporta inoltre l'attivazione di diversi livelli informativi (\emph{Layers}):
+L'interfaccia di visualizzazione del \emph{lineage} inoltre supporta diversi livelli informativi (\emph{Layers}):
 \begin{itemize}
     \item \textbf{\emph{Column Layer}}: Per evidenziare le dipendenze tra i singoli attributi.
     \item \textbf{\emph{Observability Layer}}: Per integrare direttamente sul grafo gli esiti dei test di Data Quality, consentendo di individuare visivamente il punto in cui si è verificata un'anomalia sui dati.
-    \item \textbf{\emph{Data Product Layer}}: Per evidenziare la composizione e l'origine dei dataset curati messi a disposizione dei vari domini aziendali.
+    \item \textbf{\emph{Data Product Layer}}: Per evidenziare la composizione e l'origine dei dataset messi a disposizione dei vari domini aziendali.
     \item \textbf{\emph{Service Layer}}: Per visualizzare come i dati fluiscono attraverso piattaforme e servizi differenti.
     \item \textbf{\emph{Domain Layer}}: Per organizzare i dataset e gli asset raggruppandoli all'interno di categorie di business pertinenti.
 \end{itemize}
