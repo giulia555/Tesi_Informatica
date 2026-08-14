@@ -11,7 +11,7 @@ organizzative con l'obiettivo di supportare le aziende nell'adozione di decision
 Dal punto di vista teorico e operativo, il flusso della Business Intelligence si articola in quattro passaggi sequenziali fondamentali:
 \begin{enumerate}
     \item \textbf{Raccolta ed estrazione}: i dati grezzi provenienti da fonti eterogenee (quali database, fogli di calcolo Excel o sistemi \emph{on-premise}) vengono estratti e centralizzati in depositi unificati;
-    \item \textbf{Analisi descrittiva}: le informazioni memorizzate vengono elaborate per comprendere l'andamento storico e corrente dell'azienda. In questa fase si opera una distinzione essenziale rispetto alla Business Analytics (BA): mentre la Business Intelligence si concentra sull'analisi descrittiva (rispondendo alle domande \emph{cosa} e \emph{come}), la Business Analytics dà priorità all'analisi predittiva e prescrittiva, sfruttando modelli statistici per prevedere eventi futuri (rispondendo alla domanda \emph{perché});
+    \item \textbf{Analisi descrittiva}: le informazioni memorizzate vengono elaborate per comprendere l'andamento storico e corrente dell'azienda. In questa fase si opera una distinzione essenziale rispetto alla Business Analytics (BA): mentre la Business Intelligence si concentra sull'analisi descrittiva (rispondendo alle domande «cosa» e «come»), la Business Analytics dà priorità all'analisi predittiva e prescrittiva, sfruttando modelli statistici per prevedere eventi futuri e suggerire le azioni da fare (rispondendo alle domande «cosa accadrà» e «cosa fare»);
     \item \textbf{Visualizzazione dei dati}: i risultati dell'elaborazione analitica vengono convertiti in rappresentazioni grafiche intuitive (istogrammi, diagrammi a torta, \emph{scatter plot}), rendendo le metriche complesse accessibili e leggibili anche per gli utenti di business non tecnici;
     \item \textbf{Azione basata su informazioni in tempo reale}: la visualizzazione delle performance storiche e attuali, calata nel contesto aziendale, consente ai \emph{decision maker} di intervenire prontamente per ottimizzare i processi operativi.
 \end{enumerate}
@@ -28,15 +28,15 @@ Questa soluzione fornisce servizi e strumenti in grado di connettere, trasformar
 
 Utilizzato quotidianamente dall'azienda, Power BI soddisfa nativamente numerosi requisiti legati all'osservabilità e alla gestione del dato, offrendo:
 \begin{itemize}
-    \item \textbf{Centralizzazione delle fonti}: la capacità di connettere in un unico ambiente un'ampia varietà di dati strutturati (come database SQL Server, PostgreSQL) e non strutturati (come file JSON, CSV, fogli Excel), fungendo da singola fonte di verità per la reportistica aziendale;
-    \item \textbf{Sincronizzazione programmata}: l'allineamento costante e automatico delle informazioni con le fonti originali, tramite Power BI Service e i \emph{Gateway} dati locali;
-    \item \textbf{Organizzazione logica}: la strutturazione dei modelli di dati attraverso prospettive distinte (vista Report, vista Tabella, vista Modello), che permettono di esplorare le relazioni tra le entità importate;
-    \item \textbf{Sicurezza e gestione degli accessi}: l'implementazione di standard di sicurezza, includendo un sistema RBAC a livello di \emph{workspace} e la sicurezza a livello di riga (RLS - \emph{Row-Level Security}).
+    \item \textbf{Centralizzazione delle fonti}: La capacità di connettere in un unico ambiente un'ampia varietà di dati strutturati (come database SQL Server, PostgreSQL) e non strutturati (come file JSON, CSV, fogli Excel), fungendo da singola fonte di verità per la reportistica aziendale.
+    \item \textbf{Sincronizzazione programmata}: L'allineamento costante e automatico delle informazioni con le fonti originali, tramite Power BI Service e i \emph{Gateway} dati locali.
+    \item \textbf{Organizzazione logica}: La strutturazione dei modelli di dati attraverso prospettive distinte (vista Report, vista Tabella, vista Modello), che permettono di esplorare le relazioni tra le entità importate.
+    \item \textbf{Sicurezza e gestione degli accessi}: L'implementazione di standard di sicurezza, includendo un sistema RBAC a livello di \emph{workspace} e la sicurezza a livello di riga (RLS - \emph{Row-Level Security}).
 \end{itemize}
 
 \subsection{La piattaforma Microsoft Power BI}
-Wintech adotta Microsoft Power BI come soluzione di riferimento per lo sviluppo dei propri sistemi di reporting interni e per la consulenza offerta ai clienti. 
-Si tratta di una piattaforma avanzata di Business Intelligence che fornisce una \emph{suite} di servizi, applicazioni e connettori che trasformano molteplici 
+Wintech adotta Microsoft Power BI come soluzione di riferimento per lo sviluppo dei propri sistemi di \emph{reporting} interni e per la consulenza offerta ai clienti. 
+Si tratta di una piattaforma avanzata di Business Intelligence che fornisce una suite di servizi, applicazioni e connettori che trasformano molteplici 
 fonti di dati in informazioni strategiche, dettagliate e visivamente interattive.
 
 La piattaforma offre tre ambienti operativi principali, che supportano l'analista durante l'intero ciclo di modellazione e fruizione dei dati:
@@ -54,7 +54,7 @@ La piattaforma offre tre ambienti operativi principali, che supportano l'analist
 \end{figure}
 
 \subsection{Contesto aziendale}
-In Wintech S.p.A., la Business Intelligence ha un ruolo strategico. In qualità di consulente e \emph{System Integrator}, l'azienda aiuta i clienti a integrare 
+In Wintech S.p.A., la Business Intelligence ha un ruolo strategico. In qualità di consulente e System Integrator, l'azienda aiuta i clienti a integrare 
 sistemi ERP e a creare dashboard personalizzate, che permettono di monitorare facilmente le vendite, la logistica, le risorse umane e l'andamento finanziario.
 
 Durante lo stage, lo studio di Power BI ha permesso di comprendere l'utilità pratica dello strumento, sviluppando report basati sia sul database di test \emph{AdventureWorks} 
@@ -76,7 +76,6 @@ esattamente come vengono estratte, senza verificarne preventivamente la qualità
 Affinché la Business Intelligence sia davvero affidabile e conforme alle normative sulla privacy, è necessario creare un flusso informativo intermedio. 
 Questo livello si posiziona tra le fonti grezze e i report finali, affidando l'ispezione, la pulizia e la classificazione dei dati a piattaforme specifiche di Data Discovery e Data Governance.
 
-
 \section{Flusso sicuro dei dati}
 % PER SPIEGARE QUAL è L'IDEA DIETRO LA CONNESSIONE DATA CATALOG - POWER BI + grafico del flusso:  dati grezzi → catalogazione → classificazione PII → data quality e 
 % monitoraggio → mascheramento → governance e policy → strumenti BI che consumano solo dati puliti, sicuri e certificati
@@ -86,9 +85,9 @@ Power BI) e le basi dati genera criticità significative sotto il profilo operat
 
 Connettere gli strumenti di Business Intelligence direttamente alle sorgenti espone l'organizzazione a tre vulnerabilità principali:
 \begin{itemize}
-    \item \textbf{Esposizione incontrollata di dati sensibili}: i report di BI analizzano tipicamente metriche aggregate. Tuttavia, una connessione diretta ai database di produzione consente agli analisti di accedere e importare record contenenti informazioni personali in chiaro (quali nomi, indirizzi, e-mail o codici fiscali), violando i principi di minimizzazione e limitazione delle finalità previsti dal GDPR;
-    \item \textbf{Propagazione di anomalie di Data Quality}: se una sorgente dati presenta valori nulli, duplicati o anomalie strutturali, lo strumento di BI importa passivamente tali errori. Questo genera visualizzazioni distorte o errate, compromettendo l'affidabilità delle metriche esposte e quindi dei processi decisionali;
-    \item \textbf{Assenza di contesto semantico e documentale}: gli analisti faticano a individuare e comprendere i dataset d'interesse (Data Discovery), dovendo decifrare strutture fisiche complesse e nomenclature tecniche prive di una descrizione formalizzata o di un'associazione chiara con i termini di business dell'organizzazione.
+    \item \textbf{Esposizione incontrollata di dati sensibili}: I report di BI analizzano tipicamente metriche aggregate. Tuttavia, una connessione diretta ai database di produzione consente agli analisti di accedere e importare record contenenti informazioni personali in chiaro (quali nomi, indirizzi, e-mail o codici fiscali), violando i principi di minimizzazione e limitazione delle finalità previsti dal GDPR.
+    \item \textbf{Propagazione di anomalie di Data Quality}: Se una sorgente dati presenta valori nulli, duplicati o anomalie strutturali, lo strumento di BI importa passivamente tali errori. Questo genera visualizzazioni distorte o errate, compromettendo l'affidabilità delle metriche esposte e quindi dei processi decisionali.
+    \item \textbf{Assenza di contesto semantico e documentale}: Gli analisti faticano a individuare e comprendere i dataset d'interesse (Data Discovery), dovendo decifrare strutture fisiche complesse e nomenclature tecniche prive di una descrizione formalizzata o di un'associazione chiara con i termini di business dell'organizzazione.
 \end{itemize}
 
 \noindent Per mitigare tali rischi e implementare nativamente i principi di \emph{Privacy by Design}, l'architettura informativa deve integrare un livello intermedio che funga 
@@ -101,7 +100,7 @@ Il processo che trasforma i dati grezzi in informazioni utili per le decisioni a
     \item \textbf{Arricchimento semantico}: i metadati tecnici vengono associati ai termini formalizzati nel glossario aziendale, definendo responsabilità e \emph{ownership} per ciascun asset e facilitando la Data Discovery da parte degli utenti di business;
     \item \textbf{Individuazione e classificazione dei PII}: mediante l'esecuzione dell'\emph{AutoClassification Agent} o l'applicazione manuale dei tag, il sistema rileva le informazioni personali e vi applica i tag pertinenti (es. \texttt{PII.Sensitive}), mappando la distribuzione dei dati protetti;
     \item \textbf{Monitoraggio della qualità}: il motore di Data Quality esegue i test pianificati sui database sorgente. In caso di anomalie, il sistema segnala l'errore sulla dashboard di Data Observability e notifica i responsabili tramite alert automatici, impedendo la propagazione dell'errore a valle;
-    \item \textbf{Mascheramento e anonimizzazione}: nel catalogo l'accesso ai dati sensibili del \emph{Sample Data} viene protetto tramite le policy RBAC, oscurando i valori (\texttt{******}) ai profili non autorizzati. A livello di database fisico, i dataset destinati ad ambienti di test e reporting vengono opportunamente anonimizzati tramite tecniche e modelli formali, mantenendo i soli vincoli relazionali necessari alle query di analisi;
+    \item \textbf{Mascheramento e anonimizzazione}: nel catalogo l'accesso ai dati sensibili del \emph{Sample Data} viene protetto tramite le policy RBAC, oscurando i valori (\texttt{******}) ai profili non autorizzati. A livello di database fisico, i dataset destinati ad ambienti di test e \emph{reporting} vengono opportunamente anonimizzati tramite tecniche e modelli formali, mantenendo i soli vincoli relazionali necessari alle query di analisi;
     \item \textbf{Consumo sicuro}: lo sviluppatore o l'analista di BI si connette esclusivamente alle sorgenti o alle aree di \emph{staging} sicure contenenti i dati precedentemente catalogati, verificati e bonificati, garantendo una reportistica attendibile, accurata e conforme alle normative.
 \end{enumerate}
 
@@ -119,18 +118,17 @@ Tali requisiti, di competenza dell'area IT Infrastructure, sono stati posticipat
 concettuale e sulla modellazione logica del flusso informativo.
 
 Un altro vincolo tecnico consiste nell'asimmetria dell'integrazione tra i due sistemi. All'interno di OpenMetadata è possibile registrare Power BI come un servizio sorgente 
-per estrane i metadati, importando nel catalogo i metadati relativi a dashboard, report, datamodel e Data Lineage.
+per estrarre i metadati, importando nel catalogo i metadati relativi a dashboard, report, datamodel e Data Lineage.
 
 Tuttavia, questo flusso di metadati è esclusivamente unidirezionale:
 \begin{itemize}
-    \item Power BI alimenta il data catalog fornendo la topologia delle proprie risorse analitiche;
+    \item Power BI alimenta il Data Catalog fornendo la topologia delle proprie risorse analitiche.
     \item Power BI non può in alcun modo connettersi a OpenMetadata per interrogarlo come fonte dati reale o per estrarre direttamente tabelle fisiche pulite e anonimizzate.
 \end{itemize}
 
 \noindent Questo limite deriva dall'architettura del catalogo dati: la piattaforma non opera come database fisico e non fa una copia delle informazioni aziendali, ma si limita 
 ad archiviare e indicizzare i metadati descrittivi e qualitativi degli asset esterni. Di conseguenza, la pulizia e il mascheramento fisico dei dati devono essere delegati 
 ad altri strumenti, che operano a livello di base dati o staging area, lasciando a OpenMetadata il solo ruolo di tracciamento e controllo di conformità.
-
 
 \section{Strumenti di Data Discovery}
 Durante l'analisi condotta nel percorso di stage, è stata valutata l'ipotesi di escludere l'adozione di un Data Catalog complesso come OpenMetadata in favore di uno 
@@ -139,68 +137,74 @@ strumento verticale e leggero di PII Discovery, che possa essere affiancato a Mi
 Tale riflessione nasce dal fatto che Power BI, già integrato nell'infrastruttura aziendale di Wintech S.p.A., si attesta non solo come un eccellente strumento di 
 reportistica e Data Visualization, ma offre nativamente anche alcune funzionalità tipiche di un catalogo dati:
 \begin{itemize}
-    \item \textbf{Centralizzazione delle fonti}: si connette a una vasta gamma di fonti dati strutturate e non strutturate, fungendo da \emph{Single Source of Truth};
-    \item \textbf{Sincronizzazione}: garantisce l'aggiornamento programmato dei dati allineandoli continuamente alle fonti originali;
-    \item \textbf{Sicurezza e gestione accessi}: governa la visibilità del dato tramite controlli a livello di \emph{workspace} e \emph{Row-Level Security} (RLS);
-    \item \textbf{Data Collaboration e Observability}: supporta l'esplorazione dei modelli semantici, la condivisione sicura tramite Microsoft Teams e l'attivazione di alert automatici sui KPI e metriche aziendali.
+    \item \textbf{Centralizzazione delle fonti}: Si connette a una vasta gamma di fonti dati strutturate e non strutturate, fungendo da \emph{Single Source of Truth}.
+    \item \textbf{Sincronizzazione}: garantisce L'aggiornamento programmato dei dati allineandoli continuamente alle fonti originali.
+    \item \textbf{Sicurezza e gestione accessi}: Governa la visibilità del dato tramite controlli a livello di \emph{workspace} e \emph{Row-Level Security}.
+    \item \textbf{Data Collaboration e Observability}: Supporta l'esplorazione dei modelli semantici, la condivisione sicura tramite Microsoft Teams e l'attivazione di alert automatici sui KPI e metriche aziendali.
 \end{itemize}
 
 Tuttavia, essendo uno strumento orientato al \emph{Decision Making}, Power BI da solo non è in grado di garantire il controllo qualitativo e la 
 conformità normativa alla sorgente. Power BI importa i dati passivamente: non effettua test di Data Quality automatici sui database originali per intercettare 
 valori nulli o errati e, soprattutto, non dispone di algoritmi per scovare le informazioni personali (PII) nei database prima che queste vengano 
-importate nei report. Infine, manca di un ambiente centralizzato per l'apertura di \emph{task} e la segnalazione di anomalie documentali.
+importate nei report. Infine, manca di un ambiente centralizzato per l'apertura di task e la segnalazione di anomalie documentali.
 
-Per colmare questo divario senza incorrere nella complessità sistemistica di un data catalog completo, lo stage ha previsto la valutazione di alcune soluzioni più leggere 
+Per colmare questo divario senza incorrere nella complessità sistemistica di un Data Catalog completo, lo stage ha previsto la valutazione di alcune soluzioni più leggere 
 (\emph{tool} di PII Discovery e anonimizzazione), analizzandone l'utilità, le caratteristiche e la fattibilità di integrazione nell'infrastruttura aziendale:
 \begin{enumerate}
     \item \textbf{Microsoft Presidio}: Un \emph{framework open-source} e \emph{stateless} sviluppato da Microsoft, specializzato nell'individuazione e nell'anonimizzazione delle PII tramite modelli NLP locali (spaCy) ed espressioni regolari. Poiché non si connette direttamente alle fonti dati ma riceve testo tramite API, risulta estremamente flessibile per essere integrato all'interno di pipeline Python personalizzate prima del caricamento in Power BI.
     \item \textbf{ARX (Data Anonymization Tool)}: Uno strumento \emph{open-source} dedicato alla de-identificazione fisica dei dati strutturati. Si distingue per la capacità di connettersi ai database relazionali, analizzare preventivamente il rischio statistico di re-identificazione e applicare modelli matematici formali di privacy, quali la \gls{k-anonymity}, la \gls{l-diversity} e la \gls{t-closeness}, esportando tabelle bonificate e sicure utilizzabili dagli analisti di Business Intelligence.
-    \item \textbf{Hawk-Eye}: Una potente utility a riga di comando \emph{open-source} progettata per scansionare sia fonti strutturate (database SQL) sia risorse non strutturate (file PDF, Word, immagini e video) grazie all'uso combinato di pattern matching e tecnologie \gls{ocr}. Pur eccellendo nella fase di Data Discovery e auditing, Hawk-Eye presenta due limiti significativi: non supporta nativamente Microsoft SQL Server e non applica alcuna tecnica di mascheramento, delegando la protezione a passaggi successivi dello sviluppo.
+    \item \textbf{Hawk-Eye}: Una potente \emph{utility} a riga di comando \emph{open-source} progettata per scansionare sia fonti strutturate (database SQL) sia risorse non strutturate (file PDF, Word, immagini e video) grazie all'uso combinato di pattern matching e tecnologie \gls{ocr}. Pur eccellendo nella fase di Data Discovery e auditing, Hawk-Eye presenta due limiti significativi: non supporta nativamente Microsoft SQL Server e non applica alcuna tecnica di mascheramento, delegando la protezione a passaggi successivi dello sviluppo.
     \item \textbf{Bytebase}: Uno strumento focalizzato sul DevSecOps e sulla gestione del ciclo di vita dei database. Consente l'applicazione di policy di mascheramento dinamico (\emph{dynamic data masking}) direttamente a livello di query, ma richiede l'adozione di un'infrastruttura di gestione complessa.
     \item \textbf{Fides (di Ethyca)}: Una piattaforma di privacy engineering basata sulla metodologia \emph{Privacy-as-Code}, progettata per automatizzare il rispetto del GDPR direttamente nei flussi di sviluppo software. Richiede tuttavia un'installazione e una manutenzione sistemistica non trascurabile tramite Container Docker.
 \end{enumerate}
 
-La combinazione di Power BI con un applicativo di PII Discovery e anonimizzazione mirato rappresenta un'alternativa concreta, efficiente ed economicamente vantaggiosa 
-all'implementazione di un Data Catalog completo.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{bi/ARX_anonimizzazione.png}
+    \caption[Interfaccia nativa di ARX]{Interfaccia principale di ARX che mostra i dati d'uscita. I valori quasi-identificativi e sensibili sono stati oscurati e generalizzati per rispettare il modello della \emph{k-Anonymity}}
+    \label{fig:arx_anonimizzazione}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{bi/ARX_powerbi.png}
+    \caption[Importazione del dataset bonificato in Power BI]{Importazione in Microsoft Power BI del file CSV generato tramite ARX, contenente i dati personali precedentemente de-identificati e pronti per la reportistica}
+    \label{fig:arx_powerbi}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{bi/presidio_pdf.png}
+    \caption[De-identificazione visiva su documento PDF con Presidio]{Esempio di redazione visiva irreversibile su un documento non strutturato (verbale interno Wintech S.p.A.) elaborato tramite Microsoft Presidio e la libreria PyMuPDF}
+    \label{fig:presidio_pdf}
+\end{figure}
 
 La combinazione di Power BI con uno strumento di PII Discovery e anonimizzazione mirato rappresenta un'alternativa concreta, efficiente ed economicamente 
 vantaggiosa all'implementazione di un Data Catalog completo. Questa architettura ibrida permette di blindare la sicurezza del dato alla radice e di abilitare un 
 \emph{reporting} sicuro. Tale approccio richiede tuttavia di rinunciare ad alcune funzionalità esclusive di una piattaforma di Data Governance nativa, quali:
 \begin{itemize}
-    \item L'esecuzione di test automatizzati di Data Quality in grado di bloccare a monte i dati errati o corrotti;
-    \item La gestione di un Glossario aziendale centralizzato a supporto della documentazione semantica;
-    \item La tracciabilità visiva del Data Lineage \emph{end-to-end};
-    \item L'utilizzo di strumenti di collaborazione diretta (come l'apertura di \emph{task} operativi e la gestione degli incidenti qualitativi).
+    \item L'esecuzione di test automatizzati di Data Quality in grado di bloccare a monte i dati errati o corrotti.
+    \item La gestione di un glossario aziendale centralizzato a supporto della documentazione semantica.
+    \item La tracciabilità visiva del Data Lineage \emph{end-to-end}.
+    \item L'utilizzo di strumenti di collaborazione diretta (come l'apertura di task operativi e la gestione degli incidenti qualitativi).
 \end{itemize}
 
-% DA FINIRE + IMMAGINI
 \section{Considerazioni finali}
-A completamento del \emph{Proof of Concept} sviluppato in ambiente locale, la scelta strategica sulla futura evoluzione dello stack tecnologico di Wintech S.p.A. 
-deve fondarsi su un bilancio oggettivo tra i benefici operativi e l'onere di adozione, manutenzione e gestione infrastrutturale delle diverse soluzioni analizzate.
+A completamento delle attività di analisi e di sviluppo del \emph{Proof of Concept}, si è individuata la soluzione tecnologica più adatta al contesto di Wintech S.p.A., 
+cercando di bilanciare l'onere infrastrutturale richiesto per l'adozione e l'effettivo valore aggiunto fornito dalle piattaforme esaminate.
 
-Il primo parametro discriminante è rappresentato dai requisiti hardware e dalla complessità di installazione e manutenzione delle piattaforme di catalogazione:
+Il principale parametro discriminante per la scelta è rappresentato dal rapporto tra i requisiti hardware, la complessità di manutenzione e le funzionalità offerte dalle 
+diverse piattaforme. Dalla doppia analisi condotta sulle piattaforme di Data Catalog e sui \emph{tool} di PII Discovery, emergono le seguenti considerazioni:
 \begin{itemize}
-    \item \textbf{OpenMetadata}: richiede l'esecuzione simultanea di quattro container Docker (il database transazionale MySQL/PostgreSQL, il server centrale in Java, il motore di ingestion basato su Apache Airflow e il cluster di indicizzazione Elasticsearch/OpenSearch), con un consumo minimo garantito di 6-8 GB di RAM e 4 vCPU per ambienti di produzione;
-    \item \textbf{Open Data Discovery (ODD)}: si attesta come un candidato \emph{open-source} alternativo più leggero, richiedendo solo tre componenti (la piattaforma ODD, un database PostgreSQL e l'agente collector), con requisiti sistemistici ridotti a 4 GB di RAM e 2 vCPU. Tuttavia, non dispone di un motore nativo di Auto-Classification per i dati sensibili, vanificando parte dei vantaggi della catalogazione automatica;
-    \item \textbf{Microsoft Purview}: rappresenta il modello di riferimento enterprise per l'ecosistema Microsoft aziendale, integrando nativamente l'intelligenza artificiale e la Data Compliance in Cloud, ma comporta costi di licenza e complessità di configurazione (richiedendo spesso l'uso di Kubernetes) sproporzionati rispetto alle reali necessità correnti dell'organizzazione;
-    \item \textbf{Tool leggeri standalone (ARX, Presidio, Hawk-Eye)}: non richiedono un'infrastruttura server sempre attiva (24/7), potendo essere eseguiti come script Python locali schedulati periodicamente in background (tramite Windows Task Scheduler o cron in Linux), riducendo a zero l'onere sistemistico fisso e azzerando i costi di adozione.
+    \item \textbf{Impatto architetturale dei Data Catalog}: OpenMetadata si è dimostrata la piattaforma più completa, ma richiede un'infrastruttura complessa articolata su quattro Container Docker (database transazionale, server centrale, motore Apache Airflow e \emph{cluster} Elasticsearch/OpenSearch), richiedendo un minimo di 6-8 GB di RAM e 4 vCPU per gli ambienti di produzione. Alternative più snelle come Open Data Discovery (ODD) richiedono meno risorse, ma non offrono nativamente una funzionalità di \emph{Auto-Classification} per le PII.
+    \item \textbf{Esclusione delle piattaforme DevSecOps complesse}: Sebbene strumenti come Fides o Bytebase offrano funzionalità avanzate, la loro adozione comporta un onere sistemistico basato su microservizi estremamente elevato. Questo introdurrebbe un rischio di sovra-ingegnerizzazione (\emph{over-engineering}) del problema: a parità di sforzo infrastrutturale, risulterebbe infatti preferibile un Data Catalog completo come OpenMetadata, la cui complessità di installazione è ripagata dalle funzionalità offerte.
+    \item \textbf{Efficienza dei \emph{tool} leggeri \emph{standalone}}: Le soluzioni verticali come ARX, Microsoft Presidio e Hawk-Eye presentano il vantaggio di non richiedere un'infrastruttura server permanentemente attiva. Potendo essere eseguite in modalità \emph{stateless} tramite script locali schedulati in background, riducono a zero i costi di adozione e garantiscono la bonifica dei database relazionali direttamente all'interno del perimetro di rete protetto dell'azienda.
 \end{itemize}
 
-Sulla base di queste considerazioni, l'introduzione immediata di una piattaforma di Data Catalog completa come OpenMetadata risulterebbe parzialmente sovrodimensionata per 
-l'attuale contesto operativo di Wintech S.p.A., determinando un rischio di sovra-ingegnerizzazione (\emph{over-engineering}) a fronte di un patrimonio informativo che può 
-essere protetto con strategie più snelle.
+Sulla base di queste considerazioni, l'introduzione di una piattaforma di Data Catalog completa come OpenMetadata risulterebbe sovrodimensionata per 
+l'attuale contesto operativo di Wintech S.p.A., rischiando una sovra-ingegnerizzazione del problema.
 
-Tuttavia, il vero valore del progetto di stage non risiede nell'adozione immediata e vincolante di un singolo applicativo software, bensì nella maturità e nella consapevolezza 
-metodologica acquisite dall'azienda in materia di Data Governance, qualità del dato e Sviluppo Sicuro. Lo studio compiuto ha evidenziato come le tematiche di conformità al 
-GDPR (inclusa la corretta classificazione dei tag e l'esigenza di una tracciabilità trasparente dei flussi) non siano meri vincoli burocratici, ma requisiti architetturali 
-ad alto valore aggiunto che coinvolgono trasversalmente molteplici reparti aziendali:
-\begin{itemize}
-    \item Il team di Ricerca e Sviluppo acquisisce strumenti concreti per bonificare e anonimizzare i database di produzione prima di utilizzarli negli ambienti locali di test e sviluppo software;
-    \item Il reparto Business Intelligence ottiene linee guida chiare per progettare flussi informativi intermediati e sicuri, riducendo il rischio di esporre accidentalmente record riservati o di propagare anomalie qualitative nelle metriche direzionali;
-    \item L'area Compliance e Sicurezza dispone di un \emph{framework} di riferimento (ispirato agli standard ISO/IEC 27001 e ISO/IEC 29100) per gestire con efficacia gli audit interni, mappare i rischi di re-identificazione statistica e rispondere tempestivamente alle richieste di esercizio dei diritti degli interessati (come il diritto all'oblio).
-\end{itemize}
-
-In conclusione, lo scenario evolutivo più realistico e sostenibile per l'organizzazione prevede l'adozione di un approccio modulare e progressivo: anziché mantenere attiva 
-un'infrastruttura di catalogazione complessa a livello aziendale, Wintech S.p.A. potrà capitalizzare i risultati dello stage implementando in produzione gli strumenti di 
-PII Discovery e anonimizzazione deterministica (come ARX) per la bonifica dei database fisici operazionali, garantendo il pieno rispetto della privacy fin dalla progettazione 
-(\emph{Privacy by Design}) all'interno di flussi analitici e applicativi intrinsecamente sicuri.
+La strategia più sostenibile ed efficiente consiste nell'adottare un approccio modulare: l'utilizzo degli strumenti di PII Discovery e di anonimizzazione (quali ARX o 
+Microsoft Presidio) consente di rendere sicuri e affidabili i database fisici direttamente alla radice. In questo modo viene assicurato lo sviluppo sicuro e gli strumenti 
+di Business Intelligence vengono alimentati esclusivamente con dataset già protetti e verificati, realizzando un ecosistema analitico sicuro, a basso impatto infrastrutturale 
+e pienamente conforme alla normativa GDPR fin dalla progettazione (\emph{Privacy by Design}).

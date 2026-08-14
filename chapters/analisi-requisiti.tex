@@ -52,9 +52,9 @@ Ogni caso d'uso è identificato dalla seguente notazione:
     \label{uc:1_1_fonte_strutturata}
 \end{usecase}
 
-\begin{usecase}{1.2}{Connessione a una fonte dati semi strutturata}
+\begin{usecase}{1.2}{Connessione a una fonte dati semi-strutturata}
     \usecaseactors{Amministratore di sistema}
-    \usecasedesc{L'amministratore connette una fonte dati semi strutturata al catalogo dati aziendale e ne visualizza i metadati tramite interfaccia}
+    \usecasedesc{L'amministratore connette una fonte dati semi-strutturata al catalogo dati aziendale e ne visualizza i metadati tramite interfaccia}
     \usecasepre{L'attore ha effettuato l'accesso alla piattaforma con privilegi di amministratore e possiede le credenziali o il percorso della fonte dati da importare}
     \usecasepost{I metadati della fonte dati selezionata sono stati importati con successo e sono visibili all'interno del catalogo dati}
     \usecasemain{
@@ -248,7 +248,7 @@ Ogni caso d'uso è identificato dalla seguente notazione:
     \label{uc:2_2_revisione_classificazione_automatica}
 \end{usecase}
 
-\begin{usecase}{2.3}{Classificazione manuale dei dati tramite flag}
+\begin{usecase}{2.3}{Classificazione manuale dei dati tramite tag}
     \usecaseactors{Responsabile della Governance e della sicurezza dei dati}
     \usecasedesc{L'attore assegna manualmente tag ai dati presenti nel catalogo per classificarli secondo diversi parametri, tra cui la sensibilità del dato, l'area tematica 
     di appartenenza, il reparto di riferimento o altri criteri aziendali. Questo caso d'uso si applica sia come \emph{fallback} quando il motore di classificazione automatica non ha 
@@ -828,7 +828,7 @@ RF-D-24 & Il sistema permette di risalire al Data Lineage di un dato o dataset. 
 RF-D-25 & L'utente può visualizzare l'elenco delle modifiche subite da un dataset. & UC-3.4 \\ \midrule
 RF-D-26 & Il sistema registra e rende visibile la lista degli accessi e delle ricerche effettuate su un dataset. & UC-3.4 \\ \midrule
 RF-D-27 & L'utente può visualizzare le interazioni di altri utenti su un certo dataset. & UC-3.4 \\ \midrule
-RF-D-28 & Il sistema permette all'utente di salvare specifici asset nei preferiti (o di «seguirlo») e ricevere notifiche. & UC-3.5 \\ \midrule
+RF-D-28 & Il sistema permette all'utente di salvare specifici asset nei preferiti (o di «seguirli») e ricevere notifiche. & UC-3.5 \\ \midrule
 RF-D-29 & L'utente può lasciare un commento o un feedback direttamente sulla pagina del dataset. & UC-3.6 \\ \midrule
 RF-D-30 & L'utente può inviare una domanda o fare una richiesta relativamente a un dataset. & UC-3.7 \\ \midrule
 RF-D-31 & Il sistema notifica gli utenti autorizzati quando viene lasciato un commento, una richiesta o un problema su un dataset. & UC-3.6, 3.7, 3.8 \\ \midrule
@@ -922,7 +922,7 @@ I requisiti di qualità descrivono le caratteristiche misurabili che il sistema 
 
 % REQUISITI OBBLIGATORI
 RQ-O-1 & Il sistema deve integrare nativamente un modello di sicurezza \gls{rbac}, garantendo che solo le figure autorizzate possano gestire policy e permessi. & UC-1.5, 2.1 \\ \midrule
-RQ-O-2 & Il sistema in ambiente di produzione richiede risorse hardware stimate per 10-16 GB di RAM, 150-200 GB di spazio disco e 4 vCPU. & - \\ \midrule
+RQ-O-2 & Il sistema, per un deployment in un ambiente di produzione aziendale reale, richiede risorse hardware stimate per 10-16 GB di RAM, 150-200 GB di spazio disco e 4 vCPU. & - \\ \midrule
 RQ-O-3 & Il tempo di risposta dell'interfaccia utente per l'esecuzione di una ricerca testuale all'interno del catalogo deve essere istantaneo (inferiore a 1 secondo nel 95\% dei casi). & - \\ \midrule
 RQ-O-4 & Il sistema deve fornire una rappresentazione puramente visiva e interattiva del Data Lineage, permettendo agli utenti di navigare le dipendenze senza scrivere query. & UC-3.3 \\ \midrule
 RQ-O-5 & Il sistema deve garantire un'alta disponibilità, assicurando che l'accesso al catalogo sia garantito per almeno il 99\% del tempo di operatività richiesto. & - \\
