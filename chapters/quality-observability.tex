@@ -43,7 +43,7 @@ autorizzati possono controllare lo stato di avanzamento delle attività (\emph{A
 \section{Test di qualità}
 Per valutare lo stato di salute di un patrimonio informativo, è necessario definire dei parametri e delle metriche che consentano di misurare la qualità del dato 
 (\textbf{Data Quality})~\cite{site:ibm_data_quality}. In ambito ingegneristico, la qualità del dato è concepita come una misura multidimensionale 
-basata su sei criteri fondamentali, standardizzati a livello internazionale dal \emph{framework} di \textbf{DAMA UK}~\cite{site:dama-dq-dimensions}:
+basata su sei criteri fondamentali, standardizzati a livello internazionale dal \emph{framework} di \textbf{DAMA UK}~\cite{dama:dq-dimensions}:
 \begin{itemize}
     \item \textbf{Accuratezza (\emph{Accuracy})}: Il grado con cui le informazioni rappresentano correttamente la realtà o aderiscono a una fonte autorevole di riferimento.
     \item \textbf{Completezza (\emph{Completeness})}: La presenza di tutti i valori necessari e attesi per una specifica finalità d'uso, operando una distinzione tra campi informativi critici e opzionali.
@@ -99,11 +99,11 @@ al test la seguente espressione regolare per la verifica degli indirizzi e-mail:
     \label{fig:configurazione_test}
 \end{figure}
 
-\noindent Come documentato durante le fasi di collaudo dello stage, l'esecuzione di questa \emph{Test Suite} ha registrato un fallimento, in quanto non tutti i record 
+\noindent L'esecuzione di questa \emph{Test Suite} ha registrato un fallimento, in quanto non tutti i record 
 fittizi forniti dal database di test rispettavano il formato sintattico imposto. Questo risultato, mantenuto a fini esplicativi, ha permesso di validare 
-la reattività del sistema: il mancato superamento dell'asserzione ha innescato l'aggiornamento real-time degli indicatori cromatici nella scheda di Data Observability 
+la reattività del sistema: il mancato superamento del test ha innescato l'aggiornamento real-time degli indicatori cromatici nella scheda di Data Observability 
 e ha generato l'apertura automatica di un incidente. Questo livello di monitoraggio proattivo è esattamente ciò che previene l'importazione di anomalie nei sistemi di 
-Business Intelligence situati a valle, preservando la correttezza della reportistica direzionale aziendale.
+Business Intelligence situati a valle, preservando la correttezza della reportistica aziendale.
 
 \begin{figure}[H]
     \centering
@@ -151,11 +151,11 @@ Affinché le procedure di Data Quality e la gestione degli incidenti risultino r
 gli utenti, gli sviluppatori e gli analisti devono poter comunicare in modo fluido e tempestivo. I metodi di monitoraggio tradizionali, basati esclusivamente sul controllo 
 manuale dei cruscotti o sullo scambio di e-mail o messaggi, si rivelano spesso inefficienti e dispersivi.
 
-Per questo motivo, OpenMetadata non si limita a catalogare i dati, ma integra strumenti di collaborazione (\textbf{Data Collaboration}) e sistemi di avviso automatico 
+Per questo motivo, OpenMetadata integra strumenti di collaborazione (\textbf{Data Collaboration}) e sistemi di avviso automatico 
 (\emph{alerting}) che mantengono gli utenti costantemente aggiornati. 
 
 Il valore aggiunto della Data Collaboration risiede nella contestualizzazione delle comunicazioni: invece di utilizzare chat generiche, 
-gli utenti possono segnalare anomalie, avvisi o modifiche direttamente all'interno della scheda del dato interessato. Questo approccio fornisce un contesto preciso alla 
+gli utenti possono segnalare anomalie, inviare avvisi o richiedere modifiche direttamente all'interno della scheda del dato interessato. Questo approccio fornisce un contesto preciso alla 
 comunicazione, ne previene la frammentazione e garantisce che lo storico delle decisioni rimanga ordinato e sempre accessibile.
 
 \subsection{Strumenti di Data Collaboration}
@@ -194,15 +194,15 @@ sulle attività e sulle menzioni che li riguardano.
 Per evitare controlli manuali continui delle dashboard di Data Quality, la piattaforma offre un sistema di \emph{alerting} automatico, che notifica tempestivamente eventi critici agli utenti. 
 OpenMetadata differenzia gli allarmi in due macro-categorie:
 \begin{enumerate}
-    \item \textbf{\emph{System \& Governance Alerts}}: Monitorano le variazioni ai metadati e le attività di collaborazione (es. modifiche alle descrizioni, assegnazione di nuovi task o l'inserimento di un nuovo termine nel Glossario).
+    \item \textbf{\emph{System \& Governance Alerts}}: Monitorano le variazioni ai metadati e le attività di collaborazione (es. modifiche alle descrizioni, assegnazione di nuovi task o l'inserimento di un nuovo termine nel glossario).
     \item \textbf{\emph{Data Observability Alerts}}: Rilevano le anomalie tecniche (es. fallimento dei test di qualità, interruzione delle \emph{pipeline} di estrazione o mutamenti non previsti nella struttura delle tabelle).
 \end{enumerate}
 
 La configurazione di questi allarmi segue una logica modulare strutturata in tre fasi sequenziali:
 \begin{itemize}
-    \item Si definisce la sorgente dell'evento (\emph{Source}).
-    \item Si applicano dei filtri per limitare il raggio d'azione (\emph{Filters}), ad esempio circoscrivendo la notifica ai soli dati di un dominio specifico.
-    \item Si imposta il canale di destinazione (\emph{Destination}), decidendo se recapitare il messaggio all'interno della piattaforma stessa oppure instradarlo verso i sistemi aziendali esterni.
+    \item si definisce la sorgente dell'evento (\emph{Source});
+    \item si applicano dei filtri per limitare il raggio d'azione (\emph{Filters}), ad esempio circoscrivendo la notifica ai soli dati di un dominio specifico;
+    \item si imposta il canale di destinazione (\emph{Destination}), decidendo se recapitare il messaggio all'interno della piattaforma stessa oppure instradarlo verso i sistemi aziendali esterni.
 \end{itemize}
 
 \begin{figure}[H]
@@ -228,7 +228,9 @@ formali in caso di fallimento dei controlli qualitativi.
 
 L'integrazione con Microsoft Teams, invece, può essere configurata sfruttando la tecnologia dei \emph{Webhook}, un meccanismo standard per la comunicazione in tempo reale tra 
 applicazioni web. Va precisato che, in seguito alla dismissione dei precedenti \emph{Office 365 Connector} da parte di Microsoft, l'integrazione si basa oggi sui più recenti \emph{Workflow Webhook}, 
-che veicolano le notifiche in formato \emph{Adaptive Card}. Il flusso automatico di notifica prevede i seguenti passaggi:
+che veicolano le notifiche in formato \emph{Adaptive Card}.
+
+Il flusso automatico di notifica prevede i seguenti passaggi:
 \begin{enumerate}
     \item In presenza di un evento critico (come il fallimento di un test), OpenMetadata genera un pacchetto di dati (\emph{payload}) strutturato in formato JSON, contenente i dettagli dell'anomalia.
     \item Il pacchetto viene inviato tramite una richiesta di rete a un indirizzo univoco e sicuro generato da Microsoft Teams.
