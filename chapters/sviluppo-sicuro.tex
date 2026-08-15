@@ -20,7 +20,7 @@ Questa definizione si basa su tre concetti fondamentali:
 \end{itemize}
 
 \subsection{Principi della privacy}
-Nella definizione delle proprie Linee Guida allo Sviluppo Sicuro, Wintech si ispira allo standard \textbf{ISO/IEC 29100:2011}, il quale raccoglie undici principi fondamentali 
+Nella definizione delle proprie Linee Guida allo Sviluppo Sicuro, Wintech si ispira allo standard \textbf{ISO/IEC 29100}, il quale raccoglie undici principi fondamentali 
 che indirizzano la progettazione, lo sviluppo e l'implementazione dei requisiti di protezione della privacy all'interno dei software. 
 Tali principi sono descritti in dettaglio di seguito:
 
@@ -38,12 +38,12 @@ Tali principi sono descritti in dettaglio di seguito:
 
 \midrule
 \noalign{\vspace{10pt}}
-\caption[]{Principi della privacy secondo lo standard ISO/IEC 29100:2011} \\
+\caption[]{Principi della privacy secondo lo standard ISO/IEC 29100} \\
 \endfoot
 
 \bottomrule
 \noalign{\vspace{10pt}}
-\caption{Principi della privacy secondo lo standard ISO/IEC 29100:2011}
+\caption{Principi della privacy secondo lo standard ISO/IEC 29100}
 \label{tab:principi-privacy}
 \endlastfoot
     \textbf{Consenso e Scelta} & L'interessato deve poter scegliere se acconsentire o meno al trattamento, in modo chiaro e accessibile.\\ \midrule
@@ -65,7 +65,7 @@ I requisiti funzionali e tecnici introdotti dal Regolamento influenzano quasi tu
 dai livelli più bassi, come l'architettura dei dati (database) e i livelli di trasporto, per arrivare fino ai livelli applicativi e di presentazione. 
 Wintech si impegna a soddisfare tali requisiti fin dalle prime fasi dell'SDLC.
 
-Di seguito vengono mappati e spiegati alcuni dei principali articoli del GDPR e le misure che l'azienda si impegna ad adottare per garantire la \emph{Privacy by Design} e lo Sviluppo Sicuro.
+Di seguito vengono mappati e spiegati alcuni dei principali articoli del GDPR e le misure che l'azienda si impegna ad adottare per garantire la \emph{Privacy by Design} e lo sviluppo sicuro.
 % \begin{longtable}{ p{0.18\textwidth} p{0.37\textwidth} p{0.37\textwidth} }
 \begin{longtable}{ >{\raggedright\arraybackslash}p{0.18\textwidth} p{0.37\textwidth} p{0.37\textwidth} }
 \toprule
@@ -140,7 +140,7 @@ OpenMetadata organizza i tag all'interno di categorie logiche centralizzate, den
 metadati e tradurre i requisiti normativi in regole tecniche, la piattaforma fornisce alcune classificazioni di sistema predefinite. Tali categorie non possono essere 
 eliminate, ma guidano l'assegnazione corretta delle etichette:
 \begin{itemize}
-    \item \textbf{PII}: Classificazione standard concepita per l'identificazione e la mappatura delle informazioni personali, fondamentale per la conformità al GDPR. Include il tag \texttt{PII.NonSensitive}, utilizzato per dati identificativi generici e a basso rischio (come nome, cognome o e-mail aziendale), e il tag \texttt{PII.Sensitive}, obbligatorio per gli identificatori critici (come codici fiscali, password o coordinate bancarie). L'assegnazione di quest'ultimo innesca automaticamente logiche di anonimizzazione per gli utenti sprovvisti dei privilegi giusti.
+    \item \textbf{PII}: Classificazione standard concepita per l'identificazione e la mappatura delle informazioni personali, fondamentale per la conformità al GDPR. Include il tag \texttt{PII.NonSensitive}, utilizzato per dati identificativi generici e a basso rischio, e il tag \texttt{PII.Sensitive}, obbligatorio per gli identificatori critici (come codici fiscali, password o coordinate bancarie). L'assegnazione di quest'ultimo innesca automaticamente logiche di anonimizzazione per gli utenti sprovvisti dei privilegi giusti.
     \item \textbf{PersonalData}: Classificazione complementare per mappare i dati riferibili a persone fisiche, suddivisa in \texttt{PersonalData.Personal} e \texttt{PersonalData.SpecialCategory}. Quest'ultimo tag è destinato ai dati particolari (Art. 9 del GDPR, come dati biometrici o sanitari) e ai dati giudiziari, imponendo un approccio di massima chiusura che ne limita l'accesso esclusivamente alle autorità o ai ruoli aziendali espressamente autorizzati.
     \item \textbf{\emph{Tier} (Livello)}: Utilizzata per suddividere gli asset in base alla loro rilevanza strategica e architetturale per l'organizzazione. Comprende cinque livelli gerarchici standard, da \texttt{Tier.Tier1} (assegnato ad asset contenenti dati critici e insostituibili per il business) fino a \texttt{Tier.Tier5} (associato a informazioni marginali o secondarie).
     \item \textbf{\emph{Certification} (Certificazione)}: Impiegata all'interno delle procedure di Data Quality per qualificare visivamente l'affidabilità di un dataset. Questa tassonomia si articola nei tag gerarchici \texttt{Bronze}, \texttt{Silver} e \texttt{Gold}, permettendo agli analisti di Business Intelligence di verificare all'istante se un dato è stato validato e approvato prima di importarlo nei report.
@@ -175,7 +175,7 @@ impedendo che a un singolo asset vengano associati contemporaneamente due tag co
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{schermate/tag_personalizzato.png}
-    \caption[Esempio di classificazione personalizzata]{Esempio di classificazione personalizzata \texttt{DataClassification}, configurata con l'opzione di mutua esclusione (\emph{Mutually Exclusive}) attivata}
+    \caption[Esempio di classificazione personalizzata]{Esempio di classificazione personalizzata \texttt{DataClassification}, configurata con l'opzione di mutua esclusione attivata}
     \label{fig:tag_personalizzato}
 \end{figure}
 
@@ -215,10 +215,10 @@ esclusivamente il metadato risultante (il tag di classificazione da applicare).
 \end{figure}
 
 Per rispettare il GDPR e i vincoli di sicurezza imposti dall'infrastruttura di Wintech, l'intero processo avviene in locale e offline. A differenza degli assistenti basati 
-su Cloud, i modelli linguistici necessari per l'analisi vengono scaricati una sola volta durante la fase iniziale di compilazione e installazione del Container. 
-A riprova di questo, su reti aziendali dotate di rigide policy di sicurezza, il Container può restituire l'errore \texttt{SSL: CERTIFICATE\_VERIFY\_FAILED} 
-al primo avvio, venendo bloccato dal firewall aziendale durante il tentativo di download del modello; una volta scaricato manualmente, il sistema opera totalmente 
-offline garantendo che nessuna informazione sensibile venga trasmessa all'esterno della rete aziendale.
+su Cloud, i modelli linguistici necessari per l'analisi vengono scaricati una sola volta durante la fase iniziale di compilazione e installazione del Container.
+% A riprova di questo, su reti aziendali dotate di rigide policy di sicurezza, il Container può restituire l'errore \texttt{SSL: CERTIFICATE\_VERIFY\_FAILED} 
+% al primo avvio, venendo bloccato dal firewall aziendale durante il tentativo di download del modello; una volta scaricato manualmente, il sistema opera totalmente 
+% offline garantendo che nessuna informazione sensibile venga trasmessa all'esterno della rete aziendale.
 
 Infine, l'architettura basata su Presidio garantisce una notevole scalabilità tramite i cosiddetti \emph{Custom Recognizers}. Qualora l'azienda necessiti di intercettare 
 formati di dati specifici o interni (per esempio la sintassi proprietaria di un ID Cliente), è sufficiente sviluppare e integrare un riconoscitore personalizzato 
@@ -236,7 +236,7 @@ In primo luogo, l'efficacia del rilevamento automatico sui database aziendali di
 
 In secondo luogo, è stato rilevato un importante vincolo relativo alla versione \emph{open-source} di OpenMetadata: il modulo è progettato per operare una classificazione 
 prevalentemente binaria a livello di GDPR, etichettando i campi sensibili in modo generico come \texttt{PII.Sensitive} o \texttt{PII.NonSensitive}. La capacità di associare 
-automaticamente tag più granulari (come \texttt{Address} o \texttt{Name}) è una funzionalità esclusiva della distribuzione commerciale (\emph{Collate}) e non è direttamente 
+automaticamente tag più granulari (come \texttt{Address} o \texttt{Name}) è una funzionalità esclusiva della distribuzione commerciale \textbf{Collate} e non è direttamente 
 fruibile nell'installazione locale standard. 
 
 A fronte di questi limiti tecnici e per garantire la massima conformità alle policy aziendali, è indispensabile una fase di classificazione e revisione manuale. 
@@ -254,7 +254,7 @@ questa soluzione risponde ai requisiti di sicurezza attraverso i seguenti meccan
 
 \begin{itemize}
     \item \textbf{Totale isolamento dei dati reali}: L'assistente AI non stabilisce alcuna connessione diretta con i database fisici dell'azienda, precludendo 
-    l'accesso ai dati in chiaro. Il modello interagisce unicamente con il server MCP di OpenMetadata, il quale trasmette all'esterno esclusivamente metadati 
+    l'accesso ai dati in chiaro. Il modello interagisce unicamente con il server MCP di OpenMetadata, il quale trasmette all'esterno solo i metadati 
     strutturali (schema delle tabelle, nomi dei campi, definizioni del glossario, tag di classificazione applicati). Le informazioni effettive contenute nei 
     database non vengono mai elaborate dall'AI e non lasciano il perimetro aziendale, garantendo la conformità alle direttive sulla sicurezza.
     \item \textbf{Preservazione del controllo degli accessi}: L'utilizzo dell'AI tramite server MCP è subordinato al rispetto delle policy di Data Governance, impedendo 
@@ -271,7 +271,7 @@ Tuttavia, OpenMetadata integra un meccanismo automatico di mascheramento totale 
 
 Quando una colonna o una tabella viene classificata con il tag \texttt{PII.Sensitive}, i relativi \emph{Sample Data} vengono oscurati e sostituiti visivamente da asterischi 
 (\texttt{******}) all'interno dell'interfaccia. Questo blocco visivo viene applicato in automatico a tutti gli utenti standard, garantendo invece la visualizzazione dei valori 
-in chiaro esclusivamente agli amministratori di sistema (\emph{Admin}) e ai proprietari (\emph{owner}) del singolo asset.
+in chiaro agli amministratori di sistema (\emph{Admin}) e ai proprietari (\emph{owner}) del singolo asset.
 
 \begin{figure}[H]
     \centering
@@ -287,10 +287,10 @@ Durante l'analisi e il collaudo della funzionalità, sono state riscontrate alcu
     \item \textbf{Assenza di pseudonimizzazione}: Non è possibile scegliere tra anonimizzazione e pseudonimizzazione. Il comportamento del meccanismo di mascheramento è predefinito e si applica in modo uniforme (mascheramento totale) a tutti gli asset etichettati come \texttt{PII.Sensitive}.
     \item \textbf{Rigidità configurativa}: Non è permesso configurare autonomamente regole di mascheramento basate sull'assegnazione di tag di classificazione personalizzati.
     \item \textbf{Mancata propagazione esterna}: Non sono previste funzionalità per propagare le direttive di mascheramento ai sistemi esterni a valle (come, ad esempio, gli strumenti di Business Intelligence).
-    \item \textbf{Dipendenza dal modello RBAC}: Il meccanismo si basa interamente sul sistema di \emph{ownership} e ruoli. Una rigorosa configurazione dei permessi rappresenta quindi un prerequisito architetturale indispensabile affinché la protezione dei dati sensibili sia garantita.
+    \item \textbf{Dipendenza dal modello RBAC}: Il meccanismo si basa interamente sul sistema di \emph{ownership} e ruoli. La configurazione dei permessi rappresenta quindi un prerequisito architetturale indispensabile affinché la protezione dei dati sensibili sia garantita.
 \end{itemize}
 
-Nonostante questi vincoli tecnici, OpenMetadata offre una funzionalità di base per l'anonimizzazione dei dati che risulta comunque sufficiente per soddisfare i requisiti normativi e le esigenze aziendali.
+Nonostante questi vincoli tecnici, OpenMetadata offre una funzionalità di base per l'anonimizzazione dei dati che risulta comunque sufficiente per soddisfare i requisiti aziendali.
 
 
 \section{Gestione degli accessi}
@@ -386,7 +386,7 @@ L'obiettivo principale di questo strumento è stabilire un linguaggio aziendale 
 attraverso la definizione di un significato comune per ogni termine. All'interno di OpenMetadata, i concetti formalizzati nel glossario assumono il ruolo di veri e propri 
 metadati: possono essere infatti assegnati agli asset per descrivere e categorizzare ulteriormente tabelle e dataset.
 
-Un'organizzazione può definire molteplici glossari indipendenti, strutturandoli in base agli specifici domini aziendali (ad esempio Amministrazione, Risorse Umane o Vendite). 
+Un'organizzazione può definire molteplici glossari indipendenti, strutturandoli in base ai diversi domini aziendali (ad esempio Amministrazione, Risorse Umane o Vendite). 
 I termini all'interno di ciascun glossario possono essere organizzati secondo una gerarchia logica e possono essere arricchiti con una serie di proprietà avanzate:
 \begin{itemize}
     \item \textbf{Contesto semantico}: Descrizioni testuali, sinonimi, riferimenti a link esterni e associazioni con altri termini correlati.
