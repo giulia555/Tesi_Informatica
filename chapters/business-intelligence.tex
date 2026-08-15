@@ -81,7 +81,7 @@ Questo livello si posiziona tra le fonti grezze e i report finali, affidando l'i
 % monitoraggio → mascheramento → governance e policy → strumenti BI che consumano solo dati puliti, sicuri e certificati
 L'efficacia strategica della Business Intelligence non dipende solo dalle capacità analitiche o grafiche delle dashboard, ma è condizionata alla radice dall'accuratezza e 
 dalla sicurezza del flusso informativo sottostante. Nelle architetture tradizionali, il collegamento diretto tra gli strumenti di Business Intelligence (come Microsoft 
-Power BI) e le basi dati genera criticità significative sotto il profilo operativo, della Data Quality e della conformità al GDPR.
+Power BI) e le basi dati genera criticità significative sotto il profilo della Data Quality e della conformità al GDPR.
 
 Connettere gli strumenti di Business Intelligence direttamente alle sorgenti espone l'organizzazione a tre vulnerabilità principali:
 \begin{itemize}
@@ -100,7 +100,7 @@ Il processo che trasforma i dati grezzi in informazioni utili per le decisioni a
     \item \textbf{Arricchimento semantico}: i metadati tecnici vengono associati ai termini formalizzati nel glossario aziendale, definendo responsabilità e \emph{ownership} per ciascun asset e facilitando la Data Discovery da parte degli utenti di business;
     \item \textbf{Individuazione e classificazione dei PII}: mediante l'esecuzione dell'\emph{AutoClassification Agent} o l'applicazione manuale dei tag, il sistema rileva le informazioni personali e vi applica i tag pertinenti (es. \texttt{PII.Sensitive}), mappando la distribuzione dei dati protetti;
     \item \textbf{Monitoraggio della qualità}: il motore di Data Quality esegue i test pianificati sui database sorgente. In caso di anomalie, il sistema segnala l'errore sulla dashboard di Data Observability e notifica i responsabili tramite alert automatici, impedendo la propagazione dell'errore a valle;
-    \item \textbf{Mascheramento e anonimizzazione}: nel catalogo l'accesso ai dati sensibili del \emph{Sample Data} viene protetto tramite le policy RBAC, oscurando i valori (\texttt{******}) ai profili non autorizzati. A livello di database fisico, i dataset destinati ad ambienti di test e \emph{reporting} vengono opportunamente anonimizzati tramite tecniche e modelli formali, mantenendo i soli vincoli relazionali necessari alle query di analisi;
+    \item \textbf{Mascheramento e anonimizzazione}: nel catalogo l'accesso ai dati sensibili del \emph{Sample Data} viene protetto tramite le policy RBAC, oscurando i valori (\texttt{******}) ai profili non autorizzati. A livello di database fisico, i dataset destinati ad ambienti di test e \emph{reporting} devono essere opportunamente anonimizzati tramite tecniche e modelli formali, mantenendo i soli vincoli relazionali necessari alle query di analisi;
     \item \textbf{Consumo sicuro}: lo sviluppatore o l'analista di BI si connette esclusivamente alle sorgenti o alle aree di \emph{staging} sicure contenenti i dati precedentemente catalogati, verificati e bonificati, garantendo una reportistica attendibile, accurata e conforme alle normative.
 \end{enumerate}
 
@@ -117,8 +117,8 @@ non è stato possibile collaudare la connessione fisica tra l'istanza locale di 
 Tali requisiti, di competenza dell'area IT Infrastructure, sono stati posticipati per motivi di sicurezza perimetrale, portando lo stage a concentrarsi sullo studio 
 concettuale e sulla modellazione logica del flusso informativo.
 
-Un altro vincolo tecnico consiste nell'asimmetria dell'integrazione tra i due sistemi. All'interno di OpenMetadata è possibile registrare Power BI come un servizio sorgente 
-per estrarre i metadati, importando nel catalogo i metadati relativi a dashboard, report, datamodel e Data Lineage.
+Un altro vincolo tecnico consiste nell'asimmetria dell'integrazione tra i due sistemi: all'interno di OpenMetadata è possibile registrare Power BI come un servizio sorgente, 
+importando nel catalogo i metadati relativi a dashboard, report, datamodel e Data Lineage.
 
 Tuttavia, questo flusso di metadati è esclusivamente unidirezionale:
 \begin{itemize}
@@ -128,20 +128,14 @@ Tuttavia, questo flusso di metadati è esclusivamente unidirezionale:
 
 \noindent Questo limite deriva dall'architettura del catalogo dati: la piattaforma non opera come database fisico e non fa una copia delle informazioni aziendali, ma si limita 
 ad archiviare e indicizzare i metadati descrittivi e qualitativi degli asset esterni. Di conseguenza, la pulizia e il mascheramento fisico dei dati devono essere delegati 
-ad altri strumenti, che operano a livello di base dati o staging area, lasciando a OpenMetadata il solo ruolo di tracciamento e controllo di conformità.
+ad altri strumenti, che operano a livello di base dati o \emph{staging area}, lasciando a OpenMetadata il solo ruolo di tracciamento e controllo di conformità.
 
 \section{Strumenti di Data Discovery}
-Durante l'analisi condotta nel percorso di stage, è stata valutata l'ipotesi di escludere l'adozione di un Data Catalog complesso come OpenMetadata in favore di uno 
+Durante l'analisi condotta nel percorso di stage è stata valutata l'ipotesi di escludere l'adozione di un Data Catalog complesso come OpenMetadata in favore di uno 
 strumento verticale e leggero di PII Discovery, che possa essere affiancato a Microsoft Power BI per soddisfare i requisiti che da solo non potrebbe soddisfare.
 
 Tale riflessione nasce dal fatto che Power BI, già integrato nell'infrastruttura aziendale di Wintech S.p.A., si attesta non solo come un eccellente strumento di 
-reportistica e Data Visualization, ma offre nativamente anche alcune funzionalità tipiche di un catalogo dati:
-\begin{itemize}
-    \item \textbf{Centralizzazione delle fonti}: Si connette a una vasta gamma di fonti dati strutturate e non strutturate, fungendo da \emph{Single Source of Truth}.
-    \item \textbf{Sincronizzazione}: garantisce L'aggiornamento programmato dei dati allineandoli continuamente alle fonti originali.
-    \item \textbf{Sicurezza e gestione accessi}: Governa la visibilità del dato tramite controlli a livello di \emph{workspace} e \emph{Row-Level Security}.
-    \item \textbf{Data Collaboration e Observability}: Supporta l'esplorazione dei modelli semantici, la condivisione sicura tramite Microsoft Teams e l'attivazione di alert automatici sui KPI e metriche aziendali.
-\end{itemize}
+reportistica e Data Visualization, ma offre nativamente anche alcune funzionalità tipiche di un catalogo dati.
 
 Tuttavia, essendo uno strumento orientato al \emph{Decision Making}, Power BI da solo non è in grado di garantire il controllo qualitativo e la 
 conformità normativa alla sorgente. Power BI importa i dati passivamente: non effettua test di Data Quality automatici sui database originali per intercettare 
@@ -197,7 +191,7 @@ Il principale parametro discriminante per la scelta è rappresentato dal rapport
 diverse piattaforme. Dalla doppia analisi condotta sulle piattaforme di Data Catalog e sui \emph{tool} di PII Discovery, emergono le seguenti considerazioni:
 \begin{itemize}
     \item \textbf{Impatto architetturale dei Data Catalog}: OpenMetadata si è dimostrata la piattaforma più completa, ma richiede un'infrastruttura complessa articolata su quattro Container Docker (database transazionale, server centrale, motore Apache Airflow e \emph{cluster} Elasticsearch/OpenSearch), richiedendo un minimo di 6-8 GB di RAM e 4 vCPU per gli ambienti di produzione. Alternative più snelle come Open Data Discovery (ODD) richiedono meno risorse, ma non offrono nativamente una funzionalità di \emph{Auto-Classification} per le PII.
-    \item \textbf{Esclusione delle piattaforme DevSecOps complesse}: Sebbene strumenti come Fides o Bytebase offrano funzionalità avanzate, la loro adozione comporta un onere sistemistico basato su microservizi estremamente elevato. Questo introdurrebbe un rischio di sovra-ingegnerizzazione (\emph{over-engineering}) del problema: a parità di sforzo infrastrutturale, risulterebbe infatti preferibile un Data Catalog completo come OpenMetadata, la cui complessità di installazione è ripagata dalle funzionalità offerte.
+    \item \textbf{Esclusione delle piattaforme DevSecOps complesse}: Sebbene strumenti come Fides o Bytebase offrano funzionalità avanzate, la loro adozione comporta un onere sistemistico estremamente elevato. Questo introdurrebbe un rischio di sovra-ingegnerizzazione (\emph{over-engineering}) del problema: a parità di sforzo infrastrutturale, risulterebbe infatti preferibile un Data Catalog completo come OpenMetadata, la cui complessità di installazione è ripagata dalle funzionalità offerte.
     \item \textbf{Efficienza dei \emph{tool} leggeri \emph{standalone}}: Le soluzioni verticali come ARX, Microsoft Presidio e Hawk-Eye presentano il vantaggio di non richiedere un'infrastruttura server permanentemente attiva. Potendo essere eseguite in modalità \emph{stateless} tramite script locali schedulati in background, riducono a zero i costi di adozione e garantiscono la bonifica dei database relazionali direttamente all'interno del perimetro di rete protetto dell'azienda.
 \end{itemize}
 
@@ -207,4 +201,4 @@ l'attuale contesto operativo di Wintech S.p.A., rischiando una sovra-ingegnerizz
 La strategia più sostenibile ed efficiente consiste nell'adottare un approccio modulare: l'utilizzo degli strumenti di PII Discovery e di anonimizzazione (quali ARX o 
 Microsoft Presidio) consente di rendere sicuri e affidabili i database fisici direttamente alla radice. In questo modo viene assicurato lo sviluppo sicuro e gli strumenti 
 di Business Intelligence vengono alimentati esclusivamente con dataset già protetti e verificati, realizzando un ecosistema analitico sicuro, a basso impatto infrastrutturale 
-e pienamente conforme alla normativa GDPR fin dalla progettazione (\emph{Privacy by Design}).
+e pienamente conforme alla normativa GDPR fin dalla progettazione.
