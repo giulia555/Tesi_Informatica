@@ -146,6 +146,12 @@ eliminate, ma guidano l'assegnazione corretta delle etichette:
     \item \textbf{\emph{Certification} (Certificazione)}: Impiegata all'interno delle procedure di Data Quality per qualificare visivamente l'affidabilità di un dataset. Questa tassonomia si articola nei tag gerarchici \texttt{Bronze}, \texttt{Silver} e \texttt{Gold}, permettendo agli analisti di Business Intelligence di verificare all'istante se un dato è stato validato e approvato prima di importarlo nei report.
 \end{itemize}
 
+\noindent Oltre alle tassonomie predefinite, la piattaforma supporta la creazione di classificazioni personalizzate, adattabili alle specifiche policy interne 
+di Wintech, per esempio per contrassegnare dati con un tag che ne indica il livello di «confidenzialità».
+
+Ogni classificazione può essere configurata attivando l'opzione di mutua esclusione. Se abilitata, questa proprietà garantisce l'integrità logica della classificazione, 
+impedendo che a un singolo asset vengano associati contemporaneamente due tag contrastanti appartenenti alla medesima tassonomia.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{schermate/tag_pii.png}
@@ -155,20 +161,14 @@ eliminate, ma guidano l'assegnazione corretta delle etichette:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{schermate/tag_tier.png}
+    \includegraphics[width=0.9\textwidth]{schermate/tag_tier.png}
     \caption{Pannello di gestione delle classificazioni di sistema: tassonomia Tier.}
     \label{fig:tag_tier}
 \end{figure}
 
-\noindent Oltre alle tassonomie predefinite, la piattaforma supporta la creazione di classificazioni personalizzate, adattabili alle specifiche policy interne 
-di Wintech, per esempio per contrassegnare dati con un tag che ne indica il livello di «confidenzialità».
-
-Ogni classificazione può essere configurata attivando l'opzione di mutua esclusione. Se abilitata, questa proprietà garantisce l'integrità logica della classificazione, 
-impedendo che a un singolo asset vengano associati contemporaneamente due tag contrastanti appartenenti alla medesima tassonomia.
-
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.75\textwidth]{schermate/tag_personalizzato.png}
+    \includegraphics[width=0.7\textwidth]{schermate/tag_personalizzato.png}
     \caption[Esempio di classificazione personalizzata.]{Esempio di classificazione personalizzata \texttt{DataClassification}, configurata con l'opzione di mutua esclusione attivata.}
     \label{fig:tag_personalizzato}
 \end{figure}
@@ -202,8 +202,7 @@ esclusivamente il metadato risultante (il tag di classificazione da applicare).
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{autoclassificazione.png}
-    \vspace{0.2cm}
+    \includegraphics[width=0.85\textwidth]{autoclassificazione.png}
     \caption[Rappresentazione del flusso di auto-classificazione.]{Architettura dell'auto-classificazione: i dati reali vengono elaborati e distrutti localmente, trasmettendo al server centrale solo i metadati. \textit{Nota: La presente infografica è stata generata con l'ausilio di un sistema di Intelligenza Artificiale.}}
     \label{fig:flusso_autoclassificazione}
 \end{figure}
@@ -270,7 +269,6 @@ in chiaro agli amministratori di sistema (\emph{Admin}) e ai proprietari (\emph{
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{schermate/anonimizzazione.png}
-    \vspace{0.2cm}
     \caption[Applicazione dell'anonimizzazione nell'interfaccia.]{Applicazione pratica dell'anonimizzazione: i \emph{Sample Data} classificati come sensibili vengono oscurati per gli utenti non autorizzati.}
     \label{fig:anonimizzazione}
 \end{figure}
@@ -353,7 +351,7 @@ quattro principi fondamentali:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{schermate/policy_gdpr.png}
+    \includegraphics[width=0.98\textwidth]{schermate/policy_gdpr.png}
     \caption[Dettaglio della policy GDPR]{Dettaglio della policy dedicata al rispetto del GDPR: regola con effetto di divieto (\emph{Deny}) basata sui tag, per impedire la visualizzazione in chiaro dei dati etichettati come sensibili.}
     \label{fig:policy_gdpr}
 \end{figure}
@@ -379,8 +377,7 @@ I termini all'interno di ciascun glossario possono essere organizzati secondo un
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{schermate/glossario_wintech.png}
-    \vspace{0.2cm}
+    \includegraphics[width=0.98\textwidth]{schermate/glossario_wintech.png}
     \caption{Interfaccia principale del glossario aziendale.}
     \label{fig:glossario_generale}
 \end{figure}
@@ -388,7 +385,6 @@ I termini all'interno di ciascun glossario possono essere organizzati secondo un
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{schermate/glossario_termini.png}
-    \vspace{0.2cm}
     \caption{Struttura gerarchica dei termini nel glossario.}
     \label{fig:glossario_gerarchia}
 \end{figure}
