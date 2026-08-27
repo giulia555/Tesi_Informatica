@@ -92,18 +92,18 @@ al test la seguente espressione regolare per la verifica degli indirizzi e-mail:
 ^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$
 \end{verbatim}
 
+\noindent L'esecuzione di questa \emph{Test Suite} ha registrato un fallimento, in quanto non tutti i record 
+fittizi forniti dal database di test rispettavano il formato sintattico imposto. Questo risultato, mantenuto a fini esplicativi, ha permesso di validare 
+la reattività del sistema: il mancato superamento del test ha innescato l'aggiornamento real-time degli indicatori cromatici nella scheda di Data Observability 
+e ha generato l'apertura automatica di un incidente. Questo livello di monitoraggio proattivo è esattamente ciò che previene l'importazione di anomalie nei sistemi di 
+Business Intelligence situati a valle, preservando la correttezza della reportistica aziendale.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{schermate/configurazione_test.png}
     \caption[Esempio concreto di test di qualità.]{Configurazione dell'espressione regolare per la validazione del campo EmailAddress.}
     \label{fig:configurazione_test}
 \end{figure}
-
-\noindent L'esecuzione di questa \emph{Test Suite} ha registrato un fallimento, in quanto non tutti i record 
-fittizi forniti dal database di test rispettavano il formato sintattico imposto. Questo risultato, mantenuto a fini esplicativi, ha permesso di validare 
-la reattività del sistema: il mancato superamento del test ha innescato l'aggiornamento real-time degli indicatori cromatici nella scheda di Data Observability 
-e ha generato l'apertura automatica di un incidente. Questo livello di monitoraggio proattivo è esattamente ciò che previene l'importazione di anomalie nei sistemi di 
-Business Intelligence situati a valle, preservando la correttezza della reportistica aziendale.
 
 \begin{figure}[H]
     \centering

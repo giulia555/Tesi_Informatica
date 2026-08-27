@@ -214,16 +214,8 @@ eseguite sulle fonti originali, le definizioni delle viste e le configurazioni d
     \item \textbf{\emph{Column-Level Lineage}}: Traccia il percorso di derivazione fino al dettaglio della singola colonna. Questa funzionalità risulta fondamentale ai fini della conformità al GDPR, poiché permette di verificare esattamente come un campo contenente dati personali o sensibili si propaga tra le tabelle e i sistemi aziendali.
 \end{itemize}
 
-
-Qualora vi siano trasformazioni non tracciabili direttamente dai log SQL, OpenMetadata mette a disposizione un editor visuale \emph{no-code} (\textbf{\emph{Lineage} manuale}) 
+\noindent Qualora vi siano trasformazioni non tracciabili direttamente dai log SQL, OpenMetadata mette a disposizione un editor visuale \emph{no-code} (\textbf{\emph{Lineage} manuale}) 
 basato su meccanismi \emph{drag-and-drop}, consentendo agli utenti autorizzati di creare o integrare manualmente nodi e collegamenti.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{schermate/lineage.png}
-    \caption{Esempio di grafo di Data Lineage della tabella \texttt{Customer} in OpenMetadata.}
-    \label{fig:lineage}
-\end{figure}
 
 \subsection{Analisi di impatto e livelli informativi}
 L'applicazione operativa più rilevante del \emph{Column-Level Lineage} è la cosiddetta \textbf{\emph{Impact Analysis}} (Analisi di Impatto). 
@@ -238,6 +230,13 @@ L'interfaccia di visualizzazione del \emph{lineage} inoltre supporta diversi liv
     \item \textbf{\emph{Service Layer}}: Per visualizzare come i dati fluiscono attraverso piattaforme e servizi differenti.
     \item \textbf{\emph{Domain Layer}}: Per organizzare i dataset e gli asset raggruppandoli all'interno di categorie di business pertinenti.
 \end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{schermate/lineage.png}
+    \caption{Esempio di grafo di Data Lineage della tabella \texttt{Customer} in OpenMetadata.}
+    \label{fig:lineage}
+\end{figure}
 
 \begin{figure}[H]
     \centering

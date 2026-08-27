@@ -148,22 +148,16 @@ eliminate, ma guidano l'assegnazione corretta delle etichette:
 
 \begin{figure}[H]
     \centering
-    \begin{subfigure}[b]{0.9\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{schermate/tag_pii.png}
-        \caption{Tassonomia PII.}
-    \end{subfigure}
-    
-    \vspace{0.4cm}
-    
-    \begin{subfigure}[b]{0.9\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{schermate/tag_tier.png}
-        \caption{Tassonomia Tier.}
-    \end{subfigure}
-    
-    \caption{Pannelli di gestione delle classificazioni di sistema.}
-    \label{fig:tassonomie_sistema}
+    \includegraphics[width=1\textwidth]{schermate/tag_pii.png}
+    \caption{Pannello di gestione delle classificazioni di sistema: tassonomia PII.}
+    \label{fig:tag_pii}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{schermate/tag_tier.png}
+    \caption{Pannello di gestione delle classificazioni di sistema: tassonomia Tier.}
+    \label{fig:tag_tier}
 \end{figure}
 
 \noindent Oltre alle tassonomie predefinite, la piattaforma supporta la creazione di classificazioni personalizzate, adattabili alle specifiche policy interne 
@@ -174,7 +168,7 @@ impedendo che a un singolo asset vengano associati contemporaneamente due tag co
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.65\textwidth]{schermate/tag_personalizzato.png}
+    \includegraphics[width=0.75\textwidth]{schermate/tag_personalizzato.png}
     \caption[Esempio di classificazione personalizzata.]{Esempio di classificazione personalizzata \texttt{DataClassification}, configurata con l'opzione di mutua esclusione attivata.}
     \label{fig:tag_personalizzato}
 \end{figure}
@@ -208,7 +202,7 @@ esclusivamente il metadato risultante (il tag di classificazione da applicare).
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{autoclassificazione.png}
+    \includegraphics[width=0.9\textwidth]{autoclassificazione.png}
     \vspace{0.2cm}
     \caption[Rappresentazione del flusso di auto-classificazione.]{Architettura dell'auto-classificazione: i dati reali vengono elaborati e distrutti localmente, trasmettendo al server centrale solo i metadati. \textit{Nota: La presente infografica è stata generata con l'ausilio di un sistema di Intelligenza Artificiale.}}
     \label{fig:flusso_autoclassificazione}
@@ -326,7 +320,7 @@ la piattaforma interroga il provider e crea in automatico il relativo profilo ne
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{schermate/team.png}
+    \includegraphics[width=1\textwidth]{schermate/team.png}
     \caption[Mappatura gerarchica dei team]{Mappatura gerarchica dell'organigramma tramite i \emph{Team}, con organizzazione in dipartimenti o \emph{BusinessUnit}.}
     \label{fig:gestione_team}
 \end{figure}
@@ -352,14 +346,14 @@ quattro principi fondamentali:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\textwidth]{schermate/ruolo_datagovmanager.png}
+    \includegraphics[width=1\textwidth]{schermate/ruolo_datagovmanager.png}
     \caption[Assegnazione policy al ruolo Data Governance Manager]{Assegnazione di una policy di sicurezza allo specifico ruolo di \emph{Data Governance Manager}.}
     \label{fig:ruolo_datagovmanager}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{schermate/policy_gdpr.png}
+    \includegraphics[width=1\textwidth]{schermate/policy_gdpr.png}
     \caption[Dettaglio della policy GDPR]{Dettaglio della policy dedicata al rispetto del GDPR: regola con effetto di divieto (\emph{Deny}) basata sui tag, per impedire la visualizzazione in chiaro dei dati etichettati come sensibili.}
     \label{fig:policy_gdpr}
 \end{figure}
@@ -385,7 +379,7 @@ I termini all'interno di ciascun glossario possono essere organizzati secondo un
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{schermate/glossario_wintech.png}
+    \includegraphics[width=1\textwidth]{schermate/glossario_wintech.png}
     \vspace{0.2cm}
     \caption{Interfaccia principale del glossario aziendale.}
     \label{fig:glossario_generale}
