@@ -63,18 +63,18 @@ sia sui movimenti contabili reali estratti in ambiente sicuro dai sistemi gestio
 A titolo esemplificativo, la Figura~\ref{fig:report_powerbi} mostra l'interfaccia di un report sviluppato sui dati di test, evidenziando le funzionalità di 
 Data Visualization e il pannello per la configurazione degli avvisi di monitoraggio.
 
+Tuttavia, Power BI è uno strumento progettato specificamente per la Data Visualization e la reportistica. Proprio per questo motivo, elabora le informazioni 
+esattamente come vengono estratte, senza verificarne preventivamente la qualità o la presenza di dati personali alla sorgente. 
+
+Affinché la Business Intelligence sia davvero affidabile e conforme alle normative sulla privacy, è necessario creare un flusso informativo intermedio. 
+Questo livello si posiziona tra le fonti grezze e i report finali, affidando l'ispezione, la pulizia e la classificazione dei dati a piattaforme specifiche di Data Discovery e Data Governance.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{bi/report_powerbi.png}
     \caption[Interfaccia di un report in Microsoft Power BI.]{Esempio di dashboard analitica sviluppata in Power BI sui dati di \emph{AdventureWorks}. Sulla destra è visibile il pannello di configurazione degli avvisi, utile per il monitoraggio parziale dei dati.}
     \label{fig:report_powerbi}
 \end{figure}
-
-Tuttavia, Power BI è uno strumento progettato specificamente per la Data Visualization e la reportistica. Proprio per questo motivo, elabora le informazioni 
-esattamente come vengono estratte, senza verificarne preventivamente la qualità o la presenza di dati personali alla sorgente. 
-
-Affinché la Business Intelligence sia davvero affidabile e conforme alle normative sulla privacy, è necessario creare un flusso informativo intermedio. 
-Questo livello si posiziona tra le fonti grezze e i report finali, affidando l'ispezione, la pulizia e la classificazione dei dati a piattaforme specifiche di Data Discovery e Data Governance.
 
 \section{Flusso sicuro dei dati}
 % PER SPIEGARE QUAL è L'IDEA DIETRO LA CONNESSIONE DATA CATALOG - POWER BI + grafico del flusso:  dati grezzi → catalogazione → classificazione PII → data quality e 
