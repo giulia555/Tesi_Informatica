@@ -46,4 +46,12 @@
     \fancyhead[L]{\fontsize{12}{14.5} \selectfont Bibliografia}
     \input{appendix/bibliography}
     \input{appendix/acknowledgements} % ringraziamenti
+
+    % Pagine bianche finali vuote per la stampa
+    \clearpage
+    \thispagestyle{empty} % Toglie intestazione e numero di pagina
+    \mbox{} % Scatola invisibile per costringere LaTeX a creare la pagina
+    \clearpage
+    \thispagestyle{empty}
+    \mbox{}
 \end{document}
