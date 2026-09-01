@@ -25,12 +25,15 @@
     \input{chapters/conclusioni} %9
 
     \appendix
-    % \input{appendix/appendice-a} % TOLTA APPENDICE A perchè non serve
 
     \backmatter
     % \glsaddall % per stampare tutto anche se i termini non ci sono ancora nel testo
 
-    % fix intestazione acronimi e glossario
+    % Crea un foglio completamente bianco (destra e sinistra) per staccare dal Cap 8 - prima di acronimi e abbreviazioni
+    \cleardoublepage
+    \thispagestyle{empty} \mbox{} \clearpage
+    \thispagestyle{empty} \mbox{} \cleardoublepage
+
     \cleardoublepage
     % IMPONE IL NOME ACRONIMI o GLOSSARIO FISSO A SINISTRA NELL'INTESTAZIONE E NULLA A DESTRA
     \fancyhead[L]{\fontsize{12}{14.5} \selectfont Acronimi e abbreviazioni}
@@ -45,13 +48,19 @@
     \cleardoublepage
     \fancyhead[L]{\fontsize{12}{14.5} \selectfont Bibliografia}
     \input{appendix/bibliography}
-    \input{appendix/acknowledgements} % ringraziamenti
 
-    % Pagine bianche finali vuote per la stampa
+    % --- INIZIO A SINISTRA PER I RINGRAZIAMENTI (eccezione) ---
+    \cleardoublepage      % Va alla prima pagina di destra disponibile
+    \thispagestyle{empty} % Rende la pagina di destra completamente bianca
+    \mbox{}               % Crea la pagina invisibile
+    \clearpage            % Salta alla pagina di sinistra successiva (pari)
+    
+    \fancyhead[L]{\fontsize{12}{14.5} \selectfont Ringraziamenti}
+    \input{appendix/acknowledgements}
+
+    % pagina aggiuntiva bianca alla fine
     \clearpage
     \thispagestyle{empty} % Toglie intestazione e numero di pagina
     \mbox{} % Scatola invisibile per costringere LaTeX a creare la pagina
-    \clearpage
-    \thispagestyle{empty}
-    \mbox{}
+
 \end{document}
