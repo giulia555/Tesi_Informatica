@@ -1,71 +1,76 @@
 \begin{titlepage}
-    \begin{center}
-        \begin{LARGE}
-            \textbf{\myUni}\\
-        \end{LARGE}
+    \begin{adjustwidth}{(\evensidemargin-\oddsidemargin)/2}{(\oddsidemargin-\evensidemargin)/2}
+        \begin{center}
+            \begin{LARGE}
+                \textbf{\myUni}\\
+            \end{LARGE}
 
-        \vspace{10pt}
+            \vspace{10pt}
 
-        \begin{Large}
-            \textsc{\myDepartment}\\
-        \end{Large}
+            \begin{Large}
+                \textsc{\myDepartment}\\
+            \end{Large}
 
-        \vspace{10pt}
+            \vspace{10pt}
 
-        \begin{large}
-            \textsc{\myFaculty}\\
-        \end{large}
+            \begin{large}
+                \textsc{\myFaculty}\\
+            \end{large}
 
-        % \vspace{30pt}
-        \vfill
+            % \vspace{30pt}
+            \vfill
 
-        \begin{figure}[htbp]
-            \centering
-            \includegraphics[width=0.5\textwidth]{unipd-logo} %va bene così perchè le impostazioni di compilazione prevedono che le immagini siano nella cartella "images"
-        \end{figure}
-        
-        %\vspace{30pt}
-        \vfill
+            %\begin{figure}[htbp]
+            %    \centering
+            %    \includegraphics[width=0.5\textwidth]{unipd-logo} %va bene così perchè le impostazioni di compilazione prevedono che le immagini siano nella cartella "images"
+            %\end{figure}
 
-        \begin{LARGE}
-            \textbf{\myTitle}\\
-        \end{LARGE}
+            % Rimozione dell'ambiente figure per forzare la centratura esatta
+            \includegraphics[width=0.5\textwidth]{unipd-logo}
+            
+            %\vspace{30pt}
+            \vfill
 
-        \vspace{10pt}
+            \begin{LARGE}
+                \textbf{\myTitle}\\
+            \end{LARGE}
 
-        \begin{large}
-            \textsl{\myDegree}\\
-        \end{large}
+            \vspace{10pt}
 
-        %\vspace{40pt}
-        \vfill
+            \begin{large}
+                \textsl{\myDegree}\\
+            \end{large}
 
-        \begin{large}
-            \begin{flushleft}
-                \textit{Relatore}\\
-                \vspace{5pt}
-                \profTitle\ \myProf
-            \end{flushleft}
+            %\vspace{40pt}
+            \vfill
 
-            % You can tweak the spacing to have professor and student names on the same line
-            % useful if the page is broken by a long thesis title and you need more space
-            % \vspace{-52pt}
+            \begin{large}
+                \begin{flushleft}
+                    \textit{Relatore}\\
+                    \vspace{5pt}
+                    \profTitle\ \myProf
+                \end{flushleft}
 
-            \begin{flushright}
-                \textit{Laureanda}\\
-                \vspace{5pt}
-                \myName \\
-                \vspace{5pt}
-                \textit{Matricola} \myID
-            \end{flushright}
-        \end{large}
+                % You can tweak the spacing to have professor and student names on the same line
+                % useful if the page is broken by a long thesis title and you need more space
+                % \vspace{-52pt}
 
-        %\vspace{40pt}
-        \vfill
+                \begin{flushright}
+                    \textit{Laureanda}\\
+                    \vspace{5pt}
+                    \myName \\
+                    \vspace{5pt}
+                    \textit{Matricola} \myID
+                \end{flushright}
+            \end{large}
 
-        \line(1, 0){338} \\
-        \begin{normalsize}
-            \textsc{Anno Accademico \myAA}
-        \end{normalsize}
-    \end{center}
+            %\vspace{40pt}
+            \vfill
+
+            \line(1, 0){338} \\
+            \begin{normalsize}
+                \textsc{Anno Accademico \myAA}
+            \end{normalsize}
+        \end{center}
+    \end{adjustwidth}
 \end{titlepage}
